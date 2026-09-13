@@ -22,6 +22,19 @@ jobs:
         run: python3 tools/boundary_check.py --config .tla/boundary.json
       - name: Planted-violation fixture tests
         run: python3 -m unittest discover -s tools/tests -v
+      - name: Traceability check on every episode engagement
+        shell: bash
+        run: |
+          set -euo pipefail
+          checked=0
+          while IFS= read -r matrix; do
+            episode="$(dirname "$(dirname "$matrix")")"
+            echo "::group::$episode"
+            python3 tools/traceability_check.py "$episode"
+            echo "::endgroup::"
+            checked=$((checked + 1))
+          done < <(find . -path './season-*' -name TRACEABILITY_MATRIX.md -path '*/06-validation/*' | sort)
+          echo "episode engagements checked: $checked"
 
   secret-scan:
     name: secret-scan
