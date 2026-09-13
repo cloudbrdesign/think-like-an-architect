@@ -38,11 +38,14 @@ LINK_RE = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
 
 
 def list_files(root):
-    """Tracked files when root is a Git work tree; otherwise every file below root (used by fixture tests)."""
+    """Tracked AND untracked (not ignored) files when root is a Git work tree, so a local run before staging still scans
+    new files; otherwise every file below root (used by fixture tests)."""
     if os.path.isdir(os.path.join(root, ".git")):
         try:
-            out = subprocess.run(["git", "-C", root, "ls-files", "-z"], capture_output=True, check=True).stdout
-            return sorted(f for f in out.decode("utf-8").split("\0") if f)
+            out = subprocess.run(["git", "-C", root, "ls-files", "-z", "--cached", "--others", "--exclude-standard"],
+                                 capture_output=True, check=True).stdout
+            names = {f for f in out.decode("utf-8").split("\0") if f}
+            return sorted(f for f in names if os.path.isfile(os.path.join(root, f)))
         except (OSError, subprocess.CalledProcessError):
             pass
     found = []
