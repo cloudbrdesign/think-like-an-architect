@@ -8,6 +8,7 @@ F (education CI needs no commercial access).
 import json
 import os
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -99,6 +100,21 @@ class EducationBoundary(unittest.TestCase):
 
     def test_B_missing_required_file_rejected(self):
         self.assertRejected(drop=("LICENSING.md",), expect="required file missing")
+
+    def test_B_untracked_file_in_git_work_tree_is_scanned(self):
+        root = tempfile.mkdtemp(prefix="tla-edu-git-")
+        self.addCleanup(shutil.rmtree, root)
+        for rel, content in VALID.items():
+            path = os.path.join(root, rel)
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            with open(path, "w", encoding="utf-8") as handle:
+                handle.write(content)
+        subprocess.run(["git", "init", "-q", root], check=True)
+        subprocess.run(["git", "-C", root, "add", "-A"], check=True)
+        with open(os.path.join(root, "templates", "untracked.md"), "w", encoding="utf-8") as handle:
+            handle.write("header " + bc.MARKER + "\n")
+        violations = bc.scan(root, CONFIG)
+        self.assertTrue(any("templates/untracked.md" in v for v in violations), violations)
 
     # F — education CI must not need commercial access
     def test_F_workflow_checking_out_another_repository_rejected(self):
