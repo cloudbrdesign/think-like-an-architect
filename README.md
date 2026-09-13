@@ -1,7 +1,7 @@
 # Think Like an Architect
 
 > **Repository status: PRIVATE STAGING.** This repository will hold free, public architecture education. It is private
-> only while its structure and boundaries are being established. No episode has been published yet.
+> only while its structure and first engagement are being established. Nothing has been published yet.
 
 **Think Like an Architect** teaches architectural thinking. Every episode is a simulated professional architecture
 engagement, run end to end:
@@ -26,8 +26,9 @@ The video teaches the thinking. This repository teaches the doing.
 README.md                              this file
 LICENSING.md                           licensing status
 CONTRIBUTING.md                        how changes are made and reviewed
-templates/                             reusable engagement templates (to be added)
-season-01-architecting-genai-aws/      Season 1 episodes (to be added as they are released)
+templates/                             reusable engagement templates
+tools/                                 boundary and traceability checks
+season-01-architecting-genai-aws/      Season 1 episodes
 ```
 
 ## Before you run anything
@@ -37,4 +38,5 @@ drivers and cleanup steps **before** the first deployment step. Always run the c
 
 ## Status
 
-No templates or episodes are published yet. See `season-01-architecting-genai-aws/README.md` for the season plan.
+The engagement templates are available in [templates/](templates/README.md). Episode 01 is in engagement design; see
+[season-01-architecting-genai-aws/README.md](season-01-architecting-genai-aws/README.md).

@@ -5,15 +5,15 @@ is.**
 
 ## Planned episodes
 
-| # | Episode |
-|---|---|
-| 01 | How to Build Multi-Tenant RAG Without Leaking Customer Data |
-| 02 | How to Design RAG When Your Documents Contain Sensitive Data |
-| 03 | How to Keep a Production Knowledge Base Up to Date |
-| 04 | How to Design a GenAI API That Survives Production Traffic |
-| 05 | How to Reduce GenAI Cost Without Destroying User Experience |
-| 06 | How to Design AI Systems You Can Actually Audit |
-| 07 | How to Design for Failure When Your AI Model Is Unavailable |
-| 08 | Design the Enterprise GenAI Platform — Final Architecture Challenge |
+| # | Episode | Status |
+|---|---|---|
+| 01 | [How to Build Multi-Tenant RAG Without Leaking Customer Data](episode-01-multi-tenant-rag/README.md) | Engagement design in progress |
+| 02 | How to Design RAG When Your Documents Contain Sensitive Data | Planned |
+| 03 | How to Keep a Production Knowledge Base Up to Date | Planned |
+| 04 | How to Design a GenAI API That Survives Production Traffic | Planned |
+| 05 | How to Reduce GenAI Cost Without Destroying User Experience | Planned |
+| 06 | How to Design AI Systems You Can Actually Audit | Planned |
+| 07 | How to Design for Failure When Your AI Model Is Unavailable | Planned |
+| 08 | Design the Enterprise GenAI Platform — Final Architecture Challenge | Planned |
 
-No episode content is published yet. Episode folders are added only when an episode is released.
+Nothing is published yet. Episode folders appear as each engagement is developed.
