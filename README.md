@@ -24,7 +24,8 @@ The video teaches the thinking. This repository teaches the doing.
 
 ```
 README.md                              this file
-LICENSING.md                           licensing status
+LICENSING.md                           which licence applies where
+LICENSES/                              licence texts (Apache-2.0, CC-BY-4.0)
 CONTRIBUTING.md                        how changes are made and reviewed
 templates/                             reusable engagement templates
 tools/                                 boundary and traceability checks
@@ -42,3 +43,8 @@ The engagement templates are available in [templates/](templates/README.md). Epi
 engagement, the educational implementation, its validation suite and an example evidence set. Start at
 [the Episode 01 README](season-01-architecting-genai-aws/episode-01-multi-tenant-rag/README.md); the season overview is
 [season-01-architecting-genai-aws/README.md](season-01-architecting-genai-aws/README.md).
+
+## Licence
+
+Code is licensed under Apache-2.0; educational content and documentation under CC BY 4.0. See
+[LICENSING.md](LICENSING.md).
