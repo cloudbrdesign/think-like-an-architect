@@ -1,0 +1,53 @@
+{
+  "controls": [
+    "CTL-003"
+  ],
+  "evidence": [
+    "evidence/TST-SEC-007.json"
+  ],
+  "expected": "Rejected at the edge (401; 403 for the scope-less identity token); no service invocation; no audit record",
+  "finished_at": "2026-09-14T07:58:39+00:00",
+  "level": "L3",
+  "observations": {
+    "expired token": {
+      "audit_records_for_request": 0,
+      "event_id_header": null,
+      "status": 401
+    },
+    "identity token instead of access token (no required scope)": {
+      "audit_records_for_request": 0,
+      "event_id_header": null,
+      "status": 403
+    },
+    "malformed token": {
+      "audit_records_for_request": 0,
+      "event_id_header": null,
+      "status": 401
+    },
+    "no token": {
+      "audit_records_for_request": 0,
+      "event_id_header": null,
+      "status": 401
+    },
+    "probe_token_age_seconds": 339,
+    "tampered signature (stands in for another signing key)": {
+      "audit_records_for_request": 0,
+      "event_id_header": null,
+      "status": 401
+    },
+    "token issued to another app client": {
+      "audit_records_for_request": 0,
+      "event_id_header": null,
+      "status": 401
+    }
+  },
+  "privileged": false,
+  "reason": "all six token cases rejected at the edge; no service ran",
+  "started_at": "2026-09-14T07:58:39+00:00",
+  "status": "PASS",
+  "suite": "identity",
+  "test_id": "TST-SEC-007",
+  "verifies": [
+    "SEC-002"
+  ]
+}

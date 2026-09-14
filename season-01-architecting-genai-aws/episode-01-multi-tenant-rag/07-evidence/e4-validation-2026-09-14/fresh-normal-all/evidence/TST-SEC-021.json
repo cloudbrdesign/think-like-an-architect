@@ -1,0 +1,166 @@
+{
+  "controls": [
+    "CTL-018"
+  ],
+  "evidence": [
+    "evidence/TST-SEC-021.json"
+  ],
+  "expected": "Citations contain only own document ID, title and route location; cited \u2286 verified; fabricated reference removed",
+  "finished_at": "2026-09-14T07:54:36+00:00",
+  "level": "L3",
+  "observations": {
+    "fabrication_answer": "I cannot find Brightmoor's 2027 supplier discount schedule in the provided documents. The documents only contain information about Northwall Facilities' 2026 supplier rate card [D1] and cleaning services contract [D2], and North Chiller Maintenance Manual [D3].",
+    "samples": [
+      {
+        "citations": [
+          {
+            "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+            "label": "D1",
+            "location": "/documents/6c728020-48cd-474b-b1dc-1897aeec47ca",
+            "title": "Supplier rate card"
+          },
+          {
+            "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "label": "D2",
+            "location": "/documents/cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "title": "Cleaning services contract"
+          },
+          {
+            "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+            "label": "D3",
+            "location": "/documents/c6a809d5-1102-4a8d-af10-5a15a68c979b",
+            "title": "North chiller maintenance manual"
+          }
+        ],
+        "cited_document_ids": [
+          "6c728020-48cd-474b-b1dc-1897aeec47ca",
+          "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+          "c6a809d5-1102-4a8d-af10-5a15a68c979b"
+        ],
+        "issues": [],
+        "sample": "fabrication",
+        "status": 200
+      },
+      {
+        "citations": [
+          {
+            "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "label": "D1",
+            "location": "/documents/cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "title": "Cleaning services contract"
+          }
+        ],
+        "cited_document_ids": [
+          "cecd22b3-bdbf-4349-9d0c-c1c85851cdae"
+        ],
+        "issues": [],
+        "sample": "TST-ISO-001",
+        "status": 200
+      },
+      {
+        "citations": [
+          {
+            "document_id": "7e7db5b5-9f02-4a97-b142-20f65b720701",
+            "label": "D1",
+            "location": "/documents/7e7db5b5-9f02-4a97-b142-20f65b720701",
+            "title": "Cleaning services contract"
+          }
+        ],
+        "cited_document_ids": [
+          "7e7db5b5-9f02-4a97-b142-20f65b720701"
+        ],
+        "issues": [],
+        "sample": "TST-ISO-002",
+        "status": 200
+      },
+      {
+        "citations": [
+          {
+            "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+            "label": "D1",
+            "location": "/documents/c6a809d5-1102-4a8d-af10-5a15a68c979b",
+            "title": "North chiller maintenance manual"
+          }
+        ],
+        "cited_document_ids": [
+          "c6a809d5-1102-4a8d-af10-5a15a68c979b"
+        ],
+        "issues": [],
+        "sample": "TST-SEC-008",
+        "status": 200
+      },
+      {
+        "citations": [
+          {
+            "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "label": "D1",
+            "location": "/documents/cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "title": "Cleaning services contract"
+          },
+          {
+            "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+            "label": "D2",
+            "location": "/documents/6c728020-48cd-474b-b1dc-1897aeec47ca",
+            "title": "Supplier rate card"
+          },
+          {
+            "document_id": "ca272710-84ad-46f5-b0e6-4b5fde31f496",
+            "label": "D3",
+            "location": "/documents/ca272710-84ad-46f5-b0e6-4b5fde31f496",
+            "title": "Chiller lock-out procedure"
+          }
+        ],
+        "cited_document_ids": [
+          "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+          "6c728020-48cd-474b-b1dc-1897aeec47ca",
+          "ca272710-84ad-46f5-b0e6-4b5fde31f496"
+        ],
+        "issues": [],
+        "sample": "TST-ISO-003",
+        "status": 200
+      },
+      {
+        "citations": [
+          {
+            "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "label": "D1",
+            "location": "/documents/cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "title": "Cleaning services contract"
+          }
+        ],
+        "cited_document_ids": [
+          "cecd22b3-bdbf-4349-9d0c-c1c85851cdae"
+        ],
+        "issues": [],
+        "sample": "TST-ISO-003",
+        "status": 200
+      },
+      {
+        "citations": [
+          {
+            "document_id": "ca272710-84ad-46f5-b0e6-4b5fde31f496",
+            "label": "D1",
+            "location": "/documents/ca272710-84ad-46f5-b0e6-4b5fde31f496",
+            "title": "Chiller lock-out procedure"
+          }
+        ],
+        "cited_document_ids": [
+          "ca272710-84ad-46f5-b0e6-4b5fde31f496"
+        ],
+        "issues": [],
+        "sample": "TST-ISO-003",
+        "status": 200
+      }
+    ]
+  },
+  "privileged": false,
+  "reason": "11 citations across 7 responses, all allow-listed and own",
+  "started_at": "2026-09-14T07:54:36+00:00",
+  "status": "PASS",
+  "suite": "security",
+  "test_id": "TST-SEC-021",
+  "verifies": [
+    "SEC-001",
+    "FUN-001"
+  ]
+}

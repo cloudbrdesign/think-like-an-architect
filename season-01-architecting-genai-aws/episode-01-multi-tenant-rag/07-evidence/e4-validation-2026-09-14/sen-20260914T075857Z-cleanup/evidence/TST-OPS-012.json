@@ -1,0 +1,40 @@
+{
+  "controls": [],
+  "evidence": [
+    "evidence/TST-OPS-012.json"
+  ],
+  "expected": "VERIFIABLE: no resource of the episode deployment(s) remains (authoritative service lookups)",
+  "finished_at": "2026-09-14T08:05:08+00:00",
+  "level": "L2/L5",
+  "observations": {
+    "remaining": {
+      "functions": [],
+      "http_apis": [],
+      "iam_roles": [],
+      "knowledge_bases": [],
+      "log_groups": [],
+      "s3_buckets": [],
+      "stacks": [],
+      "tables": [],
+      "tagged_resources_confirmed_by_owning_service": [],
+      "user_pools": [],
+      "vector_buckets": []
+    },
+    "tag_index_entries_not_found_by_owning_service": [
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_qkcLr9N2M",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_GB3MMeg7d"
+    ],
+    "variants": [
+      "sensitivity"
+    ]
+  },
+  "privileged": false,
+  "reason": "CLEAN \u2014 sensitivity (2 stale tag-index entries confirmed deleted)",
+  "started_at": "2026-09-14T08:05:08+00:00",
+  "status": "PASS",
+  "suite": "cleanup",
+  "test_id": "TST-OPS-012",
+  "verifies": [
+    "OPS-004"
+  ]
+}

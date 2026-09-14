@@ -1,0 +1,76 @@
+{
+  "controls": [
+    "CTL-019",
+    "CTL-020",
+    "CTL-024"
+  ],
+  "evidence": [
+    "evidence/TST-OPS-015.json"
+  ],
+  "expected": "Investigator can answer who, which tenant, decision and why, constraint, documents, failed control; no marker, question, chunk or answer text in records or logs; model invocation logging disabled",
+  "finished_at": "2026-09-14T07:56:19+00:00",
+  "level": "L3",
+  "observations": {
+    "canaries_in_audit": {},
+    "investigation_examples": {
+      "allowed_example": {
+        "decision": "ALLOW",
+        "which_constraint": {
+          "attribute": "owning_tenant",
+          "operator": "equals",
+          "value": "tenant-a"
+        },
+        "which_control_failed": null,
+        "which_documents": [
+          {
+            "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "owner_attribute": "tenant-a"
+          },
+          {
+            "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+            "owner_attribute": "tenant-a"
+          },
+          {
+            "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+            "owner_attribute": "tenant-a"
+          }
+        ],
+        "which_tenant": "tenant-a",
+        "who": "24b854f8-3081-706f-9fb7-10b656365f54",
+        "why": "ALLOWED"
+      },
+      "denied_example": {
+        "decision": "DENY",
+        "which_constraint": "NONE",
+        "which_control_failed": "CTL-004",
+        "which_documents": [],
+        "which_tenant": "tenant-a",
+        "who": "24b854f8-3081-706f-9fb7-10b656365f54",
+        "why": "REQUEST_FIELD_REJECTED"
+      }
+    },
+    "log_content_hits": {},
+    "log_events_scanned": 245,
+    "log_groups": [
+      "/aws/lambda/tla-s01e01-normal-query",
+      "/aws/lambda/tla-s01e01-normal-ingestion",
+      "/tla/tla-s01e01-normal/api-access"
+    ],
+    "model_invocation_logging_enabled": false,
+    "question_texts_in_audit": [],
+    "records_examined": 27,
+    "records_missing_fields": {},
+    "unexpected_fields": {}
+  },
+  "privileged": true,
+  "reason": "27 records complete and content-free; 245 log events scanned, 0 content hits; model logging disabled",
+  "started_at": "2026-09-14T07:56:19+00:00",
+  "status": "PASS",
+  "suite": "audit",
+  "test_id": "TST-OPS-015",
+  "verifies": [
+    "OPS-001",
+    "OPS-002",
+    "CMP-001"
+  ]
+}

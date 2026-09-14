@@ -1,0 +1,4 @@
+# Local build output, learner configuration and raw run results never enter version control.
+05-implementation/build/
+05-implementation/config/learner.env
+06-validation/results/

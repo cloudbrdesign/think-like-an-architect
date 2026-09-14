@@ -86,6 +86,16 @@ collections — nothing is billed by the hour.
 **CON-008 (under USD 10 per session): plausible with a wide margin.** It is confirmed only when the first real run's
 bill is read (VE-11) — billing data can lag by a day.
 
+**Observed usage (E4 fresh-copy run, 2026-09-14).** The complete learner session took about 18 minutes: deploy,
+fixtures, full suite, sensitivity bracketing with a second stack, cleanup. It recorded:
+- 86 API requests with audit records;
+- 51 privileged precondition retrievals;
+- 57 successful responses;
+- 9 synthetic documents plus 4 edge-case uploads.
+
+That is well below every volume assumed in the estimate above, so the session cost sits at the low end of the estimate.
+The billed amount had not yet appeared on the day of the run.
+
 ### Fixed / minimum cost
 
 - No resource is billed per hour.
@@ -111,7 +121,7 @@ Every billable resource has an owner, a deletion method, dependencies and a veri
 
 | Resource | Created by | Deletion method | Dependencies | Cleanup verification |
 |---|---|---|---|---|
-| Sensitivity stack (all resources below, variant `sensitivity`) | `sensitivity-run.sh` | Deleted by `sensitivity-run.sh` at the end of the run; `cleanup.sh` deletes it first if still present | Its document bucket emptied first | No stack named `tla-s01e01-sensitivity-*`; no resource tagged `tla:variant=sensitivity` |
+| Sensitivity stack (all resources below, variant `sensitivity`) | `sensitivity-run.sh` | Deleted by `sensitivity-run.sh` at the end of the run; `cleanup.sh` deletes it first if still present | Its document bucket emptied first | No stack named `tla-s01e01-sensitivity`; no remaining resource tagged `Variant=sensitivity` (confirmed with the owning service) |
 | Document bucket objects | Ingestion function | `cleanup.sh` deletes every object | Before stack deletion | Bucket gone with stack |
 | Stack `tla-s01e01-<suffix>` | `deploy.sh` | `cleanup.sh`: delete stack and wait | Bucket empty; no sensitivity stack | Stack `DELETE_COMPLETE` or not found |
 | — Knowledge base + custom data source (deletion policy `DELETE`) | Stack | Stack deletion | Before index | No knowledge base named `tla-s01e01-*` |
@@ -119,7 +129,7 @@ Every billable resource has an owner, a deletion method, dependencies and a veri
 | — Functions, their log groups, API + access log group | Stack | Stack deletion (log groups declared in the stack; functions log only to them) | — | No functions or log groups with the episode prefix |
 | — DynamoDB tables (registry, audit) | Stack | Stack deletion | Export evidence first | No tables with the episode prefix |
 | — Cognito user pool (users and groups created by the fixture loader) | Stack (pool); harness (users) | Stack deletion removes users and groups | — | No user pool with the episode name |
-| — IAM roles | Stack | Stack deletion | After functions and knowledge base | No roles under path `/tla/s01e01/` |
+| — IAM roles | Stack | Stack deletion | After functions and knowledge base | No roles named `tla-s01e01-*` |
 | Artifact bucket | `deploy.sh` | `cleanup.sh`: empty, then delete | After stack deletion | Bucket not found |
 | Local harness results | Harness | Kept by the learner as evidence (not billable) | Redact before sharing | — |
 
@@ -137,14 +147,15 @@ Every billable resource has an owner, a deletion method, dependencies and a veri
 ## Verify cleanup
 
 `verify-cleanup` checks, and records in the results file:
-1. A tag search for `tla:episode=s01e01` returns **no** resources.
-2. Named checks, because tag search does not cover every resource type:
+1. Named checks with each owning service:
    - no stack with the episode prefix;
-   - no knowledge base, vector bucket, function, table, user pool, API, IAM role (path `/tla/s01e01/`) or log group
-     with the episode prefix;
-   - the artifact bucket is not found.
-3. It reports **CLEAN** only if every check is empty. Otherwise it lists each remaining resource and the command that
-   removes it.
+   - no knowledge base, vector bucket, S3 bucket (documents or artifacts), function, table, user pool, HTTP API, IAM
+     role or log group with the episode prefix (`tla-s01e01-normal`, `tla-s01e01-sensitivity`).
+2. A tag search for `Course=ThinkLikeAnArchitect`, `Episode=01`, `Purpose=education`. The tag index is eventually
+   consistent and can still list a resource shortly after deletion, so **every tagged resource is confirmed with its
+   owning service** before it counts as remaining. Stale index entries are listed separately and do not fail cleanup.
+3. It reports **CLEAN** (TST-OPS-012 PASS) only if every authoritative check is empty. Otherwise it lists each remaining
+   resource.
 
 ## What changes at production scale
 

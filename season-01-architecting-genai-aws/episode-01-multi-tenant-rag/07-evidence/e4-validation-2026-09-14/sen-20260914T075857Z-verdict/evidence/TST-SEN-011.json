@@ -1,0 +1,44 @@
+{
+  "controls": [
+    "CTL-015"
+  ],
+  "evidence": [
+    "evidence/TST-SEN-011.json"
+  ],
+  "expected": "Both negative tests FAIL at the retrieval layer with CTL-015 removed; both PASS before and after on the normal deployment; the variant is destroyed and cleanup verified",
+  "finished_at": "2026-09-14T08:05:54+00:00",
+  "level": "Sensitivity",
+  "observations": {
+    "TST-ISO-003": {
+      "baseline": "PASS",
+      "bracket": "PASS",
+      "variant": "FAIL",
+      "variant_foreign_chunks_retrieved": 12,
+      "variant_ownership_mismatch_responses": 6
+    },
+    "TST-ISO-004": {
+      "baseline": "PASS",
+      "bracket": "PASS",
+      "variant": "FAIL",
+      "variant_foreign_chunks_retrieved": 13,
+      "variant_ownership_mismatch_responses": 6
+    },
+    "runs": [
+      "sen-20260914T075857Z-baseline",
+      "sen-20260914T075857Z-variant",
+      "sen-20260914T075857Z-cleanup",
+      "sen-20260914T075857Z-bracket"
+    ],
+    "variant_cleanup": "PASS"
+  },
+  "privileged": false,
+  "reason": "normal PASS \u2192 variant FAIL (foreign chunks retrieved, ownership verification fired) \u2192 variant destroyed \u2192 normal PASS",
+  "started_at": "2026-09-14T08:05:54+00:00",
+  "status": "PASS",
+  "suite": "sensitivity",
+  "test_id": "TST-SEN-011",
+  "verifies": [
+    "SEC-001",
+    "SEC-004"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "tla-validation-results/1",
+  "run_id": "sen-20260914T075857Z-verdict",
+  "suite": "sensitivity-verdict",
+  "started_at": "2026-09-14T08:05:54+00:00",
+  "finished_at": "2026-09-14T08:05:54+00:00",
+  "harness_commit": "3af258e9b7a8bdde9b9aef9c33655c392aaca723",
+  "variant": null,
+  "stack": null,
+  "region": null,
+  "account": "<account>",
+  "packages": {},
+  "counts": {
+    "PASS": 1,
+    "FAIL": 0,
+    "ERROR": 0,
+    "NOT_RUN": 0,
+    "NOT_APPLICABLE": 0
+  },
+  "tests": [
+    {
+      "test_id": "TST-SEN-011",
+      "suite": "sensitivity",
+      "verifies": [
+        "SEC-001",
+        "SEC-004"
+      ],
+      "controls": [
+        "CTL-015"
+      ],
+      "level": "Sensitivity",
+      "expected": "Both negative tests FAIL at the retrieval layer with CTL-015 removed; both PASS before and after on the normal deployment; the variant is destroyed and cleanup verified",
+      "status": "PASS",
+      "reason": "normal PASS \u2192 variant FAIL (foreign chunks retrieved, ownership verification fired) \u2192 variant destroyed \u2192 normal PASS",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-SEN-011.json"
+      ],
+      "started_at": "2026-09-14T08:05:54+00:00",
+      "finished_at": "2026-09-14T08:05:54+00:00"
+    }
+  ]
+}

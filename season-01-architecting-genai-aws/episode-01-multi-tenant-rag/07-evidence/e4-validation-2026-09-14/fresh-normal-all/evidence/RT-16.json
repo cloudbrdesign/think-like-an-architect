@@ -1,0 +1,30 @@
+{
+  "controls": [],
+  "evidence": [
+    "evidence/RT-16.json"
+  ],
+  "expected": "Cleanup refuses an unexpected account and never touches a stack it was not asked to remove",
+  "finished_at": "2026-09-14T07:58:56+00:00",
+  "level": "red-team",
+  "observations": {
+    "cleanup with a different expected account": {
+      "exit": 1,
+      "output": [
+        "REFUSED: account <account> is not TLA_EXPECTED_ACCOUNT <account>"
+      ]
+    },
+    "normal stack after the refused cleanup": "CREATE_COMPLETE",
+    "outputs for a stack that does not exist (no side effects)": {
+      "exit": 1
+    }
+  },
+  "privileged": false,
+  "reason": "cleanup refused the wrong account; normal stack still CREATE_COMPLETE",
+  "started_at": "2026-09-14T07:58:56+00:00",
+  "status": "PASS",
+  "suite": "redteam",
+  "test_id": "RT-16",
+  "verifies": [
+    "OPS-004"
+  ]
+}

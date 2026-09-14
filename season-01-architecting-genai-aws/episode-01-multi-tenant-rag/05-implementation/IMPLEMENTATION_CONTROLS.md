@@ -3,8 +3,16 @@
 **Stage:** build authorisation and implementation design (E3) · **Date:** 2026-09-14
 
 Every approved architecture control (defined in the ADRs) becomes an implementation specification here. File paths
-refer to the planned source tree in [IMPLEMENTATION_DESIGN section 6](IMPLEMENTATION_DESIGN.md#6-source-structure-planned-created-at-e4).
-Nothing is implemented yet.
+refer to the source tree in [IMPLEMENTATION_DESIGN section 6](IMPLEMENTATION_DESIGN.md#6-source-structure-planned-created-at-e4).
+
+**E4 status (2026-09-14):** the `EDU` controls are implemented in this folder. Their validation results are in
+[07-evidence/e4-validation-2026-09-14](../07-evidence/e4-validation-2026-09-14/README.md).
+- **Paths:** the harness lives in `06-validation/harness/`, not `validation/harness/`.
+- **Additions:** the strict group-claim parser is its own module, `app/shared/tenant_claims.py` (CH-12). The test-only
+  primary-control replacement is `06-validation/sensitivity/retrieval_scope.py`.
+- **CTL-010:** the correction workflow removes the misattributed document step by step, and the correct tenant's user
+  uploads it again through the normal route. Operators cannot write originals, because the document bucket policy
+  admits only the ingestion service.
 
 **Scope marks:**
 - **EDU** — implemented in the learner build.

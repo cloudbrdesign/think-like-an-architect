@@ -40,9 +40,10 @@ observed and recorded**.
 stored.
 
 **Target guard** (checked before any suite):
-- the stack exists with tag `tla:episode=s01e01`;
-- the stack's `tla:variant` tag matches the suite: `sensitivity` for the sensitivity suite, `normal` for every other
-  suite;
+- the stack exists and carries the episode tags (`Project=CloudBreweryLabs`, `Course=ThinkLikeAnArchitect`, `Season=01`,
+  `Episode=01`);
+- the stack's `Variant` tag and output match the suite: `sensitivity` for the sensitivity suite, `normal` for every
+  other suite;
 - each deployed function's code SHA-256 equals the locally built package for that variant (`build/<variant>/*.zip`);
 - the region and account match the configuration, and the account is displayed for the learner to confirm.
 
@@ -173,8 +174,8 @@ Additional identity fixtures for TST-SEC-013: `user-none` (no group) and `user-t
 | Control removed | **Only CTL-015.** `validation/sensitivity/retrieval_scope.py` replaces `app/shared/retrieval_scope.py`: its constraint builder returns a non-constraining predicate (`owning_tenant` not equal to a sentinel that no document has), so every attributed chunk is a candidate. The retrieval client, verification (CTL-017) and everything else are unchanged |
 | No runtime switch | The normal deployment contains **no** flag, parameter or environment variable that weakens the constraint. The variant exists only as a **separate build** (`build.sh sensitivity`) and a **separate stack** |
 | Build guard | `build.sh normal` fails if any file from `validation/sensitivity/` is present or if `retrieval_scope.py` differs from source. `build.sh sensitivity` writes to `build/sensitivity/` only |
-| Separate deployment | Stack `tla-s01e01-sensitivity-<suffix>`, tag `tla:variant=sensitivity`, its own API, user pool, tables, buckets and knowledge base; audit `variant = sensitivity` (build constant) |
-| Wrong-target protection | Harness target guard: the sensitivity suite runs only against `tla:variant=sensitivity` **and** matching code hashes; normal suites refuse that stack |
+| Separate deployment | Stack `tla-s01e01-sensitivity`, tag `Variant=sensitivity`, its own API, user pool, tables, buckets and knowledge base; audit `variant = sensitivity` (build constant) |
+| Wrong-target protection | Harness target guard: the sensitivity suite runs only against `Variant=sensitivity` **and** matching code hashes; normal suites refuse that stack. The deploy script refuses the sensitivity variant outside `sensitivity-run.sh` |
 | Synthetic data only | Loads the A and B fixture set from the repository; checks the fixture manifest hash before loading |
 | Procedure | `sensitivity-run.sh`: normal ISO-003/004 → **PASS** · build and deploy the variant · load fixtures · ISO-003/004 → expected **FAIL** · destroy variant · verify no `sensitivity` resources remain · normal ISO-003/004 → **PASS** |
 | Expected evidence | Variant audit records show Tenant B documents in `retrieved` for `user-a` (and the mirror). `verification_outcome = OWNERSHIP_MISMATCH` shows defence in depth firing |

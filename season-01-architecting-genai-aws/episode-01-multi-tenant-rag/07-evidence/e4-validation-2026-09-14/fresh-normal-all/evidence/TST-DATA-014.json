@@ -1,0 +1,98 @@
+{
+  "controls": [
+    "CTL-014",
+    "CTL-017"
+  ],
+  "evidence": [
+    "evidence/TST-DATA-014.json"
+  ],
+  "expected": "Immediately: not cited (discarded if retrieved). After removal: absent from index, status DELETED. Cross-tenant delete: not found, nothing changed",
+  "finished_at": "2026-09-14T07:57:15+00:00",
+  "level": "L3",
+  "observations": {
+    "a1_status_before_after": [
+      "AVAILABLE",
+      "AVAILABLE"
+    ],
+    "cross_tenant_delete": {
+      "code": "DOCUMENT_NOT_FOUND_FOR_TENANT",
+      "event_id": "99b943a1-2ca4-4bb5-9378-41302414174f",
+      "request_id": "DrdPwh2CoAMEVBg=",
+      "status": 404
+    },
+    "delete": {
+      "code": null,
+      "event_id": "f7d4608c-125f-4397-b4c5-1f19b64feae0",
+      "request_id": "DrdP-gNfIAMEbEA=",
+      "status": 202
+    },
+    "final_status": "DELETED",
+    "immediate": {
+      "cited_document_ids": [],
+      "constraint": {
+        "attribute": "owning_tenant",
+        "operator": "equals",
+        "value": "tenant-a"
+      },
+      "decision": "ALLOW",
+      "discarded_count": 0,
+      "event_id": "2b337faa-9fd7-440e-85d8-849b716fae3c",
+      "failed_control": null,
+      "outcome": "ANSWERED",
+      "reason_code": "ALLOWED",
+      "retrieved": [
+        {
+          "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "ca272710-84ad-46f5-b0e6-4b5fde31f496",
+          "owner_attribute": "tenant-a"
+        }
+      ],
+      "status_code": 200,
+      "tenant_context": "tenant-a",
+      "variant": "normal",
+      "verification_outcome": "PASSED"
+    },
+    "index_status": "NOT_FOUND",
+    "later": {
+      "cited_document_ids": [],
+      "constraint": {
+        "attribute": "owning_tenant",
+        "operator": "equals",
+        "value": "tenant-a"
+      },
+      "decision": "ALLOW",
+      "discarded_count": 0,
+      "event_id": "998e32e2-cbbe-4599-8374-82d03c9bcad0",
+      "failed_control": null,
+      "outcome": "ANSWERED",
+      "reason_code": "ALLOWED",
+      "retrieved": [
+        {
+          "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "ca272710-84ad-46f5-b0e6-4b5fde31f496",
+          "owner_attribute": "tenant-a"
+        }
+      ],
+      "status_code": 200,
+      "tenant_context": "tenant-a",
+      "variant": "normal",
+      "verification_outcome": "PASSED"
+    },
+    "restored_fixture_document_id": "9a3ec849-614e-4e25-ac66-2015453478ff"
+  },
+  "privileged": false,
+  "reason": "deleted document never cited; removed from index; cross-tenant delete not found (fixture restored)",
+  "started_at": "2026-09-14T07:57:15+00:00",
+  "status": "PASS",
+  "suite": "lifecycle",
+  "test_id": "TST-DATA-014",
+  "verifies": [
+    "FUN-003"
+  ]
+}

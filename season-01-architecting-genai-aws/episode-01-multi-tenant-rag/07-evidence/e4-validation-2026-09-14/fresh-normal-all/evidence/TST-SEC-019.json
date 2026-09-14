@@ -1,0 +1,67 @@
+{
+  "controls": [
+    "CTL-011"
+  ],
+  "evidence": [
+    "evidence/TST-SEC-019.json"
+  ],
+  "expected": "Owner, tenant and ID fields refused; content claiming another owner attributed to Tenant A with owner, uploader, time and status",
+  "finished_at": "2026-09-14T07:55:25+00:00",
+  "level": "L3",
+  "observations": {
+    "document_records_before_after": [
+      7,
+      7
+    ],
+    "embedded_owner_document": {
+      "created_at": "2026-09-14T07:55:16+00:00",
+      "document_id": "72e8cefd-7bdd-4cfe-b629-5cce92511e7d",
+      "owner": "tenant-a",
+      "status": "AVAILABLE",
+      "title": "Window cleaning schedule",
+      "uploader": "24b854f8-3081-706f-9fb7-10b656365f54"
+    },
+    "refused_uploads": {
+      "document_id": {
+        "code": "REQUEST_FIELD_REJECTED",
+        "event_id": "1dd588e8-52f4-434f-84e2-89de760d16d6",
+        "request_id": "Drc_dimgIAMEPpg=",
+        "status": 400
+      },
+      "owner": {
+        "code": "REQUEST_FIELD_REJECTED",
+        "event_id": "208ea9a8-09c0-4af7-a2b8-7a9ac2ddee14",
+        "request_id": "Drc_IjLOoAMEQsQ=",
+        "status": 400
+      },
+      "owning_tenant": {
+        "code": "REQUEST_FIELD_REJECTED",
+        "event_id": "3aa08571-3462-4b9d-9d66-7927bd3ae516",
+        "request_id": "Drc_SgcaoAMEP7Q=",
+        "status": 400
+      },
+      "tenant_id": {
+        "code": "REQUEST_FIELD_REJECTED",
+        "event_id": "c7c8be48-8323-4fec-ae67-38df1c03c4db",
+        "request_id": "Drc-9i2BIAMEPzA=",
+        "status": 400
+      }
+    },
+    "tenant_b_open": {
+      "code": "DOCUMENT_NOT_FOUND_FOR_TENANT",
+      "event_id": "46c61f00-0b43-4439-8b89-6bfc204ef1a1",
+      "request_id": "DrdBJgP9oAMEPxw=",
+      "status": 404
+    }
+  },
+  "privileged": false,
+  "reason": "4 field attempts refused, nothing stored; embedded claim ignored; owner tenant-a",
+  "started_at": "2026-09-14T07:55:25+00:00",
+  "status": "PASS",
+  "suite": "ingestion",
+  "test_id": "TST-SEC-019",
+  "verifies": [
+    "SEC-006",
+    "DATA-001"
+  ]
+}

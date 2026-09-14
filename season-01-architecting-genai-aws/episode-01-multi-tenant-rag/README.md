@@ -2,12 +2,15 @@
 
 > **You are the architect. Here is the client problem.**
 
-**Status: implementation design (E3).** This folder contains:
+**Status: educational implementation (E4).** This folder contains:
 - the approved engagement design;
 - the **approved architecture**;
-- the **educational implementation design**: platform verification, controls, harness, cost and cleanup.
+- the **educational implementation design**: platform verification, controls, harness design, cost and cleanup;
+- the **educational implementation**: one CloudFormation stack, the application, the test harness, the sensitivity
+  variant and the cleanup flow.
 
-**No implementation exists yet.** Nothing here deploys anything, so this stage has no cloud cost.
+Reading costs nothing. **Deploying creates billable resources in your own sandbox account** — read
+[Cost and cleanup](05-implementation/COST_AND_CLEANUP.md) before step 20.
 
 The principle this episode is built around:
 
@@ -54,7 +57,14 @@ with tests that are allowed to fail, that one customer cannot retrieve another c
 | 18 | Know how the isolation control will be proven, including the sensitivity variant | [Test harness design](06-validation/TEST_HARNESS_DESIGN.md) |
 | 19 | Know the cost and the cleanup before deploying anything | [Cost and cleanup](05-implementation/COST_AND_CLEANUP.md) |
 
-The learner implementation, validation results and cleanup scripts are added in the build stage.
+### Build, attack and prove it (E4)
+
+| Step | Do | File |
+|---|---|---|
+| 20 | Find, in the source, where tenant authority comes from, where the filter is built and what prevents bypass — then deploy | [Build it](05-implementation/README.md) · [template](05-implementation/infrastructure/template.yaml) · [primary control](05-implementation/app/shared/retrieval_scope.py) |
+| 21 | Load synthetic tenants, try to forge a tenant, and read the audit record | [Build it — explore the boundary](05-implementation/README.md#explore-the-boundary-yourself-between-steps-3-and-4) |
+| 22 | Run the attack suite, then prove the tests fail when the primary control is removed | [Harness](06-validation/harness/) · [sensitivity variant](06-validation/sensitivity/retrieval_scope.py) |
+| 23 | Clean up, verify, and keep your evidence | [Cost and cleanup](05-implementation/COST_AND_CLEANUP.md) · [Portfolio evidence plan](07-evidence/PORTFOLIO_EVIDENCE_PLAN.md) |
 
 ## Check the traceability chain
 

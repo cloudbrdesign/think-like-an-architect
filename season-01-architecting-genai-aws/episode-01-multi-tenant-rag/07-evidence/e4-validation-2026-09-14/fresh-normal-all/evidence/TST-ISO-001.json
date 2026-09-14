@@ -1,0 +1,75 @@
+{
+  "controls": [
+    "CTL-004",
+    "CTL-011",
+    "CTL-015",
+    "CTL-018"
+  ],
+  "evidence": [
+    "evidence/TST-ISO-001.json"
+  ],
+  "expected": "ALLOWED: tenant-a retrieves and cites only its own documents",
+  "finished_at": "2026-09-14T07:53:49+00:00",
+  "level": "L3",
+  "observations": {
+    "answer": "The weekend call-out rate for out-of-hours work in the cleaning services contract is USD 185 per hour, with a minimum charge of three hours per call-out [D1].",
+    "audit": {
+      "cited_document_ids": [
+        "cecd22b3-bdbf-4349-9d0c-c1c85851cdae"
+      ],
+      "constraint": {
+        "attribute": "owning_tenant",
+        "operator": "equals",
+        "value": "tenant-a"
+      },
+      "decision": "ALLOW",
+      "discarded_count": 0,
+      "event_id": "3feb7907-5054-45b0-bb07-3ecf495a6a7e",
+      "failed_control": null,
+      "outcome": "ANSWERED",
+      "reason_code": "ALLOWED",
+      "retrieved": [
+        {
+          "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+          "owner_attribute": "tenant-a"
+        }
+      ],
+      "status_code": 200,
+      "tenant_context": "tenant-a",
+      "variant": "normal",
+      "verification_outcome": "PASSED"
+    },
+    "citations": [
+      {
+        "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+        "label": "D1",
+        "location": "/documents/cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+        "title": "Cleaning services contract"
+      }
+    ],
+    "response": {
+      "code": null,
+      "event_id": "3feb7907-5054-45b0-bb07-3ecf495a6a7e",
+      "request_id": "DrcyEgrtIAMEbog=",
+      "status": 200
+    }
+  },
+  "privileged": false,
+  "reason": "3 chunks retrieved, all tenant-a; cited 1 own document(s)",
+  "started_at": "2026-09-14T07:53:49+00:00",
+  "status": "PASS",
+  "suite": "isolation",
+  "test_id": "TST-ISO-001",
+  "verifies": [
+    "FUN-001",
+    "FUN-002"
+  ]
+}

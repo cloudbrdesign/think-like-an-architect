@@ -1,0 +1,268 @@
+{
+  "controls": [
+    "CTL-004",
+    "CTL-006"
+  ],
+  "evidence": [
+    "evidence/TST-SEC-005.json"
+  ],
+  "expected": "Body field refused; query, header, path and question variants keep tenant context and constraint tenant-a with no Tenant B retrieval; self-service cannot change membership",
+  "finished_at": "2026-09-14T07:53:39+00:00",
+  "level": "L3",
+  "observations": {
+    "1-body-field": {
+      "audit": {
+        "cited_document_ids": [],
+        "constraint": "NONE",
+        "decision": "DENY",
+        "discarded_count": 0,
+        "event_id": "94bce336-1b21-45a3-bc94-f92441e07245",
+        "failed_control": "CTL-004",
+        "outcome": "DENIED",
+        "reason_code": "REQUEST_FIELD_REJECTED",
+        "retrieved": [],
+        "status_code": 400,
+        "tenant_context": "tenant-a",
+        "variant": "normal",
+        "verification_outcome": "NOT_APPLICABLE"
+      },
+      "response": {
+        "code": "REQUEST_FIELD_REJECTED",
+        "event_id": "94bce336-1b21-45a3-bc94-f92441e07245",
+        "request_id": "DrcuAjKqIAMEbIg=",
+        "status": 400
+      }
+    },
+    "2-query-string": {
+      "audit": {
+        "cited_document_ids": [
+          "cecd22b3-bdbf-4349-9d0c-c1c85851cdae"
+        ],
+        "constraint": {
+          "attribute": "owning_tenant",
+          "operator": "equals",
+          "value": "tenant-a"
+        },
+        "decision": "ALLOW",
+        "discarded_count": 0,
+        "event_id": "5d44965c-fe26-4445-8b8a-608848958c34",
+        "failed_control": null,
+        "outcome": "ANSWERED",
+        "reason_code": "ALLOWED",
+        "retrieved": [
+          {
+            "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "owner_attribute": "tenant-a"
+          },
+          {
+            "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+            "owner_attribute": "tenant-a"
+          },
+          {
+            "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+            "owner_attribute": "tenant-a"
+          }
+        ],
+        "status_code": 200,
+        "tenant_context": "tenant-a",
+        "variant": "normal",
+        "verification_outcome": "PASSED"
+      },
+      "findings": {
+        "foreign_canaries": {},
+        "foreign_citations": [],
+        "foreign_retrieved": [],
+        "verification_outcome": "PASSED"
+      },
+      "response": {
+        "code": null,
+        "event_id": "5d44965c-fe26-4445-8b8a-608848958c34",
+        "request_id": "DrcurjgCIAMEbjw=",
+        "status": 200
+      }
+    },
+    "3-header": {
+      "audit": {
+        "cited_document_ids": [
+          "cecd22b3-bdbf-4349-9d0c-c1c85851cdae"
+        ],
+        "constraint": {
+          "attribute": "owning_tenant",
+          "operator": "equals",
+          "value": "tenant-a"
+        },
+        "decision": "ALLOW",
+        "discarded_count": 0,
+        "event_id": "79fd374b-aa4c-40aa-891b-f1d8e0e6aff4",
+        "failed_control": null,
+        "outcome": "ANSWERED",
+        "reason_code": "ALLOWED",
+        "retrieved": [
+          {
+            "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "owner_attribute": "tenant-a"
+          },
+          {
+            "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+            "owner_attribute": "tenant-a"
+          },
+          {
+            "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+            "owner_attribute": "tenant-a"
+          }
+        ],
+        "status_code": 200,
+        "tenant_context": "tenant-a",
+        "variant": "normal",
+        "verification_outcome": "PASSED"
+      },
+      "findings": {
+        "foreign_canaries": {},
+        "foreign_citations": [],
+        "foreign_retrieved": [],
+        "verification_outcome": "PASSED"
+      },
+      "response": {
+        "code": null,
+        "event_id": "79fd374b-aa4c-40aa-891b-f1d8e0e6aff4",
+        "request_id": "DrcvDjyToAMEbDg=",
+        "status": 200
+      }
+    },
+    "4-path": {
+      "/ask/tenant-b": {
+        "code": null,
+        "event_id": null,
+        "request_id": "DrcvYjXjoAMEbBg=",
+        "status": 404
+      },
+      "/tenant-b/ask": {
+        "code": null,
+        "event_id": null,
+        "request_id": "DrcvihvkoAMEVMA=",
+        "status": 404
+      },
+      "/tenants/tenant-b/ask": {
+        "code": null,
+        "event_id": null,
+        "request_id": "DrcvsiNzoAMEVtA=",
+        "status": 404
+      }
+    },
+    "5-question-text": {
+      "audit": {
+        "cited_document_ids": [
+          "cecd22b3-bdbf-4349-9d0c-c1c85851cdae"
+        ],
+        "constraint": {
+          "attribute": "owning_tenant",
+          "operator": "equals",
+          "value": "tenant-a"
+        },
+        "decision": "ALLOW",
+        "discarded_count": 0,
+        "event_id": "20c8a30c-231c-41a9-9110-6aa8f42b6d65",
+        "failed_control": null,
+        "outcome": "ANSWERED",
+        "reason_code": "ALLOWED",
+        "retrieved": [
+          {
+            "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "owner_attribute": "tenant-a"
+          },
+          {
+            "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+            "owner_attribute": "tenant-a"
+          },
+          {
+            "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+            "owner_attribute": "tenant-a"
+          }
+        ],
+        "status_code": 200,
+        "tenant_context": "tenant-a",
+        "variant": "normal",
+        "verification_outcome": "PASSED"
+      },
+      "findings": {
+        "foreign_canaries": {},
+        "foreign_citations": [],
+        "foreign_retrieved": [],
+        "verification_outcome": "PASSED"
+      },
+      "response": {
+        "code": null,
+        "event_id": "20c8a30c-231c-41a9-9110-6aa8f42b6d65",
+        "request_id": "Drcv1hEOIAMEb5g=",
+        "status": 200
+      }
+    },
+    "6-ask-after-self-update": {
+      "audit": {
+        "cited_document_ids": [
+          "cecd22b3-bdbf-4349-9d0c-c1c85851cdae"
+        ],
+        "constraint": {
+          "attribute": "owning_tenant",
+          "operator": "equals",
+          "value": "tenant-a"
+        },
+        "decision": "ALLOW",
+        "discarded_count": 0,
+        "event_id": "5b2ea058-3d9d-4ec6-b4bc-c99806b5e833",
+        "failed_control": null,
+        "outcome": "ANSWERED",
+        "reason_code": "ALLOWED",
+        "retrieved": [
+          {
+            "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "owner_attribute": "tenant-a"
+          },
+          {
+            "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+            "owner_attribute": "tenant-a"
+          },
+          {
+            "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+            "owner_attribute": "tenant-a"
+          }
+        ],
+        "status_code": 200,
+        "tenant_context": "tenant-a",
+        "variant": "normal",
+        "verification_outcome": "PASSED"
+      },
+      "findings": {
+        "foreign_canaries": {},
+        "foreign_citations": [],
+        "foreign_retrieved": [],
+        "verification_outcome": "PASSED"
+      },
+      "response": {
+        "code": null,
+        "event_id": "5b2ea058-3d9d-4ec6-b4bc-c99806b5e833",
+        "request_id": "Drcwbh9KIAMEb8g=",
+        "status": 200
+      }
+    },
+    "6-self-service": {
+      "attribute_updates": {
+        "custom:tenant": "InvalidParameterException",
+        "name": "ACCEPTED"
+      },
+      "group_operations_accepting_user_token": [],
+      "groups_in_fresh_token": [
+        "tenant-a"
+      ]
+    }
+  },
+  "privileged": false,
+  "reason": "body field refused; every other forged location ignored; membership unchanged",
+  "started_at": "2026-09-14T07:53:39+00:00",
+  "status": "PASS",
+  "suite": "identity",
+  "test_id": "TST-SEC-005",
+  "verifies": [
+    "SEC-003"
+  ]
+}

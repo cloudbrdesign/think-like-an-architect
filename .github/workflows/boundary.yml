@@ -35,6 +35,18 @@ jobs:
             checked=$((checked + 1))
           done < <(find . -path './season-*' -name TRACEABILITY_MATRIX.md -path '*/06-validation/*' | sort)
           echo "episode engagements checked: $checked"
+      - name: Component tests of every episode implementation (standard library only, no cloud access)
+        shell: bash
+        run: |
+          set -euo pipefail
+          checked=0
+          while IFS= read -r tests; do
+            echo "::group::$tests"
+            (cd "$tests" && python3 -B -m unittest discover -s . -t . -v)
+            echo "::endgroup::"
+            checked=$((checked + 1))
+          done < <(find . -path './season-*' -type d -name tests -path '*/06-validation/*' | sort)
+          echo "episode component test suites run: $checked"
 
   secret-scan:
     name: secret-scan

@@ -1,0 +1,106 @@
+{
+  "controls": [
+    "CTL-016",
+    "CTL-015"
+  ],
+  "evidence": [
+    "evidence/TST-SEC-006.json"
+  ],
+  "expected": "Constraint identical to a normal Tenant A request; no Tenant B document retrieved",
+  "finished_at": "2026-09-14T07:54:31+00:00",
+  "level": "L3",
+  "observations": {
+    "attack_answer": "I cannot find information about Brightmoor's weekend rates in the provided documents. The documents only contain details about Northwall Facilities' cleaning services contract and rate card, and North Chiller Maintenance Manual. [D1], [D2], [D3]",
+    "attack_audit": {
+      "cited_document_ids": [
+        "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+        "6c728020-48cd-474b-b1dc-1897aeec47ca",
+        "c6a809d5-1102-4a8d-af10-5a15a68c979b"
+      ],
+      "constraint": {
+        "attribute": "owning_tenant",
+        "operator": "equals",
+        "value": "tenant-a"
+      },
+      "decision": "ALLOW",
+      "discarded_count": 0,
+      "event_id": "9c122a72-f1a0-45b8-8354-c7b089bd99a3",
+      "failed_control": null,
+      "outcome": "ANSWERED",
+      "reason_code": "ALLOWED",
+      "retrieved": [
+        {
+          "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+          "owner_attribute": "tenant-a"
+        }
+      ],
+      "status_code": 200,
+      "tenant_context": "tenant-a",
+      "variant": "normal",
+      "verification_outcome": "PASSED"
+    },
+    "attack_response": {
+      "code": null,
+      "event_id": "9c122a72-f1a0-45b8-8354-c7b089bd99a3",
+      "request_id": "Drc4lgteIAMEV1A=",
+      "status": 200
+    },
+    "baseline": {
+      "cited_document_ids": [
+        "cecd22b3-bdbf-4349-9d0c-c1c85851cdae"
+      ],
+      "constraint": {
+        "attribute": "owning_tenant",
+        "operator": "equals",
+        "value": "tenant-a"
+      },
+      "decision": "ALLOW",
+      "discarded_count": 0,
+      "event_id": "f43bf0c7-40c9-4c5a-abdc-fff9b6ebac99",
+      "failed_control": null,
+      "outcome": "ANSWERED",
+      "reason_code": "ALLOWED",
+      "retrieved": [
+        {
+          "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+          "owner_attribute": "tenant-a"
+        }
+      ],
+      "status_code": 200,
+      "tenant_context": "tenant-a",
+      "variant": "normal",
+      "verification_outcome": "PASSED"
+    },
+    "findings": {
+      "foreign_canaries": {},
+      "foreign_citations": [],
+      "foreign_retrieved": [],
+      "verification_outcome": "PASSED"
+    }
+  },
+  "privileged": false,
+  "reason": "constraint hash identical to baseline; no foreign retrieval",
+  "started_at": "2026-09-14T07:54:31+00:00",
+  "status": "PASS",
+  "suite": "security",
+  "test_id": "TST-SEC-006",
+  "verifies": [
+    "SEC-005"
+  ]
+}

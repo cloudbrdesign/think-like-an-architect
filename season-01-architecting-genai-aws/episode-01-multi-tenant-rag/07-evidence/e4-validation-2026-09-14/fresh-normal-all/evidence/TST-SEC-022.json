@@ -1,0 +1,77 @@
+{
+  "controls": [
+    "CTL-017"
+  ],
+  "evidence": [
+    "evidence/TST-SEC-022.json"
+  ],
+  "expected": "DETECTED: entire response withheld; verification_outcome OWNERSHIP_MISMATCH; nothing generated",
+  "finished_at": "2026-09-14T07:54:53+00:00",
+  "level": "L4",
+  "observations": {
+    "audit": {
+      "cited_document_ids": [],
+      "constraint": {
+        "attribute": "owning_tenant",
+        "operator": "equals",
+        "value": "tenant-b"
+      },
+      "decision": "DENY",
+      "discarded_count": 0,
+      "event_id": "d7210564-3f6d-4539-8a18-a7f7be2946c5",
+      "failed_control": "CTL-017",
+      "outcome": "WITHHELD",
+      "reason_code": "OWNERSHIP_MISMATCH",
+      "retrieved": [
+        {
+          "document_id": "fx-divergence",
+          "owner_attribute": "tenant-b"
+        },
+        {
+          "document_id": "f557e2ba-59ea-4686-8b0d-a1701303dfd1",
+          "owner_attribute": "tenant-b"
+        },
+        {
+          "document_id": "6047da6c-6903-40d2-8f41-22c2c335a17a",
+          "owner_attribute": "tenant-b"
+        },
+        {
+          "document_id": "7e7db5b5-9f02-4a97-b142-20f65b720701",
+          "owner_attribute": "tenant-b"
+        }
+      ],
+      "status_code": 500,
+      "tenant_context": "tenant-b",
+      "variant": "normal",
+      "verification_outcome": "OWNERSHIP_MISMATCH"
+    },
+    "fixture_index_status": "INDEXED",
+    "fixture_removed": {
+      "index_status": "NOT_FOUND",
+      "ownership_record": null
+    },
+    "response": {
+      "code": "OWNERSHIP_MISMATCH",
+      "event_id": "d7210564-3f6d-4539-8a18-a7f7be2946c5",
+      "request_id": "Drc67jWYIAMEbzA=",
+      "status": 500
+    },
+    "response_body": {
+      "error": {
+        "code": "OWNERSHIP_MISMATCH",
+        "message": "The response was withheld."
+      },
+      "event_id": "d7210564-3f6d-4539-8a18-a7f7be2946c5"
+    }
+  },
+  "privileged": true,
+  "reason": "divergent chunk retrieved under tenant-b; response withheld; OWNERSHIP_MISMATCH recorded",
+  "started_at": "2026-09-14T07:54:53+00:00",
+  "status": "PASS",
+  "suite": "security",
+  "test_id": "TST-SEC-022",
+  "verifies": [
+    "DATA-003",
+    "SEC-001"
+  ]
+}

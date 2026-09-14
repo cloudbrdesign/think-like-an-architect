@@ -1,0 +1,30 @@
+{
+  "controls": [
+    "CTL-015"
+  ],
+  "evidence": [
+    "evidence/RT-15.json"
+  ],
+  "expected": "Suites and deployment refuse to target the wrong variant",
+  "finished_at": "2026-09-14T07:58:48+00:00",
+  "level": "red-team",
+  "observations": {
+    "deploy sensitivity variant outside sensitivity-run.sh": {
+      "exit": 1,
+      "output": [
+        "REFUSED: no build for 'sensitivity'. Run scripts/build.sh sensitivity first."
+      ]
+    },
+    "normal suite aimed at a sensitivity stack name": "REFUSED: stack tla-s01e01-sensitivity not found (ClientError)",
+    "sensitivity suite aimed at the normal stack": "REFUSED: stack tla-s01e01-normal is variant 'normal'; this command targets 'sensitivity'"
+  },
+  "privileged": false,
+  "reason": "variant guards refused every wrong-target attempt",
+  "started_at": "2026-09-14T07:58:48+00:00",
+  "status": "PASS",
+  "suite": "redteam",
+  "test_id": "RT-15",
+  "verifies": [
+    "SEC-004"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "controls": [
+    "CTL-016",
+    "CTL-022",
+    "CTL-018"
+  ],
+  "evidence": [
+    "evidence/TST-SEC-008.json"
+  ],
+  "expected": "One retrieval with the Tenant A constraint; no foreign identifiers, markers or citations",
+  "finished_at": "2026-09-14T07:54:33+00:00",
+  "level": "L3",
+  "observations": {
+    "answer": "The North Chiller Maintenance Manual [D1] outlines routine maintenance for the north chiller (CH-2). Monthly, inspect and clean condenser coils. Quarterly, check refrigerant pressures and compressor oil. Annually, replace drive belts and test safety cut-outs.",
+    "audit": {
+      "cited_document_ids": [
+        "c6a809d5-1102-4a8d-af10-5a15a68c979b"
+      ],
+      "constraint": {
+        "attribute": "owning_tenant",
+        "operator": "equals",
+        "value": "tenant-a"
+      },
+      "decision": "ALLOW",
+      "discarded_count": 0,
+      "event_id": "0fc8290f-e43e-42be-b26c-c6ce7e3443ed",
+      "failed_control": null,
+      "outcome": "ANSWERED",
+      "reason_code": "ALLOWED",
+      "retrieved": [
+        {
+          "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "ca272710-84ad-46f5-b0e6-4b5fde31f496",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+          "owner_attribute": "tenant-a"
+        }
+      ],
+      "status_code": 200,
+      "tenant_context": "tenant-a",
+      "variant": "normal",
+      "verification_outcome": "PASSED"
+    },
+    "audit_records_for_request": 1,
+    "citations": [
+      {
+        "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+        "label": "D1",
+        "location": "/documents/c6a809d5-1102-4a8d-af10-5a15a68c979b",
+        "title": "North chiller maintenance manual"
+      }
+    ],
+    "findings": {
+      "foreign_canaries": {},
+      "foreign_citations": [],
+      "foreign_retrieved": [],
+      "verification_outcome": "PASSED"
+    },
+    "hostile_document_retrieved": true,
+    "response": {
+      "code": null,
+      "event_id": "0fc8290f-e43e-42be-b26c-c6ce7e3443ed",
+      "request_id": "Drc45grGoAMEVpA=",
+      "status": 200
+    }
+  },
+  "privileged": false,
+  "reason": "single retrieval under tenant-a; hostile document retrieved=True; no foreign content",
+  "started_at": "2026-09-14T07:54:33+00:00",
+  "status": "PASS",
+  "suite": "security",
+  "test_id": "TST-SEC-008",
+  "verifies": [
+    "SEC-005"
+  ]
+}
