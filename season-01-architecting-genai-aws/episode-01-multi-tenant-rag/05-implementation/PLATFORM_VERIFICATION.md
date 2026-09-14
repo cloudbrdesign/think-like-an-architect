@@ -109,9 +109,18 @@ an administrator. Neither is an architecture or service-mapping change:
 - **Role lookup before creation.** CloudFormation looks up an IAM role by its bare name before creating it. For a role
   that does not exist yet, IAM authorises that lookup against `role/<name>` without the path. A deployment role limited
   to a role path therefore also needs read-only `iam:GetRole` on the bare-name pattern.
-- **Stage tagging.** CloudFormation tags an HTTP API stage with a separate call, authorised as
-  `apigateway:TagResource` on `/apis/<id>/stages`. IAM Access Analyzer currently reports that action name as unknown,
-  but the service enforces it.
+- **Stage tagging: an API Gateway authorization inconsistency.**
+  - **Published reference:** AWS's service-action reference does not list `apigateway:TagResource`, and IAM Access
+    Analyzer reports it as an invalid action.
+  - **Observed in real execution:** `CreateStage` requests that contain tags are denied unless the deployment
+    principal holds that action. A stage created without tags succeeds, and tagging an existing stage works with the
+    documented permissions.
+  - **Why it matters here:** CloudFormation always supplies its own stack tags when it creates a stage. The spike first
+    added the action, a correction then removed it because the reference does not list it, and stage creation failed
+    again.
+  - **Consequence:** the TLA deployment role retains a narrowly scoped `apigateway:TagResource` compatibility permission
+    for HTTP APIs in us-east-1. It is a deployment-plane permission only, supported by direct execution evidence, and
+    revalidated periodically. It is not granted to any application runtime role.
 - **Rollback clean-up.** If a stack fails before a role exists, the rollback clean-up of that role can be denied. Delete
   the stack again, retaining the never-created role.
 
