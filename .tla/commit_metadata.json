@@ -1,0 +1,18 @@
+{
+  "schema": "commit-metadata/1",
+  "publisher": {
+    "name": "CloudBrewery",
+    "github_login": "cloudbrdesign",
+    "github_user_id": 213046295
+  },
+  "platform_merge_committers": [
+    {"name": "GitHub", "email": "noreply@github.com"}
+  ],
+  "forbidden_trailer_keys": ["co-authored-by", "generated-by", "generated-with", "assisted-by"],
+  "forbidden_trailer_key_suffixes": ["-session"],
+  "forbidden_line_patterns": [
+    "(?i)^\\W*generated[- ](?:with|by)\\b",
+    "(?i)^\\W*assisted[- ]by\\b",
+    "(?i)\\bco-?authored[- ]?by\\b"
+  ]
+}
