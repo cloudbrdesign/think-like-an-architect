@@ -12,8 +12,8 @@ IDENTITY → AUTHORISATION → RETRIEVAL BOUNDARY
 Tenant isolation must be enforced **before retrieval**. The model is not the security boundary. By the end you will be
 able to show — with tests that are allowed to fail — that one customer cannot retrieve another customer's information.
 
-**Status:** educational implementation validated (E4). The engagement, the implementation, the validation suite and an
-example evidence set are all here. Everything in this folder is free; no purchase is needed to complete the engagement.
+**Status:** available. The engagement, the educational implementation, the validation suite and an example evidence set
+are all here. Everything in this folder is free; no purchase is needed to complete the engagement.
 
 ## Before you start
 

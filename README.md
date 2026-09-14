@@ -1,7 +1,7 @@
 # Think Like an Architect
 
-> **Repository status: PRIVATE STAGING.** This repository will hold free, public architecture education. It is private
-> only while its structure and first engagement are being established. Nothing has been published yet.
+> **Free architecture education.** Every engagement here is free to read, work through and build in your own cloud
+> account. No purchase is needed to complete an engagement.
 
 **Think Like an Architect** teaches architectural thinking. Every episode is a simulated professional architecture
 engagement, run end to end:
@@ -38,7 +38,7 @@ drivers and cleanup steps **before** the first deployment step. Always run the c
 
 ## Status
 
-The engagement templates are available in [templates/](templates/README.md). Episode 01's educational implementation is
-built and validated, and its learner experience is being packaged. Start at
+The engagement templates are available in [templates/](templates/README.md). Episode 01 is available: the complete
+engagement, the educational implementation, its validation suite and an example evidence set. Start at
 [the Episode 01 README](season-01-architecting-genai-aws/episode-01-multi-tenant-rag/README.md); the season overview is
 [season-01-architecting-genai-aws/README.md](season-01-architecting-genai-aws/README.md).
