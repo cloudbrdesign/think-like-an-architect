@@ -2,77 +2,67 @@
 
 > **You are the architect. Here is the client problem.**
 
-**Status: educational implementation (E4).** This folder contains:
-- the approved engagement design;
-- the **approved architecture**;
-- the **educational implementation design**: platform verification, controls, harness design, cost and cleanup;
-- the **educational implementation**: one CloudFormation stack, the application, the test harness, the sensitivity
-  variant and the cleanup flow.
-
-Reading costs nothing. **Deploying creates billable resources in your own sandbox account** — read
-[Cost and cleanup](05-implementation/COST_AND_CLEANUP.md) before step 20.
-
-The principle this episode is built around:
+**Start here.** This folder is a complete architecture engagement. You take a realistic problem from business need to a
+tested, defended architecture, then build it, attack it and prove the boundary holds.
 
 ```
 IDENTITY → AUTHORISATION → RETRIEVAL BOUNDARY
 ```
 
-Tenant isolation must not depend on instructions given to a model. By the end of the engagement you must be able to show,
-with tests that are allowed to fail, that one customer cannot retrieve another customer's information.
+Tenant isolation must be enforced **before retrieval**. The model is not the security boundary. By the end you will be
+able to show — with tests that are allowed to fail — that one customer cannot retrieve another customer's information.
 
-## Work through it in this order
+**Status:** educational implementation validated (E4). The engagement, the implementation, the validation suite and an
+example evidence set are all here. Everything in this folder is free; no purchase is needed to complete the engagement.
 
-### Engagement (approved)
+## Before you start
 
-| Step | Read / produce | File |
-|---|---|---|
-| 1 | Understand the client, the business problem and what failure costs | [Architecture Brief](01-business-context/ARCHITECTURE_BRIEF.md) |
-| 2 | Study the requirements — especially the security invariants | [Requirements](02-requirements/REQUIREMENTS.md) |
-| 3 | Separate what is assumed from what is constrained | [Assumptions and constraints](02-requirements/ASSUMPTIONS_AND_CONSTRAINTS.md) |
-| 4 | See what can go wrong before choosing anything | [Initial risk register and threat-model inputs](03-architecture/INITIAL_RISK_REGISTER.md) |
-| 5 | **Try to answer the decision questions yourself before step 6** | [Architecture decision questions](04-decisions/ARCHITECTURE_DECISION_QUESTIONS.md) |
+| | |
+|---|---|
+| **What you need to read along** | Nothing but this repository |
+| **What you need to build it** | A dedicated sandbox AWS account with administrator access, Python 3.10+ and `boto3`. Prerequisites and the preflight check are in the [learner guide](05-implementation/README.md#prerequisites) |
+| **What it costs** | Reading costs nothing. **Deploying creates billable resources in your own account.** Read [Cost and cleanup](05-implementation/COST_AND_CLEANUP.md) first, and set a budget alert |
+| **How long the lab takes** | CloudBrewery's own run from a fresh clone took about 18 minutes, from preflight to verified cleanup ([evidence](07-evidence/e4-validation-2026-09-14/FRESH_COPY_RUN.md)). Reading and reasoning time is yours |
+| **What you keep** | [Portfolio evidence of the work you performed](07-evidence/PORTFOLIO_EVIDENCE_PLAN.md) — not a certification |
 
-### Architecture (approved)
+## The engagement in ten stages
 
-| Step | Read / produce | File |
-|---|---|---|
-| 6 | Compare credible options against criteria derived from the requirements | [Architecture options analysis](04-decisions/ARCHITECTURE_OPTIONS_ANALYSIS.md) |
-| 7 | Study each decision, including why the alternatives lost | [ADR-001 isolation model](04-decisions/ADR-001-tenant-isolation-model.md) · [ADR-002 tenant context](04-decisions/ADR-002-trusted-tenant-context.md) · [ADR-003 authorisation point](04-decisions/ADR-003-authorisation-enforcement-point.md) · [ADR-004 attribution](04-decisions/ADR-004-document-tenant-attribution.md) · [ADR-005 retrieval boundary](04-decisions/ADR-005-retrieval-boundary.md) · [ADR-006 audit](04-decisions/ADR-006-audit-and-observability.md) · [ADR-007 model boundary](04-decisions/ADR-007-model-invocation-boundary.md) |
-| 8 | See the trust boundaries, flows, fail-closed behaviour and bypass analysis | [Target architecture](03-architecture/TARGET_ARCHITECTURE.md) · [diagrams](03-architecture/diagrams/) |
-| 9 | Attack the design | [Threat model and red-team review](03-architecture/THREAT_MODEL.md) |
-| 10 | Know what risk remains, and who owns it | [Residual risk register](03-architecture/RESIDUAL_RISK_REGISTER.md) |
-| 11 | Understand cost structure and where the design stops fitting | [Cost and scale analysis](03-architecture/COST_AND_SCALE_ANALYSIS.md) |
-| 12 | Only now: see how the patterns map to AWS, with dated sources | [AWS service mapping](03-architecture/AWS_SERVICE_MAPPING.md) |
-| 13 | Know exactly how the architecture will be proven | [Validation plan](06-validation/VALIDATION_PLAN.md) · [Acceptance test intent](06-validation/ACCEPTANCE_TEST_INTENT.md) · [Traceability matrix](06-validation/TRACEABILITY_MATRIX.md) |
-| 14 | Plan the record of your work | [Portfolio evidence plan](07-evidence/PORTFOLIO_EVIDENCE_PLAN.md) |
-| 15 | Prepare to defend your design | [Architecture review questions](ARCHITECTURE_REVIEW_QUESTIONS.md) |
+Work through the stages in order. **Try to answer each stage's checkpoint yourself before reading the next stage** —
+reasoning matters more than the answers in the files.
 
-### Implementation design (E3)
-
-| Step | Read / produce | File |
-|---|---|---|
-| 16 | See what has been proven about the platform — and what still needs an experiment | [Platform verification](05-implementation/PLATFORM_VERIFICATION.md) |
-| 17 | See exactly what you will build, why each part exists, and where each control lives | [Implementation design](05-implementation/IMPLEMENTATION_DESIGN.md) · [Implementation controls](05-implementation/IMPLEMENTATION_CONTROLS.md) |
-| 18 | Know how the isolation control will be proven, including the sensitivity variant | [Test harness design](06-validation/TEST_HARNESS_DESIGN.md) |
-| 19 | Know the cost and the cleanup before deploying anything | [Cost and cleanup](05-implementation/COST_AND_CLEANUP.md) |
-
-### Build, attack and prove it (E4)
-
-| Step | Do | File |
-|---|---|---|
-| 20 | Find, in the source, where tenant authority comes from, where the filter is built and what prevents bypass — then deploy | [Build it](05-implementation/README.md) · [template](05-implementation/infrastructure/template.yaml) · [primary control](05-implementation/app/shared/retrieval_scope.py) |
-| 21 | Load synthetic tenants, try to forge a tenant, and read the audit record | [Build it — explore the boundary](05-implementation/README.md#explore-the-boundary-yourself-between-steps-3-and-4) |
-| 22 | Run the attack suite, then prove the tests fail when the primary control is removed | [Harness](06-validation/harness/) · [sensitivity variant](06-validation/sensitivity/retrieval_scope.py) |
-| 23 | Clean up, verify, and keep your evidence | [Cost and cleanup](05-implementation/COST_AND_CLEANUP.md) · [Portfolio evidence plan](07-evidence/PORTFOLIO_EVIDENCE_PLAN.md) |
+| Stage | What you do | Read / run | Checkpoint — you should be able to answer |
+|---|---|---|---|
+| **1 · Business problem** | Understand the client, the stakes and what failure costs | [Architecture Brief](01-business-context/ARCHITECTURE_BRIEF.md) | Why is one cross-customer leak fatal for this product? |
+| **2 · Requirements** | Separate invariants from preferences, and assumptions from constraints | [Requirements](02-requirements/REQUIREMENTS.md) · [Assumptions and constraints](02-requirements/ASSUMPTIONS_AND_CONSTRAINTS.md) · [Initial risk register](03-architecture/INITIAL_RISK_REGISTER.md) | Which requirements can never bend, and why must authorisation happen before retrieval? |
+| **3 · Options** | Answer the decision questions **yourself**, then compare credible options against criteria | [Decision questions](04-decisions/ARCHITECTURE_DECISION_QUESTIONS.md) · [Options analysis](04-decisions/ARCHITECTURE_OPTIONS_ANALYSIS.md) | Where can tenant isolation live — prompt, post-retrieval filter, per-tenant infrastructure or inside the search — and what does each cost? |
+| **4 · Decisions** | Study each decision and why the alternatives lost | [ADR-001](04-decisions/ADR-001-tenant-isolation-model.md) · [ADR-002](04-decisions/ADR-002-trusted-tenant-context.md) · [ADR-003](04-decisions/ADR-003-authorisation-enforcement-point.md) · [ADR-004](04-decisions/ADR-004-document-tenant-attribution.md) · [ADR-005](04-decisions/ADR-005-retrieval-boundary.md) · [ADR-006](04-decisions/ADR-006-audit-and-observability.md) · [ADR-007](04-decisions/ADR-007-model-invocation-boundary.md) | Why is the tenant constraint evaluated inside every search, and what is the price of that choice? |
+| **5 · Architecture** | See trust boundaries, flows, fail-closed behaviour, threats, residual risk, cost — and only then the AWS mapping | [Target architecture](03-architecture/TARGET_ARCHITECTURE.md) · [diagrams](03-architecture/diagrams/) · [Threat model](03-architecture/THREAT_MODEL.md) · [Residual risks](03-architecture/RESIDUAL_RISK_REGISTER.md) · [Cost and scale](03-architecture/COST_AND_SCALE_ANALYSIS.md) · [AWS service mapping](03-architecture/AWS_SERVICE_MAPPING.md) | Where does untrusted tenant input become trusted context? What breaks isolation on its own? |
+| **6 · Build** | Check what the platform was proven to do, read where each control lives, then deploy | [Platform verification](05-implementation/PLATFORM_VERIFICATION.md) · [Implementation design](05-implementation/IMPLEMENTATION_DESIGN.md) · [Controls](05-implementation/IMPLEMENTATION_CONTROLS.md) · [**Learner guide** — steps 0 to 3](05-implementation/README.md) | Which single function builds the tenant filter, and what stops any other code from building a different one? |
+| **7 · Attack** | Forge a tenant, attack the prompt, inspect the audit record | [Learner guide — explore the boundary](05-implementation/README.md#explore-the-boundary-yourself-between-steps-3-and-4) · [Validation plan](06-validation/VALIDATION_PLAN.md) | You sent `tenant-b` in four places. What did the audit record show as tenant context and constraint? |
+| **8 · Validate** | Run the full suite, then prove the tests can fail with the sensitivity experiment | [Learner guide — steps 4 and 5](05-implementation/README.md#run-it--steps-0-to-6) · [Test harness design](06-validation/TEST_HARNESS_DESIGN.md) · [Traceability matrix](06-validation/TRACEABILITY_MATRIX.md) | How do you know your cross-tenant tests are not passing vacuously? |
+| **9 · Evidence** | Keep your results, clean up, verify nothing remains | [Learner guide — step 6](05-implementation/README.md#run-it--steps-0-to-6) · [Portfolio evidence plan](07-evidence/PORTFOLIO_EVIDENCE_PLAN.md) · [example evidence set](07-evidence/e4-validation-2026-09-14/README.md) | What exactly did your run prove, under which conditions — and what did it not prove? |
+| **10 · Architecture review** | Defend the architecture as you would to a review board | [Architecture review questions](ARCHITECTURE_REVIEW_QUESTIONS.md) | Could you answer every question by citing your own artifacts? |
 
 ## Check the traceability chain
 
+Every requirement traces to its decision, control, implementing source, test and result:
+
 ```
 python3 tools/traceability_check.py season-01-architecting-genai-aws/episode-01-multi-tenant-rag
-python3 tools/traceability_check.py season-01-architecting-genai-aws/episode-01-multi-tenant-rag --why ADR-001
+python3 tools/traceability_check.py season-01-architecting-genai-aws/episode-01-multi-tenant-rag --why ADR-005
 python3 tools/traceability_check.py season-01-architecting-genai-aws/episode-01-multi-tenant-rag --proof SEC-001
 ```
+
+## What the example evidence shows — and its limits
+
+CloudBrewery's run of this implementation, from a fresh clone, is in
+[07-evidence/e4-validation-2026-09-14](07-evidence/e4-validation-2026-09-14/README.md):
+- all 22 validation tests passed;
+- the sensitivity experiment made the isolation tests fail once the primary control was removed;
+- cleanup was verified.
+
+The results hold for that educational deployment, account, region, corpus and set of conditions. They are not a proof of
+production-scale isolation or performance. Your own run is your evidence.
 
 ## What this is not
 
