@@ -1,6 +1,6 @@
 # Cost and Scale Analysis — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** proposed — awaiting architecture approval · **Date:** 2026-09-14
+**Stage:** architecture (E2) · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 
 This is **architectural reasoning about cost structure**, not a pricing spreadsheet. It contains **no prices**. A dated
 cost estimate for the learner implementation, with its region and assumptions, is produced at build authorisation (VE-11)

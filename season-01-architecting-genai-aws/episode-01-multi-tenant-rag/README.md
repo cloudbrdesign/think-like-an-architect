@@ -2,9 +2,10 @@
 
 > **You are the architect. Here is the client problem.**
 
-**Status: architecture design (E2), proposed.** This folder contains:
-- the approved engagement design: client problem, requirements and decision questions;
-- the **proposed architecture**: options analysis, decisions, threat model, diagrams and validation plan.
+**Status: implementation design (E3).** This folder contains:
+- the approved engagement design;
+- the **approved architecture**;
+- the **educational implementation design**: platform verification, controls, harness, cost and cleanup.
 
 **No implementation exists yet.** Nothing here deploys anything, so this stage has no cloud cost.
 
@@ -29,7 +30,7 @@ with tests that are allowed to fail, that one customer cannot retrieve another c
 | 4 | See what can go wrong before choosing anything | [Initial risk register and threat-model inputs](03-architecture/INITIAL_RISK_REGISTER.md) |
 | 5 | **Try to answer the decision questions yourself before step 6** | [Architecture decision questions](04-decisions/ARCHITECTURE_DECISION_QUESTIONS.md) |
 
-### Architecture (proposed)
+### Architecture (approved)
 
 | Step | Read / produce | File |
 |---|---|---|
@@ -44,7 +45,16 @@ with tests that are allowed to fail, that one customer cannot retrieve another c
 | 14 | Plan the record of your work | [Portfolio evidence plan](07-evidence/PORTFOLIO_EVIDENCE_PLAN.md) |
 | 15 | Prepare to defend your design | [Architecture review questions](ARCHITECTURE_REVIEW_QUESTIONS.md) |
 
-The learner implementation, validation results and cleanup are added in later stages.
+### Implementation design (E3)
+
+| Step | Read / produce | File |
+|---|---|---|
+| 16 | See what has been proven about the platform — and what still needs an experiment | [Platform verification](05-implementation/PLATFORM_VERIFICATION.md) |
+| 17 | See exactly what you will build, why each part exists, and where each control lives | [Implementation design](05-implementation/IMPLEMENTATION_DESIGN.md) · [Implementation controls](05-implementation/IMPLEMENTATION_CONTROLS.md) |
+| 18 | Know how the isolation control will be proven, including the sensitivity variant | [Test harness design](06-validation/TEST_HARNESS_DESIGN.md) |
+| 19 | Know the cost and the cleanup before deploying anything | [Cost and cleanup](05-implementation/COST_AND_CLEANUP.md) |
+
+The learner implementation, validation results and cleanup scripts are added in the build stage.
 
 ## Check the traceability chain
 

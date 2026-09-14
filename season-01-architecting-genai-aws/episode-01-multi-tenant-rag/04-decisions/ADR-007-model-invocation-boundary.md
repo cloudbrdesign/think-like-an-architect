@@ -1,7 +1,7 @@
 <!-- template: tla-adr/1 -->
 # ADR-007 — Model invocation boundary and data residency: verify first, generate in-region
 
-**Status:** proposed — awaiting architecture approval · **Date:** 2026-09-14
+**Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 **Answers:** a decision identified during architecture (not an E1 decision question) · **Options analysis:**
 [section 8](ARCHITECTURE_OPTIONS_ANALYSIS.md#8-model-invocation-boundary-and-data-residency--adr-007)
 

@@ -1,7 +1,7 @@
 <!-- template: tla-adr/1 -->
 # ADR-005 — Retrieval boundary: a mandatory tenant constraint evaluated inside every search
 
-**Status:** proposed — awaiting architecture approval · **Date:** 2026-09-14
+**Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 **Answers:** decision question DQ-E · **Options analysis:** [section 6](ARCHITECTURE_OPTIONS_ANALYSIS.md#6-retrieval-boundary--adr-005)
 
 ## Context

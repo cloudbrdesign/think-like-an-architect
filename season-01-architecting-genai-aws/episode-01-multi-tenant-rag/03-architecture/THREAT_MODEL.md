@@ -1,7 +1,7 @@
 <!-- template: tla-threat-model/1 -->
 # Threat Model — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** proposed — awaiting architecture approval · **Date:** 2026-09-14
+**Stage:** architecture (E2) · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 
 Produced **with** the architecture. A threat is described as addressed only where the selected design contains the
 control. **No control is implemented or validated yet**; validation evidence comes later.

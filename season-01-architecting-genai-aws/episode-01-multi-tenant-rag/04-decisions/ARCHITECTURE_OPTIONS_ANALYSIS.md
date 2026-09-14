@@ -1,7 +1,7 @@
 <!-- template: tla-options-analysis/1 -->
 # Architecture Options Analysis — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** proposed — awaiting architecture approval · **Date:** 2026-09-14
+**Stage:** architecture (E2) · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 
 This document turns the approved requirements into decisions in a fixed order:
 

@@ -1,6 +1,6 @@
 # Target Architecture — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** proposed — awaiting architecture approval · **Date:** 2026-09-14
+**Stage:** architecture (E2) · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 
 This description is **service-neutral**: it names architectural components and the decisions that shape them. The
 mapping to an implementation environment is in [AWS_SERVICE_MAPPING.md](AWS_SERVICE_MAPPING.md).
