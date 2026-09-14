@@ -1,8 +1,9 @@
 # Educational Implementation Design — Veltamere Document Assistant
 
 **Stage:** build authorisation and implementation design (E3) · **Date:** 2026-09-14
-**Status:** design complete; **not built**; build authorisation blocked until the platform spikes run (see
-[PLATFORM_VERIFICATION.md](PLATFORM_VERIFICATION.md)).
+**Status:** design complete; **not built**. The platform spikes ran on 2026-09-14 and passed (see
+[PLATFORM_VERIFICATION.md](PLATFORM_VERIFICATION.md)). Building still requires the product owner's build-authorisation
+ruling.
 
 ```
 VERIFIED IDENTITY → TRUSTED TENANT CONTEXT → AUTHORITATIVE AUTHORISATION
@@ -57,8 +58,7 @@ visible and testable, while staying reproducible, non-interactive, inspectable, 
 - **Stack deletion** gives a dependable teardown; the cleanup script handles only what a stack cannot (emptying buckets,
   the artifact bucket) and then verifies.
 - **Resource support is documented** for every type needed, including knowledge bases on S3 Vectors and custom data
-  sources (PE-05…PE-07). Deployment is proven by spike SPK-I; if it fails, those resources move into the deploy script
-  and nothing else changes.
+  sources (PE-05…PE-07). Deployment was proven by spike SPK-I on 2026-09-14: create and delete both completed.
 
 **Commercial packs are unaffected:** their Terraform + CloudFormation obligation is separate and does not shape this
 choice.
@@ -319,11 +319,11 @@ This maps outputs to [PORTFOLIO_EVIDENCE_PLAN.md](../07-evidence/PORTFOLIO_EVIDE
 | Criterion | Status |
 |---|---|
 | Architecture approved | **Met** (2026-09-14) |
-| Load-bearing AWS capabilities sufficiently verified | **Not met** — documentation checks complete; SPK-A, B, C, D, E, F, G, I not run (no sandbox) |
+| Load-bearing AWS capabilities sufficiently verified | **Met on evidence (2026-09-14)** — SPK-I, C, A, B, E, F, G, D all PASS in a sandbox account; SPK-B found zero cross-tenant results. Open: VE-09 (production item), VE-11 (confirmed at the first E4 run), VE-18 (partly verified). See PLATFORM_VERIFICATION |
 | Learner mechanism selected | **Met** — section 2 |
 | Implementation design complete | **Met** — this document, IMPLEMENTATION_CONTROLS, TEST_HARNESS_DESIGN |
 | Test strategy executable | **Met in design** — harness, fixtures, guards, sensitivity variant specified |
-| Sandbox prerequisites understood | **Met** — PLATFORM_VERIFICATION section 1; **account, region and budget not yet provided** |
+| Sandbox prerequisites understood | **Met** — PLATFORM_VERIFICATION section 1; CloudBrewery's validation sandbox, region (us-east-1) and budget guardrail are in place |
 | Cost target plausible | **Met** — dated estimate far below USD 10 |
 | Cleanup designed | **Met** — COST_AND_CLEANUP |
-| No unresolved architecture blocker | **Met** — all platform findings are mapping-level (CH-01…CH-08); SPK-B is the one spike whose failure would reopen ADR-005 |
+| No unresolved architecture blocker | **Met** — all platform findings are mapping- or implementation-level (CH-01…CH-13); SPK-B, the one spike whose failure would reopen ADR-005, passed |
