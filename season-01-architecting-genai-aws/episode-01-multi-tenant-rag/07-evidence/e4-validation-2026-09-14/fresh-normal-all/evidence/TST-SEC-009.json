@@ -1,0 +1,95 @@
+{
+  "controls": [
+    "CTL-008",
+    "CTL-009",
+    "CTL-014"
+  ],
+  "evidence": [
+    "evidence/TST-SEC-009.json"
+  ],
+  "expected": "BLOCKED in every case, or the path does not exist for tenant users",
+  "finished_at": "2026-09-14T07:55:09+00:00",
+  "level": "L3+L1",
+  "observations": {
+    "1 direct invocation with forged claims": "ClientError: 77223128:function:tla-s01e01-normal-query with an explicit deny in a resource-based policy",
+    "2 retrieval with other credentials": {
+      "end_users_have_aws_credentials": false,
+      "other_application_roles": {
+        "IngestionRole": "implicitDeny",
+        "KnowledgeBaseServiceRole": "implicitDeny"
+      }
+    },
+    "3 direct read of an original": "AccessDenied: AccessDenied",
+    "4 open another tenant's document by ID": {
+      "code": "DOCUMENT_NOT_FOUND_FOR_TENANT",
+      "event_id": "ca332d93-2930-4fda-9029-69fbd9545cf2",
+      "request_id": "Drc9VjBrIAMEZlA=",
+      "status": 404
+    },
+    "5 debug or override parameters": {
+      "GET /admin": {
+        "code": null,
+        "event_id": null,
+        "request_id": "Drc-njTboAMEPmw=",
+        "status": 404
+      },
+      "GET /debug": {
+        "code": null,
+        "event_id": null,
+        "request_id": "Drc-dh85oAMEPjQ=",
+        "status": 404
+      },
+      "GET /documents": {
+        "code": null,
+        "event_id": null,
+        "request_id": "Drc-wimgIAMEZtg=",
+        "status": 404
+      },
+      "debug and tenant=all query": {
+        "constraint": {
+          "attribute": "owning_tenant",
+          "operator": "equals",
+          "value": "tenant-a"
+        },
+        "response": {
+          "code": null,
+          "event_id": "45721be6-d2e3-470b-9500-617434167cd7",
+          "request_id": "Drc90jLCoAMEZOg=",
+          "status": 200
+        }
+      },
+      "debug body field": {
+        "constraint": "NONE",
+        "response": {
+          "code": "REQUEST_FIELD_REJECTED",
+          "event_id": "f633dfec-0ec6-42b4-a5a6-ef4d548d8ba5",
+          "request_id": "Drc9ngxEIAMEPCg=",
+          "status": 400
+        }
+      },
+      "debug header": {
+        "constraint": {
+          "attribute": "owning_tenant",
+          "operator": "equals",
+          "value": "tenant-a"
+        },
+        "response": {
+          "code": null,
+          "event_id": "5ba21f09-50b9-42b9-a06c-4b6e62172304",
+          "request_id": "Drc-IjE5IAMEZpA=",
+          "status": 200
+        }
+      }
+    },
+    "6 legacy export role": "NOT_APPLICABLE \u2014 not part of the learner build"
+  },
+  "privileged": true,
+  "reason": "direct invoke denied by explicit Deny; no other retrieval principal; originals unreadable directly; cross-tenant open not found; no debug or override path",
+  "started_at": "2026-09-14T07:55:09+00:00",
+  "status": "PASS",
+  "suite": "security",
+  "test_id": "TST-SEC-009",
+  "verifies": [
+    "SEC-009"
+  ]
+}

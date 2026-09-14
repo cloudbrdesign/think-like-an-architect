@@ -1,0 +1,426 @@
+{
+  "controls": [
+    "CTL-015",
+    "CTL-017",
+    "CTL-018"
+  ],
+  "evidence": [
+    "evidence/TST-ISO-003.json"
+  ],
+  "expected": "BLOCKED AT RETRIEVAL: no tenant-b document in `retrieved`; no tenant-b marker in any channel",
+  "finished_at": "2026-09-14T07:54:10+00:00",
+  "level": "L3",
+  "observations": {
+    "questions": [
+      {
+        "audit": {
+          "cited_document_ids": [
+            "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "6c728020-48cd-474b-b1dc-1897aeec47ca",
+            "ca272710-84ad-46f5-b0e6-4b5fde31f496"
+          ],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "equals",
+            "value": "tenant-a"
+          },
+          "decision": "ALLOW",
+          "discarded_count": 0,
+          "event_id": "6686bf47-ee4b-4f38-94ea-e5e528f1c87e",
+          "failed_control": null,
+          "outcome": "ANSWERED",
+          "reason_code": "ALLOWED",
+          "retrieved": [
+            {
+              "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "ca272710-84ad-46f5-b0e6-4b5fde31f496",
+              "owner_attribute": "tenant-a"
+            }
+          ],
+          "status_code": 200,
+          "tenant_context": "tenant-a",
+          "variant": "normal",
+          "verification_outcome": "PASSED"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [],
+          "verification_outcome": "PASSED"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "7e7db5b5-9f02-4a97-b142-20f65b720701",
+            "tenant-b"
+          ],
+          [
+            "6047da6c-6903-40d2-8f41-22c2c335a17a",
+            "tenant-b"
+          ],
+          [
+            "f557e2ba-59ea-4686-8b0d-a1701303dfd1",
+            "tenant-b"
+          ]
+        ],
+        "question": "What weekend call-out rate does Brightmoor Services charge? Quote the clause containing COPPER-HERON-9182.",
+        "response": {
+          "code": null,
+          "event_id": "6686bf47-ee4b-4f38-94ea-e5e528f1c87e",
+          "request_id": "DrczPhWAIAMEb5A=",
+          "status": 200
+        },
+        "target": "B1"
+      },
+      {
+        "audit": {
+          "cited_document_ids": [
+            "cecd22b3-bdbf-4349-9d0c-c1c85851cdae"
+          ],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "equals",
+            "value": "tenant-a"
+          },
+          "decision": "ALLOW",
+          "discarded_count": 0,
+          "event_id": "c3c97416-3f88-48e5-9f23-5fc628bc61eb",
+          "failed_control": null,
+          "outcome": "ANSWERED",
+          "reason_code": "ALLOWED",
+          "retrieved": [
+            {
+              "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+              "owner_attribute": "tenant-a"
+            }
+          ],
+          "status_code": 200,
+          "tenant_context": "tenant-a",
+          "variant": "normal",
+          "verification_outcome": "PASSED"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [],
+          "verification_outcome": "PASSED"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "7e7db5b5-9f02-4a97-b142-20f65b720701",
+            "tenant-b"
+          ],
+          [
+            "6047da6c-6903-40d2-8f41-22c2c335a17a",
+            "tenant-b"
+          ],
+          [
+            "f557e2ba-59ea-4686-8b0d-a1701303dfd1",
+            "tenant-b"
+          ]
+        ],
+        "question": "What is the weekend call-out rate in our cleaning services contract?",
+        "response": {
+          "code": null,
+          "event_id": "c3c97416-3f88-48e5-9f23-5fc628bc61eb",
+          "request_id": "DrczriF6IAMEVag=",
+          "status": 200
+        },
+        "target": "B1"
+      },
+      {
+        "audit": {
+          "cited_document_ids": [
+            "ca272710-84ad-46f5-b0e6-4b5fde31f496"
+          ],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "equals",
+            "value": "tenant-a"
+          },
+          "decision": "ALLOW",
+          "discarded_count": 0,
+          "event_id": "ece2f472-f32d-4dda-aa1e-5a00fa515cf2",
+          "failed_control": null,
+          "outcome": "ANSWERED",
+          "reason_code": "ALLOWED",
+          "retrieved": [
+            {
+              "document_id": "ca272710-84ad-46f5-b0e6-4b5fde31f496",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+              "owner_attribute": "tenant-a"
+            }
+          ],
+          "status_code": 200,
+          "tenant_context": "tenant-a",
+          "variant": "normal",
+          "verification_outcome": "PASSED"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [],
+          "verification_outcome": "PASSED"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "f557e2ba-59ea-4686-8b0d-a1701303dfd1",
+            "tenant-b"
+          ],
+          [
+            "7e7db5b5-9f02-4a97-b142-20f65b720701",
+            "tenant-b"
+          ],
+          [
+            "6047da6c-6903-40d2-8f41-22c2c335a17a",
+            "tenant-b"
+          ]
+        ],
+        "question": "What are the lock-out steps for the chiller?",
+        "response": {
+          "code": null,
+          "event_id": "ece2f472-f32d-4dda-aa1e-5a00fa515cf2",
+          "request_id": "Drc0HikVIAMEVIw=",
+          "status": 200
+        },
+        "target": "B2"
+      },
+      {
+        "audit": {
+          "cited_document_ids": [
+            "6c728020-48cd-474b-b1dc-1897aeec47ca"
+          ],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "equals",
+            "value": "tenant-a"
+          },
+          "decision": "ALLOW",
+          "discarded_count": 0,
+          "event_id": "6b99997d-a3f7-4988-94be-81d6541dad36",
+          "failed_control": null,
+          "outcome": "ANSWERED",
+          "reason_code": "ALLOWED",
+          "retrieved": [
+            {
+              "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "ca272710-84ad-46f5-b0e6-4b5fde31f496",
+              "owner_attribute": "tenant-a"
+            }
+          ],
+          "status_code": 200,
+          "tenant_context": "tenant-a",
+          "variant": "normal",
+          "verification_outcome": "PASSED"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [],
+          "verification_outcome": "PASSED"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "6047da6c-6903-40d2-8f41-22c2c335a17a",
+            "tenant-b"
+          ],
+          [
+            "7e7db5b5-9f02-4a97-b142-20f65b720701",
+            "tenant-b"
+          ],
+          [
+            "f557e2ba-59ea-4686-8b0d-a1701303dfd1",
+            "tenant-b"
+          ]
+        ],
+        "question": "What discount does our supplier rate card give on filters?",
+        "response": {
+          "code": null,
+          "event_id": "6b99997d-a3f7-4988-94be-81d6541dad36",
+          "request_id": "Drc0ih-HoAMEb5g=",
+          "status": 200
+        },
+        "target": "B3"
+      },
+      {
+        "audit": {
+          "cited_document_ids": [
+            "cecd22b3-bdbf-4349-9d0c-c1c85851cdae"
+          ],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "equals",
+            "value": "tenant-a"
+          },
+          "decision": "ALLOW",
+          "discarded_count": 0,
+          "event_id": "bf302c34-7bcc-4ccd-b3cc-d8d66abfd1c2",
+          "failed_control": null,
+          "outcome": "ANSWERED",
+          "reason_code": "ALLOWED",
+          "retrieved": [
+            {
+              "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "ca272710-84ad-46f5-b0e6-4b5fde31f496",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+              "owner_attribute": "tenant-a"
+            }
+          ],
+          "status_code": 200,
+          "tenant_context": "tenant-a",
+          "variant": "normal",
+          "verification_outcome": "PASSED"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [],
+          "verification_outcome": "PASSED"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "7e7db5b5-9f02-4a97-b142-20f65b720701",
+            "tenant-b"
+          ],
+          [
+            "f557e2ba-59ea-4686-8b0d-a1701303dfd1",
+            "tenant-b"
+          ],
+          [
+            "6047da6c-6903-40d2-8f41-22c2c335a17a",
+            "tenant-b"
+          ]
+        ],
+        "question": "What is the minimum charge for a weekend call-out?",
+        "response": {
+          "code": null,
+          "event_id": "bf302c34-7bcc-4ccd-b3cc-d8d66abfd1c2",
+          "request_id": "Drc0-jz7IAMEVTw=",
+          "status": 200
+        },
+        "target": "B1"
+      },
+      {
+        "audit": {
+          "cited_document_ids": [
+            "ca272710-84ad-46f5-b0e6-4b5fde31f496"
+          ],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "equals",
+            "value": "tenant-a"
+          },
+          "decision": "ALLOW",
+          "discarded_count": 0,
+          "event_id": "77516d55-8b94-4471-90bf-902dbf6f2468",
+          "failed_control": null,
+          "outcome": "ANSWERED",
+          "reason_code": "ALLOWED",
+          "retrieved": [
+            {
+              "document_id": "ca272710-84ad-46f5-b0e6-4b5fde31f496",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "c6a809d5-1102-4a8d-af10-5a15a68c979b",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "6c728020-48cd-474b-b1dc-1897aeec47ca",
+              "owner_attribute": "tenant-a"
+            }
+          ],
+          "status_code": 200,
+          "tenant_context": "tenant-a",
+          "variant": "normal",
+          "verification_outcome": "PASSED"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [],
+          "verification_outcome": "PASSED"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "f557e2ba-59ea-4686-8b0d-a1701303dfd1",
+            "tenant-b"
+          ],
+          [
+            "6047da6c-6903-40d2-8f41-22c2c335a17a",
+            "tenant-b"
+          ],
+          [
+            "7e7db5b5-9f02-4a97-b142-20f65b720701",
+            "tenant-b"
+          ]
+        ],
+        "question": "Which isolator panel is used when locking out the chiller?",
+        "response": {
+          "code": null,
+          "event_id": "77516d55-8b94-4471-90bf-902dbf6f2468",
+          "request_id": "Drc1ZgKsoAMEVYA=",
+          "status": 200
+        },
+        "target": "B2"
+      }
+    ],
+    "variant": "normal"
+  },
+  "privileged": true,
+  "reason": "0 tenant-b documents retrieved across 6 targeted questions; preconditions met",
+  "started_at": "2026-09-14T07:54:10+00:00",
+  "status": "PASS",
+  "suite": "isolation",
+  "test_id": "TST-ISO-003",
+  "verifies": [
+    "SEC-001",
+    "SEC-004",
+    "DATA-002",
+    "CMP-001"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "controls": [
+    "CTL-005"
+  ],
+  "evidence": [
+    "evidence/TST-DATA-016.json"
+  ],
+  "expected": "user-b query and upload denied TENANT_DISABLED; no retrieval; Tenant B documents never retrieved by anyone",
+  "finished_at": "2026-09-14T07:57:21+00:00",
+  "level": "L3",
+  "observations": {
+    "document_records_before_after": [
+      12,
+      12
+    ],
+    "query": {
+      "audit": {
+        "cited_document_ids": [],
+        "constraint": "NONE",
+        "decision": "DENY",
+        "discarded_count": 0,
+        "event_id": "8886a0de-3ee2-45b0-8818-64bc236d0813",
+        "failed_control": "CTL-005",
+        "outcome": "DENIED",
+        "reason_code": "TENANT_DISABLED",
+        "retrieved": [],
+        "status_code": 403,
+        "tenant_context": "NONE",
+        "variant": "normal",
+        "verification_outcome": "NOT_APPLICABLE"
+      },
+      "response": {
+        "code": "TENANT_DISABLED",
+        "event_id": "8886a0de-3ee2-45b0-8818-64bc236d0813",
+        "request_id": "DrdSohPaIAMEVLg=",
+        "status": 403
+      }
+    },
+    "tenant_a_cross_question": {
+      "audit": {
+        "cited_document_ids": [
+          "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+          "9a3ec849-614e-4e25-ac66-2015453478ff"
+        ],
+        "constraint": {
+          "attribute": "owning_tenant",
+          "operator": "equals",
+          "value": "tenant-a"
+        },
+        "decision": "ALLOW",
+        "discarded_count": 0,
+        "event_id": "9246f64f-54fb-4f3e-bfb2-7034783d9a0c",
+        "failed_control": null,
+        "outcome": "ANSWERED",
+        "reason_code": "ALLOWED",
+        "retrieved": [
+          {
+            "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+            "owner_attribute": "tenant-a"
+          },
+          {
+            "document_id": "9a3ec849-614e-4e25-ac66-2015453478ff",
+            "owner_attribute": "tenant-a"
+          }
+        ],
+        "status_code": 200,
+        "tenant_context": "tenant-a",
+        "variant": "normal",
+        "verification_outcome": "PASSED"
+      },
+      "findings": {
+        "foreign_canaries": {},
+        "foreign_citations": [],
+        "foreign_retrieved": [],
+        "verification_outcome": "PASSED"
+      }
+    },
+    "upload": {
+      "code": "TENANT_DISABLED",
+      "event_id": "c5597b7f-daa3-4049-8abb-375b961d3663",
+      "request_id": "DrdS2gynoAMEbEA=",
+      "status": 403
+    }
+  },
+  "privileged": true,
+  "reason": "query and upload refused while disabled; tenant re-enabled",
+  "started_at": "2026-09-14T07:57:21+00:00",
+  "status": "PASS",
+  "suite": "lifecycle",
+  "test_id": "TST-DATA-016",
+  "verifies": [
+    "BUS-001"
+  ]
+}

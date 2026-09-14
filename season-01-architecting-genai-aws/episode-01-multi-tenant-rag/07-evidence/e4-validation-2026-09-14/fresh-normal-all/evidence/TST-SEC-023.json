@@ -1,0 +1,171 @@
+{
+  "controls": [
+    "CTL-008",
+    "CTL-009",
+    "CTL-010",
+    "CTL-013"
+  ],
+  "evidence": [
+    "evidence/TST-SEC-023.json"
+  ],
+  "expected": "EXCLUSIVE: only the gateway retrieves, only ingestion indexes, only indexing touches vectors, only the API invokes",
+  "finished_at": "2026-09-14T07:53:21+00:00",
+  "level": "L1",
+  "observations": {
+    "document_bucket_policy_statements": [
+      "DenyInsecureTransport",
+      "DenyDocumentWritesExceptIngestionService",
+      "DenyDocumentReadsExceptIngestionServiceAndIndexing"
+    ],
+    "function_resource_policies": {
+      "tla-s01e01-normal-ingestion": [
+        [
+          "AllowThisApiOnly",
+          "Allow"
+        ],
+        [
+          "DenyEveryOtherCaller",
+          "Deny"
+        ]
+      ],
+      "tla-s01e01-normal-query": [
+        [
+          "AllowThisApiOnly",
+          "Allow"
+        ],
+        [
+          "DenyEveryOtherCaller",
+          "Deny"
+        ]
+      ]
+    },
+    "identity_pools": [],
+    "privileged_path": "the sandbox administrator/deployment identity can change these policies (RR-02, CH-01, CH-02)",
+    "simulation_matrix": [
+      {
+        "action": "bedrock:Retrieve",
+        "capability": "retrieve",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "KnowledgeBaseServiceRole": "implicitDeny",
+          "QueryRole": "allowed"
+        }
+      },
+      {
+        "action": "bedrock:IngestKnowledgeBaseDocuments",
+        "capability": "index documents",
+        "decisions": {
+          "IngestionRole": "allowed",
+          "KnowledgeBaseServiceRole": "implicitDeny",
+          "QueryRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "bedrock:DeleteKnowledgeBaseDocuments",
+        "capability": "remove documents",
+        "decisions": {
+          "IngestionRole": "allowed",
+          "KnowledgeBaseServiceRole": "implicitDeny",
+          "QueryRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "s3vectors:QueryVectors",
+        "capability": "query vectors directly",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "KnowledgeBaseServiceRole": "allowed",
+          "QueryRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "s3:GetObject",
+        "capability": "read originals",
+        "decisions": {
+          "IngestionRole": "allowed",
+          "KnowledgeBaseServiceRole": "allowed",
+          "QueryRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "s3:PutObject",
+        "capability": "write originals",
+        "decisions": {
+          "IngestionRole": "allowed",
+          "KnowledgeBaseServiceRole": "implicitDeny",
+          "QueryRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "dynamodb:PutItem",
+        "capability": "write tenant registry entries",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "KnowledgeBaseServiceRole": "implicitDeny",
+          "QueryRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "dynamodb:PutItem",
+        "capability": "write ownership records",
+        "decisions": {
+          "IngestionRole": "allowed",
+          "KnowledgeBaseServiceRole": "implicitDeny",
+          "QueryRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "lambda:InvokeFunction",
+        "capability": "invoke query service (identity policy)",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "KnowledgeBaseServiceRole": "implicitDeny",
+          "QueryRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "lambda:InvokeFunction",
+        "capability": "invoke ingestion service (identity policy)",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "KnowledgeBaseServiceRole": "implicitDeny",
+          "QueryRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "bedrock:InvokeModel",
+        "capability": "generate with the In-Region model",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "KnowledgeBaseServiceRole": "implicitDeny",
+          "QueryRole": "allowed"
+        }
+      },
+      {
+        "action": "apigateway:TagResource",
+        "capability": "deployment compatibility action apigateway:TagResource (FC-04)",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "KnowledgeBaseServiceRole": "implicitDeny",
+          "QueryRole": "implicitDeny"
+        }
+      }
+    ],
+    "stack_roles": [
+      "IngestionRole",
+      "KnowledgeBaseServiceRole",
+      "QueryRole"
+    ]
+  },
+  "privileged": true,
+  "reason": "every capability held only by its intended principal; no application role holds the FC-04 deployment action",
+  "started_at": "2026-09-14T07:53:21+00:00",
+  "status": "PASS",
+  "suite": "permissions",
+  "test_id": "TST-SEC-023",
+  "verifies": [
+    "SEC-009",
+    "SEC-010",
+    "SEC-007"
+  ]
+}

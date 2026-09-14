@@ -8,6 +8,13 @@ from harness.common import EPISODE, RESULTS, now_iso, redact
 STATUSES = ("PASS", "FAIL", "ERROR", "NOT_RUN", "NOT_APPLICABLE")
 
 
+def summary_row(test):
+    """One summary.md row. The test ID is written as code: the validation plan is the single place a test ID is defined,
+    and tools/traceability_check.py treats a bare ID in a table's first cell as a (duplicate) definition."""
+    return (f"| `{test['test_id']}` | {', '.join(test['verifies'])} | {test['status']} | "
+            f"{test['reason'].replace('|', '/')} | `{test['evidence'][0]}` |")
+
+
 class Run:
     def __init__(self, run_id, target, suite):
         self.run_id, self.target, self.suite = run_id, target, suite
@@ -52,8 +59,7 @@ class Run:
                  " · ".join(f"{s} {n}" for s, n in counts.items()), "",
                  "| Test | Verifies | Status | Key observation | Evidence |", "|---|---|---|---|---|"]
         for t in self.tests:
-            lines.append(f"| {t['test_id']} | {', '.join(t['verifies'])} | {t['status']} | "
-                         f"{t['reason'].replace('|', '/')} | `{t['evidence'][0]}` |")
+            lines.append(summary_row(t))
         open(os.path.join(self.directory, "summary.md"), "w").write(redact("\n".join(lines)) + "\n")
         print(f"results: {os.path.relpath(self.directory, os.getcwd())} — " + ", ".join(f"{s} {n}" for s, n in counts.items() if n))
         if counts["ERROR"]:

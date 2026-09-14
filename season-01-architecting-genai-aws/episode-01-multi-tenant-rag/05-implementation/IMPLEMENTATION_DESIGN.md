@@ -1,9 +1,11 @@
 # Educational Implementation Design — Veltamere Document Assistant
 
 **Stage:** build authorisation and implementation design (E3) · **Date:** 2026-09-14
-**Status:** design complete; **not built**. The platform spikes ran on 2026-09-14 and passed (see
-[PLATFORM_VERIFICATION.md](PLATFORM_VERIFICATION.md)). Building still requires the product owner's build-authorisation
-ruling.
+**Status:**
+- **Design:** complete. The platform spikes ran on 2026-09-14 and passed (see [PLATFORM_VERIFICATION.md](PLATFORM_VERIFICATION.md)).
+- **Build:** authorised, and the educational implementation is built (E4). The learner guide is [README.md](README.md).
+- **Validation:** the fresh-copy run of 2026-09-14 is in [07-evidence/e4-validation-2026-09-14](../07-evidence/e4-validation-2026-09-14/README.md).
+- **Approval:** awaiting product-owner review.
 
 ```
 VERIFIED IDENTITY → TRUSTED TENANT CONTEXT → AUTHORITATIVE AUTHORISATION
@@ -160,6 +162,16 @@ carries `x-tla-event-id`, the audit record key.
 cleanup/README.md                 the single documented cleanup flow
 ```
 
+**As built (E4), differences from the plan above:**
+- `app/shared/tenant_claims.py` (strict group-claim parser, CH-12), `registry.py`, `dynamo.py`, `http.py` and
+  `build_info.py` were added as small explicit modules.
+- `scripts/tla_ops.py` holds the deployment logic that the `.sh` wrappers call (Python and boto3 only; the AWS CLI is
+  not required).
+- The harness and component tests live under `06-validation/` (`harness/`, `tests/`); run results go to
+  `06-validation/results/` (git-ignored); curated evidence goes to `07-evidence/`.
+- There is no separate `cleanup/README.md`: the single cleanup flow is in [README.md](README.md#clean-up) and
+  [COST_AND_CLEANUP.md](COST_AND_CLEANUP.md).
+
 ## 7. Identity flow — what the learner observes
 
 1. The fixture loader creates Tenant A, B and C in the registry and one user per tenant, each in exactly one group.
@@ -300,7 +312,8 @@ remain. Added at implementation design:
 
 ## 15. Portfolio evidence produced by the implementation
 
-This maps outputs to [PORTFOLIO_EVIDENCE_PLAN.md](../07-evidence/PORTFOLIO_EVIDENCE_PLAN.md). Nothing is generated yet.
+This maps outputs to [PORTFOLIO_EVIDENCE_PLAN.md](../07-evidence/PORTFOLIO_EVIDENCE_PLAN.md). A complete example set,
+from CloudBrewery's own fresh-copy run, is in [07-evidence/e4-validation-2026-09-14](../07-evidence/e4-validation-2026-09-14/README.md).
 
 | Evidence category | Produced by | Artifact (learner keeps, redacted) |
 |---|---|---|

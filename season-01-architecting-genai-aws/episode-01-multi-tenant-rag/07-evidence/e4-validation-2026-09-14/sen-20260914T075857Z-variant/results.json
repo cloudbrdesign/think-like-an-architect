@@ -1,0 +1,78 @@
+{
+  "schema": "tla-validation-results/1",
+  "run_id": "sen-20260914T075857Z-variant",
+  "suite": "sensitivity",
+  "started_at": "2026-09-14T08:02:58+00:00",
+  "finished_at": "2026-09-14T08:03:37+00:00",
+  "harness_commit": "3af258e9b7a8bdde9b9aef9c33655c392aaca723",
+  "variant": "sensitivity",
+  "stack": "tla-s01e01-sensitivity",
+  "region": "us-east-1",
+  "account": "<account>",
+  "packages": {
+    "query": "26fe1f2f02da0be53f520b1764dfffc0721706ec37cb95377a252f11ce5cd0a4",
+    "ingestion": "0075012db90eb8b1212a60e24d42c8727ad98cdd54e4a8779c8d22f0027e4527"
+  },
+  "suites": [
+    "sensitivity"
+  ],
+  "counts": {
+    "PASS": 0,
+    "FAIL": 2,
+    "ERROR": 0,
+    "NOT_RUN": 0,
+    "NOT_APPLICABLE": 0
+  },
+  "tests": [
+    {
+      "test_id": "TST-ISO-003",
+      "suite": "sensitivity",
+      "verifies": [
+        "SEC-001",
+        "SEC-004",
+        "DATA-002",
+        "CMP-001"
+      ],
+      "controls": [
+        "CTL-015",
+        "CTL-017",
+        "CTL-018"
+      ],
+      "level": "L3",
+      "expected": "BLOCKED AT RETRIEVAL: no tenant-b document in `retrieved`; no tenant-b marker in any channel",
+      "status": "FAIL",
+      "reason": "6/6 questions crossed the boundary (12 foreign chunks retrieved)",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-ISO-003.json"
+      ],
+      "started_at": "2026-09-14T08:03:20+00:00",
+      "finished_at": "2026-09-14T08:03:20+00:00"
+    },
+    {
+      "test_id": "TST-ISO-004",
+      "suite": "sensitivity",
+      "verifies": [
+        "SEC-001",
+        "SEC-004",
+        "DATA-002",
+        "CMP-001"
+      ],
+      "controls": [
+        "CTL-015",
+        "CTL-017",
+        "CTL-018"
+      ],
+      "level": "L3",
+      "expected": "BLOCKED AT RETRIEVAL: no tenant-a document in `retrieved`; no tenant-a marker in any channel",
+      "status": "FAIL",
+      "reason": "6/6 questions crossed the boundary (13 foreign chunks retrieved)",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-ISO-004.json"
+      ],
+      "started_at": "2026-09-14T08:03:37+00:00",
+      "finished_at": "2026-09-14T08:03:37+00:00"
+    }
+  ]
+}

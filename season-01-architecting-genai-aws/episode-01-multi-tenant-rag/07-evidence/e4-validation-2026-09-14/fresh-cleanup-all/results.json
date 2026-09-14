@@ -1,0 +1,44 @@
+{
+  "schema": "tla-validation-results/1",
+  "run_id": "fresh-cleanup-all",
+  "suite": "cleanup",
+  "started_at": "2026-09-14T08:07:13+00:00",
+  "finished_at": "2026-09-14T08:07:34+00:00",
+  "harness_commit": "3af258e9b7a8bdde9b9aef9c33655c392aaca723",
+  "variant": null,
+  "stack": null,
+  "region": null,
+  "account": "<account>",
+  "packages": {},
+  "variants": [
+    "normal",
+    "sensitivity"
+  ],
+  "counts": {
+    "PASS": 1,
+    "FAIL": 0,
+    "ERROR": 0,
+    "NOT_RUN": 0,
+    "NOT_APPLICABLE": 0
+  },
+  "tests": [
+    {
+      "test_id": "TST-OPS-012",
+      "suite": "cleanup",
+      "verifies": [
+        "OPS-004"
+      ],
+      "controls": [],
+      "level": "L2/L5",
+      "expected": "VERIFIABLE: no resource of the episode deployment(s) remains (authoritative service lookups)",
+      "status": "PASS",
+      "reason": "CLEAN \u2014 normal, sensitivity (4 stale tag-index entries confirmed deleted)",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-OPS-012.json"
+      ],
+      "started_at": "2026-09-14T08:07:34+00:00",
+      "finished_at": "2026-09-14T08:07:34+00:00"
+    }
+  ]
+}

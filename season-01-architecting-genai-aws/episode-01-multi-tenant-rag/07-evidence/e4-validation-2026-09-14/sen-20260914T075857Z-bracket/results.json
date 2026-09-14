@@ -1,0 +1,78 @@
+{
+  "schema": "tla-validation-results/1",
+  "run_id": "sen-20260914T075857Z-bracket",
+  "suite": "isolation-negative",
+  "started_at": "2026-09-14T08:05:14+00:00",
+  "finished_at": "2026-09-14T08:05:54+00:00",
+  "harness_commit": "3af258e9b7a8bdde9b9aef9c33655c392aaca723",
+  "variant": "normal",
+  "stack": "tla-s01e01-normal",
+  "region": "us-east-1",
+  "account": "<account>",
+  "packages": {
+    "query": "abba3a0e3501955c2d02f8c7ccd7387ea7e50eff58fbf0d8fe557142d5454845",
+    "ingestion": "3b3d9baffbf6b7a8c000d03b4b6daa09b7fd171fe06d917435c0d4a92dc4e841"
+  },
+  "suites": [
+    "isolation-negative"
+  ],
+  "counts": {
+    "PASS": 2,
+    "FAIL": 0,
+    "ERROR": 0,
+    "NOT_RUN": 0,
+    "NOT_APPLICABLE": 0
+  },
+  "tests": [
+    {
+      "test_id": "TST-ISO-003",
+      "suite": "isolation",
+      "verifies": [
+        "SEC-001",
+        "SEC-004",
+        "DATA-002",
+        "CMP-001"
+      ],
+      "controls": [
+        "CTL-015",
+        "CTL-017",
+        "CTL-018"
+      ],
+      "level": "L3",
+      "expected": "BLOCKED AT RETRIEVAL: no tenant-b document in `retrieved`; no tenant-b marker in any channel",
+      "status": "PASS",
+      "reason": "0 tenant-b documents retrieved across 6 targeted questions; preconditions met",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-ISO-003.json"
+      ],
+      "started_at": "2026-09-14T08:05:35+00:00",
+      "finished_at": "2026-09-14T08:05:35+00:00"
+    },
+    {
+      "test_id": "TST-ISO-004",
+      "suite": "isolation",
+      "verifies": [
+        "SEC-001",
+        "SEC-004",
+        "DATA-002",
+        "CMP-001"
+      ],
+      "controls": [
+        "CTL-015",
+        "CTL-017",
+        "CTL-018"
+      ],
+      "level": "L3",
+      "expected": "BLOCKED AT RETRIEVAL: no tenant-a document in `retrieved`; no tenant-a marker in any channel",
+      "status": "PASS",
+      "reason": "0 tenant-a documents retrieved across 6 targeted questions; preconditions met",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-ISO-004.json"
+      ],
+      "started_at": "2026-09-14T08:05:54+00:00",
+      "finished_at": "2026-09-14T08:05:54+00:00"
+    }
+  ]
+}

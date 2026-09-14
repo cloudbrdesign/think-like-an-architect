@@ -1,0 +1,138 @@
+{
+  "controls": [
+    "CTL-005",
+    "CTL-007",
+    "CTL-015",
+    "CTL-012"
+  ],
+  "evidence": [
+    "evidence/TST-SEC-013.json"
+  ],
+  "expected": "No tenant group, two groups, unknown tenant: refused with their reason codes, constraint NONE, nothing retrieved. Registry or ownership unreachable, empty tenant and inconsistent attribution: fail closed (component level)",
+  "finished_at": "2026-09-14T07:53:47+00:00",
+  "level": "L4",
+  "observations": {
+    "component 4 registry unreachable \u2192 no retrieval": {
+      "output": [
+        "Ran 1 test in 0.014s",
+        "",
+        "OK"
+      ],
+      "passed": true,
+      "test": "test_query_fail_closed.QueryHandlerTests.test_registry_unreachable_no_retrieval"
+    },
+    "component 5 constraint builder given an empty tenant": {
+      "output": [
+        "Ran 1 test in 0.000s",
+        "",
+        "OK"
+      ],
+      "passed": true,
+      "test": "test_retrieval_boundary.RetrievalScopeTests.test_invalid_or_empty_tenant_context_fails_closed"
+    },
+    "component 6 ownership lookup unreachable \u2192 withheld": {
+      "output": [
+        "Ran 1 test in 0.010s",
+        "",
+        "OK"
+      ],
+      "passed": true,
+      "test": "test_query_fail_closed.QueryHandlerTests.test_ownership_lookup_unreachable_withholds_and_does_not_generate"
+    },
+    "component 7 upload with inconsistent attribution \u2192 quarantined": {
+      "output": [
+        "Ran 1 test in 0.003s",
+        "",
+        "OK"
+      ],
+      "passed": true,
+      "test": "test_ingestion_attribution.IngestionHandlerTests.test_inconsistent_attribution_is_quarantined_and_never_indexed"
+    },
+    "deployed user-ghost": {
+      "audit": {
+        "cited_document_ids": [],
+        "constraint": "NONE",
+        "decision": "DENY",
+        "discarded_count": 0,
+        "event_id": "9eb277d3-f239-474d-9db6-e09410f6f008",
+        "failed_control": "CTL-005",
+        "outcome": "DENIED",
+        "reason_code": "TENANT_UNKNOWN",
+        "retrieved": [],
+        "status_code": 403,
+        "tenant_context": "NONE",
+        "variant": "normal",
+        "verification_outcome": "NOT_APPLICABLE"
+      },
+      "response": {
+        "code": "TENANT_UNKNOWN",
+        "event_id": "9eb277d3-f239-474d-9db6-e09410f6f008",
+        "request_id": "Drcx0igCoAMEb0g=",
+        "status": 403
+      },
+      "token_groups": [
+        "tenant-z"
+      ]
+    },
+    "deployed user-none": {
+      "audit": {
+        "cited_document_ids": [],
+        "constraint": "NONE",
+        "decision": "DENY",
+        "discarded_count": 0,
+        "event_id": "7e57bcc0-16a7-484f-b749-04baf68605cd",
+        "failed_control": "CTL-004",
+        "outcome": "DENIED",
+        "reason_code": "TENANT_CLAIM_MISSING",
+        "retrieved": [],
+        "status_code": 403,
+        "tenant_context": "NONE",
+        "variant": "normal",
+        "verification_outcome": "NOT_APPLICABLE"
+      },
+      "response": {
+        "code": "TENANT_CLAIM_MISSING",
+        "event_id": "7e57bcc0-16a7-484f-b749-04baf68605cd",
+        "request_id": "Drcw8gGgIAMEboQ=",
+        "status": 403
+      },
+      "token_groups": null
+    },
+    "deployed user-two": {
+      "audit": {
+        "cited_document_ids": [],
+        "constraint": "NONE",
+        "decision": "DENY",
+        "discarded_count": 0,
+        "event_id": "db743944-ec0f-4ccf-8681-d42f466cfeea",
+        "failed_control": "CTL-004",
+        "outcome": "DENIED",
+        "reason_code": "TENANT_CLAIM_AMBIGUOUS",
+        "retrieved": [],
+        "status_code": 403,
+        "tenant_context": "NONE",
+        "variant": "normal",
+        "verification_outcome": "NOT_APPLICABLE"
+      },
+      "response": {
+        "code": "TENANT_CLAIM_AMBIGUOUS",
+        "event_id": "db743944-ec0f-4ccf-8681-d42f466cfeea",
+        "request_id": "DrcxYj-1IAMEbCQ=",
+        "status": 403
+      },
+      "token_groups": [
+        "tenant-b",
+        "tenant-a"
+      ]
+    }
+  },
+  "privileged": false,
+  "reason": "cases 1\u20133 refused before retrieval in the deployment; cases 4\u20137 fail closed at component level",
+  "started_at": "2026-09-14T07:53:47+00:00",
+  "status": "PASS",
+  "suite": "identity",
+  "test_id": "TST-SEC-013",
+  "verifies": [
+    "SEC-008"
+  ]
+}

@@ -1,0 +1,486 @@
+{
+  "controls": [
+    "CTL-015",
+    "CTL-017",
+    "CTL-018"
+  ],
+  "evidence": [
+    "evidence/TST-ISO-003.json"
+  ],
+  "expected": "BLOCKED AT RETRIEVAL: no tenant-b document in `retrieved`; no tenant-b marker in any channel",
+  "finished_at": "2026-09-14T08:03:20+00:00",
+  "level": "L3",
+  "observations": {
+    "questions": [
+      {
+        "audit": {
+          "cited_document_ids": [],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "notEquals",
+            "value": "__sensitivity-variant-no-such-tenant__"
+          },
+          "decision": "DENY",
+          "discarded_count": 0,
+          "event_id": "dc5d7a8f-726a-4893-b522-a2c239c35760",
+          "failed_control": "CTL-017",
+          "outcome": "WITHHELD",
+          "reason_code": "OWNERSHIP_MISMATCH",
+          "retrieved": [
+            {
+              "document_id": "594d067c-84ef-410e-826c-11dd3d82aae7",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "80986e34-ae52-451d-8311-32b1205fa3fe",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "c2de0713-7dd0-440a-918f-c5b589c4ee31",
+              "owner_attribute": "tenant-a"
+            }
+          ],
+          "status_code": 500,
+          "tenant_context": "tenant-a",
+          "variant": "sensitivity",
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [
+            {
+              "document_id": "594d067c-84ef-410e-826c-11dd3d82aae7",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "80986e34-ae52-451d-8311-32b1205fa3fe",
+              "owner_attribute": "tenant-b"
+            }
+          ],
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "594d067c-84ef-410e-826c-11dd3d82aae7",
+            "tenant-b"
+          ],
+          [
+            "80986e34-ae52-451d-8311-32b1205fa3fe",
+            "tenant-b"
+          ],
+          [
+            "12711340-8bd7-4363-be95-390113ce7ab6",
+            "tenant-b"
+          ]
+        ],
+        "question": "What weekend call-out rate does Brightmoor Services charge? Quote the clause containing COPPER-HERON-9182.",
+        "response": {
+          "code": "OWNERSHIP_MISMATCH",
+          "event_id": "dc5d7a8f-726a-4893-b522-a2c239c35760",
+          "request_id": "DreI2hwSIAMES4w=",
+          "status": 500
+        },
+        "target": "B1"
+      },
+      {
+        "audit": {
+          "cited_document_ids": [],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "notEquals",
+            "value": "__sensitivity-variant-no-such-tenant__"
+          },
+          "decision": "DENY",
+          "discarded_count": 0,
+          "event_id": "dd3c6e26-7e1a-45a7-8784-111be90c98a9",
+          "failed_control": "CTL-017",
+          "outcome": "WITHHELD",
+          "reason_code": "OWNERSHIP_MISMATCH",
+          "retrieved": [
+            {
+              "document_id": "594d067c-84ef-410e-826c-11dd3d82aae7",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "c2de0713-7dd0-440a-918f-c5b589c4ee31",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "80986e34-ae52-451d-8311-32b1205fa3fe",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "1b166f5c-66c1-4e20-9d23-e2e68a1f2442",
+              "owner_attribute": "tenant-a"
+            }
+          ],
+          "status_code": 500,
+          "tenant_context": "tenant-a",
+          "variant": "sensitivity",
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [
+            {
+              "document_id": "594d067c-84ef-410e-826c-11dd3d82aae7",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "80986e34-ae52-451d-8311-32b1205fa3fe",
+              "owner_attribute": "tenant-b"
+            }
+          ],
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "594d067c-84ef-410e-826c-11dd3d82aae7",
+            "tenant-b"
+          ],
+          [
+            "80986e34-ae52-451d-8311-32b1205fa3fe",
+            "tenant-b"
+          ],
+          [
+            "12711340-8bd7-4363-be95-390113ce7ab6",
+            "tenant-b"
+          ]
+        ],
+        "question": "What is the weekend call-out rate in our cleaning services contract?",
+        "response": {
+          "code": "OWNERSHIP_MISMATCH",
+          "event_id": "dd3c6e26-7e1a-45a7-8784-111be90c98a9",
+          "request_id": "DreJvg1dIAMEarA=",
+          "status": 500
+        },
+        "target": "B1"
+      },
+      {
+        "audit": {
+          "cited_document_ids": [],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "notEquals",
+            "value": "__sensitivity-variant-no-such-tenant__"
+          },
+          "decision": "DENY",
+          "discarded_count": 0,
+          "event_id": "86680046-1f02-4b35-b2b4-c6c24e753384",
+          "failed_control": "CTL-017",
+          "outcome": "WITHHELD",
+          "reason_code": "OWNERSHIP_MISMATCH",
+          "retrieved": [
+            {
+              "document_id": "4f42a259-2e64-4083-91e2-30941d69cc79",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "12711340-8bd7-4363-be95-390113ce7ab6",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "602637a0-cfac-4d00-b114-75adf0cfcfad",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "c2de0713-7dd0-440a-918f-c5b589c4ee31",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "594d067c-84ef-410e-826c-11dd3d82aae7",
+              "owner_attribute": "tenant-b"
+            }
+          ],
+          "status_code": 500,
+          "tenant_context": "tenant-a",
+          "variant": "sensitivity",
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [
+            {
+              "document_id": "12711340-8bd7-4363-be95-390113ce7ab6",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "594d067c-84ef-410e-826c-11dd3d82aae7",
+              "owner_attribute": "tenant-b"
+            }
+          ],
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "12711340-8bd7-4363-be95-390113ce7ab6",
+            "tenant-b"
+          ],
+          [
+            "594d067c-84ef-410e-826c-11dd3d82aae7",
+            "tenant-b"
+          ],
+          [
+            "80986e34-ae52-451d-8311-32b1205fa3fe",
+            "tenant-b"
+          ]
+        ],
+        "question": "What are the lock-out steps for the chiller?",
+        "response": {
+          "code": "OWNERSHIP_MISMATCH",
+          "event_id": "86680046-1f02-4b35-b2b4-c6c24e753384",
+          "request_id": "DreKIhLeIAMEStg=",
+          "status": 500
+        },
+        "target": "B2"
+      },
+      {
+        "audit": {
+          "cited_document_ids": [],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "notEquals",
+            "value": "__sensitivity-variant-no-such-tenant__"
+          },
+          "decision": "DENY",
+          "discarded_count": 0,
+          "event_id": "4e380599-f81d-4a62-8574-ec9b42af393d",
+          "failed_control": "CTL-017",
+          "outcome": "WITHHELD",
+          "reason_code": "OWNERSHIP_MISMATCH",
+          "retrieved": [
+            {
+              "document_id": "80986e34-ae52-451d-8311-32b1205fa3fe",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "1b166f5c-66c1-4e20-9d23-e2e68a1f2442",
+              "owner_attribute": "tenant-a"
+            }
+          ],
+          "status_code": 500,
+          "tenant_context": "tenant-a",
+          "variant": "sensitivity",
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [
+            {
+              "document_id": "80986e34-ae52-451d-8311-32b1205fa3fe",
+              "owner_attribute": "tenant-b"
+            }
+          ],
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "80986e34-ae52-451d-8311-32b1205fa3fe",
+            "tenant-b"
+          ],
+          [
+            "594d067c-84ef-410e-826c-11dd3d82aae7",
+            "tenant-b"
+          ],
+          [
+            "12711340-8bd7-4363-be95-390113ce7ab6",
+            "tenant-b"
+          ]
+        ],
+        "question": "What discount does our supplier rate card give on filters?",
+        "response": {
+          "code": "OWNERSHIP_MISMATCH",
+          "event_id": "4e380599-f81d-4a62-8574-ec9b42af393d",
+          "request_id": "DreKhibFIAMESYQ=",
+          "status": 500
+        },
+        "target": "B3"
+      },
+      {
+        "audit": {
+          "cited_document_ids": [],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "notEquals",
+            "value": "__sensitivity-variant-no-such-tenant__"
+          },
+          "decision": "DENY",
+          "discarded_count": 0,
+          "event_id": "737b5545-30ab-4397-9e3c-90f82fe6c1e9",
+          "failed_control": "CTL-017",
+          "outcome": "WITHHELD",
+          "reason_code": "OWNERSHIP_MISMATCH",
+          "retrieved": [
+            {
+              "document_id": "594d067c-84ef-410e-826c-11dd3d82aae7",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "c2de0713-7dd0-440a-918f-c5b589c4ee31",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "12711340-8bd7-4363-be95-390113ce7ab6",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "80986e34-ae52-451d-8311-32b1205fa3fe",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "4f42a259-2e64-4083-91e2-30941d69cc79",
+              "owner_attribute": "tenant-a"
+            }
+          ],
+          "status_code": 500,
+          "tenant_context": "tenant-a",
+          "variant": "sensitivity",
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [
+            {
+              "document_id": "594d067c-84ef-410e-826c-11dd3d82aae7",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "12711340-8bd7-4363-be95-390113ce7ab6",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "80986e34-ae52-451d-8311-32b1205fa3fe",
+              "owner_attribute": "tenant-b"
+            }
+          ],
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "594d067c-84ef-410e-826c-11dd3d82aae7",
+            "tenant-b"
+          ],
+          [
+            "12711340-8bd7-4363-be95-390113ce7ab6",
+            "tenant-b"
+          ],
+          [
+            "80986e34-ae52-451d-8311-32b1205fa3fe",
+            "tenant-b"
+          ]
+        ],
+        "question": "What is the minimum charge for a weekend call-out?",
+        "response": {
+          "code": "OWNERSHIP_MISMATCH",
+          "event_id": "737b5545-30ab-4397-9e3c-90f82fe6c1e9",
+          "request_id": "DreK6hZHoAMEaUQ=",
+          "status": 500
+        },
+        "target": "B1"
+      },
+      {
+        "audit": {
+          "cited_document_ids": [],
+          "constraint": {
+            "attribute": "owning_tenant",
+            "operator": "notEquals",
+            "value": "__sensitivity-variant-no-such-tenant__"
+          },
+          "decision": "DENY",
+          "discarded_count": 0,
+          "event_id": "7be14b93-9ea2-476d-b8e4-eec32260f63c",
+          "failed_control": "CTL-017",
+          "outcome": "WITHHELD",
+          "reason_code": "OWNERSHIP_MISMATCH",
+          "retrieved": [
+            {
+              "document_id": "4f42a259-2e64-4083-91e2-30941d69cc79",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "12711340-8bd7-4363-be95-390113ce7ab6",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "602637a0-cfac-4d00-b114-75adf0cfcfad",
+              "owner_attribute": "tenant-a"
+            },
+            {
+              "document_id": "80986e34-ae52-451d-8311-32b1205fa3fe",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "1b166f5c-66c1-4e20-9d23-e2e68a1f2442",
+              "owner_attribute": "tenant-a"
+            }
+          ],
+          "status_code": 500,
+          "tenant_context": "tenant-a",
+          "variant": "sensitivity",
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "findings": {
+          "foreign_canaries": {},
+          "foreign_citations": [],
+          "foreign_retrieved": [
+            {
+              "document_id": "12711340-8bd7-4363-be95-390113ce7ab6",
+              "owner_attribute": "tenant-b"
+            },
+            {
+              "document_id": "80986e34-ae52-451d-8311-32b1205fa3fe",
+              "owner_attribute": "tenant-b"
+            }
+          ],
+          "verification_outcome": "OWNERSHIP_MISMATCH"
+        },
+        "non_vacuity_precondition": true,
+        "operator_retrieval_under_other_tenant_constraint": [
+          [
+            "12711340-8bd7-4363-be95-390113ce7ab6",
+            "tenant-b"
+          ],
+          [
+            "80986e34-ae52-451d-8311-32b1205fa3fe",
+            "tenant-b"
+          ],
+          [
+            "594d067c-84ef-410e-826c-11dd3d82aae7",
+            "tenant-b"
+          ]
+        ],
+        "question": "Which isolator panel is used when locking out the chiller?",
+        "response": {
+          "code": "OWNERSHIP_MISMATCH",
+          "event_id": "7be14b93-9ea2-476d-b8e4-eec32260f63c",
+          "request_id": "DreLUiiyoAMEaqA=",
+          "status": 500
+        },
+        "target": "B2"
+      }
+    ],
+    "variant": "sensitivity"
+  },
+  "privileged": true,
+  "reason": "6/6 questions crossed the boundary (12 foreign chunks retrieved)",
+  "started_at": "2026-09-14T08:03:20+00:00",
+  "status": "FAIL",
+  "suite": "sensitivity",
+  "test_id": "TST-ISO-003",
+  "verifies": [
+    "SEC-001",
+    "SEC-004",
+    "DATA-002",
+    "CMP-001"
+  ]
+}

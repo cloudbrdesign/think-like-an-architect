@@ -1,0 +1,78 @@
+{
+  "controls": [
+    "CTL-013",
+    "CTL-010"
+  ],
+  "evidence": [
+    "evidence/TST-SEC-020.json"
+  ],
+  "expected": "User attempts refused (no route or field refused); operator correction recorded step by step; ownership never edited in place",
+  "finished_at": "2026-09-14T07:55:46+00:00",
+  "level": "L3",
+  "observations": {
+    "correction_steps": [
+      {
+        "correction_step": "1-QUARANTINE",
+        "document_id": "72e8cefd-7bdd-4cfe-b629-5cce92511e7d",
+        "operator_reason": "TST-SEC-020 fixture: window schedule filed under Northwall in error (target tenant tenant-b)",
+        "outcome": "QUARANTINED"
+      },
+      {
+        "correction_step": "2-REMOVE_FROM_INDEX",
+        "document_id": "72e8cefd-7bdd-4cfe-b629-5cce92511e7d",
+        "operator_reason": "TST-SEC-020 fixture: window schedule filed under Northwall in error (target tenant tenant-b)",
+        "outcome": "DELETING"
+      },
+      {
+        "correction_step": "3-DELETE_ORIGINAL",
+        "document_id": "72e8cefd-7bdd-4cfe-b629-5cce92511e7d",
+        "operator_reason": "TST-SEC-020 fixture: window schedule filed under Northwall in error (target tenant tenant-b)",
+        "outcome": "DELETED"
+      },
+      {
+        "correction_step": "4-MARK_REMOVED",
+        "document_id": "72e8cefd-7bdd-4cfe-b629-5cce92511e7d",
+        "operator_reason": "TST-SEC-020 fixture: window schedule filed under Northwall in error (target tenant tenant-b)",
+        "outcome": "REMOVED_FOR_CORRECTION"
+      }
+    ],
+    "original_record_after": {
+      "owner": "tenant-a",
+      "status": "REMOVED_FOR_CORRECTION"
+    },
+    "reuploaded_document": {
+      "document_id": "def2b591-521c-4988-8e3c-077d028e03e8",
+      "owner": "tenant-b",
+      "status": "AVAILABLE"
+    },
+    "user_attempts": {
+      "PATCH /documents/{id}": {
+        "code": null,
+        "event_id": null,
+        "request_id": "DrdBeibToAMEZ2w=",
+        "status": 404
+      },
+      "PUT /documents/{id}": {
+        "code": null,
+        "event_id": null,
+        "request_id": "DrdBUhyxIAMEP6Q=",
+        "status": 404
+      },
+      "re-upload claiming the same identifier": {
+        "code": "REQUEST_FIELD_REJECTED",
+        "event_id": "4ded7b16-1282-442d-83dd-9fb20bb0bc77",
+        "request_id": "DrdBng73IAMEZgA=",
+        "status": 400
+      }
+    }
+  },
+  "privileged": true,
+  "reason": "no user route changes ownership; 4 recorded correction steps; new tenant-b document via normal upload",
+  "started_at": "2026-09-14T07:55:46+00:00",
+  "status": "PASS",
+  "suite": "ingestion",
+  "test_id": "TST-SEC-020",
+  "verifies": [
+    "SEC-007"
+  ]
+}

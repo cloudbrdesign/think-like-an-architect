@@ -44,5 +44,16 @@ class RedactionTests(unittest.TestCase):
         self.assertEqual(redact(f"event {event_id} in 123456789012"), f"event {event_id} in <account>")
 
 
+class SummaryFormatTests(unittest.TestCase):
+    def test_summary_rows_do_not_define_test_ids(self):
+        import re
+        from harness.results import summary_row
+        row = summary_row({"test_id": "TST-ISO-003", "verifies": ["SEC-001"], "status": "PASS", "reason": "a | b",
+                           "evidence": ["evidence/TST-ISO-003.json"]})
+        first_cell = row.strip()[1:-1].split("|")[0].strip()
+        self.assertIsNone(re.fullmatch(r"TST-[A-Z]+-\d{3}", first_cell))
+        self.assertEqual(first_cell, "`TST-ISO-003`")
+
+
 if __name__ == "__main__":
     unittest.main()

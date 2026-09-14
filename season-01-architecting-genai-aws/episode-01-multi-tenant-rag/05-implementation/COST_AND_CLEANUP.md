@@ -86,6 +86,16 @@ collections — nothing is billed by the hour.
 **CON-008 (under USD 10 per session): plausible with a wide margin.** It is confirmed only when the first real run's
 bill is read (VE-11) — billing data can lag by a day.
 
+**Observed usage (E4 fresh-copy run, 2026-09-14).** The complete learner session took about 18 minutes: deploy,
+fixtures, full suite, sensitivity bracketing with a second stack, cleanup. It recorded:
+- 86 API requests with audit records;
+- 51 privileged precondition retrievals;
+- 57 successful responses;
+- 9 synthetic documents plus 4 edge-case uploads.
+
+That is well below every volume assumed in the estimate above, so the session cost sits at the low end of the estimate.
+The billed amount had not yet appeared on the day of the run.
+
 ### Fixed / minimum cost
 
 - No resource is billed per hour.

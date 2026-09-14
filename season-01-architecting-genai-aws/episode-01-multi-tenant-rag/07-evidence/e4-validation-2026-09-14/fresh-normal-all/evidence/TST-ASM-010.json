@@ -1,0 +1,118 @@
+{
+  "controls": [
+    "CTL-012",
+    "CTL-011",
+    "CTL-019",
+    "CTL-013"
+  ],
+  "evidence": [
+    "evidence/TST-ASM-010.json"
+  ],
+  "expected": "(a) inconsistent attribution quarantined, never indexed. (b) a Tenant A upload carrying a Tenant B marker stays Tenant A's: retrievable by user-a only, uploader and retrievals recorded (RR-03)",
+  "finished_at": "2026-09-14T07:57:45+00:00",
+  "level": "L4",
+  "observations": {
+    "a_component_tests": {
+      "output": [
+        "Ran 3 tests in 0.005s",
+        "",
+        "OK"
+      ],
+      "passed": true
+    },
+    "b_record": {
+      "created_at": "2026-09-14T07:57:22+00:00",
+      "document_id": "68210ac4-712a-4ad3-89b4-da6aad38a1b8",
+      "owner": "tenant-a",
+      "uploader": "24b854f8-3081-706f-9fb7-10b656365f54"
+    },
+    "b_removal": {
+      "delete": {
+        "code": null,
+        "event_id": "8b30a4e8-ad5c-4281-99dd-704d1472d9ad",
+        "request_id": "DrdVmhCLoAMEVQg=",
+        "status": 202
+      },
+      "final_status": "DELETED"
+    },
+    "b_user_a": {
+      "cited_document_ids": [
+        "68210ac4-712a-4ad3-89b4-da6aad38a1b8"
+      ],
+      "constraint": {
+        "attribute": "owning_tenant",
+        "operator": "equals",
+        "value": "tenant-a"
+      },
+      "decision": "ALLOW",
+      "discarded_count": 0,
+      "event_id": "c971eafa-c264-4392-981a-bd51eaff2778",
+      "failed_control": null,
+      "outcome": "ANSWERED",
+      "reason_code": "ALLOWED",
+      "retrieved": [
+        {
+          "document_id": "68210ac4-712a-4ad3-89b4-da6aad38a1b8",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "cecd22b3-bdbf-4349-9d0c-c1c85851cdae",
+          "owner_attribute": "tenant-a"
+        },
+        {
+          "document_id": "9a3ec849-614e-4e25-ac66-2015453478ff",
+          "owner_attribute": "tenant-a"
+        }
+      ],
+      "status_code": 200,
+      "tenant_context": "tenant-a",
+      "variant": "normal",
+      "verification_outcome": "PASSED"
+    },
+    "b_user_b": {
+      "cited_document_ids": [
+        "6047da6c-6903-40d2-8f41-22c2c335a17a",
+        "7e7db5b5-9f02-4a97-b142-20f65b720701"
+      ],
+      "constraint": {
+        "attribute": "owning_tenant",
+        "operator": "equals",
+        "value": "tenant-b"
+      },
+      "decision": "ALLOW",
+      "discarded_count": 0,
+      "event_id": "3e0e0ac1-1f69-432c-89d8-7a98b27c250f",
+      "failed_control": null,
+      "outcome": "ANSWERED",
+      "reason_code": "ALLOWED",
+      "retrieved": [
+        {
+          "document_id": "7e7db5b5-9f02-4a97-b142-20f65b720701",
+          "owner_attribute": "tenant-b"
+        },
+        {
+          "document_id": "6047da6c-6903-40d2-8f41-22c2c335a17a",
+          "owner_attribute": "tenant-b"
+        },
+        {
+          "document_id": "def2b591-521c-4988-8e3c-077d028e03e8",
+          "owner_attribute": "tenant-b"
+        }
+      ],
+      "status_code": 200,
+      "tenant_context": "tenant-b",
+      "variant": "normal",
+      "verification_outcome": "PASSED"
+    }
+  },
+  "privileged": false,
+  "reason": "(a) quarantine verified at component level; (b) exposed as residual risk RR-03, confined to tenant-a, removed",
+  "started_at": "2026-09-14T07:57:45+00:00",
+  "status": "PASS",
+  "suite": "lifecycle",
+  "test_id": "TST-ASM-010",
+  "verifies": [
+    "SEC-006",
+    "DATA-003"
+  ]
+}

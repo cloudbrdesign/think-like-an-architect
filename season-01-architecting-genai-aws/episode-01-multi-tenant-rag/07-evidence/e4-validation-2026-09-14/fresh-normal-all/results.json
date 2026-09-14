@@ -1,0 +1,522 @@
+{
+  "schema": "tla-validation-results/1",
+  "run_id": "fresh-normal-all",
+  "suite": "all",
+  "started_at": "2026-09-14T07:52:57+00:00",
+  "finished_at": "2026-09-14T07:58:56+00:00",
+  "harness_commit": "3af258e9b7a8bdde9b9aef9c33655c392aaca723",
+  "variant": "normal",
+  "stack": "tla-s01e01-normal",
+  "region": "us-east-1",
+  "account": "<account>",
+  "packages": {
+    "query": "abba3a0e3501955c2d02f8c7ccd7387ea7e50eff58fbf0d8fe557142d5454845",
+    "ingestion": "3b3d9baffbf6b7a8c000d03b4b6daa09b7fd171fe06d917435c0d4a92dc4e841"
+  },
+  "suites": [
+    "permissions",
+    "identity",
+    "isolation",
+    "security",
+    "ingestion",
+    "audit",
+    "onboarding",
+    "lifecycle",
+    "identity-expiry",
+    "redteam"
+  ],
+  "counts": {
+    "PASS": 22,
+    "FAIL": 0,
+    "ERROR": 0,
+    "NOT_RUN": 0,
+    "NOT_APPLICABLE": 0
+  },
+  "tests": [
+    {
+      "test_id": "TST-SEC-023",
+      "suite": "permissions",
+      "verifies": [
+        "SEC-009",
+        "SEC-010",
+        "SEC-007"
+      ],
+      "controls": [
+        "CTL-008",
+        "CTL-009",
+        "CTL-010",
+        "CTL-013"
+      ],
+      "level": "L1",
+      "expected": "EXCLUSIVE: only the gateway retrieves, only ingestion indexes, only indexing touches vectors, only the API invokes",
+      "status": "PASS",
+      "reason": "every capability held only by its intended principal; no application role holds the FC-04 deployment action",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-SEC-023.json"
+      ],
+      "started_at": "2026-09-14T07:53:21+00:00",
+      "finished_at": "2026-09-14T07:53:21+00:00"
+    },
+    {
+      "test_id": "TST-SEC-005",
+      "suite": "identity",
+      "verifies": [
+        "SEC-003"
+      ],
+      "controls": [
+        "CTL-004",
+        "CTL-006"
+      ],
+      "level": "L3",
+      "expected": "Body field refused; query, header, path and question variants keep tenant context and constraint tenant-a with no Tenant B retrieval; self-service cannot change membership",
+      "status": "PASS",
+      "reason": "body field refused; every other forged location ignored; membership unchanged",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-SEC-005.json"
+      ],
+      "started_at": "2026-09-14T07:53:39+00:00",
+      "finished_at": "2026-09-14T07:53:39+00:00"
+    },
+    {
+      "test_id": "TST-SEC-013",
+      "suite": "identity",
+      "verifies": [
+        "SEC-008"
+      ],
+      "controls": [
+        "CTL-005",
+        "CTL-007",
+        "CTL-015",
+        "CTL-012"
+      ],
+      "level": "L4",
+      "expected": "No tenant group, two groups, unknown tenant: refused with their reason codes, constraint NONE, nothing retrieved. Registry or ownership unreachable, empty tenant and inconsistent attribution: fail closed (component level)",
+      "status": "PASS",
+      "reason": "cases 1\u20133 refused before retrieval in the deployment; cases 4\u20137 fail closed at component level",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-SEC-013.json"
+      ],
+      "started_at": "2026-09-14T07:53:47+00:00",
+      "finished_at": "2026-09-14T07:53:47+00:00"
+    },
+    {
+      "test_id": "TST-ISO-001",
+      "suite": "isolation",
+      "verifies": [
+        "FUN-001",
+        "FUN-002"
+      ],
+      "controls": [
+        "CTL-004",
+        "CTL-011",
+        "CTL-015",
+        "CTL-018"
+      ],
+      "level": "L3",
+      "expected": "ALLOWED: tenant-a retrieves and cites only its own documents",
+      "status": "PASS",
+      "reason": "3 chunks retrieved, all tenant-a; cited 1 own document(s)",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-ISO-001.json"
+      ],
+      "started_at": "2026-09-14T07:53:49+00:00",
+      "finished_at": "2026-09-14T07:53:49+00:00"
+    },
+    {
+      "test_id": "TST-ISO-002",
+      "suite": "isolation",
+      "verifies": [
+        "FUN-001",
+        "FUN-002"
+      ],
+      "controls": [
+        "CTL-004",
+        "CTL-011",
+        "CTL-015",
+        "CTL-018"
+      ],
+      "level": "L3",
+      "expected": "ALLOWED: tenant-b retrieves and cites only its own documents",
+      "status": "PASS",
+      "reason": "3 chunks retrieved, all tenant-b; cited 1 own document(s)",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-ISO-002.json"
+      ],
+      "started_at": "2026-09-14T07:53:53+00:00",
+      "finished_at": "2026-09-14T07:53:53+00:00"
+    },
+    {
+      "test_id": "TST-ISO-003",
+      "suite": "isolation",
+      "verifies": [
+        "SEC-001",
+        "SEC-004",
+        "DATA-002",
+        "CMP-001"
+      ],
+      "controls": [
+        "CTL-015",
+        "CTL-017",
+        "CTL-018"
+      ],
+      "level": "L3",
+      "expected": "BLOCKED AT RETRIEVAL: no tenant-b document in `retrieved`; no tenant-b marker in any channel",
+      "status": "PASS",
+      "reason": "0 tenant-b documents retrieved across 6 targeted questions; preconditions met",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-ISO-003.json"
+      ],
+      "started_at": "2026-09-14T07:54:10+00:00",
+      "finished_at": "2026-09-14T07:54:10+00:00"
+    },
+    {
+      "test_id": "TST-ISO-004",
+      "suite": "isolation",
+      "verifies": [
+        "SEC-001",
+        "SEC-004",
+        "DATA-002",
+        "CMP-001"
+      ],
+      "controls": [
+        "CTL-015",
+        "CTL-017",
+        "CTL-018"
+      ],
+      "level": "L3",
+      "expected": "BLOCKED AT RETRIEVAL: no tenant-a document in `retrieved`; no tenant-a marker in any channel",
+      "status": "PASS",
+      "reason": "0 tenant-a documents retrieved across 6 targeted questions; preconditions met",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-ISO-004.json"
+      ],
+      "started_at": "2026-09-14T07:54:27+00:00",
+      "finished_at": "2026-09-14T07:54:27+00:00"
+    },
+    {
+      "test_id": "TST-SEC-006",
+      "suite": "security",
+      "verifies": [
+        "SEC-005"
+      ],
+      "controls": [
+        "CTL-016",
+        "CTL-015"
+      ],
+      "level": "L3",
+      "expected": "Constraint identical to a normal Tenant A request; no Tenant B document retrieved",
+      "status": "PASS",
+      "reason": "constraint hash identical to baseline; no foreign retrieval",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-SEC-006.json"
+      ],
+      "started_at": "2026-09-14T07:54:31+00:00",
+      "finished_at": "2026-09-14T07:54:31+00:00"
+    },
+    {
+      "test_id": "TST-SEC-008",
+      "suite": "security",
+      "verifies": [
+        "SEC-005"
+      ],
+      "controls": [
+        "CTL-016",
+        "CTL-022",
+        "CTL-018"
+      ],
+      "level": "L3",
+      "expected": "One retrieval with the Tenant A constraint; no foreign identifiers, markers or citations",
+      "status": "PASS",
+      "reason": "single retrieval under tenant-a; hostile document retrieved=True; no foreign content",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-SEC-008.json"
+      ],
+      "started_at": "2026-09-14T07:54:33+00:00",
+      "finished_at": "2026-09-14T07:54:33+00:00"
+    },
+    {
+      "test_id": "TST-SEC-021",
+      "suite": "security",
+      "verifies": [
+        "SEC-001",
+        "FUN-001"
+      ],
+      "controls": [
+        "CTL-018"
+      ],
+      "level": "L3",
+      "expected": "Citations contain only own document ID, title and route location; cited \u2286 verified; fabricated reference removed",
+      "status": "PASS",
+      "reason": "11 citations across 7 responses, all allow-listed and own",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-SEC-021.json"
+      ],
+      "started_at": "2026-09-14T07:54:36+00:00",
+      "finished_at": "2026-09-14T07:54:36+00:00"
+    },
+    {
+      "test_id": "TST-SEC-022",
+      "suite": "security",
+      "verifies": [
+        "DATA-003",
+        "SEC-001"
+      ],
+      "controls": [
+        "CTL-017"
+      ],
+      "level": "L4",
+      "expected": "DETECTED: entire response withheld; verification_outcome OWNERSHIP_MISMATCH; nothing generated",
+      "status": "PASS",
+      "reason": "divergent chunk retrieved under tenant-b; response withheld; OWNERSHIP_MISMATCH recorded",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-SEC-022.json"
+      ],
+      "started_at": "2026-09-14T07:54:53+00:00",
+      "finished_at": "2026-09-14T07:54:53+00:00"
+    },
+    {
+      "test_id": "TST-SEC-009",
+      "suite": "security",
+      "verifies": [
+        "SEC-009"
+      ],
+      "controls": [
+        "CTL-008",
+        "CTL-009",
+        "CTL-014"
+      ],
+      "level": "L3+L1",
+      "expected": "BLOCKED in every case, or the path does not exist for tenant users",
+      "status": "PASS",
+      "reason": "direct invoke denied by explicit Deny; no other retrieval principal; originals unreadable directly; cross-tenant open not found; no debug or override path",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-SEC-009.json"
+      ],
+      "started_at": "2026-09-14T07:55:09+00:00",
+      "finished_at": "2026-09-14T07:55:09+00:00"
+    },
+    {
+      "test_id": "TST-SEC-019",
+      "suite": "ingestion",
+      "verifies": [
+        "SEC-006",
+        "DATA-001"
+      ],
+      "controls": [
+        "CTL-011"
+      ],
+      "level": "L3",
+      "expected": "Owner, tenant and ID fields refused; content claiming another owner attributed to Tenant A with owner, uploader, time and status",
+      "status": "PASS",
+      "reason": "4 field attempts refused, nothing stored; embedded claim ignored; owner tenant-a",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-SEC-019.json"
+      ],
+      "started_at": "2026-09-14T07:55:25+00:00",
+      "finished_at": "2026-09-14T07:55:25+00:00"
+    },
+    {
+      "test_id": "TST-SEC-020",
+      "suite": "ingestion",
+      "verifies": [
+        "SEC-007"
+      ],
+      "controls": [
+        "CTL-013",
+        "CTL-010"
+      ],
+      "level": "L3",
+      "expected": "User attempts refused (no route or field refused); operator correction recorded step by step; ownership never edited in place",
+      "status": "PASS",
+      "reason": "no user route changes ownership; 4 recorded correction steps; new tenant-b document via normal upload",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-SEC-020.json"
+      ],
+      "started_at": "2026-09-14T07:55:46+00:00",
+      "finished_at": "2026-09-14T07:55:46+00:00"
+    },
+    {
+      "test_id": "TST-OPS-015",
+      "suite": "audit",
+      "verifies": [
+        "OPS-001",
+        "OPS-002",
+        "CMP-001"
+      ],
+      "controls": [
+        "CTL-019",
+        "CTL-020",
+        "CTL-024"
+      ],
+      "level": "L3",
+      "expected": "Investigator can answer who, which tenant, decision and why, constraint, documents, failed control; no marker, question, chunk or answer text in records or logs; model invocation logging disabled",
+      "status": "PASS",
+      "reason": "27 records complete and content-free; 245 log events scanned, 0 content hits; model logging disabled",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-OPS-015.json"
+      ],
+      "started_at": "2026-09-14T07:56:19+00:00",
+      "finished_at": "2026-09-14T07:56:19+00:00"
+    },
+    {
+      "test_id": "TST-OPS-017",
+      "suite": "onboarding",
+      "verifies": [
+        "BUS-002",
+        "NFR-002"
+      ],
+      "controls": [
+        "CTL-005",
+        "CTL-006"
+      ],
+      "level": "L3",
+      "expected": "No code, template or deployment change; isolation holds across A, B and C",
+      "status": "PASS",
+      "reason": "tenant-c onboarded by registry entry + membership only; C\u2194A, C\u2194B, A\u2192C isolated",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-OPS-017.json"
+      ],
+      "started_at": "2026-09-14T07:56:57+00:00",
+      "finished_at": "2026-09-14T07:56:57+00:00"
+    },
+    {
+      "test_id": "TST-DATA-014",
+      "suite": "lifecycle",
+      "verifies": [
+        "FUN-003"
+      ],
+      "controls": [
+        "CTL-014",
+        "CTL-017"
+      ],
+      "level": "L3",
+      "expected": "Immediately: not cited (discarded if retrieved). After removal: absent from index, status DELETED. Cross-tenant delete: not found, nothing changed",
+      "status": "PASS",
+      "reason": "deleted document never cited; removed from index; cross-tenant delete not found (fixture restored)",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-DATA-014.json"
+      ],
+      "started_at": "2026-09-14T07:57:15+00:00",
+      "finished_at": "2026-09-14T07:57:15+00:00"
+    },
+    {
+      "test_id": "TST-DATA-016",
+      "suite": "lifecycle",
+      "verifies": [
+        "BUS-001"
+      ],
+      "controls": [
+        "CTL-005"
+      ],
+      "level": "L3",
+      "expected": "user-b query and upload denied TENANT_DISABLED; no retrieval; Tenant B documents never retrieved by anyone",
+      "status": "PASS",
+      "reason": "query and upload refused while disabled; tenant re-enabled",
+      "privileged": true,
+      "evidence": [
+        "evidence/TST-DATA-016.json"
+      ],
+      "started_at": "2026-09-14T07:57:21+00:00",
+      "finished_at": "2026-09-14T07:57:21+00:00"
+    },
+    {
+      "test_id": "TST-ASM-010",
+      "suite": "lifecycle",
+      "verifies": [
+        "SEC-006",
+        "DATA-003"
+      ],
+      "controls": [
+        "CTL-012",
+        "CTL-011",
+        "CTL-019",
+        "CTL-013"
+      ],
+      "level": "L4",
+      "expected": "(a) inconsistent attribution quarantined, never indexed. (b) a Tenant A upload carrying a Tenant B marker stays Tenant A's: retrievable by user-a only, uploader and retrievals recorded (RR-03)",
+      "status": "PASS",
+      "reason": "(a) quarantine verified at component level; (b) exposed as residual risk RR-03, confined to tenant-a, removed",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-ASM-010.json"
+      ],
+      "started_at": "2026-09-14T07:57:45+00:00",
+      "finished_at": "2026-09-14T07:57:45+00:00"
+    },
+    {
+      "test_id": "TST-SEC-007",
+      "suite": "identity",
+      "verifies": [
+        "SEC-002"
+      ],
+      "controls": [
+        "CTL-003"
+      ],
+      "level": "L3",
+      "expected": "Rejected at the edge (401; 403 for the scope-less identity token); no service invocation; no audit record",
+      "status": "PASS",
+      "reason": "all six token cases rejected at the edge; no service ran",
+      "privileged": false,
+      "evidence": [
+        "evidence/TST-SEC-007.json"
+      ],
+      "started_at": "2026-09-14T07:58:39+00:00",
+      "finished_at": "2026-09-14T07:58:39+00:00"
+    },
+    {
+      "test_id": "RT-15",
+      "suite": "redteam",
+      "verifies": [
+        "SEC-004"
+      ],
+      "controls": [
+        "CTL-015"
+      ],
+      "level": "red-team",
+      "expected": "Suites and deployment refuse to target the wrong variant",
+      "status": "PASS",
+      "reason": "variant guards refused every wrong-target attempt",
+      "privileged": false,
+      "evidence": [
+        "evidence/RT-15.json"
+      ],
+      "started_at": "2026-09-14T07:58:48+00:00",
+      "finished_at": "2026-09-14T07:58:48+00:00"
+    },
+    {
+      "test_id": "RT-16",
+      "suite": "redteam",
+      "verifies": [
+        "OPS-004"
+      ],
+      "controls": [],
+      "level": "red-team",
+      "expected": "Cleanup refuses an unexpected account and never touches a stack it was not asked to remove",
+      "status": "PASS",
+      "reason": "cleanup refused the wrong account; normal stack still CREATE_COMPLETE",
+      "privileged": false,
+      "evidence": [
+        "evidence/RT-16.json"
+      ],
+      "started_at": "2026-09-14T07:58:56+00:00",
+      "finished_at": "2026-09-14T07:58:56+00:00"
+    }
+  ]
+}
