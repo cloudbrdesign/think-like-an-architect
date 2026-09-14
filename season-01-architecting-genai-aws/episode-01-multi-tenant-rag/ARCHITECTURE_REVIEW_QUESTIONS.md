@@ -4,11 +4,11 @@
 The questions an architecture review board or an interviewer should be able to ask you at the end of this engagement.
 Answer by citing your artifacts; defending the architecture matters more than recalling facts.
 
-**Updated after the educational implementation (E4).**
+**Updated after the educational implementation.**
 - **Question sets:** the engagement and design-specific questions remain. A third set, *Implementation and evidence
   questions*, asks you to defend what you built and what your tests proved.
 - **Citing results:** a "result" is your own validation run. The example results are in
-  [07-evidence/e4-validation-2026-09-14](07-evidence/e4-validation-2026-09-14/README.md).
+  [07-evidence/implementation-validation-2026-09-14](07-evidence/implementation-validation-2026-09-14/README.md).
 
 ## Engagement questions
 
@@ -71,5 +71,5 @@ Answer by citing your artifacts; defending the architecture matters more than re
 | Observation point | In the sensitivity run every answer was withheld. Why would a test that only checked answers have missed the missing control? | Ownership verification as defence in depth (`ownership_verification.py`); VALIDATION_PLAN section 5; `retrieved` in the variant audit records |
 | Ingestion | A caller tries to choose the owner or the storage location of a document. What stops them? | `ownership.py` (server-derived key, attribution gate) and platform finding CH-11; TST-SEC-019, TST-ASM-010 results |
 | Audit | Reconstruct a refused cross-tenant attempt from the audit record alone. What does the record deliberately not contain? | `audit.py` field allow-list; TST-OPS-015 result |
-| Evidence scope | Which conclusions from your run hold only for your tested conditions, and what would production still need to verify? | The example evidence README's limits; [latency summary](07-evidence/e4-validation-2026-09-14/LATENCY_SUMMARY.md); RESIDUAL_RISK_REGISTER; VE-09 and VE-11 in PLATFORM_VERIFICATION |
+| Evidence scope | Which conclusions from your run hold only for your tested conditions, and what would production still need to verify? | The example evidence README's limits; [latency summary](07-evidence/implementation-validation-2026-09-14/LATENCY_SUMMARY.md); RESIDUAL_RISK_REGISTER; VE-09 and VE-11 in PLATFORM_VERIFICATION |
 | Cleanup | How do you know nothing from the lab remains, given that a tag search can lag behind deletions? | `06-validation/harness/cleanup_check.py` (service-by-service confirmation); TST-OPS-012 result |

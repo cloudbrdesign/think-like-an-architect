@@ -1,4 +1,4 @@
-# E4 validation evidence — fresh-copy run, 2026-09-14
+# Implementation validation evidence — fresh-copy run, 2026-09-14
 
 Commit `3af258e9b7a8bdde9b9aef9c33655c392aaca723` · region us-east-1 · account numbers redacted · synthetic data only.
 Portfolio evidence of the work performed — not certification.

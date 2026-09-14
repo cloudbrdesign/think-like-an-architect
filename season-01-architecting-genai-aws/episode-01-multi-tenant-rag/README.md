@@ -22,7 +22,7 @@ are all here. Everything in this folder is free; no purchase is needed to comple
 | **What you need to read along** | Nothing but this repository |
 | **What you need to build it** | A dedicated sandbox AWS account with administrator access, Python 3.10+ and `boto3`. Prerequisites and the preflight check are in the [learner guide](05-implementation/README.md#prerequisites) |
 | **What it costs** | Reading costs nothing. **Deploying creates billable resources in your own account.** Read [Cost and cleanup](05-implementation/COST_AND_CLEANUP.md) first, and set a budget alert |
-| **How long the lab takes** | CloudBrewery's own run from a fresh clone took about 18 minutes, from preflight to verified cleanup ([evidence](07-evidence/e4-validation-2026-09-14/FRESH_COPY_RUN.md)). Reading and reasoning time is yours |
+| **How long the lab takes** | CloudBrewery's own run from a fresh clone took about 18 minutes, from preflight to verified cleanup ([evidence](07-evidence/implementation-validation-2026-09-14/FRESH_COPY_RUN.md)). Reading and reasoning time is yours |
 | **What you keep** | [Portfolio evidence of the work you performed](07-evidence/PORTFOLIO_EVIDENCE_PLAN.md) — not a certification |
 
 ## The engagement in ten stages
@@ -40,7 +40,7 @@ reasoning matters more than the answers in the files.
 | **6 · Build** | Check what the platform was proven to do, read where each control lives, then deploy | [Platform verification](05-implementation/PLATFORM_VERIFICATION.md) · [Implementation design](05-implementation/IMPLEMENTATION_DESIGN.md) · [Controls](05-implementation/IMPLEMENTATION_CONTROLS.md) · [**Learner guide** — steps 0 to 3](05-implementation/README.md) | Which single function builds the tenant filter, and what stops any other code from building a different one? |
 | **7 · Attack** | Forge a tenant, attack the prompt, inspect the audit record | [Learner guide — explore the boundary](05-implementation/README.md#explore-the-boundary-yourself-between-steps-3-and-4) · [Validation plan](06-validation/VALIDATION_PLAN.md) | You sent `tenant-b` in four places. What did the audit record show as tenant context and constraint? |
 | **8 · Validate** | Run the full suite, then prove the tests can fail with the sensitivity experiment | [Learner guide — steps 4 and 5](05-implementation/README.md#run-it--steps-0-to-6) · [Test harness design](06-validation/TEST_HARNESS_DESIGN.md) · [Traceability matrix](06-validation/TRACEABILITY_MATRIX.md) | How do you know your cross-tenant tests are not passing vacuously? |
-| **9 · Evidence** | Keep your results, clean up, verify nothing remains | [Learner guide — step 6](05-implementation/README.md#run-it--steps-0-to-6) · [Portfolio evidence plan](07-evidence/PORTFOLIO_EVIDENCE_PLAN.md) · [example evidence set](07-evidence/e4-validation-2026-09-14/README.md) | What exactly did your run prove, under which conditions — and what did it not prove? |
+| **9 · Evidence** | Keep your results, clean up, verify nothing remains | [Learner guide — step 6](05-implementation/README.md#run-it--steps-0-to-6) · [Portfolio evidence plan](07-evidence/PORTFOLIO_EVIDENCE_PLAN.md) · [example evidence set](07-evidence/implementation-validation-2026-09-14/README.md) | What exactly did your run prove, under which conditions — and what did it not prove? |
 | **10 · Architecture review** | Defend the architecture as you would to a review board | [Architecture review questions](ARCHITECTURE_REVIEW_QUESTIONS.md) | Could you answer every question by citing your own artifacts? |
 
 ## Check the traceability chain
@@ -56,7 +56,7 @@ python3 tools/traceability_check.py season-01-architecting-genai-aws/episode-01-
 ## What the example evidence shows — and its limits
 
 CloudBrewery's run of this implementation, from a fresh clone, is in
-[07-evidence/e4-validation-2026-09-14](07-evidence/e4-validation-2026-09-14/README.md):
+[07-evidence/implementation-validation-2026-09-14](07-evidence/implementation-validation-2026-09-14/README.md):
 - all 22 validation tests passed;
 - the sensitivity experiment made the isolation tests fail once the primary control was removed;
 - cleanup was verified.

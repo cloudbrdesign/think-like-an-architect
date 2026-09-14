@@ -1,7 +1,7 @@
 <!-- template: tla-cost-and-cleanup/1 -->
 # Cost and Cleanup — Veltamere Document Assistant
 
-**Stage:** build authorisation and implementation design (E3) · **Date of estimate:** 2026-09-14 · **Region:** US East
+**Stage:** implementation design · **Date of estimate:** 2026-09-14 · **Region:** US East
 (N. Virginia), `us-east-1`
 
 **Read this before deploying anything.** The learner implementation creates resources in **your own** sandbox AWS
@@ -9,7 +9,7 @@ account, and they are billable.
 
 ## Before you start
 
-- Use a **dedicated sandbox account** (see [PLATFORM_VERIFICATION section 1](PLATFORM_VERIFICATION.md#1-learner-sandbox-requirements-pd-09)).
+- Use a **dedicated sandbox account** (see [PLATFORM_VERIFICATION section 1](PLATFORM_VERIFICATION.md#1-learner-sandbox-requirements)).
 - Create an AWS Budgets monthly budget with alerts at 50%, 80% and 100%. A ceiling of USD 20 is suggested.
 - Deploy in `us-east-1`. The design requires In-Region models (CTL-023), and costs and availability differ by region.
 - Plan to deploy, validate and clean up **in the same session**.
@@ -86,7 +86,7 @@ collections — nothing is billed by the hour.
 **CON-008 (under USD 10 per session): plausible with a wide margin.** It is confirmed only when the first real run's
 bill is read (VE-11) — billing data can lag by a day.
 
-**Observed usage (E4 fresh-copy run, 2026-09-14).** The complete learner session took about 18 minutes: deploy,
+**Observed usage (fresh-copy validation run, 2026-09-14).** The complete learner session took about 18 minutes: deploy,
 fixtures, full suite, sensitivity bracketing with a second stack, cleanup. It recorded:
 - 86 API requests with audit records;
 - 51 privileged precondition retrievals;
@@ -159,7 +159,7 @@ Every billable resource has an owner, a deletion method, dependencies and a veri
 
 ## What changes at production scale
 
-Veltamere's production costs follow the E2 [cost and scale analysis](../03-architecture/COST_AND_SCALE_ANALYSIS.md).
+Veltamere's production costs follow the architecture's [cost and scale analysis](../03-architecture/COST_AND_SCALE_ANALYSIS.md).
 - Generation and function time grow with questions.
 - Vector storage grows with documents.
 - Audit records and data events grow with requests.

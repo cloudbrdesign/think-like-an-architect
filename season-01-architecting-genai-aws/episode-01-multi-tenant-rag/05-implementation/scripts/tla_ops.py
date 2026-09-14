@@ -214,7 +214,7 @@ _TRANSIENT_BUCKET_ERRORS = ("NoSuchBucket", "OperationAborted")
 
 
 def _retry_transient(call, attempts=12, delay=5, sleep=time.sleep):
-    """S3 is briefly inconsistent when a bucket name is re-created soon after deletion (found by the E4 fresh-copy run:
+    """S3 is briefly inconsistent when a bucket name is re-created soon after deletion (found by the fresh-copy validation run:
     create succeeded, then PutPublicAccessBlock returned NoSuchBucket). Retry only those transient errors, bounded."""
     for attempt in range(attempts):
         try:

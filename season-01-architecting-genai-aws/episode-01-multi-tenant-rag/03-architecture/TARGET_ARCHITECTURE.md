@@ -1,6 +1,6 @@
 # Target Architecture — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
+**Stage:** architecture · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 
 This description is **service-neutral**: it names architectural components and the decisions that shape them. The
 mapping to an implementation environment is in [AWS_SERVICE_MAPPING.md](AWS_SERVICE_MAPPING.md).
@@ -243,7 +243,7 @@ the chosen model can evolve **without weakening the current guarantee**. The rul
 
 ## 11. What is trusted — and what breaks isolation on its own
 
-Answering the E1 cross-cutting question "which trusted component, if wrong, breaks isolation on its own?":
+Answering the engagement's cross-cutting decision question "which trusted component, if wrong, breaks isolation on its own?":
 
 | Trusted element | If it is wrong | What still catches or limits it |
 |---|---|---|

@@ -1,12 +1,12 @@
 # Implementation Controls — Veltamere Document Assistant
 
-**Stage:** build authorisation and implementation design (E3) · **Date:** 2026-09-14
+**Stage:** implementation design · **Date:** 2026-09-14
 
 Every approved architecture control (defined in the ADRs) becomes an implementation specification here. File paths
-refer to the source tree in [IMPLEMENTATION_DESIGN section 6](IMPLEMENTATION_DESIGN.md#6-source-structure-planned-created-at-e4).
+refer to the source tree in [IMPLEMENTATION_DESIGN section 6](IMPLEMENTATION_DESIGN.md#6-source-structure-planned-created-during-implementation).
 
-**E4 status (2026-09-14):** the `EDU` controls are implemented in this folder. Their validation results are in
-[07-evidence/e4-validation-2026-09-14](../07-evidence/e4-validation-2026-09-14/README.md).
+**Implementation status (2026-09-14):** the `EDU` controls are implemented in this folder. Their validation results are in
+[07-evidence/implementation-validation-2026-09-14](../07-evidence/implementation-validation-2026-09-14/README.md).
 - **Paths:** the harness lives in `06-validation/harness/`, not `validation/harness/`.
 - **Additions:** the strict group-claim parser is its own module, `app/shared/tenant_claims.py` (CH-12). The test-only
   primary-control replacement is `06-validation/sensitivity/retrieval_scope.py`.
@@ -144,9 +144,9 @@ generated answer, document content, tokens.
 
 ## 4. Failure reason codes
 
-These are stable, machine-observable codes. The E2 architecture names (ADR-006) map to them as shown.
+These are stable, machine-observable codes. The architecture names (ADR-006) map to them as shown.
 
-| Reason code | E2 name | Raised by | HTTP | Meaning |
+| Reason code | Architecture name | Raised by | HTTP | Meaning |
 |---|---|---|---|---|
 | `AUTH_TOKEN_MISSING` | (edge) | API edge | 401 | No token; **no audit record** — observed at the edge |
 | `AUTH_TOKEN_INVALID` | (edge) | API edge | 401 | Signature, issuer, audience, expiry or scope failed; **no audit record** |

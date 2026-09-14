@@ -1,6 +1,6 @@
 """Red-team guard probes for the operational attacks that are not API requests:
 RT-15 sensitivity-stack targeting mistake · RT-16 cleanup against the wrong stack, account or region.
-(The other red-team attacks are exercised by the named tests; see the E4 red-team table.)
+(The other red-team attacks are exercised by the named tests; see the red-team table in the validation evidence.)
 """
 import os
 import subprocess

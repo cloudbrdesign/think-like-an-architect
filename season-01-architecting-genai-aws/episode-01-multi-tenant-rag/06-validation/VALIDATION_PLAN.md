@@ -1,7 +1,7 @@
 <!-- template: tla-validation-plan/1 -->
 # Validation Plan — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
+**Stage:** architecture · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 
 This plan refines the approved [acceptance test intents](ACCEPTANCE_TEST_INTENT.md) into tests for the **selected**
 architecture. **No test has been implemented or run.** Results are recorded later in the

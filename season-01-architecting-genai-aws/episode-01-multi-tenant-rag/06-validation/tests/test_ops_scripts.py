@@ -13,7 +13,7 @@ class NoSuchBucket(Exception):
 
 
 class FakeS3:
-    """A bucket re-created soon after deletion: configuration calls briefly report NoSuchBucket (seen in the E4 fresh-copy run)."""
+    """A bucket re-created soon after deletion: configuration calls briefly report NoSuchBucket (seen in the fresh-copy validation run)."""
 
     def __init__(self, transient_failures=2):
         self.transient_failures, self.calls = transient_failures, []

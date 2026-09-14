@@ -1,7 +1,7 @@
 <!-- template: tla-threat-model/1 -->
 # Threat Model — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
+**Stage:** architecture · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 
 Produced **with** the architecture. A threat is described as addressed only where the selected design contains the
 control. **No control is implemented or validated yet**; validation evidence comes later.
@@ -45,7 +45,7 @@ Query path steps Q1–Q12, ingestion steps I1–I11, deletion D1–D7 and disabl
 
 **Attack paths per trust boundary, organised by STRIDE categories that matter here** — spoofing (identity, tenant),
 tampering (attribution), information disclosure (every output channel) and elevation of privilege (bypass). The method
-follows the approved E1 attack paths so that every one maps to a control and a test. Denial of service and capacity are
+follows the attack paths identified in the engagement design so that every one maps to a control and a test. Denial of service and capacity are
 Episode 04; they are noted only where fail-closed behaviour trades availability for isolation.
 
 ## 6. Threats
@@ -271,7 +271,7 @@ Episode 04; they are noted only where fail-closed behaviour trades availability 
 | Affected requirements | SEC-003, ASM-005 |
 | Primary control | CTL-006 — membership only from administrator-controlled data; exactly one active tenant |
 | Defence in depth | CTL-005 registry validation (existence, status); audit |
-| Validation test | TST-SEC-005 (includes a profile self-update attempt); VE-08 at build authorisation |
+| Validation test | TST-SEC-005 (includes a profile self-update attempt); VE-08 during platform verification |
 | Residual risk | RR-01, RR-11 |
 
 ### THR-17 — Tenant content processed outside the contracted region
@@ -307,7 +307,7 @@ Each attack was run conceptually against the design in this repository.
 | A-11 | Disabled tenant with still-valid tokens keeps asking | CTL-005 registry status on every request | **Yes** | None |
 | A-12 | Malicious privileged operator reads documents directly | CTL-010 recorded role; CTL-021 | **Partially** — detected and recorded, not prevented | **RR-02** owned by Head of Platform Engineering |
 
-### Architecture defects found during design — and fixed before E2
+### Architecture defects found during design — and fixed before the architecture was accepted
 
 These weaknesses were created by earlier drafts of the design itself and are **not** waved away as implementation details:
 

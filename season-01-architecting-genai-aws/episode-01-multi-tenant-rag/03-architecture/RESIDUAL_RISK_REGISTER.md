@@ -1,6 +1,6 @@
 # Residual Risk Register — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
+**Stage:** architecture · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 
 No architecture removes all risk. These risks **remain with the selected design** after its controls are in place. The
 controls are designed but not yet implemented or validated, so nothing here is claimed as mitigated in practice.
