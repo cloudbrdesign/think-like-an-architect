@@ -201,19 +201,39 @@ def cmd_build(args):
 
 
 # ── deploy ──────────────────────────────────────────────────────────────────────────────────────────────────────────
-def _ensure_artifact_bucket(s3, bucket, variant):
+_TRANSIENT_BUCKET_ERRORS = ("NoSuchBucket", "OperationAborted")
+
+
+def _retry_transient(call, attempts=12, delay=5, sleep=time.sleep):
+    """S3 is briefly inconsistent when a bucket name is re-created soon after deletion (found by the E4 fresh-copy run:
+    create succeeded, then PutPublicAccessBlock returned NoSuchBucket). Retry only those transient errors, bounded."""
+    for attempt in range(attempts):
+        try:
+            return call()
+        except Exception as error:  # noqa: BLE001
+            if attempt == attempts - 1 or not any(code in f"{type(error).__name__} {error}" for code in _TRANSIENT_BUCKET_ERRORS):
+                raise
+            sleep(delay)
+
+
+def _ensure_artifact_bucket(s3, bucket, variant, sleep=time.sleep):
     try:
         s3.head_bucket(Bucket=bucket)
     except Exception:  # noqa: BLE001
-        s3.create_bucket(Bucket=bucket)
-        s3.get_waiter("bucket_exists").wait(Bucket=bucket)
-    s3.put_public_access_block(Bucket=bucket, PublicAccessBlockConfiguration={
-        "BlockPublicAcls": True, "IgnorePublicAcls": True, "BlockPublicPolicy": True, "RestrictPublicBuckets": True})
-    s3.put_bucket_policy(Bucket=bucket, Policy=json.dumps({"Version": "2012-10-17", "Statement": [{
+        def create():
+            try:
+                s3.create_bucket(Bucket=bucket)
+            except Exception as error:  # noqa: BLE001
+                if "BucketAlreadyOwnedByYou" not in f"{type(error).__name__} {error}":
+                    raise
+        _retry_transient(create, sleep=sleep)
+    _retry_transient(lambda: s3.put_public_access_block(Bucket=bucket, PublicAccessBlockConfiguration={
+        "BlockPublicAcls": True, "IgnorePublicAcls": True, "BlockPublicPolicy": True, "RestrictPublicBuckets": True}), sleep=sleep)
+    _retry_transient(lambda: s3.put_bucket_policy(Bucket=bucket, Policy=json.dumps({"Version": "2012-10-17", "Statement": [{
         "Sid": "DenyInsecureTransport", "Effect": "Deny", "Principal": "*", "Action": "s3:*",
         "Resource": [f"arn:aws:s3:::{bucket}", f"arn:aws:s3:::{bucket}/*"],
-        "Condition": {"Bool": {"aws:SecureTransport": "false"}}}]}))
-    s3.put_bucket_tagging(Bucket=bucket, Tagging={"TagSet": tags(variant)})
+        "Condition": {"Bool": {"aws:SecureTransport": "false"}}}]})), sleep=sleep)
+    _retry_transient(lambda: s3.put_bucket_tagging(Bucket=bucket, Tagging={"TagSet": tags(variant)}), sleep=sleep)
 
 
 def _wait_stack(cfn, stack_id):
