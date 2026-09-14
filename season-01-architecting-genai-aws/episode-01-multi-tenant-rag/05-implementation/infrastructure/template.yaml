@@ -1,0 +1,594 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Think Like an Architect S01E01 - Veltamere Document Assistant (educational implementation).
+  Every resource and every permission of the application is in this one file. Read the IAM roles to answer
+  "who can retrieve?", "who can index?" and "who can invoke the services?".
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Parameters. Variant and NamePrefix only name and tag resources. Nothing here changes application behaviour:
+# the sensitivity variant differs only in the function code package it is deployed with (a separate build).
+# ---------------------------------------------------------------------------------------------------------------------
+Parameters:
+  NamePrefix:
+    Type: String
+    Default: tla-s01e01-normal
+    AllowedPattern: "^tla-s01e01-(normal|sensitivity)$"
+  Variant:
+    Type: String
+    Default: normal
+    AllowedValues: [normal, sensitivity]
+  ArtifactBucket:
+    Type: String
+    Description: Bucket holding the function packages (created by scripts/deploy.sh)
+  QueryCodeKey:
+    Type: String
+  IngestionCodeKey:
+    Type: String
+  RolePath:
+    Type: String
+    Default: /tla/s01e01/
+    Description: IAM path for the application roles. Some accounts require a specific path for deployment roles.
+  PermissionsBoundaryArn:
+    Type: String
+    Default: ""
+    Description: Optional permissions boundary for the application roles. Leave empty unless your account requires one.
+
+Conditions:
+  HasPermissionsBoundary: !Not [!Equals [!Ref PermissionsBoundaryArn, ""]]
+
+Resources:
+  # ===================================================================================================================
+  # Document store (CTL-002, CTL-013): private, encrypted, TLS-only. Only the ingestion role may write originals; only
+  # the ingestion role and the knowledge-base service role may read them. Deletion stays possible for cleanup.
+  # ===================================================================================================================
+  DocumentBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${NamePrefix}-docs-${AWS::AccountId}"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+
+  DocumentBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref DocumentBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:*"
+            Resource:
+              - !GetAtt DocumentBucket.Arn
+              - !Sub "${DocumentBucket.Arn}/*"
+            Condition:
+              Bool:
+                aws:SecureTransport: "false"
+          - Sid: DenyDocumentWritesExceptIngestionService
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:PutObject"
+            Resource: !Sub "${DocumentBucket.Arn}/*"
+            Condition:
+              ArnNotEquals:
+                aws:PrincipalArn: !GetAtt IngestionRole.Arn
+          - Sid: DenyDocumentReadsExceptIngestionServiceAndIndexing
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "${DocumentBucket.Arn}/*"
+            Condition:
+              ArnNotEquals:
+                aws:PrincipalArn:
+                  - !GetAtt IngestionRole.Arn
+                  - !GetAtt KnowledgeBaseServiceRole.Arn
+
+  # ===================================================================================================================
+  # Tenant registry + ownership records (TENANT#<id>, DOC#<id>) and the separate security audit table (CTL-019).
+  # ===================================================================================================================
+  RegistryTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${NamePrefix}-registry"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: pk
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+
+  AuditTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${NamePrefix}-audit"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: event_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: event_id
+          KeyType: HASH
+
+  # ===================================================================================================================
+  # Shared retrieval index: customer-managed knowledge base, CUSTOM data source (direct ingestion with inline
+  # attributes owning_tenant and document_id), S3 Vectors store.
+  # ===================================================================================================================
+  VectorBucket:
+    Type: AWS::S3Vectors::VectorBucket
+    Properties:
+      VectorBucketName: !Sub "${NamePrefix}-vectors"
+
+  VectorIndex:
+    Type: AWS::S3Vectors::Index
+    DependsOn: VectorBucket
+    Properties:
+      VectorBucketName: !Sub "${NamePrefix}-vectors"
+      IndexName: !Sub "${NamePrefix}-index"
+      DataType: float32
+      Dimension: 1024
+      DistanceMetric: cosine
+      MetadataConfiguration:
+        NonFilterableMetadataKeys: [AMAZON_BEDROCK_TEXT, AMAZON_BEDROCK_METADATA]
+
+  KnowledgeBaseServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-kb-service"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: bedrock.amazonaws.com
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref "AWS::AccountId"
+              ArnLike:
+                aws:SourceArn: !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:knowledge-base/*"
+      Policies:
+        - PolicyName: indexing
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: EmbedWithInRegionModelOnly
+                Effect: Allow
+                Action: bedrock:InvokeModel
+                Resource: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0"
+              - Sid: VectorIndexOnlyTheIndexingPipeline
+                Effect: Allow
+                Action: [s3vectors:PutVectors, s3vectors:GetVectors, s3vectors:DeleteVectors, s3vectors:QueryVectors, s3vectors:GetIndex]
+                Resource: !Ref VectorIndex
+              - Sid: ReadOriginalsForIndexing
+                Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub "arn:aws:s3:::${NamePrefix}-docs-${AWS::AccountId}/tenants/*"
+
+  KnowledgeBase:
+    Type: AWS::Bedrock::KnowledgeBase
+    Properties:
+      Name: !Sub "${NamePrefix}-kb"
+      RoleArn: !GetAtt KnowledgeBaseServiceRole.Arn
+      KnowledgeBaseConfiguration:
+        Type: VECTOR
+        VectorKnowledgeBaseConfiguration:
+          EmbeddingModelArn: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0"
+          EmbeddingModelConfiguration:
+            BedrockEmbeddingModelConfiguration:
+              Dimensions: 1024
+              EmbeddingDataType: FLOAT32
+      StorageConfiguration:
+        Type: S3_VECTORS
+        S3VectorsConfiguration:
+          IndexArn: !Ref VectorIndex
+
+  DocumentDataSource:
+    Type: AWS::Bedrock::DataSource
+    Properties:
+      Name: !Sub "${NamePrefix}-documents"
+      KnowledgeBaseId: !Ref KnowledgeBase
+      DataDeletionPolicy: DELETE
+      DataSourceConfiguration:
+        Type: CUSTOM
+
+  # ===================================================================================================================
+  # Identity provider stand-in (CTL-003, CTL-006). Tenant membership = administrator-managed groups, created by the
+  # fixture loader. There is no tenant user attribute. OtherAppClient exists only so tests can present a valid token
+  # issued to a different application (TST-SEC-007).
+  # ===================================================================================================================
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: !Sub "${NamePrefix}-users"
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: true
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: admin_only
+            Priority: 1
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 16
+          RequireLowercase: true
+          RequireUppercase: true
+          RequireNumbers: true
+          RequireSymbols: true
+
+  AppClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref UserPool
+      ClientName: !Sub "${NamePrefix}-app"
+      GenerateSecret: false
+      ExplicitAuthFlows: [ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_REFRESH_TOKEN_AUTH]
+      PreventUserExistenceErrors: ENABLED
+      AccessTokenValidity: 5
+      IdTokenValidity: 5
+      RefreshTokenValidity: 60
+      TokenValidityUnits:
+        AccessToken: minutes
+        IdToken: minutes
+        RefreshToken: minutes
+
+  OtherAppClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref UserPool
+      ClientName: !Sub "${NamePrefix}-other-app"
+      GenerateSecret: false
+      ExplicitAuthFlows: [ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_REFRESH_TOKEN_AUTH]
+      PreventUserExistenceErrors: ENABLED
+
+  # ===================================================================================================================
+  # Application roles. Exclusivity is the control (CTL-008, CTL-013): ONLY QueryRole can Retrieve; ONLY IngestionRole
+  # can index or delete documents; ONLY KnowledgeBaseServiceRole touches vectors.
+  # ===================================================================================================================
+  QueryRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-query"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: retrieval-gateway
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: OnlyHolderOfRetrieve
+                Effect: Allow
+                Action: bedrock:Retrieve
+                Resource: !GetAtt KnowledgeBase.KnowledgeBaseArn
+              - Sid: InRegionGenerationModelOnly
+                Effect: Allow
+                Action: bedrock:InvokeModel
+                Resource: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.nova-micro-v1:0"
+              - Sid: ReadTenantRegistryAndOwnership
+                Effect: Allow
+                Action: [dynamodb:GetItem, dynamodb:BatchGetItem]
+                Resource: !GetAtt RegistryTable.Arn
+              - Sid: WriteAuditOnly
+                Effect: Allow
+                Action: [dynamodb:PutItem, dynamodb:UpdateItem]
+                Resource: !GetAtt AuditTable.Arn
+              - Sid: OwnLogGroup
+                Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !Sub "${QueryLogGroup.Arn}"
+
+  IngestionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-ingestion"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: ingestion-service
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: TenantDocumentOriginals
+                Effect: Allow
+                Action: [s3:PutObject, s3:GetObject, s3:DeleteObject]
+                Resource: !Sub "arn:aws:s3:::${NamePrefix}-docs-${AWS::AccountId}/tenants/*"
+              - Sid: ReadTenantRegistryAndOwnership
+                Effect: Allow
+                Action: dynamodb:GetItem
+                Resource: !GetAtt RegistryTable.Arn
+              - Sid: WriteOwnershipRecordsOnlyNeverTenants
+                Effect: Allow
+                Action: [dynamodb:PutItem, dynamodb:UpdateItem]
+                Resource: !GetAtt RegistryTable.Arn
+                Condition:
+                  ForAllValues:StringLike:
+                    dynamodb:LeadingKeys: ["DOC#*"]
+              - Sid: OnlyHolderOfIndexingMinimumActionSet
+                Effect: Allow
+                Action:
+                  - bedrock:IngestKnowledgeBaseDocuments
+                  - bedrock:GetKnowledgeBaseDocuments
+                  - bedrock:DeleteKnowledgeBaseDocuments
+                  - bedrock:StartIngestionJob
+                  - bedrock:AssociateThirdPartyKnowledgeBase
+                Resource: !GetAtt KnowledgeBase.KnowledgeBaseArn
+              - Sid: WriteAuditOnly
+                Effect: Allow
+                Action: [dynamodb:PutItem, dynamodb:UpdateItem]
+                Resource: !GetAtt AuditTable.Arn
+              - Sid: OwnLogGroup
+                Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !Sub "${IngestionLogGroup.Arn}"
+
+  # ===================================================================================================================
+  # Functions and their log groups (1-day retention; functions log only allowlisted fields - CTL-020).
+  # ===================================================================================================================
+  QueryLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${NamePrefix}-query"
+      RetentionInDays: 1
+
+  IngestionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${NamePrefix}-ingestion"
+      RetentionInDays: 1
+
+  ApiAccessLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/tla/${NamePrefix}/api-access"
+      RetentionInDays: 1
+
+  QueryFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${NamePrefix}-query"
+      Runtime: python3.13
+      Handler: query.handler.handler
+      MemorySize: 512
+      Timeout: 30
+      Role: !GetAtt QueryRole.Arn
+      Code:
+        S3Bucket: !Ref ArtifactBucket
+        S3Key: !Ref QueryCodeKey
+      LoggingConfig:
+        LogGroup: !Ref QueryLogGroup
+      Environment:
+        Variables:
+          REGISTRY_TABLE: !Ref RegistryTable
+          AUDIT_TABLE: !Ref AuditTable
+          KNOWLEDGE_BASE_ID: !Ref KnowledgeBase
+          GENERATION_MODEL_ID: amazon.nova-micro-v1:0
+          APP_CLIENT_ID: !Ref AppClient
+          TOKEN_ISSUER: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}"
+
+  IngestionFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${NamePrefix}-ingestion"
+      Runtime: python3.13
+      Handler: ingestion.handler.handler
+      MemorySize: 256
+      Timeout: 30
+      Role: !GetAtt IngestionRole.Arn
+      Code:
+        S3Bucket: !Ref ArtifactBucket
+        S3Key: !Ref IngestionCodeKey
+      LoggingConfig:
+        LogGroup: !Ref IngestionLogGroup
+      Environment:
+        Variables:
+          REGISTRY_TABLE: !Ref RegistryTable
+          AUDIT_TABLE: !Ref AuditTable
+          DOCUMENT_BUCKET: !Ref DocumentBucket
+          KNOWLEDGE_BASE_ID: !Ref KnowledgeBase
+          DATA_SOURCE_ID: !GetAtt DocumentDataSource.DataSourceId
+          APP_CLIENT_ID: !Ref AppClient
+          TOKEN_ISSUER: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}"
+
+  # ===================================================================================================================
+  # API edge (CTL-003): JWT authorizer on every route, no default route. Invocation boundary (CTL-009): each function
+  # may be invoked by this API only; every other caller - including account administrators - is explicitly denied.
+  # ===================================================================================================================
+  HttpApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Sub "${NamePrefix}-api"
+      ProtocolType: HTTP
+
+  JwtAuthorizer:
+    Type: AWS::ApiGatewayV2::Authorizer
+    Properties:
+      ApiId: !Ref HttpApi
+      Name: !Sub "${NamePrefix}-jwt"
+      AuthorizerType: JWT
+      IdentitySource: ["$request.header.Authorization"]
+      JwtConfiguration:
+        Issuer: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}"
+        Audience: [!Ref AppClient]
+
+  QueryIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApi
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt QueryFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  IngestionIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApi
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt IngestionFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  AskRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: POST /ask
+      AuthorizationType: JWT
+      AuthorizerId: !Ref JwtAuthorizer
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+      Target: !Sub "integrations/${QueryIntegration}"
+
+  UploadRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: POST /documents
+      AuthorizationType: JWT
+      AuthorizerId: !Ref JwtAuthorizer
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+      Target: !Sub "integrations/${IngestionIntegration}"
+
+  OpenRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: GET /documents/{document_id}
+      AuthorizationType: JWT
+      AuthorizerId: !Ref JwtAuthorizer
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+      Target: !Sub "integrations/${IngestionIntegration}"
+
+  DeleteRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: DELETE /documents/{document_id}
+      AuthorizationType: JWT
+      AuthorizerId: !Ref JwtAuthorizer
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+      Target: !Sub "integrations/${IngestionIntegration}"
+
+  DefaultStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref HttpApi
+      StageName: $default
+      AutoDeploy: true
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 20
+        ThrottlingRateLimit: 10
+      AccessLogSettings:
+        DestinationArn: !GetAtt ApiAccessLogGroup.Arn
+        Format: '{"requestId":"$context.requestId","routeKey":"$context.routeKey","status":"$context.status","authorizerError":"$context.authorizer.error","integrationError":"$context.integrationErrorMessage","requestTime":"$context.requestTime"}'
+
+  QueryInvokeOnlyThroughApi:
+    Type: AWS::Lambda::ResourcePolicy
+    Properties:
+      ResourceArn: !GetAtt QueryFunction.Arn
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: AllowThisApiOnly
+            Effect: Allow
+            Principal:
+              Service: apigateway.amazonaws.com
+            Action: lambda:InvokeFunction
+            Resource: !GetAtt QueryFunction.Arn
+            Condition:
+              ArnLike:
+                aws:SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*"
+          - Sid: DenyEveryOtherCaller
+            Effect: Deny
+            Principal: "*"
+            Action: lambda:InvokeFunction
+            Resource: !GetAtt QueryFunction.Arn
+            Condition:
+              ArnNotLike:
+                aws:SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*"
+
+  IngestionInvokeOnlyThroughApi:
+    Type: AWS::Lambda::ResourcePolicy
+    Properties:
+      ResourceArn: !GetAtt IngestionFunction.Arn
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: AllowThisApiOnly
+            Effect: Allow
+            Principal:
+              Service: apigateway.amazonaws.com
+            Action: lambda:InvokeFunction
+            Resource: !GetAtt IngestionFunction.Arn
+            Condition:
+              ArnLike:
+                aws:SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*"
+          - Sid: DenyEveryOtherCaller
+            Effect: Deny
+            Principal: "*"
+            Action: lambda:InvokeFunction
+            Resource: !GetAtt IngestionFunction.Arn
+            Condition:
+              ArnNotLike:
+                aws:SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*"
+
+Outputs:
+  Variant:
+    Value: !Ref Variant
+  ApiEndpoint:
+    Value: !GetAtt HttpApi.ApiEndpoint
+  UserPoolId:
+    Value: !Ref UserPool
+  AppClientId:
+    Value: !Ref AppClient
+  OtherAppClientId:
+    Value: !Ref OtherAppClient
+  TokenIssuer:
+    Value: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}"
+  RegistryTable:
+    Value: !Ref RegistryTable
+  AuditTable:
+    Value: !Ref AuditTable
+  DocumentBucket:
+    Value: !Ref DocumentBucket
+  KnowledgeBaseId:
+    Value: !Ref KnowledgeBase
+  KnowledgeBaseArn:
+    Value: !GetAtt KnowledgeBase.KnowledgeBaseArn
+  DataSourceId:
+    Value: !GetAtt DocumentDataSource.DataSourceId
+  VectorIndexArn:
+    Value: !Ref VectorIndex
+  QueryFunctionName:
+    Value: !Ref QueryFunction
+  IngestionFunctionName:
+    Value: !Ref IngestionFunction
+  QueryRoleArn:
+    Value: !GetAtt QueryRole.Arn
+  IngestionRoleArn:
+    Value: !GetAtt IngestionRole.Arn
+  KnowledgeBaseServiceRoleArn:
+    Value: !GetAtt KnowledgeBaseServiceRole.Arn

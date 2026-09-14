@@ -87,8 +87,11 @@ The E2 candidate mapping, refined by verification. "Status" shows the strongest 
 
 ## 4. The deployable learner architecture
 
-One stack per deployment (`tla-s01e01-<suffix>`) plus an artifact bucket created by the deploy script. Every resource is
-tagged `tla:episode=s01e01` and `tla:variant=normal` (the sensitivity deployment uses `sensitivity`).
+One stack per deployment (`tla-s01e01-normal`, or `tla-s01e01-sensitivity` for the test-only variant) plus an artifact
+bucket created by the deploy script. As built (E4), every resource carries the CloudBrewery lab tag standard:
+`Project=CloudBreweryLabs`, `Course=ThinkLikeAnArchitect`, `Season=01`, `Episode=01`, `Environment=Sandbox`,
+`ManagedBy=CloudBreweryLabs`, `Variant=normal|sensitivity`, `Purpose=education`, `DeployedWith=CloudFormation`. This replaces
+the `tla:*` keys drafted at E3, so there is one tag vocabulary.
 
 | Resource | Count | Purpose |
 |---|---|---|
