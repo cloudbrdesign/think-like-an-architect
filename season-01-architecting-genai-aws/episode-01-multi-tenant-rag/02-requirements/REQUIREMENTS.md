@@ -7,7 +7,9 @@
 - `Verified by` names acceptance test intents in [ACCEPTANCE_TEST_INTENT.md](../06-validation/ACCEPTANCE_TEST_INTENT.md),
   or `review` where a test is not the right proof.
 - `Related decisions` names decision questions in
-  [ARCHITECTURE_DECISION_QUESTIONS.md](../04-decisions/ARCHITECTURE_DECISION_QUESTIONS.md). No decision has been made.
+  [ARCHITECTURE_DECISION_QUESTIONS.md](../04-decisions/ARCHITECTURE_DECISION_QUESTIONS.md), as they stood when the
+  requirements were approved. The decisions that answer them (ADRs) and the controls they introduce are traced in the
+  [traceability matrix](../06-validation/TRACEABILITY_MATRIX.md).
 - **Invariants.** Requirements marked **INVARIANT** state a security property the system must hold at all times. Absolute
   words such as "never" express the invariant; they are not a claim that the property is automatically guaranteed. Each
   invariant is later validated against the identified attack paths, including tests that are shown capable of failing.

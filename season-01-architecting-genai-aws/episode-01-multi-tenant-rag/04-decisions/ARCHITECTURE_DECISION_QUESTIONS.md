@@ -6,6 +6,11 @@ decision is consequential, an architecture decision record.
 
 **Try to answer each question yourself before reading any later material.**
 
+> **Answered at the architecture stage.** After you have tried: DQ-A → ADR-001 · DQ-B → ADR-002 · DQ-C → ADR-003 ·
+> DQ-D → ADR-004 · DQ-E → ADR-005 · DQ-F → ADR-006, with the comparison in
+> [ARCHITECTURE_OPTIONS_ANALYSIS.md](ARCHITECTURE_OPTIONS_ANALYSIS.md). One further decision, ADR-007, emerged during
+> the analysis.
+
 ---
 
 ## DQ-A — Tenant isolation model
