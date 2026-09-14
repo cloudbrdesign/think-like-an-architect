@@ -170,16 +170,26 @@ identity supplied with each query.
 resources, operations, onboarding work, cost and lifecycle management. Shared logical isolation (B) improves efficiency,
 onboarding and utilisation, but it makes identity, authorisation, attribution, retrieval filtering and bypass prevention
 **far more critical**, because one missing constraint would expose everyone. Neither is universally superior. B wins
-**here** because the contracts require logical segregation, the team is small, onboarding must need no per-tenant rules,
-and cost must follow usage. It is only acceptable because the architecture removes its defining weakness by construction:
+**here, under the present assumptions**:
+- the contractual requirement is tenant segregation, and the decision concludes that enforced logical isolation satisfies
+  it;
+- dedicated physical infrastructure per tenant is not currently required;
+- the shared platform is an explicit constraint;
+- the team is small;
+- onboarding must need no per-tenant infrastructure or rules;
+- cost must follow usage as tenants grow from about 120 towards about 400.
+
+It is only acceptable because the architecture removes its defining weakness by construction:
 - the constraint cannot be empty (CTL-015);
 - only one component may retrieve (CTL-008);
 - results are verified against ownership before generation (CTL-017);
 - the sensitivity test proves the negative tests detect a missing constraint (TST-SEN-011).
 
-- **A rejected:** it buys blast-radius reduction that no requirement demands (contracts require *logical* segregation), at
-  the cost of per-tenant infrastructure that conflicts with NFR-002's intent, NFR-004 and CON-003. Its routing decision is
-  still a software decision unless every tenant also gets separately scoped credentials — more machinery again.
+- **A not chosen:** it genuinely reduces blast radius, which matters even though it is not a numbered requirement. But
+  dedicated per-tenant infrastructure is not currently required. At about 120 → 400 tenants it would materially increase
+  resource count, lifecycle operations and fixed cost for a small team (CON-002, CON-003, NFR-002, NFR-004). Its routing
+  decision is still a software decision unless every tenant also gets separately scoped credentials. With C, it remains
+  the escalation path if requirements change.
 - **C deferred, not rejected:** it adds a routing layer and K structures before any requirement needs them. It is the
   **defined evolution** of B (ADR-001 triggers), and the always-filter rule means moving to C never weakens SEC-001.
 - **D rejected:** it fails the onboarding gate (per-user lists on every document) and cannot verify the identity it is

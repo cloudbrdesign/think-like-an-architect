@@ -8,8 +8,12 @@
 
 Veltamere serves about 120 competing facilities-management companies from one shared platform, growing towards 400
 (ASM-001). Each tenant's documents must never inform another tenant's answers, citations or metadata. The platform team
-is five engineers and one SRE (CON-003), customer contracts require **logical** segregation of each customer's data, and
-pricing assumes shared infrastructure. The question is what the unit of isolation for retrieval data should be.
+is five engineers and one SRE (CON-003), customer contracts require segregation of each customer's data, and pricing
+assumes shared infrastructure. The question is what the unit of isolation for retrieval data should be.
+
+**Requirement ≠ implementation choice.** The contractual requirement is tenant segregation. This decision concludes that
+enforced logical isolation satisfies that requirement under the present assumptions. That is a judgement about this
+engagement, not a claim that logical isolation is generally preferable to physical isolation.
 
 ## Requirements driving this decision
 
@@ -63,12 +67,22 @@ constraint.
 
 ## Why not the other options
 
-- **Why not A (dedicated per tenant)?** It buys blast-radius reduction that no current requirement demands — contracts ask
-  for logical segregation — at the price of per-tenant infrastructure that a five-person team would have to provision,
-  monitor, patch and keep consistent for 120 → 400 tenants (CON-003, RSK-09). Each tenant would add fixed cost
-  (NFR-004). Its routing decision would still need to be protected as carefully as B's constraint, unless each tenant
-  also received separately scoped credentials — more machinery again. **A would win** if contracts required physical
-  separation, if tenants needed their own encryption keys, or if there were a few dozen very high-value tenants.
+- **Why not A (dedicated per tenant)?** A genuinely reduces cross-tenant blast radius, and blast radius is
+  architecturally relevant here even though it is not a numbered requirement. A is not chosen because:
+  - the engagement requires strong tenant segregation, but it does not currently require dedicated physical
+    infrastructure per tenant;
+  - the shared-platform constraint is explicit (CON-002);
+  - the operating team is small (CON-003);
+  - tenant onboarding must not require bespoke infrastructure (NFR-002, BUS-002);
+  - at about 120 tenants growing towards about 400 (ASM-001), dedicated per-tenant infrastructure would materially
+    increase resource count, lifecycle operations and fixed cost (NFR-004, RSK-09, RSK-13);
+  - A's routing decision would still need protecting as carefully as B's constraint, unless each tenant also received
+    separately scoped credentials.
+
+  The selected logical isolation model is acceptable **only because** its identity, authorisation, ingestion and
+  retrieval controls can be mechanically enforced and validated (the conditions above). **Physical or cell isolation
+  remains the escalation path if requirements change.** A would win if contracts required physical separation, if
+  tenants needed their own encryption keys, or if there were a few dozen very high-value tenants.
 - **Why not C (cells) now?** It adds a routing layer, a placement process and several structures before any requirement
   needs them. It is the **planned evolution** of B, triggered by the conditions below.
 - **Why not D (per-user access lists)?** It fails the onboarding gate: a tenant boundary expressed as per-user lists on

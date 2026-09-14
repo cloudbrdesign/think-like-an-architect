@@ -32,7 +32,7 @@ exist yet — they come from validation.
 
 | Area | Question | A strong answer cites |
 |---|---|---|
-| Isolation model | Why a shared retrieval structure and not per-tenant infrastructure? | ADR-001 "why not A"; CON-002, CON-003, NFR-002, NFR-004; contracts require logical segregation |
+| Isolation model | Why a shared retrieval structure and not per-tenant infrastructure? | ADR-001 "why not A"; CON-002, CON-003, NFR-002, NFR-004, ASM-001; segregation is required, dedicated per-tenant infrastructure is not; blast radius versus resource count, operations and fixed cost; cell or physical isolation as the escalation path |
 | Isolation model | A shared structure means one missing filter exposes everyone. Why is that acceptable here? | ADR-001 conditions 1–5; CTL-015 construction; CTL-008; CTL-017; TST-SEN-011; RR-04 |
 | Isolation model | Why not cells now, if they limit blast radius? | Options analysis Option C; ADR-001 evolution triggers; the always-filter rule |
 | Isolation model | Why not let the store enforce per-user access lists? | Options analysis Option D (fails the onboarding gate); PC-16 "not authorization" |
