@@ -1,7 +1,7 @@
 <!-- template: tla-adr/1 -->
 # ADR-003 — Authorisation enforcement point: the retrieval gateway is authoritative
 
-**Status:** proposed — awaiting architecture approval · **Date:** 2026-09-14
+**Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 **Answers:** decision question DQ-C · **Options analysis:** [section 4](ARCHITECTURE_OPTIONS_ANALYSIS.md#4-authorisation-enforcement-point--adr-003)
 
 ## Context

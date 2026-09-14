@@ -1,6 +1,6 @@
 # AWS Service Mapping — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** proposed — awaiting architecture approval · **Date:** 2026-09-14
+**Stage:** architecture (E2) · **Status:** candidate implementation mapping — approved with the architecture on 2026-09-14, subject to E3 verification ([PLATFORM_VERIFICATION.md](../05-implementation/PLATFORM_VERIFICATION.md); final educational mapping in [IMPLEMENTATION_DESIGN.md](../05-implementation/IMPLEMENTATION_DESIGN.md#3-final-educational-aws-service-mapping)) · **Date:** 2026-09-14
 
 ## 1. How this mapping was made
 

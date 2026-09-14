@@ -38,5 +38,5 @@ drivers and cleanup steps **before** the first deployment step. Always run the c
 
 ## Status
 
-The engagement templates are available in [templates/](templates/README.md). Episode 01 is in architecture design; see
+The engagement templates are available in [templates/](templates/README.md). Episode 01 is in implementation design; see
 [season-01-architecting-genai-aws/README.md](season-01-architecting-genai-aws/README.md).

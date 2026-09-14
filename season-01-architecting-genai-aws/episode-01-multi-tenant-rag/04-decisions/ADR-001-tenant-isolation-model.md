@@ -1,7 +1,7 @@
 <!-- template: tla-adr/1 -->
 # ADR-001 — Tenant isolation model: one shared retrieval structure with an enforced tenant partition
 
-**Status:** proposed — awaiting architecture approval · **Date:** 2026-09-14
+**Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 **Answers:** decision question DQ-A · **Options analysis:** [section 2](ARCHITECTURE_OPTIONS_ANALYSIS.md#2-tenant-isolation-model--adr-001)
 
 ## Context

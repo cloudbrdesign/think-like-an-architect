@@ -1,7 +1,7 @@
 <!-- template: tla-adr/1 -->
 # ADR-002 — Tenant identity source: tenant context from a verified claim, validated against the tenant registry
 
-**Status:** proposed — awaiting architecture approval · **Date:** 2026-09-14
+**Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 **Answers:** decision question DQ-B · **Options analysis:** [section 3](ARCHITECTURE_OPTIONS_ANALYSIS.md#3-tenant-context-source--adr-002)
 
 ## Context

@@ -1,7 +1,7 @@
 <!-- template: tla-adr/1 -->
 # ADR-004 — Document tenant attribution: assigned once by the ingestion service, cross-checked, immutable
 
-**Status:** proposed — awaiting architecture approval · **Date:** 2026-09-14
+**Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 **Answers:** decision question DQ-D · **Options analysis:** [section 5](ARCHITECTURE_OPTIONS_ANALYSIS.md#5-document-tenant-attribution--adr-004)
 
 ## Context
