@@ -21,6 +21,7 @@ class Run:
         self.directory = os.path.join(RESULTS, run_id)
         os.makedirs(os.path.join(self.directory, "evidence"), exist_ok=True)
         self.tests, self.started_at = [], now_iso()
+        self._cursor = self.started_at  # tests run sequentially: each starts when the previous one was recorded
 
     def record(self, test_id, suite, verifies, controls, level, expected, status, reason, observations,
                privileged=False, started_at=None):
@@ -29,7 +30,8 @@ class Run:
         evidence_file = f"evidence/{test_id}.json"
         entry = {"test_id": test_id, "suite": suite, "verifies": verifies, "controls": controls, "level": level,
                  "expected": expected, "status": status, "reason": reason, "privileged": privileged,
-                 "evidence": [evidence_file], "started_at": started_at or now_iso(), "finished_at": now_iso()}
+                 "evidence": [evidence_file], "started_at": started_at or self._cursor, "finished_at": now_iso()}
+        self._cursor = entry["finished_at"]
         with open(os.path.join(self.directory, evidence_file), "w") as handle:
             json.dump(redact({**entry, "observations": observations}), handle, indent=2, sort_keys=True, default=str)
         self.tests.append(entry)

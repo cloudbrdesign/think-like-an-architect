@@ -9,6 +9,7 @@ Portfolio evidence of the work performed — not certification.
 | `sen-20260914T075857Z-baseline/` · `-variant/` · `-cleanup/` · `-bracket/` · `-verdict/` | Sensitivity test: normal → variant with the primary control removed → variant destroyed → normal → verdict |
 | `fresh-cleanup-all/` | Final authoritative cleanup verification |
 | `FRESH_COPY_RUN.md` | Step-by-step timing and exit codes of the fresh-copy run |
+| `LATENCY_SUMMARY.md` | NFR-001: coarse end-to-end latency from this run's evidence, and what it does not show |
 
 ## Results — normal deployment
 

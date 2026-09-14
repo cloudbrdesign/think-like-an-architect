@@ -71,5 +71,6 @@ def audit_view(record):
     if not record:
         return None
     keys = ("event_id", "tenant_context", "decision", "reason_code", "failed_control", "constraint", "retrieved",
-            "verification_outcome", "discarded_count", "cited_document_ids", "outcome", "status_code", "variant")
+            "verification_outcome", "discarded_count", "cited_document_ids", "outcome", "status_code", "variant",
+            "latency_ms")  # latency_ms: server-side, measured by the function (NFR-001 evidence)
     return {k: record.get(k) for k in keys}

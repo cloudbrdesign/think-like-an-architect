@@ -32,7 +32,7 @@ ID_RE = re.compile(rf"\b(?:{REQ}|{ADR}|{CTL}|{TST})\b")
 COLUMN_FAMILY = {0: REQ, 1: ADR, 2: CTL, 3: TST}
 MATRIX_NAME = "TRACEABILITY_MATRIX.md"
 MATRIX_HEADER = ["Requirement", "Decision", "Control", "Test", "Observed result", "Evidence"]
-RESULTS = ("NOT RUN", "PASS", "FAIL", "NOT VERIFIED", "NOT APPLICABLE")
+RESULTS = ("NOT RUN", "PASS", "FAIL", "PARTIALLY VERIFIED", "NOT VERIFIED", "NOT APPLICABLE")
 SEPARATOR_RE = re.compile(r"^:?-{3,}:?$")
 
 

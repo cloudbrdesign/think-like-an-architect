@@ -64,6 +64,57 @@ class ArtifactBucketTests(unittest.TestCase):
         self.assertEqual(len(calls), 1)
 
 
+class FakeBedrock:
+    def __init__(self, states=None, error=None):
+        self.states, self.error, self.asked = states or {}, error, []
+
+    def get_foundation_model_availability(self, modelId):
+        self.asked.append(modelId)
+        if self.error:
+            raise self.error
+        return self.states.get(modelId, {"authorizationStatus": "AUTHORIZED", "entitlementAvailability": "AVAILABLE",
+                                         "regionAvailability": "AVAILABLE"})
+
+
+class ModelAccessPreflightTests(unittest.TestCase):
+    """VE-18 failure paths (the success path is proven in the real sandbox run)."""
+
+    def check(self, bedrock, region="us-east-1"):
+        return tla_ops.model_access_problems(bedrock, region, report=lambda _: None)
+
+    def test_both_required_models_are_checked_and_pass(self):
+        bedrock = FakeBedrock()
+        self.assertEqual(self.check(bedrock), [])
+        self.assertEqual(bedrock.asked, ["amazon.titan-embed-text-v2:0", "amazon.nova-micro-v1:0"])
+
+    def test_model_access_not_granted_is_named_with_an_actionable_message(self):
+        bedrock = FakeBedrock({"amazon.nova-micro-v1:0": {"authorizationStatus": "NOT_AUTHORIZED",
+                                                          "entitlementAvailability": "AVAILABLE", "regionAvailability": "AVAILABLE"}})
+        problems = self.check(bedrock)
+        self.assertEqual(len(problems), 1)
+        self.assertIn("amazon.nova-micro-v1:0", problems[0])
+        self.assertIn("Model access", problems[0])
+        self.assertIn("scripts/preflight.sh", problems[0])
+
+    def test_model_not_available_in_region_fails_without_substitution(self):
+        bedrock = FakeBedrock({"amazon.titan-embed-text-v2:0": {"authorizationStatus": "AUTHORIZED",
+                                                                "entitlementAvailability": "AVAILABLE", "regionAvailability": "NOT_AVAILABLE"}})
+        problems = self.check(bedrock, region="eu-west-2")
+        self.assertIn("amazon.titan-embed-text-v2:0", problems[0])
+        self.assertIn("will not substitute", problems[0])
+        self.assertEqual(bedrock.asked, list(tla_ops.MODELS))  # only the approved models are ever considered
+
+    def test_unreadable_availability_fails_closed(self):
+        problems = self.check(FakeBedrock(error=PermissionError("AccessDenied")))
+        self.assertEqual(len(problems), 2)
+        self.assertTrue(all("GetFoundationModelAvailability" in p for p in problems))
+
+    def test_template_uses_only_the_approved_in_region_model(self):
+        template = open(tla_ops.TEMPLATE, encoding="utf-8").read()
+        self.assertEqual(sorted(set(__import__("re").findall(r"GENERATION_MODEL_ID:\s*(\S+)", template))), ["amazon.nova-micro-v1:0"])
+        self.assertIn("foundation-model/amazon.titan-embed-text-v2:0", template)
+
+
 class NamingAndTaggingTests(unittest.TestCase):
     def test_variant_names_and_standard_tags(self):
         names = tla_ops.names("sensitivity", "123456789012")

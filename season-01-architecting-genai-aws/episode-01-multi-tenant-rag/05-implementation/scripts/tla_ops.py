@@ -79,6 +79,28 @@ def sha256_file(path):
 
 
 # ── preflight ───────────────────────────────────────────────────────────────────────────────────────────────────────
+def model_access_problems(bedrock, region, models=MODELS, report=print):
+    """VE-18: every required model must be authorised, entitled and available In-Region in the configured region.
+    Returns learner-facing problems. It never substitutes another model or region: the lab uses exactly MODELS."""
+    problems = []
+    for model in models:
+        try:
+            availability = bedrock.get_foundation_model_availability(modelId=model)
+            state = {k: availability.get(k) for k in ("authorizationStatus", "entitlementAvailability", "regionAvailability")}
+            report(f"model {model}: {state}")
+            if state != {"authorizationStatus": "AUTHORIZED", "entitlementAvailability": "AVAILABLE",
+                         "regionAvailability": "AVAILABLE"}:
+                problems.append(f"model {model} is not usable In-Region in {region}: {state}. This lab needs exactly this "
+                                "model in this region and will not substitute another. If access has not been granted in "
+                                "this account, enable it once in the Amazon Bedrock console (Model access), then re-run "
+                                "scripts/preflight.sh before deploying (VE-18).")
+        except Exception as error:  # noqa: BLE001
+            problems.append(f"could not read the availability of {model} in {region}: {type(error).__name__}. Check that "
+                            "your credentials may call bedrock:GetFoundationModelAvailability and that Amazon Bedrock "
+                            "model access is enabled for this account and region, then re-run preflight (VE-18).")
+    return problems
+
+
 def cmd_preflight(args):
     config = load_config()
     problems = []
@@ -95,20 +117,7 @@ def cmd_preflight(args):
         print(f"WARNING: region {sess.region_name} is not the verified region us-east-1; In-Region model availability "
               "is checked below and the design requires it (CTL-023)")
     bedrock = sess.client("bedrock")
-    for model in MODELS:
-        try:
-            availability = bedrock.get_foundation_model_availability(modelId=model)
-            state = {k: availability.get(k) for k in ("authorizationStatus", "entitlementAvailability", "regionAvailability")}
-            ok = state == {"authorizationStatus": "AUTHORIZED", "entitlementAvailability": "AVAILABLE",
-                           "regionAvailability": "AVAILABLE"}
-            print(f"model {model}: {state}")
-            if not ok:
-                problems.append(f"model {model} is not usable In-Region in {sess.region_name}: {state}. If access has "
-                                "not been granted in this account, enable it once in the Amazon Bedrock console "
-                                "(Model access) and re-run preflight (VE-18).")
-        except Exception as error:  # noqa: BLE001
-            problems.append(f"could not read availability of {model}: {type(error).__name__}. Check Amazon Bedrock "
-                            "model access for this account and region (VE-18).")
+    problems += model_access_problems(bedrock, sess.region_name)
     try:
         logging_config = bedrock.get_model_invocation_logging_configuration().get("loggingConfig") or {}
         enabled = bool(logging_config.get("cloudWatchConfig") or logging_config.get("s3Config"))

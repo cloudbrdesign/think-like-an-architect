@@ -12,7 +12,8 @@ Rules (checked by `tools/traceability_check.py`):
 - keep the header exactly as below; separate multiple IDs with commas;
 - every ID you reference must be defined in your requirements, ADRs or validation plan;
 - every `MUST` requirement appears here with a test, or with `review: <rationale>` in the Test column;
-- observed result is one of `NOT RUN`, `PASS`, `FAIL`, `NOT VERIFIED`, `NOT APPLICABLE`;
+- observed result is one of `NOT RUN`, `PASS`, `FAIL`, `PARTIALLY VERIFIED`, `NOT VERIFIED`, `NOT APPLICABLE`
+  (`PARTIALLY VERIFIED` when real evidence supports only part of the claim — say which part, and why, in the row's evidence);
 - a `PASS` or `FAIL` result points to evidence by relative path inside your episode folder.
 
 | Requirement | Decision | Control | Test | Observed result | Evidence |

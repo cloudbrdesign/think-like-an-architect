@@ -14,8 +14,12 @@ business objective → requirement → decision (ADR) → control (CTL) → test
 - Results come from the fresh-copy validation run in [07-evidence/e4-validation-2026-09-14](../07-evidence/e4-validation-2026-09-14/README.md).
   The Evidence column lists the implementing source first, then the result file. Test designs are in
   [VALIDATION_PLAN.md](VALIDATION_PLAN.md).
-- `NOT VERIFIED` marks reviews this run did not complete: latency summary (NFR-001), failure isolation from the
-  core platform (NFR-003, Episode 07) and the billed session cost (NFR-004, read once billing data is available).
+- `PARTIALLY VERIFIED`: NFR-001 — end-to-end latency is summarised from the run's evidence; there is no per-component
+  breakdown ([latency summary](../07-evidence/e4-validation-2026-09-14/LATENCY_SUMMARY.md)).
+- `NOT VERIFIED`:
+  - NFR-003 is deferred to the Episode 07 engagement and not verified in Episode 01.
+  - NFR-004 is pending billing confirmation (VE-11); the billed session cost is recorded once AWS billing data is
+    available.
 - `review:` marks requirements whose proof is a design or configuration review rather than a behavioural test.
 
 Ask the chain questions with the checker:
@@ -46,9 +50,9 @@ python3 tools/traceability_check.py season-01-architecting-genai-aws/episode-01-
 | DATA-001 | ADR-004 | CTL-011 | TST-SEC-019 | PASS | 05-implementation/app/shared/ownership.py, 07-evidence/e4-validation-2026-09-14/fresh-normal-all/evidence/TST-SEC-019.json |
 | DATA-002 | ADR-001, ADR-005 | CTL-001, CTL-015 | TST-ISO-003, TST-ISO-004 | PASS | 05-implementation/app/shared/retrieval_scope.py, 07-evidence/e4-validation-2026-09-14/fresh-normal-all/evidence/TST-ISO-003.json, 07-evidence/e4-validation-2026-09-14/fresh-normal-all/evidence/TST-ISO-004.json |
 | DATA-003 | ADR-004 | CTL-012, CTL-017, CTL-019 | TST-ASM-010, TST-SEC-022 | PASS | 05-implementation/app/shared/ownership.py, 05-implementation/app/shared/ownership_verification.py, 07-evidence/e4-validation-2026-09-14/fresh-normal-all/evidence/TST-ASM-010.json, 07-evidence/e4-validation-2026-09-14/fresh-normal-all/evidence/TST-SEC-022.json |
-| NFR-001 | ADR-005, ADR-007 | — | review: latency measured and reported during validation (registry read, retrieval, ownership verification, generation); not an isolation gate | NOT VERIFIED | — |
+| NFR-001 | ADR-005, ADR-007 | — | review: latency measured and reported during validation (registry read, retrieval, ownership verification, generation); not an isolation gate | PARTIALLY VERIFIED | 05-implementation/app/shared/audit.py, 07-evidence/e4-validation-2026-09-14/LATENCY_SUMMARY.md |
 | NFR-002 | ADR-001 | CTL-005 | TST-OPS-017 | PASS | 05-implementation/app/shared/tenant_context.py, 07-evidence/e4-validation-2026-09-14/fresh-normal-all/evidence/TST-OPS-017.json |
-| NFR-003 | ADR-001, ADR-007 | — | review: assistant components are separate from the core platform and fail without affecting it; detailed failure behaviour is Episode 07 | NOT VERIFIED | — |
+| NFR-003 | ADR-001, ADR-007 | — | review: NOT VERIFIED IN EPISODE 01 — deferred to the Episode 07 architecture engagement (assistant components separate from the core platform, failing without affecting it) | NOT VERIFIED | — |
 | NFR-004 | ADR-001 | — | review: cost structure in 03-architecture/COST_AND_SCALE_ANALYSIS.md; dated estimate at build authorisation | NOT VERIFIED | — |
 | OPS-001 | ADR-006 | CTL-019 | TST-OPS-015 | PASS | 05-implementation/app/shared/audit.py, 07-evidence/e4-validation-2026-09-14/fresh-normal-all/evidence/TST-OPS-015.json |
 | OPS-002 | ADR-006, ADR-007 | CTL-020, CTL-024 | TST-OPS-015 | PASS | 05-implementation/app/shared/audit.py, 05-implementation/scripts/tla_ops.py, 07-evidence/e4-validation-2026-09-14/fresh-normal-all/evidence/TST-OPS-015.json |

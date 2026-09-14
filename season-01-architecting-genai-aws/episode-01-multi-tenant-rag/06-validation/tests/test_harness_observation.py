@@ -44,6 +44,35 @@ class RedactionTests(unittest.TestCase):
         self.assertEqual(redact(f"event {event_id} in 123456789012"), f"event {event_id} in <account>")
 
 
+class TimingCaptureTests(unittest.TestCase):
+    """NFR-001 evidence capture (corrected after the E4 run, where started_at equalled finished_at)."""
+
+    def test_sequential_tests_record_real_start_times(self):
+        import tempfile
+        import time as _time
+        from harness import results
+        with tempfile.TemporaryDirectory() as tmp:
+            original = results.RESULTS
+            results.RESULTS = tmp
+            try:
+                run = results.Run("timing-test", None, "unit")
+                first = run.record("TST-ISO-001", "unit", [], [], "-", "e", "PASS", "r", {})
+                _time.sleep(1.1)
+                second = run.record("TST-ISO-002", "unit", [], [], "-", "e", "PASS", "r", {})
+            finally:
+                results.RESULTS = original
+        self.assertEqual(second["started_at"], first["finished_at"])
+        self.assertLess(second["started_at"], second["finished_at"])
+
+    def test_response_summary_carries_client_elapsed_time(self):
+        from harness.client import Response
+        self.assertEqual(Response(200, {}, {"x-tla-event-id": "e"}, elapsed_ms=1234).summary()["client_elapsed_ms"], 1234)
+
+    def test_audit_view_includes_server_latency(self):
+        from harness.context import audit_view
+        self.assertEqual(audit_view({"latency_ms": 870})["latency_ms"], 870)
+
+
 class SummaryFormatTests(unittest.TestCase):
     def test_summary_rows_do_not_define_test_ids(self):
         import re
