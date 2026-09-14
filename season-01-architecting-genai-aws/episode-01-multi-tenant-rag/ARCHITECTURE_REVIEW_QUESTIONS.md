@@ -4,9 +4,11 @@
 The questions an architecture review board or an interviewer should be able to ask you at the end of this engagement.
 Answer by citing your artifacts; defending the architecture matters more than recalling facts.
 
-**Updated at the architecture stage (E2).** The engagement questions remain, now pointing to the decisions that answer
-them, and design-specific questions have been added for the selected architecture. Results cited as "result" do not
-exist yet — they come from validation.
+**Updated after the educational implementation (E4).**
+- **Question sets:** the engagement and design-specific questions remain. A third set, *Implementation and evidence
+  questions*, asks you to defend what you built and what your tests proved.
+- **Citing results:** a "result" is your own validation run. The example results are in
+  [07-evidence/e4-validation-2026-09-14](07-evidence/e4-validation-2026-09-14/README.md).
 
 ## Engagement questions
 
@@ -56,3 +58,18 @@ exist yet — they come from validation.
 | Evolution | Product wants "shared documentation for all customers". What must change, and what must not? | TARGET_ARCHITECTURE section 10; RR-12; ASM-007 |
 | Production hardening | Which three production changes most reduce residual risk, and which risks do they address? | AWS_SERVICE_MAPPING section 7; RR-02, RR-04, RR-06 |
 | Neutrality | Show that the decisions came before the service choices | Options analysis section 9; ADR "platform evidence (checked after the decision)" sections |
+
+## Implementation and evidence questions
+
+| Area | Question | A strong answer cites |
+|---|---|---|
+| Primary control | Show the one function that builds the tenant filter. What stops any other code path from building a different one? | `05-implementation/app/shared/retrieval_scope.py` (`authorize_and_scope`, the scoped query only it can issue); `retrieval_client.py` type check; component tests `06-validation/tests/test_retrieval_boundary.py` |
+| Trusted context | How does a verified group claim become exactly one tenant? What happens with no group, two groups or a malformed claim? | `tenant_claims.py` and platform finding CH-12 (claims arrive as strings); `tenant_context.py`; TST-SEC-013 result |
+| Forged tenant | You sent another tenant's ID in the body, query, header, path and question. Which were refused, which were ignored, and how do you know? | TST-SEC-005 result; the audit records' `tenant_context` and `constraint`; `request_schema.py` |
+| Bypass | Could someone invoke the query function directly with forged claims, or retrieve with another role? | `infrastructure/template.yaml` resource policies (explicit Deny) and role policies; TST-SEC-009 and TST-SEC-023 results |
+| Non-vacuity | Your cross-tenant tests passed. Prove they could have failed | Non-vacuity preconditions in the TST-ISO-003 and TST-ISO-004 evidence; TST-SEN-011 verdict and variant results |
+| Observation point | In the sensitivity run every answer was withheld. Why would a test that only checked answers have missed the missing control? | Ownership verification as defence in depth (`ownership_verification.py`); VALIDATION_PLAN section 5; `retrieved` in the variant audit records |
+| Ingestion | A caller tries to choose the owner or the storage location of a document. What stops them? | `ownership.py` (server-derived key, attribution gate) and platform finding CH-11; TST-SEC-019, TST-ASM-010 results |
+| Audit | Reconstruct a refused cross-tenant attempt from the audit record alone. What does the record deliberately not contain? | `audit.py` field allow-list; TST-OPS-015 result |
+| Evidence scope | Which conclusions from your run hold only for your tested conditions, and what would production still need to verify? | The example evidence README's limits; [latency summary](07-evidence/e4-validation-2026-09-14/LATENCY_SUMMARY.md); RESIDUAL_RISK_REGISTER; VE-09 and VE-11 in PLATFORM_VERIFICATION |
+| Cleanup | How do you know nothing from the lab remains, given that a tag search can lag behind deletions? | `06-validation/harness/cleanup_check.py` (service-by-service confirmation); TST-OPS-012 result |

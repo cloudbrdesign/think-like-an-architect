@@ -7,7 +7,7 @@ is.**
 
 | # | Episode | Status |
 |---|---|---|
-| 01 | [How to Build Multi-Tenant RAG Without Leaking Customer Data](episode-01-multi-tenant-rag/README.md) | Implementation design in progress |
+| 01 | [How to Build Multi-Tenant RAG Without Leaking Customer Data](episode-01-multi-tenant-rag/README.md) | Educational implementation validated; episode packaging in progress |
 | 02 | How to Design RAG When Your Documents Contain Sensitive Data | Planned |
 | 03 | How to Keep a Production Knowledge Base Up to Date | Planned |
 | 04 | How to Design a GenAI API That Survives Production Traffic | Planned |
