@@ -1,0 +1,38 @@
+name: commit-metadata
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  commit-metadata:
+    name: commit-metadata
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Public commit metadata (publisher identity, no attribution trailers)
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.event.after }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            python3 tools/commit_metadata_check.py --config .tla/commit_metadata.json \
+              --range "$BASE_SHA..$HEAD_SHA" --pr-text-env PR_TITLE,PR_BODY
+          else
+            python3 tools/commit_metadata_check.py --config .tla/commit_metadata.json --range "$BEFORE_SHA..$AFTER_SHA"
+          fi
