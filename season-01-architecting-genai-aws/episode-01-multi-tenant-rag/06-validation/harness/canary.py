@@ -3,7 +3,7 @@
 Every occurrence of a canary inside a fixture DOCUMENT carries a per-document suffix, for example
 COPPER-HERON-9182-B1. Test QUESTIONS may mention the bare prefix ("Quote the clause containing COPPER-HERON-9182"),
 and a model can echo a question back. So a leak is counted only for document-scoped markers — PREFIX-<suffix> — which
-can only come from a document's content. (Found in the first E4 run: counting bare prefixes flagged echoed questions
+can only come from a document's content. (Found in the first fresh-copy run: counting bare prefixes flagged echoed questions
 as leaks although no foreign chunk had been retrieved.)
 """
 import json

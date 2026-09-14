@@ -2,7 +2,7 @@
 
 Every planted violation is built at runtime inside a temporary directory, so this repository never contains a real
 commercial marker, canary, secret or local path. Each check must be SEEN TO FAIL on its planted violation.
-Test IDs follow the G1 cross-repository safety tests: A (valid fixture accepted), B (planted violations rejected),
+Test IDs follow the cross-repository safety tests: A (valid fixture accepted), B (planted violations rejected),
 F (education CI needs no commercial access).
 """
 import json

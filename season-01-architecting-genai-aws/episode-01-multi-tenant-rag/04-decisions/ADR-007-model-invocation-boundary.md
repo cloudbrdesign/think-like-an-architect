@@ -2,7 +2,7 @@
 # ADR-007 — Model invocation boundary and data residency: verify first, generate in-region
 
 **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
-**Answers:** a decision identified during architecture (not an E1 decision question) · **Options analysis:**
+**Answers:** a decision identified during architecture (not one of the engagement's decision questions) · **Options analysis:**
 [section 8](ARCHITECTURE_OPTIONS_ANALYSIS.md#8-model-invocation-boundary-and-data-residency--adr-007)
 
 ## Context
@@ -76,7 +76,7 @@ regions would add capacity at the price of breaking the region commitment.
 
 **Negative / accepted trade-offs**
 - More gateway code; two service calls per question.
-- Model choice and capacity are limited to what is offered in the contracted region; checked at build authorisation.
+- Model choice and capacity are limited to what is offered in the contracted region; checked during platform verification.
 - Answer integrity under hostile document content remains a residual risk within the tenant (RR-10).
 
 ## Residual risks

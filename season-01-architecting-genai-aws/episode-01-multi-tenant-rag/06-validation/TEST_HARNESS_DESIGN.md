@@ -1,6 +1,6 @@
 # Test Harness Design — Veltamere Document Assistant
 
-**Stage:** build authorisation and implementation design (E3) · **Date:** 2026-09-14 · **Status:** designed, not built
+**Stage:** implementation design · **Date:** 2026-09-14 · **Status:** designed, not built
 
 This turns the approved [validation plan](VALIDATION_PLAN.md) into an executable harness design. Test designs (inputs,
 expected outcomes, failure appearance) stay in the validation plan. This document defines **how they are executed,

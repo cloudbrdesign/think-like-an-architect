@@ -1,11 +1,10 @@
 # Educational Implementation Design — Veltamere Document Assistant
 
-**Stage:** build authorisation and implementation design (E3) · **Date:** 2026-09-14
+**Stage:** implementation design · **Date:** 2026-09-14
 **Status:**
 - **Design:** complete. The platform spikes ran on 2026-09-14 and passed (see [PLATFORM_VERIFICATION.md](PLATFORM_VERIFICATION.md)).
-- **Build:** authorised, and the educational implementation is built (E4). The learner guide is [README.md](README.md).
-- **Validation:** the fresh-copy run of 2026-09-14 is in [07-evidence/e4-validation-2026-09-14](../07-evidence/e4-validation-2026-09-14/README.md).
-- **Approval:** awaiting product-owner review.
+- **Build:** the educational implementation is built. The learner guide is [README.md](README.md).
+- **Validation:** the fresh-copy run of 2026-09-14 is in [07-evidence/implementation-validation-2026-09-14](../07-evidence/implementation-validation-2026-09-14/README.md).
 
 ```
 VERIFIED IDENTITY → TRUSTED TENANT CONTEXT → AUTHORITATIVE AUTHORISATION
@@ -37,7 +36,7 @@ A small, working multi-tenant document assistant in the learner's own sandbox AW
 | `app/shared/ownership_verification.py` | Defence in depth: retrieved results are checked before generation |
 | `infrastructure/template.yaml` | Who is allowed to do what — every role and permission in one file |
 
-## 2. Implementation mechanism (PD-05)
+## 2. Implementation mechanism
 
 **Decision question:** which mechanism makes the taught controls — trusted identity, tenant derivation, authorisation,
 ingestion attribution, retrieval filtering, permission boundaries, fail-closed behaviour and negative testing — most
@@ -67,9 +66,9 @@ choice.
 
 ## 3. Final educational AWS service mapping
 
-The E2 candidate mapping, refined by verification. "Status" shows the strongest evidence so far.
+The architecture's candidate mapping, refined by verification. "Status" shows the strongest evidence so far.
 
-| Architectural component | Educational implementation | Change from E2 candidate | Status |
+| Architectural component | Educational implementation | Change from architecture candidate | Status |
 |---|---|---|---|
 | Identity provider | Amazon Cognito user pool **standing in for Veltamere's existing identity provider**; tenant membership = administrator-managed group (`tenant-a`, …); one app client | — | Docs (PE-10); claim format pending SPK-G |
 | API edge | Amazon API Gateway HTTP API; JWT authorizer (issuer = user pool, audience = app client, route scope `aws.cognito.signin.user.admin`) on every route; access logging | — | Docs (PC-17) |
@@ -90,10 +89,10 @@ The E2 candidate mapping, refined by verification. "Status" shows the strongest 
 ## 4. The deployable learner architecture
 
 One stack per deployment (`tla-s01e01-normal`, or `tla-s01e01-sensitivity` for the test-only variant) plus an artifact
-bucket created by the deploy script. As built (E4), every resource carries the CloudBrewery lab tag standard:
+bucket created by the deploy script. As built, every resource carries the CloudBrewery lab tag standard:
 `Project=CloudBreweryLabs`, `Course=ThinkLikeAnArchitect`, `Season=01`, `Episode=01`, `Environment=Sandbox`,
 `ManagedBy=CloudBreweryLabs`, `Variant=normal|sensitivity`, `Purpose=education`, `DeployedWith=CloudFormation`. This replaces
-the `tla:*` keys drafted at E3, so there is one tag vocabulary.
+the `tla:*` keys drafted during design, so there is one tag vocabulary.
 
 | Resource | Count | Purpose |
 |---|---|---|
@@ -137,12 +136,12 @@ carries `x-tla-event-id`, the audit record key.
 | `validation/harness/` | Test harness, fixtures, evidence | Runs on the learner's machine, never deployed |
 | `validation/sensitivity/retrieval_scope.py` | **Test-only** replacement for the primary control | Never part of a normal build (section 10) |
 
-## 6. Source structure (planned; created at E4)
+## 6. Source structure (planned; created during implementation)
 
 ```
 05-implementation/
-  IMPLEMENTATION_DESIGN.md · IMPLEMENTATION_CONTROLS.md · PLATFORM_VERIFICATION.md · COST_AND_CLEANUP.md   (E3)
-  README.md                       learner guide, in architecture order (E4)
+  IMPLEMENTATION_DESIGN.md · IMPLEMENTATION_CONTROLS.md · PLATFORM_VERIFICATION.md · COST_AND_CLEANUP.md   (design)
+  README.md                       learner guide, in architecture order
   config/learner.env.example      AWS_REGION, STACK_SUFFIX, AWS_PROFILE (no secrets)
   infrastructure/template.yaml    all resources and IAM in one file
   app/
@@ -162,7 +161,7 @@ carries `x-tla-event-id`, the audit record key.
 cleanup/README.md                 the single documented cleanup flow
 ```
 
-**As built (E4), differences from the plan above:**
+**As built, differences from the plan above:**
 - `app/shared/tenant_claims.py` (strict group-claim parser, CH-12), `registry.py`, `dynamo.py`, `http.py` and
   `build_info.py` were added as small explicit modules.
 - `scripts/tla_ops.py` holds the deployment logic that the `.sh` wrappers call (Python and boto3 only; the AWS CLI is
@@ -284,7 +283,7 @@ account state (AC-VAL-03).
 
 ## 13. Teaching simplifications
 
-TS-01…TS-10 from [AWS_SERVICE_MAPPING section 6](../03-architecture/AWS_SERVICE_MAPPING.md#6-educational-implementation-fit-pd-05)
+TS-01…TS-10 from [AWS_SERVICE_MAPPING section 6](../03-architecture/AWS_SERVICE_MAPPING.md#6-educational-implementation-fit)
 remain. Added at implementation design:
 
 | ID | Simplification | Why it exists | What production would do | Security consequence in the learner build | Removes the taught control? |
@@ -313,7 +312,7 @@ remain. Added at implementation design:
 ## 15. Portfolio evidence produced by the implementation
 
 This maps outputs to [PORTFOLIO_EVIDENCE_PLAN.md](../07-evidence/PORTFOLIO_EVIDENCE_PLAN.md). A complete example set,
-from CloudBrewery's own fresh-copy run, is in [07-evidence/e4-validation-2026-09-14](../07-evidence/e4-validation-2026-09-14/README.md).
+from CloudBrewery's own fresh-copy run, is in [07-evidence/implementation-validation-2026-09-14](../07-evidence/implementation-validation-2026-09-14/README.md).
 
 | Evidence category | Produced by | Artifact (learner keeps, redacted) |
 |---|---|---|
@@ -330,12 +329,12 @@ from CloudBrewery's own fresh-copy run, is in [07-evidence/e4-validation-2026-09
 
 **Claim boundary unchanged:** portfolio evidence of the work you performed — not certification.
 
-## 16. Build-authorisation criteria
+## 16. Build-readiness criteria
 
 | Criterion | Status |
 |---|---|
 | Architecture approved | **Met** (2026-09-14) |
-| Load-bearing AWS capabilities sufficiently verified | **Met on evidence (2026-09-14)** — SPK-I, C, A, B, E, F, G, D all PASS in a sandbox account; SPK-B found zero cross-tenant results. Open: VE-09 (production item), VE-11 (confirmed at the first E4 run), VE-18 (partly verified). See PLATFORM_VERIFICATION |
+| Load-bearing AWS capabilities sufficiently verified | **Met on evidence (2026-09-14)** — SPK-I, C, A, B, E, F, G, D all PASS in a sandbox account; SPK-B found zero cross-tenant results. Open: VE-09 (production item), VE-11 (confirmed at the first fresh-copy run), VE-18 (partly verified). See PLATFORM_VERIFICATION |
 | Learner mechanism selected | **Met** — section 2 |
 | Implementation design complete | **Met** — this document, IMPLEMENTATION_CONTROLS, TEST_HARNESS_DESIGN |
 | Test strategy executable | **Met in design** — harness, fixtures, guards, sensitivity variant specified |

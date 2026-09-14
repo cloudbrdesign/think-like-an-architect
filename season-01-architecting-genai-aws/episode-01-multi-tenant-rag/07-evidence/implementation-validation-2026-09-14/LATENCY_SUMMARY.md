@@ -1,4 +1,4 @@
-# Latency summary — E4 fresh-copy run (NFR-001: partially verified)
+# Latency summary — fresh-copy validation run (NFR-001: partially verified)
 
 **What this is:** a coarse summary derived from evidence that already existed. The lab was **not** re-run to produce it.
 It describes the educational deployment under the tested conditions. It is **not** a performance benchmark and says

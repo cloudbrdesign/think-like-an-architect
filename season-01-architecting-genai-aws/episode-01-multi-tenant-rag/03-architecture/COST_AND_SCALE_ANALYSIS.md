@@ -1,9 +1,9 @@
 # Cost and Scale Analysis — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
+**Stage:** architecture · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 
 This is **architectural reasoning about cost structure**, not a pricing spreadsheet. It contains **no prices**. A dated
-cost estimate for the learner implementation, with its region and assumptions, is produced at build authorisation (VE-11)
+cost estimate for the learner implementation, with its region and assumptions, is produced during platform verification (VE-11)
 before anything is deployed.
 
 ## 1. Cost structure of the isolation options
@@ -56,10 +56,10 @@ registry entry and identity-provider membership (NFR-002, NFR-004).
 
 ## 5. Learner implementation — cost drivers and cleanup plan
 
-The learner build is **not** priced here. At build authorisation, a dated estimate (VE-11) must confirm the CON-008 target
+The learner build is **not** priced here. During platform verification, a dated estimate (VE-11) must confirm the CON-008 target
 (a complete build → validate → cleanup session under USD 10 — **TARGET**).
 
-**Planned billable resources (confirmed at E3):**
+**Planned billable resources (confirmed in the implementation design):**
 - identity-provider user pool;
 - API edge;
 - two functions;

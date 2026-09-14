@@ -1,6 +1,6 @@
 # AWS Service Mapping — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** candidate implementation mapping — approved with the architecture on 2026-09-14, subject to E3 verification ([PLATFORM_VERIFICATION.md](../05-implementation/PLATFORM_VERIFICATION.md); final educational mapping in [IMPLEMENTATION_DESIGN.md](../05-implementation/IMPLEMENTATION_DESIGN.md#3-final-educational-aws-service-mapping)) · **Date:** 2026-09-14
+**Stage:** architecture · **Status:** candidate implementation mapping — approved with the architecture on 2026-09-14, subject to platform verification ([PLATFORM_VERIFICATION.md](../05-implementation/PLATFORM_VERIFICATION.md); final educational mapping in [IMPLEMENTATION_DESIGN.md](../05-implementation/IMPLEMENTATION_DESIGN.md#3-final-educational-aws-service-mapping)) · **Date:** 2026-09-14
 
 ## 1. How this mapping was made
 
@@ -13,7 +13,7 @@ selected service this document answers four questions:
 would matter?**
 
 Service capabilities change quickly. Every capability the design relies on is listed with a **dated source** in the
-currency check (section 4). Items that can only be confirmed in a real account are listed for build authorisation
+currency check (section 4). Items that can only be confirmed in a real account are listed for platform verification
 (section 5). **Nothing has been deployed; no AWS resources exist.**
 
 ## 2. Mapping
@@ -43,7 +43,7 @@ currency check (section 4). Items that can only be confirmed in a real account a
 | `RetrieveAndGenerate` (combined operation) | Retrieval and generation in one call, with citations | No checkpoint between retrieval and generation for CTL-017; citations carry storage locations and metadata (PC-14) — ADR-007 Option A |
 | Implicit metadata filtering | A model generates the retrieval filter from the user's query | Lets question text shape the retrieval scope — forbidden by SEC-005 and CTL-016 (PC-02) |
 | One knowledge base per tenant | Resource separation | ADR-001 Option A; the per-account knowledge-base quota is not adjustable (PC-06) |
-| Amazon OpenSearch Serverless vector collection | Mature vector search, hybrid search, richer filters | Capable, with a larger operational and capacity-management surface than the learner implementation needs. **Preferred evolution** if hybrid search or sustained query volume requires it. Collection groups can now scale to zero OCUs (PC-13); cost to be estimated at build authorisation |
+| Amazon OpenSearch Serverless vector collection | Mature vector search, hybrid search, richer filters | Capable, with a larger operational and capacity-management surface than the learner implementation needs. **Preferred evolution** if hybrid search or sustained query volume requires it. Collection groups can now scale to zero OCUs (PC-13); cost to be estimated during platform verification |
 | Amazon Aurora PostgreSQL with vector extension | SQL plus vectors | Its documented filtering is applied after the vector index scan unless iterative scans are enabled, which can reduce recall for selective tenant filters (PC-11); a database to operate |
 | S3 data source with `.metadata.json` files beside documents | Filter attributes from sidecar files synchronised by the service | The sidecar object would be a second, separately writable source of ownership (PC-08) — ADR-004 prefers attributes supplied inline by the ingestion service (PC-07) |
 | Amazon Verified Permissions (dedicated policy decision point) | Centralised policy evaluation; prior art builds retrieval filters from its decisions (PC-25) | One policy today (ADR-003 Option B). **Trigger to adopt:** shared content, administrator-only content or customer-managed policies |
@@ -62,8 +62,8 @@ implementation or the video.
 | PC-02 | **Implicit metadata filtering**: the knowledge base "generates and applies a retrieval filter based on the user query and a metadata schema" using a model | CTL-016 prohibition | [Configure and customize queries](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html) |
 | PC-03 | Service-reserved metadata fields cannot be overridden | ADR-004 platform evidence | [Configure and customize queries](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html) |
 | PC-04 | "All data that you sync from your data source becomes available to anyone with `bedrock:Retrieve` permissions to retrieve the data" | CTL-008 exclusivity | [Connect to Amazon S3 for your knowledge base](https://docs.aws.amazon.com/bedrock/latest/userguide/s3-data-source-connector.html) |
-| PC-05 | The Service Authorization Reference lists no condition keys for `Retrieve`, `RetrieveAndGenerate` or the knowledge-base document ingestion actions that could restrict a call to one tenant's filter or content (**re-confirm directly at E3 — VE-01**) | CTL-008, CTL-013 exclusivity rather than conditional policies | [Actions, resources, and condition keys for Amazon Bedrock](https://docs.aws.amazon.com/service-authorization/latest/reference/list_bedrock.html) |
-| PC-06 | Quotas (per account, per region, stated as not adjustable): 100 knowledge bases; 20 `Retrieve` and 20 `RetrieveAndGenerate` requests per second; 1 concurrent ingestion job per knowledge base; 25 files per `IngestKnowledgeBaseDocuments` request (**re-confirm in Service Quotas at E3 — VE-02**) | ADR-001 platform evidence; cost and scale inflection points | [Amazon Bedrock endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/bedrock.html) |
+| PC-05 | The Service Authorization Reference lists no condition keys for `Retrieve`, `RetrieveAndGenerate` or the knowledge-base document ingestion actions that could restrict a call to one tenant's filter or content (**re-confirm directly during platform verification — VE-01**) | CTL-008, CTL-013 exclusivity rather than conditional policies | [Actions, resources, and condition keys for Amazon Bedrock](https://docs.aws.amazon.com/service-authorization/latest/reference/list_bedrock.html) |
+| PC-06 | Quotas (per account, per region, stated as not adjustable): 100 knowledge bases; 20 `Retrieve` and 20 `RetrieveAndGenerate` requests per second; 1 concurrent ingestion job per knowledge base; 25 files per `IngestKnowledgeBaseDocuments` request (**re-confirm in Service Quotas during platform verification — VE-02**) | ADR-001 platform evidence; cost and scale inflection points | [Amazon Bedrock endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/bedrock.html) |
 | PC-07 | Direct ingestion: a **custom** data source accepts document content (inline or from an S3 location) with metadata defined **inline**; an **S3** data source accepts metadata only from S3 metadata files | ADR-004 implementation of CTL-011 | [Ingest documents directly](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion-add.html) · [Ingest changes directly](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html) |
 | PC-08 | S3 data source metadata is a `fileName.extension.metadata.json` object in the same location as the document, up to 10 KB | Rejection of sidecar ownership files | [Connect to Amazon S3 for your knowledge base](https://docs.aws.amazon.com/bedrock/latest/userguide/s3-data-source-connector.html) |
 | PC-09 | S3 Vectors "performs vector search and filter evaluation in tandem"; filtered queries may return fewer than top K results | CTL-015 evaluated during search | [S3 Vectors metadata filtering](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-metadata-filtering.html) |
@@ -84,7 +84,7 @@ implementation or the video.
 | PC-24 | Model providers do not have access to Amazon Bedrock logs or to customer prompts and completions | Trust placed in the model boundary | [Data protection](https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html) |
 | PC-25 | Prior art: silo, pool and bridge multi-tenant RAG patterns (AWS Machine Learning Blog, 2024-12-16); two-layer authorisation with retrieval filters built from verified token claims (AWS Architecture Blog, 2026-06-22) | Credibility of the options compared | [Multi-tenant RAG with Amazon Bedrock Knowledge Bases](https://aws.amazon.com/blogs/machine-learning/multi-tenant-rag-with-amazon-bedrock-knowledge-bases/) · [Secure multi-tenant RAG with Amazon Bedrock and Verified Permissions](https://aws.amazon.com/blogs/architecture/secure-multi-tenant-rag-with-amazon-bedrock-and-verified-permissions/) |
 
-## 5. Verify at build authorisation (E3)
+## 5. Verify during platform verification
 
 These cannot be settled from documentation alone and must be confirmed before or during the build. None changes a
 decision. If one fails, the mapping changes — not the architecture.
@@ -103,10 +103,10 @@ decision. If one fails, the mapping changes — not the architecture.
 | VE-10 | Deletion through direct ingestion removes the document's vectors, and how long that takes | FUN-003 window | Adjust the window or verification logic |
 | VE-11 | A dated cost estimate for a learner build → validate → cleanup session in the chosen region | CON-008 target | Reduce resources or revise the target |
 
-## 6. Educational implementation fit (PD-05)
+## 6. Educational implementation fit
 
 The free learner implementation uses **the simplest reproducible mechanism that makes the taught control visible and
-testable** (PD-05; the mechanism is chosen at E3). The architecture is not distorted to make the lab easier. **The
+testable** (the mechanism is chosen in the implementation design). The architecture is not distorted to make the lab easier. **The
 production architecture principle is kept; only its implementation is simplified.**
 
 **What stays visible to the learner:**

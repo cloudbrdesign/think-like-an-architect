@@ -1,6 +1,6 @@
 """Tests of the harness's own observation rules. A wrong observation rule produces false passes or false failures.
 
-Both rules below were corrected after the first E4 run:
+Both rules below were corrected after the first fresh-copy run:
   - canaries count only document-scoped markers, so a question that names a bare marker cannot look like a leak;
   - redaction removes account numbers but keeps UUIDs (event IDs) intact.
 """
@@ -45,7 +45,7 @@ class RedactionTests(unittest.TestCase):
 
 
 class TimingCaptureTests(unittest.TestCase):
-    """NFR-001 evidence capture (corrected after the E4 run, where started_at equalled finished_at)."""
+    """NFR-001 evidence capture (corrected after the first fresh-copy run, where started_at equalled finished_at)."""
 
     def test_sequential_tests_record_real_start_times(self):
         import tempfile

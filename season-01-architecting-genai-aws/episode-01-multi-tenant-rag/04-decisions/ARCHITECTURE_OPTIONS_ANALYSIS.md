@@ -1,7 +1,7 @@
 <!-- template: tla-options-analysis/1 -->
 # Architecture Options Analysis — Veltamere Document Assistant
 
-**Stage:** architecture (E2) · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
+**Stage:** architecture · **Status:** accepted — architecture approved 2026-09-14 · **Date:** 2026-09-14
 
 This document turns the approved requirements into decisions in a fixed order:
 
@@ -275,7 +275,7 @@ and which later controls are defence in depth?
 
 ## 8. Model invocation boundary and data residency → ADR-007
 
-This decision was not one of the E1 decision questions. It became architecture-significant during analysis, because
+This decision was not one of the engagement's decision questions. It became architecture-significant during analysis, because
 **where retrieval and generation meet** determines whether there is any point at which retrieved content can be verified
 before a model sees it.
 

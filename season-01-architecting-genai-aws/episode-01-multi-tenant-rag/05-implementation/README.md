@@ -43,7 +43,7 @@ config/learner.env.example     your region, profile and expected account — no 
 ## Prerequisites
 
 - A **dedicated sandbox AWS account** with administrator credentials in it (see
-  [PLATFORM_VERIFICATION section 1](PLATFORM_VERIFICATION.md#1-learner-sandbox-requirements-pd-09)).
+  [PLATFORM_VERIFICATION section 1](PLATFORM_VERIFICATION.md#1-learner-sandbox-requirements)).
 - Region **us-east-1**. Amazon Titan Text Embeddings V2 and Amazon Nova Micro must be usable In-Region; preflight
   checks this and tells you if the account needs model access enabled once.
 - Python 3.10+ with `boto3` (`python3 -m pip install boto3`). Nothing else.
