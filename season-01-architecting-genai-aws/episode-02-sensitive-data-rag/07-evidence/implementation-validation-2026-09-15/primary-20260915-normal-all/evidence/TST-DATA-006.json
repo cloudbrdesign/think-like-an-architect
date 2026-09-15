@@ -1,0 +1,52 @@
+{
+  "category": "data",
+  "controls": [
+    "CTL-010",
+    "CTL-017"
+  ],
+  "evidence": "evidence/TST-DATA-006.json",
+  "expected": "Shared tier holds no RESTRICTED section, restricted tier only RESTRICTED; no cache resource or cached answer path",
+  "level": "L3",
+  "observations": {
+    "no_cache_behaviour": "TST-ELG-003 asks P-02's question again for six ineligible personas immediately afterwards",
+    "problems": [],
+    "query_function_environment_keys": [
+      "AUDIT_TABLE",
+      "AUTHORIZATION_TABLE",
+      "CLASSIFICATION_TABLE",
+      "DEPLOYMENT_NAME",
+      "GENERATION_MODEL_ID",
+      "RELEVANCE_MIN_SCORE",
+      "RESTRICTED_KNOWLEDGE_BASE_ID",
+      "SHARED_KNOWLEDGE_BASE_ID"
+    ],
+    "stack_resource_types": [
+      "AWS::ApiGatewayV2::Api",
+      "AWS::ApiGatewayV2::Authorizer",
+      "AWS::ApiGatewayV2::Integration",
+      "AWS::ApiGatewayV2::Route",
+      "AWS::ApiGatewayV2::Stage",
+      "AWS::Bedrock::DataSource",
+      "AWS::Bedrock::KnowledgeBase",
+      "AWS::Cognito::UserPool",
+      "AWS::Cognito::UserPoolClient",
+      "AWS::DynamoDB::Table",
+      "AWS::IAM::Role",
+      "AWS::Lambda::Function",
+      "AWS::Lambda::ResourcePolicy",
+      "AWS::Logs::LogGroup",
+      "AWS::S3::Bucket",
+      "AWS::S3::BucketPolicy",
+      "AWS::S3Vectors::Index",
+      "AWS::S3Vectors::VectorBucket"
+    ]
+  },
+  "observed": "problems: []; cache resources []; cache settings []",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T06:46:37+00:00",
+  "status": "PASS",
+  "test_id": "TST-DATA-006",
+  "verifies": [
+    "DATA-006"
+  ]
+}

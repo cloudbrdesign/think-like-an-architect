@@ -1,0 +1,187 @@
+{
+  "category": "repeatability",
+  "controls": [],
+  "evidence": "evidence/TST-OPS-001.json",
+  "expected": "Unattended from a fresh copy: preflight \u2192 deploy \u2192 fixtures \u2192 full suite \u2192 experiments \u2192 cleanup verified; results match",
+  "level": "L5",
+  "observations": {
+    "comparison": {
+      "differences": {},
+      "reference": "primary-20260915-normal-all",
+      "this_run": "fresh-20260915-r3-normal-all"
+    },
+    "runs": {
+      "all": "fresh-20260915-r3-normal-all",
+      "cleanup": "fresh-20260915-r3-cleanup-all",
+      "experiment-1": "sen1-fresh-20260915-r3",
+      "experiment-2": "sen2-fresh-20260915-r3",
+      "experiment-3": "sen3-fresh-20260915-r3"
+    },
+    "steps": [
+      {
+        "detail": {
+          "command": "preflight",
+          "exit": 0,
+          "output_tail": [
+            "target account <redacted> \u00b7 region us-east-1 \u00b7 caller assumed-role/<account-foundation-resource>/tla-e02-build",
+            "model amazon.titan-embed-text-v2:0: {'authorizationStatus': 'AUTHORIZED', 'entitlementAvailability': 'AVAILABLE', 'regionAvailability': 'AVAILABLE'}",
+            "model amazon.nova-micro-v1:0: {'authorizationStatus': 'AUTHORIZED', 'entitlementAvailability': 'AVAILABLE', 'regionAvailability': 'AVAILABLE'}",
+            "model invocation logging: disabled",
+            "S3 Vectors: reachable",
+            "existing Episode 02 stacks: none",
+            "budget <account-foundation-resource>: limit 20.0 USD",
+            "preflight: PASS"
+          ],
+          "seconds": 11
+        },
+        "exit": 0,
+        "finished": "2026-09-15T09:39:33+00:00",
+        "started": "2026-09-15T09:39:21+00:00",
+        "step": "preflight"
+      },
+      {
+        "detail": {
+          "command": "build normal",
+          "exit": 0,
+          "output_tail": [
+            "built normal/query.zip sha256 acca0e02db6c584ae62a309298cd9e8af0acb8d8f99408bfcfad18f8b4aec07d",
+            "built normal/ingestion.zip sha256 7b1b8da28deca8123533750654608eb4ef2ead3cf15ebda86f17c27c89bc00db"
+          ],
+          "seconds": 0
+        },
+        "exit": 0,
+        "finished": "2026-09-15T09:39:33+00:00",
+        "started": "2026-09-15T09:39:33+00:00",
+        "step": "build normal"
+      },
+      {
+        "detail": {
+          "command": "deploy normal",
+          "exit": 0,
+          "output_tail": [
+            "target account <redacted> \u00b7 region us-east-1 \u00b7 caller assumed-role/<account-foundation-resource>/tla-e02-build",
+            "creating stack tla-s01e02-normal \u2026",
+            "deployed tla-s01e02-normal (CREATE_COMPLETE) in 92 s"
+          ],
+          "seconds": 101
+        },
+        "exit": 0,
+        "finished": "2026-09-15T09:41:14+00:00",
+        "started": "2026-09-15T09:39:33+00:00",
+        "step": "deploy normal"
+      },
+      {
+        "detail": {
+          "command": "fixtures load",
+          "exit": 0,
+          "seconds": 96
+        },
+        "exit": 0,
+        "finished": "2026-09-15T09:42:51+00:00",
+        "started": "2026-09-15T09:41:14+00:00",
+        "step": "fixtures load"
+      },
+      {
+        "detail": {
+          "command": "run --tests all --run-id fresh-20260915-r3-normal-all",
+          "exit": 0,
+          "seconds": 686
+        },
+        "exit": 0,
+        "finished": "2026-09-15T09:54:18+00:00",
+        "started": "2026-09-15T09:42:51+00:00",
+        "step": "validation suite"
+      },
+      {
+        "detail": {
+          "command": "experiment 1 --label fresh-20260915-r3",
+          "exit": 0,
+          "seconds": 495
+        },
+        "exit": 0,
+        "finished": "2026-09-15T10:02:33+00:00",
+        "started": "2026-09-15T09:54:18+00:00",
+        "step": "experiment 1"
+      },
+      {
+        "detail": {
+          "command": "experiment 2 --label fresh-20260915-r3",
+          "exit": 0,
+          "seconds": 354
+        },
+        "exit": 0,
+        "finished": "2026-09-15T10:08:27+00:00",
+        "started": "2026-09-15T10:02:33+00:00",
+        "step": "experiment 2"
+      },
+      {
+        "detail": {
+          "command": "experiment 3 --label fresh-20260915-r3",
+          "exit": 0,
+          "seconds": 353
+        },
+        "exit": 0,
+        "finished": "2026-09-15T10:14:21+00:00",
+        "started": "2026-09-15T10:08:27+00:00",
+        "step": "experiment 3"
+      },
+      {
+        "detail": {
+          "command": "export-audit --run-id fresh-20260915-r3-normal-all",
+          "exit": 0,
+          "seconds": 7
+        },
+        "exit": 0,
+        "finished": "2026-09-15T10:14:28+00:00",
+        "started": "2026-09-15T10:14:21+00:00",
+        "step": "export normal audit"
+      },
+      {
+        "detail": {
+          "exit": 0,
+          "lines": [
+            "[eligibility-removed] records bucket objects removed: 0",
+            "[eligibility-removed] shared-sections bucket objects removed: 0",
+            "[eligibility-removed] restricted-sections bucket objects removed: 0",
+            "[eligibility-removed] stack tla-s01e02-sen-eligibility: not present",
+            "[eligibility-removed] artifact bucket: not present",
+            "[labels-corrupted] records bucket objects removed: 0",
+            "[labels-corrupted] shared-sections bucket objects removed: 0",
+            "[labels-corrupted] restricted-sections bucket objects removed: 0",
+            "[labels-corrupted] stack tla-s01e02-sen-labels: not present",
+            "[labels-corrupted] artifact bucket: not present",
+            "[claims-as-grants] records bucket objects removed: 0",
+            "[claims-as-grants] shared-sections bucket objects removed: 0",
+            "[claims-as-grants] restricted-sections bucket objects removed: 0",
+            "[claims-as-grants] stack tla-s01e02-sen-claims: not present",
+            "[claims-as-grants] artifact bucket: not present",
+            "[normal] records bucket objects removed: 15",
+            "[normal] shared-sections bucket objects removed: 15",
+            "[normal] restricted-sections bucket objects removed: 2",
+            "[normal] stack tla-s01e02-normal: DELETE_COMPLETE",
+            "[normal] artifact bucket: deleted (2 objects)"
+          ]
+        },
+        "exit": 0,
+        "finished": "2026-09-15T10:15:54+00:00",
+        "started": "2026-09-15T10:14:28+00:00",
+        "step": "cleanup all"
+      },
+      {
+        "detail": null,
+        "exit": 0,
+        "finished": "2026-09-15T10:16:28+00:00",
+        "started": "2026-09-15T10:15:54+00:00",
+        "step": "verify cleanup"
+      }
+    ]
+  },
+  "observed": "every step exited 0; results match the reference run; cleanup verified",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T10:16:28+00:00",
+  "status": "PASS",
+  "test_id": "TST-OPS-001",
+  "verifies": [
+    "OPS-003"
+  ]
+}

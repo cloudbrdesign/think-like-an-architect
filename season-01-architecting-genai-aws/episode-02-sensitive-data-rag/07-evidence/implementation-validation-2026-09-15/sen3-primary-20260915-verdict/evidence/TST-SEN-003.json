@@ -1,0 +1,168 @@
+{
+  "category": "sensitivity",
+  "controls": [
+    "CTL-003"
+  ],
+  "evidence": "evidence/TST-SEN-003.json",
+  "expected": "Baseline PASS \u2192 variant target tests FAIL for the predicted reason \u2192 variant destroyed and verified \u2192 restored PASS",
+  "level": "L4",
+  "observations": {
+    "after_revocation_same_token": {
+      "decision": {
+        "cases": [],
+        "domains": [
+          "BID-ORION"
+        ],
+        "grants_version": 2,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "generation_invoked": true,
+      "outcome": "ANSWERED",
+      "retrieved_bid_orion": [
+        "D-03-S4",
+        "D-14-S1",
+        "D-03-S1",
+        "D-03-S2",
+        "D-03-S3"
+      ]
+    },
+    "baseline": {
+      "TST-CHG-001": "PASS"
+    },
+    "fault": "stale token group claims used as current domain and case grants",
+    "restored": {
+      "TST-CHG-001": "PASS"
+    },
+    "retrieval_layer_findings": [],
+    "runs": {
+      "baseline": "sen3-primary-20260915-baseline",
+      "cleanup": "sen3-primary-20260915-cleanup",
+      "restored": "sen3-primary-20260915-restored",
+      "variant": "sen3-primary-20260915-variant"
+    },
+    "secondary_verification": "did not contain it: verification checks chunks against the request's decision, and the decision itself was built from stale claims",
+    "steps": [
+      {
+        "command": "build claims-as-grants",
+        "exit": 0,
+        "output_tail": [
+          "built claims-as-grants/query.zip sha256 bb0d8ad121e7376ade1e3b42fcd668207a52c7b14b1ae8a37192e78ccf54abfa",
+          "built claims-as-grants/ingestion.zip sha256 6adfcc91de73d49434192d144cf484c2388a31a5f05e95ae99e8b06cfb55d0e1",
+          "NOTE: failure-experiment build \u2014 query/policy_decision.py is replaced. Deploy only through the experiment runner."
+        ],
+        "seconds": 0
+      },
+      {
+        "command": "deploy claims-as-grants",
+        "exit": 0,
+        "output_tail": [
+          "target account <redacted> \u00b7 region us-east-1 \u00b7 caller assumed-role/<account-foundation-resource>/tla-e02-build",
+          "creating stack tla-s01e02-sen-claims \u2026",
+          "deployed tla-s01e02-sen-claims (CREATE_COMPLETE) in 92 s"
+        ],
+        "seconds": 102
+      },
+      {
+        "command": "fixtures load",
+        "summary": {
+          "documents": 15,
+          "index_status": {
+            "D-01-S1": "INDEXED",
+            "D-01-S2": "INDEXED",
+            "D-02-S1": "INDEXED",
+            "D-02-S2": "INDEXED",
+            "D-03-S1": "INDEXED",
+            "D-03-S2": "INDEXED",
+            "D-03-S3": "INDEXED",
+            "D-03-S4": "INDEXED",
+            "D-04-S1": "INDEXED",
+            "D-04-S2": "INDEXED",
+            "D-05-S1": "INDEXED",
+            "D-06-S1": "INDEXED",
+            "D-07-S1": "INDEXED",
+            "D-08-S1": "INDEXED",
+            "D-12-S1": "INDEXED",
+            "D-13-S1": "INDEXED",
+            "D-14-S1": "INDEXED"
+          },
+          "objects": {
+            "restricted": 2,
+            "shared": 15
+          },
+          "personas": 11,
+          "quarantine": [
+            {
+              "document_id": "D-09",
+              "reason": "LABEL_MISSING",
+              "section_id": null
+            },
+            {
+              "document_id": "D-10",
+              "reason": "LABEL_INVALID",
+              "section_id": null
+            },
+            {
+              "document_id": "D-11",
+              "reason": "SCOPE_MISSING",
+              "section_id": null
+            },
+            {
+              "document_id": "D-15",
+              "reason": "LABEL_INVALID",
+              "section_id": null
+            }
+          ],
+          "special_category_excluded": [
+            "D-04-S3"
+          ]
+        }
+      },
+      {
+        "command": "export variant audit",
+        "usage": {
+          "deployment": "tla-s01e02-sen-claims",
+          "estimated_usage_cost_total_usd": 0.0002,
+          "estimated_usage_cost_usd": {
+            "api_and_function_requests": 0.0,
+            "embeddings": 9e-05,
+            "generation": 9e-05,
+            "vector_queries": 0.0
+          },
+          "generation_calls": 2,
+          "ingestion_runs": 1,
+          "input_tokens": 744,
+          "knowledge_base_searches": 2,
+          "not_included": "storage for hours, Lambda duration, DynamoDB requests, CloudWatch Logs, Cognito; see COST_AND_CLEANUP.md for the full model",
+          "outcomes": {
+            "ANSWERED": 2
+          },
+          "output_tokens": 128,
+          "prices": {
+            "http_api_requests_per_million": 1.0,
+            "lambda_requests_per_million": 0.2,
+            "nova_micro_input_per_million": 0.08,
+            "nova_micro_output_per_million": 0.24,
+            "titan_embeddings_per_million_tokens": 0.02,
+            "vector_queries_per_million": 2.5
+          },
+          "prices_date": "2026-09-14 (public AWS pricing pages, US East; not re-read)",
+          "query_requests": 2,
+          "sections_ingested": 17
+        }
+      }
+    ],
+    "variant": "claims-as-grants",
+    "variant_statuses": {
+      "TST-CHG-001": "FAIL"
+    }
+  },
+  "observed": "baseline PASS \u2192 variant FAIL (did not contain it: verification checks chunks against the request's decision, and the decision itself was built from stale claims) \u2192 variant destroyed, cleanup verified \u2192 restored PASS",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:17:40+00:00",
+  "status": "PASS",
+  "test_id": "TST-SEN-003",
+  "verifies": [
+    "SEC-010"
+  ]
+}

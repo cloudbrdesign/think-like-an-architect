@@ -1,0 +1,141 @@
+{
+  "category": "security",
+  "controls": [
+    "CTL-004"
+  ],
+  "evidence": "evidence/TST-SEC-006.json",
+  "expected": "P-08 (inactive, stale grant) and P-09 (no record): no search call, uniform failure, no canary",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": null,
+          "hr_version": 1,
+          "status": "DENIED"
+        },
+        "failing_control": "CTL-004",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "total": 4
+        },
+        "outcome": "REFUSED_NO_ACTIVE_EMPLOYMENT",
+        "persona": "P-08",
+        "question": "smp12",
+        "relevance": null,
+        "request_id": "1d1fb930-b7ce-4c8e-97b6-f240055ff8b2",
+        "retrieved": [],
+        "tiers_called": [],
+        "verification": {
+          "mismatches": [],
+          "status": "NOT_RUN"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": null,
+          "hr_version": 1,
+          "status": "DENIED"
+        },
+        "failing_control": "CTL-004",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "total": 3
+        },
+        "outcome": "REFUSED_NO_ACTIVE_EMPLOYMENT",
+        "persona": "P-08",
+        "question": "orion_pricing",
+        "relevance": null,
+        "request_id": "4067a017-35a6-4552-8047-72dd83b6091f",
+        "retrieved": [],
+        "tiers_called": [],
+        "verification": {
+          "mismatches": [],
+          "status": "NOT_RUN"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": null,
+          "hr_version": null,
+          "status": "DENIED"
+        },
+        "failing_control": "CTL-004",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "total": 3
+        },
+        "outcome": "REFUSED_NO_ACTIVE_EMPLOYMENT",
+        "persona": "P-09",
+        "question": "smp12",
+        "relevance": null,
+        "request_id": "4b88ae2d-4d87-40eb-b901-344b5f45db52",
+        "retrieved": [],
+        "tiers_called": [],
+        "verification": {
+          "mismatches": [],
+          "status": "NOT_RUN"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": null,
+          "hr_version": null,
+          "status": "DENIED"
+        },
+        "failing_control": "CTL-004",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "total": 4
+        },
+        "outcome": "REFUSED_NO_ACTIVE_EMPLOYMENT",
+        "persona": "P-09",
+        "question": "orion_pricing",
+        "relevance": null,
+        "request_id": "be227744-22a9-46bc-bda4-a5bff6c7fd25",
+        "retrieved": [],
+        "tiers_called": [],
+        "verification": {
+          "mismatches": [],
+          "status": "NOT_RUN"
+        }
+      }
+    ]
+  },
+  "observed": "4/4 refused with zero tier calls and the uniform response",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T09:44:42+00:00",
+  "status": "PASS",
+  "test_id": "TST-SEC-006",
+  "verifies": [
+    "SEC-007"
+  ]
+}

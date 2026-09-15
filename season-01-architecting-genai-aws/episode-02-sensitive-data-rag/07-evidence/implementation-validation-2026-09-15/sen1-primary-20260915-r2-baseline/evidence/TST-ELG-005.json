@@ -1,0 +1,426 @@
+{
+  "category": "eligibility",
+  "controls": [
+    "CTL-001",
+    "CTL-011"
+  ],
+  "evidence": "evidence/TST-ELG-005.json",
+  "expected": "P-03 (FIN-REPORTING) never receives the SEC-SIGNALLING vulnerability assessment",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question. The sources provided do not mention any weaknesses in the signalling controller maintenance interface. They focus on fault-finding, isolation procedures, post-maintenance tests, safety investigations, and project background.",
+        "citations": [
+          {
+            "document_id": "D-12",
+            "document_title": "Signalling fault-finding guide",
+            "section_id": "S1",
+            "section_title": "Finding a controller fault"
+          },
+          {
+            "document_id": "D-01",
+            "document_title": "Signalling maintenance procedure SMP-12",
+            "section_id": "S1",
+            "section_title": "Fault isolation"
+          },
+          {
+            "document_id": "D-01",
+            "document_title": "Signalling maintenance procedure SMP-12",
+            "section_id": "S2",
+            "section_title": "Post-maintenance tests"
+          },
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-03",
+            "document_title": "Project Orion delivery report",
+            "section_id": "S1",
+            "section_title": "Background"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 185,
+            "sha256": "12460fafad8be9deafdae0e34f454f0b43e9755fc963004fd813d6bb949fb2a1",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "FIN-REPORTING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "generation": 298,
+          "retrieval": 644,
+          "total": 952,
+          "verification": 5
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-03",
+        "question": "sec_vuln",
+        "relevance": {
+          "kept": [
+            "cec6af03-dc29-4a3f-a1dd-e4458dda2b7c",
+            "f3cce5ef-85e8-4e08-864a-ee5d72d0bd97",
+            "11984714-db09-4a1f-a765-21f2dad7def4",
+            "79e23c75-53d8-4d03-ae3e-afec3f8f5639",
+            "82c2e111-b496-4ba4-885c-636d8df90016"
+          ],
+          "min_score": 0.6,
+          "omitted": []
+        },
+        "request_id": "2d1d3b6e-73f8-452d-a5d9-aa9ea7369b6a",
+        "retrieved": [
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.747784,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.740685,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.710077,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651365,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.614378,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-04": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question. The sources provided do not include specific details about the maintenance costs and weaknesses of the signalling controller. They focus on fault-finding, maintenance procedures, and cost variances but do not detail maintenance costs or controller weaknesses.",
+        "citations": [
+          {
+            "document_id": "D-12",
+            "document_title": "Signalling fault-finding guide",
+            "section_id": "S1",
+            "section_title": "Finding a controller fault"
+          },
+          {
+            "document_id": "D-01",
+            "document_title": "Signalling maintenance procedure SMP-12",
+            "section_id": "S1",
+            "section_title": "Fault isolation"
+          },
+          {
+            "document_id": "D-08",
+            "document_title": "Finance month-end pack",
+            "section_id": "S1",
+            "section_title": "Signalling cost variance"
+          },
+          {
+            "document_id": "D-01",
+            "document_title": "Signalling maintenance procedure SMP-12",
+            "section_id": "S2",
+            "section_title": "Post-maintenance tests"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 185,
+            "sha256": "12460fafad8be9deafdae0e34f454f0b43e9755fc963004fd813d6bb949fb2a1",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "FIN-REPORTING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "generation": 392,
+          "retrieval": 307,
+          "total": 708,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-03",
+        "question": "What are the maintenance costs and weaknesses of the signalling controller?",
+        "relevance": {
+          "kept": [
+            "cec6af03-dc29-4a3f-a1dd-e4458dda2b7c",
+            "f3cce5ef-85e8-4e08-864a-ee5d72d0bd97",
+            "ced50bbe-9ebd-4733-9adb-506591179d4a",
+            "11984714-db09-4a1f-a765-21f2dad7def4"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "82c2e111-b496-4ba4-885c-636d8df90016"
+          ]
+        },
+        "request_id": "330dd495-1c6e-4fe9-a00d-7aae3486b224",
+        "retrieved": [
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.731339,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.726721,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-08",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "FIN-REPORTING",
+            "score": 0.689803,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.682935,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.594734,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-08": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      }
+    ],
+    "leaks": [],
+    "precondition": {
+      "answer": "A shared maintenance password and an unauthenticated diagnostic port were found in the signalling controller maintenance interface. Marker CANARY-SEC-SIG-VULN-3F.",
+      "citations": [
+        {
+          "document_id": "D-07",
+          "document_title": "Vulnerability assessment of the signalling controller",
+          "section_id": "S1",
+          "section_title": "Findings"
+        },
+        {
+          "document_id": "D-12",
+          "document_title": "Signalling fault-finding guide",
+          "section_id": "S1",
+          "section_title": "Finding a controller fault"
+        },
+        {
+          "document_id": "D-01",
+          "document_title": "Signalling maintenance procedure SMP-12",
+          "section_id": "S1",
+          "section_title": "Fault isolation"
+        },
+        {
+          "document_id": "D-01",
+          "document_title": "Signalling maintenance procedure SMP-12",
+          "section_id": "S2",
+          "section_title": "Post-maintenance tests"
+        },
+        {
+          "document_id": "D-04",
+          "document_title": "Safety investigation SI-0417 report",
+          "section_id": "S1",
+          "section_title": "Sanitised findings"
+        }
+      ],
+      "constraints": [
+        {
+          "bytes": 186,
+          "sha256": "2dbe720b1327111515d5dc32f2be78871a2fef8d0e5df8c4e3d8273672d12077",
+          "tier": "shared"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [
+          "SEC-SIGNALLING"
+        ],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": null,
+      "generation_invoked": true,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 4,
+        "generation": 268,
+        "retrieval": 467,
+        "total": 746,
+        "verification": 5
+      },
+      "outcome": "ANSWERED",
+      "persona": "P-04",
+      "question": "sec_vuln",
+      "relevance": {
+        "kept": [
+          "096a7828-8b39-4696-9c93-4472c2e352de",
+          "cec6af03-dc29-4a3f-a1dd-e4458dda2b7c",
+          "f3cce5ef-85e8-4e08-864a-ee5d72d0bd97",
+          "11984714-db09-4a1f-a765-21f2dad7def4",
+          "79e23c75-53d8-4d03-ae3e-afec3f8f5639"
+        ],
+        "min_score": 0.6,
+        "omitted": []
+      },
+      "request_id": "7ca765cf-02d3-44e7-a798-1cd2a75e874a",
+      "retrieved": [
+        {
+          "document_id": "D-07",
+          "label": "CONFIDENTIAL",
+          "record_version": "1",
+          "scope": "SEC-SIGNALLING",
+          "score": 0.880033,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-12",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.747784,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-01",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.740685,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-01",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.710077,
+          "section_id": "S2",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-04",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.651365,
+          "section_id": "S1",
+          "tier": "shared"
+        }
+      ],
+      "tiers_called": [
+        "shared"
+      ],
+      "verification": {
+        "mismatches": [],
+        "record_versions": {
+          "D-01": 1,
+          "D-04": 1,
+          "D-07": 1,
+          "D-12": 1
+        },
+        "status": "PASS"
+      }
+    }
+  },
+  "observed": "precondition: P-04 retrieved D-07; no SEC-SIGNALLING canary for P-03",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:19:06+00:00",
+  "status": "PASS",
+  "test_id": "TST-ELG-005",
+  "verifies": [
+    "SEC-001"
+  ]
+}

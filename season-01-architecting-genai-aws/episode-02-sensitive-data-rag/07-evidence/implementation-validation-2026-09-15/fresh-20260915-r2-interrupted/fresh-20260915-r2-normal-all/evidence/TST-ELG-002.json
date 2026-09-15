@@ -1,0 +1,157 @@
+{
+  "category": "eligibility",
+  "controls": [
+    "CTL-001",
+    "CTL-011",
+    "CTL-015"
+  ],
+  "evidence": "evidence/TST-ELG-002.json",
+  "expected": "P-02 (BID-ORION) retrieves and is cited the Orion pricing section D-03 \u00a74",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "The Project Orion bid price band is ZETA-17, with a commercial position of a walk-away position in band ZETA-12. These are synthetic placeholders. Marker CANARY-BID-ORION-PRICING-7Q3. I can't answer that question.",
+        "citations": [
+          {
+            "document_id": "D-03",
+            "document_title": "Project Orion delivery report",
+            "section_id": "S4",
+            "section_title": "Commercial position and bid pricing"
+          },
+          {
+            "document_id": "D-14",
+            "document_title": "Orion commercial summary",
+            "section_id": "S1",
+            "section_title": "Discount strategy"
+          },
+          {
+            "document_id": "D-03",
+            "document_title": "Project Orion delivery report",
+            "section_id": "S1",
+            "section_title": "Background"
+          },
+          {
+            "document_id": "D-03",
+            "document_title": "Project Orion delivery report",
+            "section_id": "S2",
+            "section_title": "Delivery"
+          },
+          {
+            "document_id": "D-03",
+            "document_title": "Project Orion delivery report",
+            "section_id": "S3",
+            "section_title": "Lessons learned"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 181,
+            "sha256": "8ed7671b959cc64341f3e2245c7c66922e249b8c09e0382d4732beccca64734d",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "BID-ORION"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 5,
+          "generation": 313,
+          "retrieval": 408,
+          "total": 731,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-02",
+        "question": "orion_pricing",
+        "relevance": {
+          "kept": [
+            "04cd5954-f27f-4b41-81ab-8a7b5bcd2970",
+            "406a322d-4c55-47d1-af48-2e8f376a1a29",
+            "8d181e82-7c0b-4efe-b476-98a547f5980f",
+            "4bf870b8-9a76-49b8-b64f-a9e2da8be418",
+            "534727a9-ee0c-4668-bcec-40d62fce6761"
+          ],
+          "min_score": 0.6,
+          "omitted": []
+        },
+        "request_id": "f91aa2ea-6a4b-4147-a94d-578620c1109d",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.919845,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.717496,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-03": 1,
+            "D-14": 1
+          },
+          "status": "PASS"
+        }
+      }
+    ]
+  },
+  "observed": "outcome ANSWERED; retrieved ['D-03-S1', 'D-03-S2', 'D-03-S3', 'D-03-S4', 'D-14-S1']; cited ['D-03-S1', 'D-03-S2', 'D-03-S3', 'D-03-S4', 'D-14-S1']",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:48:57+00:00",
+  "status": "PASS",
+  "test_id": "TST-ELG-002",
+  "verifies": [
+    "FUN-002"
+  ]
+}

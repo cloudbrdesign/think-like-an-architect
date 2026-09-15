@@ -1,0 +1,90 @@
+[
+  {
+    "audit_outcome": "NO_RELEVANT_CONTENT",
+    "checks": {
+      "constraint_hashes": true,
+      "decision": true,
+      "outcome": true,
+      "verification": true
+    },
+    "reconstructed": {
+      "constraint_hashes": [
+        "12460fafad8be9deafdae0e34f454f0b43e9755fc963004fd813d6bb949fb2a1"
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [
+          "FIN-REPORTING"
+        ],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "expected_outcome": "ANSWERED_OR_NOT_RELEVANT",
+      "verification": {
+        "mismatches": [],
+        "status": "PASS"
+      }
+    },
+    "request_id": "973700b2-20d5-4a02-b172-802f7a6a86e0"
+  },
+  {
+    "audit_outcome": "WITHHELD_VERIFICATION_MISMATCH",
+    "checks": {
+      "constraint_hashes": true,
+      "decision": true,
+      "outcome": true,
+      "verification": true
+    },
+    "reconstructed": {
+      "constraint_hashes": [
+        "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876"
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "expected_outcome": "WITHHELD_VERIFICATION_MISMATCH",
+      "verification": {
+        "mismatches": [
+          [
+            "04cd5954-f27f-4b41-81ab-8a7b5bcd2970",
+            "LABEL_MISMATCH"
+          ]
+        ],
+        "status": "MISMATCH"
+      }
+    },
+    "request_id": "75315576-0ae1-4344-a97c-896ae478144b"
+  },
+  {
+    "audit_outcome": "NO_RELEVANT_CONTENT",
+    "checks": {
+      "constraint_hashes": true,
+      "decision": true,
+      "outcome": true,
+      "verification": true
+    },
+    "reconstructed": {
+      "constraint_hashes": [
+        "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876"
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "expected_outcome": "ANSWERED_OR_NOT_RELEVANT",
+      "verification": {
+        "mismatches": [],
+        "status": "PASS"
+      }
+    },
+    "request_id": "c3d0150c-fa89-4811-8153-bf133fa2db40"
+  }
+]

@@ -1,0 +1,227 @@
+{
+  "category": "security",
+  "controls": [
+    "CTL-014"
+  ],
+  "evidence": "evidence/TST-SEC-007.json",
+  "expected": "A chunk indexed with the wrong label is caught before generation: withheld, mismatch recorded, no generation",
+  "level": "L4",
+  "observations": {
+    "after_restore": {
+      "answer": "I can't answer that question.",
+      "citations": [],
+      "constraints": [
+        {
+          "bytes": 49,
+          "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+          "tier": "shared"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": null,
+      "generation_invoked": true,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 4,
+        "generation": 254,
+        "retrieval": 338,
+        "total": 602,
+        "verification": 4
+      },
+      "outcome": "NO_RELEVANT_CONTENT",
+      "persona": "P-01",
+      "question": "orion_pricing",
+      "relevance": {
+        "kept": [
+          "00b8124f-a4ac-43be-a93e-7ab8f6004609",
+          "5140ac23-0a96-4836-9fdc-98f35953a183",
+          "31299997-aab8-40f3-8e07-a671a540871e"
+        ],
+        "min_score": 0.6,
+        "omitted": [
+          "fe7f5f86-d00f-4525-add2-fd113961d025",
+          "05686f31-9cb7-493e-8234-f75b06855729"
+        ]
+      },
+      "request_id": "b58cc9ea-ca0b-4e23-b2fa-d5986abf1429",
+      "retrieved": [
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.705777,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.67493,
+          "section_id": "S2",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.641212,
+          "section_id": "S3",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-12",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.530181,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-01",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.499908,
+          "section_id": "S1",
+          "tier": "shared"
+        }
+      ],
+      "tiers_called": [
+        "shared"
+      ],
+      "verification": {
+        "mismatches": [],
+        "record_versions": {
+          "D-01": 1,
+          "D-03": 1,
+          "D-12": 1
+        },
+        "status": "PASS"
+      }
+    },
+    "ask": {
+      "answer": "I can't answer that question.",
+      "citations": [],
+      "constraints": [
+        {
+          "bytes": 49,
+          "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+          "tier": "shared"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": "CTL-014",
+      "generation_invoked": false,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 4,
+        "retrieval": 373,
+        "total": 383,
+        "verification": 5
+      },
+      "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+      "persona": "P-01",
+      "question": "orion_pricing",
+      "relevance": null,
+      "request_id": "1272125b-1f5a-4d33-a349-b9bf7d51fc81",
+      "retrieved": [
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.919843,
+          "section_id": "S4",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.705779,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.674968,
+          "section_id": "S2",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.641401,
+          "section_id": "S3",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-12",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.530167,
+          "section_id": "S1",
+          "tier": "shared"
+        }
+      ],
+      "tiers_called": [
+        "shared"
+      ],
+      "verification": {
+        "mismatches": [
+          {
+            "chunk_id": "bc433406-0a28-495a-8237-00ebf87859e8",
+            "reason": "LABEL_MISMATCH"
+          }
+        ],
+        "record_versions": {
+          "D-03": 1,
+          "D-12": 1
+        },
+        "status": "MISMATCH"
+      }
+    },
+    "fault": {
+      "index_status": "INDEXED",
+      "mechanism": "operator re-ingested D-03 \u00a74 inline with label INTERNAL (test-only path)"
+    },
+    "restore_ingestion": {
+      "D-03-S1": "INDEXED",
+      "D-03-S2": "INDEXED",
+      "D-03-S3": "INDEXED",
+      "D-03-S4": "INDEXED"
+    }
+  },
+  "observed": "wrong-label chunk retrieved: True; outcome WITHHELD_VERIFICATION_MISMATCH; mismatches [{'chunk_id': 'bc433406-0a28-495a-8237-00ebf87859e8', 'reason': 'LABEL_MISMATCH'}]; generation invoked False; after re-ingest D-03 \u00a74 retrieved for P-01: False",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:36:20+00:00",
+  "status": "PASS",
+  "test_id": "TST-SEC-007",
+  "verifies": [
+    "SEC-008"
+  ]
+}

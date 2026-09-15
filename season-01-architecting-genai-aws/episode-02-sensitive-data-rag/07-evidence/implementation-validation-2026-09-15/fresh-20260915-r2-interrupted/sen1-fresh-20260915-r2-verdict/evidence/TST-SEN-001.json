@@ -1,0 +1,460 @@
+{
+  "category": "sensitivity",
+  "controls": [
+    "CTL-011",
+    "CTL-012",
+    "CTL-014"
+  ],
+  "evidence": "evidence/TST-SEN-001.json",
+  "expected": "Baseline PASS \u2192 variant target tests FAIL for the predicted reason \u2192 variant destroyed and verified \u2192 restored PASS",
+  "level": "L4",
+  "observations": {
+    "baseline": {
+      "TST-ELG-003": "PASS",
+      "TST-ELG-005": "PASS",
+      "TST-ELG-006": "PASS",
+      "TST-ELG-009": "PASS"
+    },
+    "fault": "mandatory retrieval eligibility constraint removed (label-only constraint, both tiers for everyone)",
+    "restored": {
+      "TST-ELG-003": "PASS",
+      "TST-ELG-005": "PASS",
+      "TST-ELG-006": "PASS",
+      "TST-ELG-009": "PASS"
+    },
+    "retrieval_layer_findings": [
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-04-S2",
+          "D-05-S1",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-01",
+        "question": "orion_pricing",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-04-S2",
+          "D-05-S1",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-01",
+        "question": "orion_discount",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-04-S2",
+          "D-05-S1",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-03",
+        "question": "orion_pricing",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-04-S2",
+          "D-05-S1",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-03",
+        "question": "orion_discount",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-04-S2",
+          "D-05-S1",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-04",
+        "question": "orion_pricing",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-04-S2",
+          "D-05-S1",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-04",
+        "question": "orion_discount",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-05-S1",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-05",
+        "question": "orion_pricing",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-05-S1",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-05",
+        "question": "orion_discount",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-04-S2",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-06",
+        "question": "orion_pricing",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-04-S2",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-06",
+        "question": "orion_discount",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-04-S2",
+          "D-05-S1",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-07",
+        "question": "orion_pricing",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-04-S2",
+          "D-05-S1",
+          "D-14-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-07",
+        "question": "orion_discount",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-04-S2",
+          "D-05-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-02",
+        "question": "orion_pricing",
+        "test": "TST-ELG-003"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-04-S2",
+          "D-05-S1",
+          "D-07-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-03",
+        "question": "sec_vuln",
+        "test": "TST-ELG-005"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-04-S2",
+          "D-05-S1",
+          "D-07-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-03",
+        "question": "What are the maintenance costs and weaknesses of the signalling controller?",
+        "test": "TST-ELG-005"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-04-S2",
+          "D-05-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-04",
+        "question": "sec_vuln",
+        "test": "TST-ELG-005"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-04-S2",
+          "D-05-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-07",
+        "question": "si0417_witness",
+        "test": "TST-ELG-006"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-04-S2",
+          "D-05-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-07",
+        "question": "hr2031",
+        "test": "TST-ELG-006"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-05-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-05",
+        "question": "si0417_witness",
+        "test": "TST-ELG-006"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-04-S2"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-06",
+        "question": "hr2031",
+        "test": "TST-ELG-006"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-05-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-05",
+        "question": "hr2031",
+        "test": "TST-ELG-009"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-04-S2",
+          "D-05-S1",
+          "D-07-S1",
+          "D-08-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-02",
+        "question": "finance",
+        "test": "TST-ELG-009"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-04-S2",
+          "D-05-S1",
+          "D-07-S1"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-02",
+        "question": "sec_vuln",
+        "test": "TST-ELG-009"
+      }
+    ],
+    "runs": {
+      "baseline": "sen1-fresh-20260915-r2-baseline",
+      "cleanup": "sen1-fresh-20260915-r2-cleanup",
+      "restored": "sen1-fresh-20260915-r2-restored",
+      "variant": "sen1-fresh-20260915-r2-variant"
+    },
+    "secondary_verification": "DETECTED AND CONTAINED every leaked request before generation",
+    "security_boundary": "FAILED AT RETRIEVAL",
+    "steps": [
+      {
+        "command": "build eligibility-removed",
+        "exit": 0,
+        "output_tail": [
+          "built eligibility-removed/query.zip sha256 2497d2e5129856170c0bd7e277d93e9de4c808cdf1f831565a513898abb3c736",
+          "built eligibility-removed/ingestion.zip sha256 feb08dc3994dc4525cad4aeeb4d8e3c18c69642c872a14ef8dc725922af5c86c",
+          "NOTE: failure-experiment build \u2014 core/constraints.py is replaced. Deploy only through the experiment runner."
+        ],
+        "seconds": 0
+      },
+      {
+        "command": "deploy eligibility-removed",
+        "exit": 0,
+        "output_tail": [
+          "target account <redacted> \u00b7 region us-east-1 \u00b7 caller assumed-role/<account-foundation-resource>/tla-e02-build",
+          "creating stack tla-s01e02-sen-eligibility \u2026",
+          "deployed tla-s01e02-sen-eligibility (CREATE_COMPLETE) in 92 s"
+        ],
+        "seconds": 102
+      },
+      {
+        "command": "fixtures load",
+        "summary": {
+          "documents": 15,
+          "index_status": {
+            "D-01-S1": "INDEXED",
+            "D-01-S2": "INDEXED",
+            "D-02-S1": "INDEXED",
+            "D-02-S2": "INDEXED",
+            "D-03-S1": "INDEXED",
+            "D-03-S2": "INDEXED",
+            "D-03-S3": "INDEXED",
+            "D-03-S4": "INDEXED",
+            "D-04-S1": "INDEXED",
+            "D-04-S2": "INDEXED",
+            "D-05-S1": "INDEXED",
+            "D-06-S1": "INDEXED",
+            "D-07-S1": "INDEXED",
+            "D-08-S1": "INDEXED",
+            "D-12-S1": "INDEXED",
+            "D-13-S1": "INDEXED",
+            "D-14-S1": "INDEXED"
+          },
+          "objects": {
+            "restricted": 2,
+            "shared": 15
+          },
+          "personas": 11,
+          "quarantine": [
+            {
+              "document_id": "D-09",
+              "reason": "LABEL_MISSING",
+              "section_id": null
+            },
+            {
+              "document_id": "D-10",
+              "reason": "LABEL_INVALID",
+              "section_id": null
+            },
+            {
+              "document_id": "D-11",
+              "reason": "SCOPE_MISSING",
+              "section_id": null
+            },
+            {
+              "document_id": "D-15",
+              "reason": "LABEL_INVALID",
+              "section_id": null
+            }
+          ],
+          "special_category_excluded": [
+            "D-04-S3"
+          ]
+        }
+      },
+      {
+        "command": "export variant audit",
+        "usage": {
+          "deployment": "tla-s01e02-sen-eligibility",
+          "estimated_usage_cost_total_usd": 0.0002,
+          "estimated_usage_cost_usd": {
+            "api_and_function_requests": 3e-05,
+            "embeddings": 0.0001,
+            "generation": 0.0,
+            "vector_queries": 0.00012
+          },
+          "generation_calls": 0,
+          "ingestion_runs": 1,
+          "input_tokens": 0,
+          "knowledge_base_searches": 46,
+          "not_included": "storage for hours, Lambda duration, DynamoDB requests, CloudWatch Logs, Cognito; see COST_AND_CLEANUP.md for the full model",
+          "outcomes": {
+            "WITHHELD_VERIFICATION_MISMATCH": 23
+          },
+          "output_tokens": 0,
+          "prices": {
+            "http_api_requests_per_million": 1.0,
+            "lambda_requests_per_million": 0.2,
+            "nova_micro_input_per_million": 0.08,
+            "nova_micro_output_per_million": 0.24,
+            "titan_embeddings_per_million_tokens": 0.02,
+            "vector_queries_per_million": 2.5
+          },
+          "prices_date": "2026-09-14 (public AWS pricing pages, US East; not re-read)",
+          "query_requests": 23,
+          "sections_ingested": 17
+        }
+      }
+    ],
+    "variant": "eligibility-removed",
+    "variant_statuses": {
+      "TST-ELG-003": "FAIL",
+      "TST-ELG-005": "FAIL",
+      "TST-ELG-006": "FAIL",
+      "TST-ELG-009": "FAIL"
+    }
+  },
+  "observed": "baseline PASS \u2192 variant FAIL (DETECTED AND CONTAINED every leaked request before generation) \u2192 variant destroyed, cleanup verified \u2192 restored PASS",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T08:08:10+00:00",
+  "status": "PASS",
+  "test_id": "TST-SEN-001",
+  "verifies": [
+    "SEC-001",
+    "SEC-004"
+  ]
+}

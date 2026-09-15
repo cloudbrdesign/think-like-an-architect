@@ -1,0 +1,54 @@
+{
+  "category": "security",
+  "controls": [
+    "CTL-002"
+  ],
+  "evidence": "evidence/TST-SEC-001.json",
+  "expected": "Missing, malformed, tampered, other-application and expired tokens are refused at the edge; no audit item",
+  "level": "L3",
+  "observations": {
+    "audit_items_after": 93,
+    "audit_items_before": 93,
+    "cases": {
+      "expired": {
+        "body": {
+          "message": "Unauthorized"
+        },
+        "status": 401
+      },
+      "malformed": {
+        "body": {
+          "message": "Unauthorized"
+        },
+        "status": 401
+      },
+      "missing": {
+        "body": {
+          "message": "Unauthorized"
+        },
+        "status": 401
+      },
+      "other_application": {
+        "body": {
+          "message": "Unauthorized"
+        },
+        "status": 401
+      },
+      "tampered_signature": {
+        "body": {
+          "message": "Unauthorized"
+        },
+        "status": 401
+      }
+    },
+    "expired_token_age_seconds": 679
+  },
+  "observed": "statuses {'missing': 401, 'malformed': 401, 'tampered_signature': 401, 'other_application': 401, 'expired': 401}; audit items before 93 after 93",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T09:54:17+00:00",
+  "status": "PASS",
+  "test_id": "TST-SEC-001",
+  "verifies": [
+    "SEC-002"
+  ]
+}

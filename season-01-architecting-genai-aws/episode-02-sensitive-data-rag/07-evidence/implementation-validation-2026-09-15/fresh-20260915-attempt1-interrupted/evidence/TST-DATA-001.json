@@ -1,0 +1,126 @@
+{
+  "category": "data",
+  "controls": [
+    "CTL-007"
+  ],
+  "evidence": "evidence/TST-DATA-001.json",
+  "expected": "Unlabelled D-09 is quarantined and reported; its canary is in neither tier",
+  "level": "L3",
+  "observations": {
+    "ask": {
+      "answer": "I can't answer that question.",
+      "citations": [],
+      "constraints": [
+        {
+          "bytes": 49,
+          "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+          "tier": "shared"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": null,
+      "generation_invoked": true,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 4,
+        "generation": 228,
+        "retrieval": 333,
+        "total": 571,
+        "verification": 4
+      },
+      "outcome": "NO_RELEVANT_CONTENT",
+      "persona": "P-01",
+      "question": "tooling",
+      "relevance": {
+        "kept": [
+          "3f6ce34b-4817-41c6-8c41-0c9b50f913e8",
+          "191fc339-3a1c-4d0f-98df-e211b00a68f1",
+          "7da1fd04-27d2-48cb-bfa5-00031f4947bd",
+          "14753575-c6cd-4690-ac2d-4dbaa502fab4",
+          "05686f31-9cb7-493e-8234-f75b06855729"
+        ],
+        "min_score": 0.6,
+        "omitted": []
+      },
+      "request_id": "7df6e123-8919-45e4-bd59-3324502c8ff4",
+      "retrieved": [
+        {
+          "document_id": "D-04",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.653986,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-02",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.630656,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-02",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.630377,
+          "section_id": "S2",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-13",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.607722,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-01",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.606988,
+          "section_id": "S1",
+          "tier": "shared"
+        }
+      ],
+      "tiers_called": [
+        "shared"
+      ],
+      "verification": {
+        "mismatches": [],
+        "record_versions": {
+          "D-01": 1,
+          "D-02": 1,
+          "D-04": 1,
+          "D-13": 1
+        },
+        "status": "PASS"
+      }
+    },
+    "quarantine_entries": [
+      "LABEL_MISSING"
+    ]
+  },
+  "observed": "quarantine ['LABEL_MISSING']; absent from both tiers: True; P-01 retrieved ['D-01-S1', 'D-02-S1', 'D-02-S2', 'D-04-S1', 'D-13-S1']",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:34:28+00:00",
+  "status": "PASS",
+  "test_id": "TST-DATA-001",
+  "verifies": [
+    "DATA-005",
+    "SEC-007"
+  ]
+}

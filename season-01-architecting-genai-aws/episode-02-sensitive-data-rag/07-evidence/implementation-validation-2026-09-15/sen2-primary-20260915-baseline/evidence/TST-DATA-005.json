@@ -1,0 +1,22 @@
+{
+  "category": "data",
+  "controls": [
+    "CTL-008"
+  ],
+  "evidence": "evidence/TST-DATA-005.json",
+  "expected": "Every chunk carries document, section, label, scope and version equal to its record; no chunk spans sections or is less restrictive than its document",
+  "level": "L3",
+  "observations": {
+    "chunks_checked": 17,
+    "problems": []
+  },
+  "observed": "17 chunks checked; problems: []",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:06:11+00:00",
+  "status": "PASS",
+  "test_id": "TST-DATA-005",
+  "verifies": [
+    "DATA-003",
+    "DATA-007"
+  ]
+}

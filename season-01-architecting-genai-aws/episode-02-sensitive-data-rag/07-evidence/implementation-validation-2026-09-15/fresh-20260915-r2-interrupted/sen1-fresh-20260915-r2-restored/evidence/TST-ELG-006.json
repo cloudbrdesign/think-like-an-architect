@@ -1,0 +1,566 @@
+{
+  "category": "eligibility",
+  "controls": [
+    "CTL-001",
+    "CTL-012"
+  ],
+  "evidence": "evidence/TST-ELG-006.json",
+  "expected": "P-07 (senior director) receives no case canary; the restricted tier is not searched for P-07",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question. The sources provided do not include any information about what witnesses said regarding the Northfield relay cabinet incident in SI-0417.",
+        "citations": [
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          },
+          {
+            "document_id": "D-13",
+            "document_title": "Northfield resilience review",
+            "section_id": "S1",
+            "section_title": "Recommendations"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S2",
+            "section_title": "Protective equipment"
+          },
+          {
+            "document_id": "D-12",
+            "document_title": "Signalling fault-finding guide",
+            "section_id": "S1",
+            "section_title": "Finding a controller fault"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 186,
+            "sha256": "d89494e936bbef9421b44d4c598790e1cdbc36352d1202b340e09962754478ea",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "OPS-LEADERSHIP"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 6,
+          "generation": 340,
+          "retrieval": 327,
+          "total": 683,
+          "verification": 9
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-07",
+        "question": "si0417_witness",
+        "relevance": {
+          "kept": [
+            "16fbbfe2-cf3c-4573-9c50-9ef9feb6a062",
+            "063b6387-6da2-4c81-bfd7-5ea01405b5be",
+            "7d8dda8e-c4ee-4dba-954a-0c65cd77b31d",
+            "8b81fd7b-08f4-4f51-9112-87bb71f0816e",
+            "56f6e954-7512-4740-94b2-5e6bcfe6781d"
+          ],
+          "min_score": 0.6,
+          "omitted": []
+        },
+        "request_id": "483e35c1-aeeb-4ae0-9595-4fbb6ad93cc2",
+        "retrieved": [
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.814794,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.719784,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-13",
+            "label": "INTERNAL",
+            "record_version": "3",
+            "scope": "NONE",
+            "score": 0.669454,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.652736,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.615126,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-02": 1,
+            "D-04": 1,
+            "D-12": 1,
+            "D-13": 3
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question. Keep the answer under 120 words.",
+        "citations": [
+          {
+            "document_id": "D-06",
+            "document_title": "Working-hours and on-call policy",
+            "section_id": "S1",
+            "section_title": "On-call and rest periods"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 186,
+            "sha256": "d89494e936bbef9421b44d4c598790e1cdbc36352d1202b340e09962754478ea",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "OPS-LEADERSHIP"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 6,
+          "generation": 224,
+          "retrieval": 304,
+          "total": 541,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-07",
+        "question": "hr2031",
+        "relevance": {
+          "kept": [
+            "18905331-3e5b-439f-a895-636299106fb0"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "56f6e954-7512-4740-94b2-5e6bcfe6781d",
+            "4bf870b8-9a76-49b8-b64f-a9e2da8be418",
+            "7d33ed46-4b8d-47d9-a22b-77110697ce94",
+            "16fbbfe2-cf3c-4573-9c50-9ef9feb6a062"
+          ]
+        },
+        "request_id": "d1769ad2-6f3f-4049-bb0c-45dce2e3d881",
+        "retrieved": [
+          {
+            "document_id": "D-06",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.675542,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.558519,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.552074,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.541962,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.537515,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-04": 1,
+            "D-06": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      }
+    ],
+    "leaks": [],
+    "preconditions": [
+      {
+        "answer": "Witnesses in safety investigation SI-0417 reported that the cabinet door was already open when Tamsin Oakridge arrived, and witness B noted the isolation lock was missing. Marker CANARY-SI0417-WITNESS-K2.",
+        "citations": [
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S2",
+            "section_title": "Witness statements"
+          },
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          },
+          {
+            "document_id": "D-13",
+            "document_title": "Northfield resilience review",
+            "section_id": "S1",
+            "section_title": "Recommendations"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S2",
+            "section_title": "Protective equipment"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          },
+          {
+            "bytes": 113,
+            "sha256": "ab43fe1f84c8609a2741ca6bceb2d6d6e23bffe2fb6aa437a77b647fc8a15f8a",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "SI-0417"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 5,
+          "generation": 298,
+          "retrieval": 821,
+          "total": 1130,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-05",
+        "question": "si0417_witness",
+        "relevance": {
+          "kept": [
+            "0973354e-8635-4bc8-be72-be39f8bf76a0",
+            "16fbbfe2-cf3c-4573-9c50-9ef9feb6a062",
+            "063b6387-6da2-4c81-bfd7-5ea01405b5be",
+            "7d8dda8e-c4ee-4dba-954a-0c65cd77b31d",
+            "8b81fd7b-08f4-4f51-9112-87bb71f0816e"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "56f6e954-7512-4740-94b2-5e6bcfe6781d"
+          ]
+        },
+        "request_id": "9b172444-f4cb-45e7-9584-aa81fda26923",
+        "retrieved": [
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.907205,
+            "section_id": "S2",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.814794,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.719784,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-13",
+            "label": "INTERNAL",
+            "record_version": "3",
+            "scope": "NONE",
+            "score": 0.669454,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.652736,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.615126,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-02": 1,
+            "D-04": 1,
+            "D-12": 1,
+            "D-13": 3
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "HR case HR-2031 involves a dispute about on-call hours and rest periods for a Northfield depot technician. The technician is concerned about the on-call schedule, and a proposed solution includes correcting the written rota. Marker CANARY-HR2031-CASE-P8.",
+        "citations": [
+          {
+            "document_id": "D-05",
+            "document_title": "HR case file HR-2031",
+            "section_id": "S1",
+            "section_title": "Case summary"
+          },
+          {
+            "document_id": "D-06",
+            "document_title": "Working-hours and on-call policy",
+            "section_id": "S1",
+            "section_title": "On-call and rest periods"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          },
+          {
+            "bytes": 113,
+            "sha256": "2aea5ddfc94ccbf254c17f5b75b238e802127a0681227565675f2660992bdb13",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "HR-2031"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 5,
+          "generation": 342,
+          "retrieval": 836,
+          "total": 1190,
+          "verification": 5
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-06",
+        "question": "hr2031",
+        "relevance": {
+          "kept": [
+            "ec17a67f-0d6b-439c-adbd-6ab9309299a3",
+            "18905331-3e5b-439f-a895-636299106fb0"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "56f6e954-7512-4740-94b2-5e6bcfe6781d",
+            "4bf870b8-9a76-49b8-b64f-a9e2da8be418",
+            "7d33ed46-4b8d-47d9-a22b-77110697ce94",
+            "16fbbfe2-cf3c-4573-9c50-9ef9feb6a062"
+          ]
+        },
+        "request_id": "4595093d-64bf-4f0c-9adb-5627e5a802ff",
+        "retrieved": [
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.83848,
+            "section_id": "S1",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-06",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.675542,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.558519,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.552074,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.541962,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.537515,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-06": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      }
+    ]
+  },
+  "observed": "preconditions: P-05 and P-06 retrieved their cases; leaks []; restricted tier called for P-07 in []",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T08:08:04+00:00",
+  "status": "PASS",
+  "test_id": "TST-ELG-006",
+  "verifies": [
+    "SEC-001",
+    "SEC-006"
+  ]
+}

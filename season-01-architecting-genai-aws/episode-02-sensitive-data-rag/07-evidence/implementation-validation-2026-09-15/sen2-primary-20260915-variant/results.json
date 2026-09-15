@@ -1,0 +1,71 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 3,
+    "PASS": 0
+  },
+  "deployment": "tla-s01e02-sen-labels",
+  "finished_at": "2026-09-15T07:10:03+00:00",
+  "region": "us-east-1",
+  "run_id": "sen2-primary-20260915-variant",
+  "scope": "tests TST-ELG-004,TST-DATA-005,TST-DATA-006",
+  "started_at": "2026-09-15T07:09:43+00:00",
+  "tests": [
+    {
+      "category": "data",
+      "controls": [
+        "CTL-008"
+      ],
+      "evidence": "evidence/TST-DATA-005.json",
+      "expected": "Every chunk carries document, section, label, scope and version equal to its record; no chunk spans sections or is less restrictive than its document",
+      "level": "L3",
+      "observed": "17 chunks checked; problems: [{'section': 'D-03-S4', 'tier': 'shared', 'problem': 'attributes differ from the record', 'indexed': ['INTERNAL', 'NONE'], 'record': ['CONFIDENTIAL', 'BID-ORION']}, {'section': 'D-04-S2', 'tier': 'shared', 'problem': 'attributes differ from the record', 'indexed': ['INTERNAL', 'NONE'], 'record': ['RESTRICTED', 'SI-0417']}]",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T07:10:00+00:00",
+      "status": "FAIL",
+      "test_id": "TST-DATA-005",
+      "verifies": [
+        "DATA-003",
+        "DATA-007"
+      ]
+    },
+    {
+      "category": "data",
+      "controls": [
+        "CTL-010",
+        "CTL-017"
+      ],
+      "evidence": "evidence/TST-DATA-006.json",
+      "expected": "Shared tier holds no RESTRICTED section, restricted tier only RESTRICTED; no cache resource or cached answer path",
+      "level": "L3",
+      "observed": "problems: [{'section': 'D-04-S2', 'problem': 'authoritative tier restricted, found in shared'}, {'object': 'sections/D-04/S2.txt', 'problem': 'section object in the shared bucket'}]; cache resources []; cache settings []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T07:10:03+00:00",
+      "status": "FAIL",
+      "test_id": "TST-DATA-006",
+      "verifies": [
+        "DATA-006"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-008",
+        "CTL-011"
+      ],
+      "evidence": "evidence/TST-ELG-004.json",
+      "expected": "P-01 is answered from Orion lessons (D-03 \u00a73); D-03 \u00a74 is never retrieved",
+      "level": "L3",
+      "observed": "lessons retrieved+cited: False; D-03 \u00a74 retrieved in: ['orion_lessons', 'orion_pricing']; leaks [{'persona': 'P-01', 'question': 'orion_lessons', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-01', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3']}]",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T07:09:52+00:00",
+      "status": "FAIL",
+      "test_id": "TST-ELG-004",
+      "verifies": [
+        "FUN-004",
+        "DATA-003"
+      ]
+    }
+  ],
+  "variant": "labels-corrupted"
+}

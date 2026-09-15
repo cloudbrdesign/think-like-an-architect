@@ -1,0 +1,49 @@
+{
+  "category": "data",
+  "controls": [
+    "CTL-008"
+  ],
+  "evidence": "evidence/TST-DATA-005.json",
+  "expected": "Every chunk carries document, section, label, scope and version equal to its record; no chunk spans sections or is less restrictive than its document",
+  "level": "L3",
+  "observations": {
+    "chunks_checked": 17,
+    "problems": [
+      {
+        "indexed": [
+          "INTERNAL",
+          "NONE"
+        ],
+        "problem": "attributes differ from the record",
+        "record": [
+          "RESTRICTED",
+          "SI-0417"
+        ],
+        "section": "D-04-S2",
+        "tier": "shared"
+      },
+      {
+        "indexed": [
+          "INTERNAL",
+          "NONE"
+        ],
+        "problem": "attributes differ from the record",
+        "record": [
+          "CONFIDENTIAL",
+          "BID-ORION"
+        ],
+        "section": "D-03-S4",
+        "tier": "shared"
+      }
+    ]
+  },
+  "observed": "17 chunks checked; problems: [{'section': 'D-04-S2', 'tier': 'shared', 'problem': 'attributes differ from the record', 'indexed': ['INTERNAL', 'NONE'], 'record': ['RESTRICTED', 'SI-0417']}, {'section': 'D-03-S4', 'tier': 'shared', 'problem': 'attributes differ from the record', 'indexed': ['INTERNAL', 'NONE'], 'record': ['CONFIDENTIAL', 'BID-ORION']}]",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T08:12:07+00:00",
+  "status": "FAIL",
+  "test_id": "TST-DATA-005",
+  "verifies": [
+    "DATA-003",
+    "DATA-007"
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "category": "scale",
+  "controls": [
+    "CTL-003",
+    "CTL-013"
+  ],
+  "evidence": "evidence/TST-SCALE-001.json",
+  "expected": "P-10 (40 grants) retrieves D-08 and nothing ineligible; the over-limit persona is refused before any search, never truncated; the largest constraint the application accepts is accepted by the service with its last grant honoured",
+  "level": "L4",
+  "observations": {
+    "application_budget_bytes": 8192,
+    "largest_application_accepted_constraint": {
+      "bytes": 8177,
+      "grants": 445
+    },
+    "note": "Observed platform behaviour under the tested conditions, not an architectural constant",
+    "observed_limits_bytes": {
+      "retrieve_api": 15360,
+      "vector_store": 10240
+    },
+    "p10": {
+      "answer": "The finance month-end pack indicates a cost variance of placeholder amount KAPPA-4 against the forecast for signalling project costs, with accruals for the Orion follow-on survey work. Marker CANARY-FIN-MONTHEND-9D.",
+      "citations": [
+        {
+          "document_id": "D-08",
+          "document_title": "Finance month-end pack",
+          "section_id": "S1",
+          "section_title": "Signalling cost variance"
+        },
+        {
+          "document_id": "D-01",
+          "document_title": "Signalling maintenance procedure SMP-12",
+          "section_id": "S1",
+          "section_title": "Fault isolation"
+        },
+        {
+          "document_id": "D-03",
+          "document_title": "Project Orion delivery report",
+          "section_id": "S1",
+          "section_title": "Background"
+        },
+        {
+          "document_id": "D-01",
+          "document_title": "Signalling maintenance procedure SMP-12",
+          "section_id": "S2",
+          "section_title": "Post-maintenance tests"
+        }
+      ],
+      "constraints": [
+        {
+          "bytes": 926,
+          "sha256": "76688996ba921a9bea9838a25509c91fa6f51423707b2da7699e540a25ec454a",
+          "tier": "shared"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [
+          "FIN-REPORTING",
+          "SYN-DOMAIN-0001",
+          "SYN-DOMAIN-0002",
+          "SYN-DOMAIN-0003",
+          "SYN-DOMAIN-0004",
+          "SYN-DOMAIN-0005",
+          "SYN-DOMAIN-0006",
+          "SYN-DOMAIN-0007",
+          "SYN-DOMAIN-0008",
+          "SYN-DOMAIN-0009",
+          "SYN-DOMAIN-0010",
+          "SYN-DOMAIN-0011",
+          "SYN-DOMAIN-0012",
+          "SYN-DOMAIN-0013",
+          "SYN-DOMAIN-0014",
+          "SYN-DOMAIN-0015",
+          "SYN-DOMAIN-0016",
+          "SYN-DOMAIN-0017",
+          "SYN-DOMAIN-0018",
+          "SYN-DOMAIN-0019",
+          "SYN-DOMAIN-0020",
+          "SYN-DOMAIN-0021",
+          "SYN-DOMAIN-0022",
+          "SYN-DOMAIN-0023",
+          "SYN-DOMAIN-0024",
+          "SYN-DOMAIN-0025",
+          "SYN-DOMAIN-0026",
+          "SYN-DOMAIN-0027",
+          "SYN-DOMAIN-0028",
+          "SYN-DOMAIN-0029",
+          "SYN-DOMAIN-0030",
+          "SYN-DOMAIN-0031",
+          "SYN-DOMAIN-0032",
+          "SYN-DOMAIN-0033",
+          "SYN-DOMAIN-0034",
+          "SYN-DOMAIN-0035",
+          "SYN-DOMAIN-0036",
+          "SYN-DOMAIN-0037",
+          "SYN-DOMAIN-0038",
+          "SYN-DOMAIN-0039"
+        ],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": null,
+      "generation_invoked": true,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 4,
+        "generation": 313,
+        "retrieval": 321,
+        "total": 643,
+        "verification": 4
+      },
+      "outcome": "ANSWERED",
+      "persona": "P-10",
+      "question": "finance",
+      "relevance": {
+        "kept": [
+          "7201cab3-6811-4104-8d96-110ab244a5f9",
+          "79f9e77c-efb6-4110-bdf8-dc5e90290da9",
+          "069bc8fc-0a78-4586-b34e-142b6fb08b4d",
+          "6c318803-a8fb-43ad-ba68-091fbce31e5c"
+        ],
+        "min_score": 0.6,
+        "omitted": [
+          "9cb294c5-7079-4717-902c-1e43cae7e1ff"
+        ]
+      },
+      "request_id": "39e3f79b-6c85-4eb0-a543-d96aa32f7b32",
+      "retrieved": [
+        {
+          "document_id": "D-08",
+          "label": "CONFIDENTIAL",
+          "record_version": "1",
+          "scope": "FIN-REPORTING",
+          "score": 0.905811,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-01",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.623709,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.616985,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-01",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.602108,
+          "section_id": "S2",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-12",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.594804,
+          "section_id": "S1",
+          "tier": "shared"
+        }
+      ],
+      "tiers_called": [
+        "shared"
+      ],
+      "verification": {
+        "mismatches": [],
+        "record_versions": {
+          "D-01": 1,
+          "D-03": 1,
+          "D-08": 1,
+          "D-12": 1
+        },
+        "status": "PASS"
+      }
+    },
+    "p11": {
+      "answer": "I can't answer that question.",
+      "citations": [],
+      "constraints": [],
+      "decision": {
+        "cases": [],
+        "domains": "1000 domains",
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": "CTL-013",
+      "generation_invoked": false,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 14,
+        "total": 14
+      },
+      "outcome": "REFUSED_CONSTRAINT_INCOMPLETE",
+      "persona": "P-11",
+      "question": "finance",
+      "relevance": null,
+      "request_id": "8f669e32-1b3d-4358-854d-ae1cee232b13",
+      "retrieved": [],
+      "tiers_called": [],
+      "verification": {
+        "mismatches": [],
+        "status": "NOT_RUN"
+      }
+    },
+    "platform_probe_above_limit_privileged": {
+      "accepted": false,
+      "compact_bytes": 12069,
+      "default_bytes": 12785,
+      "grants": 701,
+      "layer": "S3Vectors",
+      "message": "Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 1d8762e9-7a75-84b7-bf5a-b051bc1ea075) (SDK Attempt Count: 1)",
+      "prefix": "SYN-PROBE-"
+    },
+    "platform_probe_at_budget_privileged": {
+      "accepted": true,
+      "compact_bytes": 7717,
+      "default_bytes": 8177,
+      "grants": 445,
+      "last_grant_honoured": true,
+      "prefix": "SYN-PROBE-"
+    }
+  },
+  "observed": "P-10 retrieved D-08: True, leaks [], constraint [926] bytes, decision 4 ms; P-11 outcome REFUSED_CONSTRAINT_INCOMPLETE, tiers []; largest application-accepted constraint (445 grants, 8177 bytes) accepted by the service: True, last grant honoured: True; above the observed limit rejected: True (S3Vectors)",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T09:45:44+00:00",
+  "status": "PASS",
+  "test_id": "TST-SCALE-001",
+  "verifies": [
+    "NFR-001",
+    "NFR-002"
+  ]
+}

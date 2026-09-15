@@ -1,0 +1,435 @@
+{
+  "category": "eligibility",
+  "controls": [
+    "CTL-001",
+    "CTL-011"
+  ],
+  "evidence": "evidence/TST-ELG-005.json",
+  "expected": "P-03 (FIN-REPORTING) never receives the SEC-SIGNALLING vulnerability assessment",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "FIN-REPORTING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 5,
+          "retrieval": 675,
+          "total": 685,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-03",
+        "question": "sec_vuln",
+        "relevance": null,
+        "request_id": "99699129-7171-4fa1-800b-5ff9eaf5c264",
+        "retrieved": [
+          {
+            "document_id": "D-07",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "SEC-SIGNALLING",
+            "score": 0.880041,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.747785,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.740715,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.71012,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651529,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.604503,
+            "section_id": "S2",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.560482,
+            "section_id": "S1",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "d52c03e0-0c30-41eb-afb6-a65b5e1d9c9b",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "4ffba2cd-2e75-4df6-bb0f-94d57e95d2e8",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "a1bd2263-6aa8-4085-8a89-74716fe188f5",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-01": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-07": 1,
+            "D-12": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "FIN-REPORTING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "retrieval": 679,
+          "total": 688,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-03",
+        "question": "What are the maintenance costs and weaknesses of the signalling controller?",
+        "relevance": null,
+        "request_id": "9f10c7ea-98ca-43c2-925e-8ff6c57eea70",
+        "retrieved": [
+          {
+            "document_id": "D-07",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "SEC-SIGNALLING",
+            "score": 0.820422,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.731294,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.726733,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-08",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "FIN-REPORTING",
+            "score": 0.689823,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.682953,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.542989,
+            "section_id": "S1",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.541707,
+            "section_id": "S2",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "d52c03e0-0c30-41eb-afb6-a65b5e1d9c9b",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "a1bd2263-6aa8-4085-8a89-74716fe188f5",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "4ffba2cd-2e75-4df6-bb0f-94d57e95d2e8",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-01": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-07": 1,
+            "D-08": 1,
+            "D-12": 1
+          },
+          "status": "MISMATCH"
+        }
+      }
+    ],
+    "leaks": [
+      {
+        "leaked": [
+          "CANARY-HR2031-CASE-P8",
+          "CANARY-SEC-SIG-VULN-3F",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-03",
+        "question": "sec_vuln"
+      },
+      {
+        "leaked": [
+          "CANARY-HR2031-CASE-P8",
+          "CANARY-SEC-SIG-VULN-3F",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-03",
+        "question": "What are the maintenance costs and weaknesses of the signalling controller?"
+      }
+    ],
+    "precondition": {
+      "answer": "I can't answer that question.",
+      "citations": [],
+      "constraints": [
+        {
+          "bytes": 117,
+          "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+          "tier": "shared"
+        },
+        {
+          "bytes": 51,
+          "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+          "tier": "restricted"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [
+          "SEC-SIGNALLING"
+        ],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": "CTL-014",
+      "generation_invoked": false,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 5,
+        "retrieval": 650,
+        "total": 660,
+        "verification": 4
+      },
+      "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+      "persona": "P-04",
+      "question": "sec_vuln",
+      "relevance": null,
+      "request_id": "a451f8d4-8793-4f72-bb31-38ba8d522548",
+      "retrieved": [
+        {
+          "document_id": "D-07",
+          "label": "CONFIDENTIAL",
+          "record_version": "1",
+          "scope": "SEC-SIGNALLING",
+          "score": 0.880041,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-12",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.747785,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-01",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.740715,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-01",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.71012,
+          "section_id": "S2",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-04",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.651529,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-04",
+          "label": "RESTRICTED",
+          "record_version": "1",
+          "scope": "SI-0417",
+          "score": 0.604503,
+          "section_id": "S2",
+          "tier": "restricted"
+        },
+        {
+          "document_id": "D-05",
+          "label": "RESTRICTED",
+          "record_version": "1",
+          "scope": "HR-2031",
+          "score": 0.560482,
+          "section_id": "S1",
+          "tier": "restricted"
+        }
+      ],
+      "tiers_called": [
+        "shared",
+        "restricted"
+      ],
+      "verification": {
+        "mismatches": [
+          {
+            "chunk_id": "4ffba2cd-2e75-4df6-bb0f-94d57e95d2e8",
+            "reason": "NOT_ELIGIBLE"
+          },
+          {
+            "chunk_id": "a1bd2263-6aa8-4085-8a89-74716fe188f5",
+            "reason": "NOT_ELIGIBLE"
+          }
+        ],
+        "record_versions": {
+          "D-01": 1,
+          "D-04": 1,
+          "D-05": 1,
+          "D-07": 1,
+          "D-12": 1
+        },
+        "status": "MISMATCH"
+      }
+    }
+  },
+  "observed": "precondition: P-04 retrieved D-07; LEAKS [{'persona': 'P-03', 'question': 'sec_vuln', 'leaked': ['CANARY-HR2031-CASE-P8', 'CANARY-SEC-SIG-VULN-3F', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-03', 'question': 'What are the maintenance costs and weaknesses of the signalling controller?', 'leaked': ['CANARY-HR2031-CASE-P8', 'CANARY-SEC-SIG-VULN-3F', 'CANARY-SI0417-WITNESS-K2']}]",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:23:32+00:00",
+  "status": "FAIL",
+  "test_id": "TST-ELG-005",
+  "verifies": [
+    "SEC-001"
+  ]
+}

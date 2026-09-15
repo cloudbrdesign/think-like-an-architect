@@ -41,7 +41,9 @@ drivers and cleanup steps **before** the first deployment step. Always run the c
 
 The engagement templates are available in [templates/](templates/README.md). Episode 01 is available: the complete
 engagement, the educational implementation, its validation suite and an example evidence set. Start at
-[the Episode 01 README](season-01-architecting-genai-aws/episode-01-multi-tenant-rag/README.md); the season overview is
+[the Episode 01 README](season-01-architecting-genai-aws/episode-01-multi-tenant-rag/README.md). Episode 02 is available too:
+the engagement, implementation, validation suite, three failure experiments and an example evidence set — start at
+[the Episode 02 README](season-01-architecting-genai-aws/episode-02-sensitive-data-rag/README.md). The season overview is
 [season-01-architecting-genai-aws/README.md](season-01-architecting-genai-aws/README.md).
 
 ## Licence

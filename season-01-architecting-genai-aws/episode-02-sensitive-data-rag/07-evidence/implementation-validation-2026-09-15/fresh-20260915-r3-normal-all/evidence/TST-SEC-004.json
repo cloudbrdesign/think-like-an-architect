@@ -1,0 +1,168 @@
+{
+  "category": "security",
+  "controls": [
+    "CTL-005",
+    "CTL-010"
+  ],
+  "evidence": "evidence/TST-SEC-004.json",
+  "expected": "Only the query role can search either tier; each tier's sections are readable only by its own knowledge-base role; the query function cannot be invoked directly",
+  "level": "L1",
+  "observations": {
+    "direct_query_function_invocation": "AccessDeniedException",
+    "privileged_path": {
+      "note": "The sandbox administrator can search any tier (TS-E02-03, RR-02). Recorded, not hidden.",
+      "operator_retrieve_restricted_tier_results": 1
+    },
+    "simulation_matrix": [
+      {
+        "action": "bedrock:Retrieve",
+        "capability": "search shared tier",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "QueryRole": "allowed",
+          "RestrictedKnowledgeBaseRole": "implicitDeny",
+          "SharedKnowledgeBaseRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "bedrock:Retrieve",
+        "capability": "search restricted tier",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "QueryRole": "allowed",
+          "RestrictedKnowledgeBaseRole": "implicitDeny",
+          "SharedKnowledgeBaseRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "bedrock:IngestKnowledgeBaseDocuments",
+        "capability": "ingest shared tier",
+        "decisions": {
+          "IngestionRole": "allowed",
+          "QueryRole": "implicitDeny",
+          "RestrictedKnowledgeBaseRole": "implicitDeny",
+          "SharedKnowledgeBaseRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "bedrock:IngestKnowledgeBaseDocuments",
+        "capability": "ingest restricted tier",
+        "decisions": {
+          "IngestionRole": "allowed",
+          "QueryRole": "implicitDeny",
+          "RestrictedKnowledgeBaseRole": "implicitDeny",
+          "SharedKnowledgeBaseRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "s3:GetObject",
+        "capability": "read shared section objects",
+        "decisions": {
+          "IngestionRole": "explicitDeny",
+          "QueryRole": "explicitDeny",
+          "RestrictedKnowledgeBaseRole": "explicitDeny",
+          "SharedKnowledgeBaseRole": "allowed"
+        }
+      },
+      {
+        "action": "s3:GetObject",
+        "capability": "read restricted section objects",
+        "decisions": {
+          "IngestionRole": "explicitDeny",
+          "QueryRole": "explicitDeny",
+          "RestrictedKnowledgeBaseRole": "allowed",
+          "SharedKnowledgeBaseRole": "explicitDeny"
+        }
+      },
+      {
+        "action": "s3:PutObject",
+        "capability": "write restricted section objects",
+        "decisions": {
+          "IngestionRole": "allowed",
+          "QueryRole": "explicitDeny",
+          "RestrictedKnowledgeBaseRole": "explicitDeny",
+          "SharedKnowledgeBaseRole": "explicitDeny"
+        }
+      },
+      {
+        "action": "s3vectors:QueryVectors",
+        "capability": "query shared vectors directly",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "QueryRole": "implicitDeny",
+          "RestrictedKnowledgeBaseRole": "implicitDeny",
+          "SharedKnowledgeBaseRole": "allowed"
+        }
+      },
+      {
+        "action": "s3vectors:QueryVectors",
+        "capability": "query restricted vectors directly",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "QueryRole": "implicitDeny",
+          "RestrictedKnowledgeBaseRole": "allowed",
+          "SharedKnowledgeBaseRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "dynamodb:BatchGetItem",
+        "capability": "read authoritative grants",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "QueryRole": "allowed",
+          "RestrictedKnowledgeBaseRole": "implicitDeny",
+          "SharedKnowledgeBaseRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "dynamodb:PutItem",
+        "capability": "change authoritative grants",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "QueryRole": "implicitDeny",
+          "RestrictedKnowledgeBaseRole": "implicitDeny",
+          "SharedKnowledgeBaseRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "dynamodb:PutItem",
+        "capability": "change classification records",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "QueryRole": "implicitDeny",
+          "RestrictedKnowledgeBaseRole": "implicitDeny",
+          "SharedKnowledgeBaseRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "dynamodb:GetItem",
+        "capability": "read audit records",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "QueryRole": "implicitDeny",
+          "RestrictedKnowledgeBaseRole": "implicitDeny",
+          "SharedKnowledgeBaseRole": "implicitDeny"
+        }
+      },
+      {
+        "action": "lambda:InvokeFunction",
+        "capability": "invoke the query function (identity policy)",
+        "decisions": {
+          "IngestionRole": "implicitDeny",
+          "QueryRole": "implicitDeny",
+          "RestrictedKnowledgeBaseRole": "implicitDeny",
+          "SharedKnowledgeBaseRole": "implicitDeny"
+        }
+      }
+    ]
+  },
+  "observed": "every capability held only by its intended principal; direct invocation denied (AccessDeniedException)",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T09:46:16+00:00",
+  "status": "PASS",
+  "test_id": "TST-SEC-004",
+  "verifies": [
+    "SEC-009",
+    "SEC-013"
+  ]
+}

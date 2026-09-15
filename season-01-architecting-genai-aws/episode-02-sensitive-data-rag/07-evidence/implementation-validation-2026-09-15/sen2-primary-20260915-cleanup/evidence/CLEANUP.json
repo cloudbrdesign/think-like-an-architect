@@ -1,0 +1,44 @@
+{
+  "category": "cleanup",
+  "controls": [],
+  "evidence": "evidence/CLEANUP.json",
+  "expected": "no resource of the labels-corrupted deployment remains",
+  "level": "L2",
+  "observations": {
+    "cleanup_failed": false,
+    "lines": [
+      "[labels-corrupted] records bucket objects removed: 15",
+      "[labels-corrupted] shared-sections bucket objects removed: 16",
+      "[labels-corrupted] restricted-sections bucket objects removed: 1",
+      "[labels-corrupted] stack tla-s01e02-sen-labels: DELETE_COMPLETE",
+      "[labels-corrupted] artifact bucket: deleted (2 objects)"
+    ],
+    "remaining": {
+      "functions": [],
+      "http_apis": [],
+      "iam_roles": [],
+      "knowledge_bases": [],
+      "log_groups": [],
+      "s3_buckets": [],
+      "stacks": [],
+      "tables": [],
+      "tagged_resources_confirmed_by_owning_service": [],
+      "user_pools": [],
+      "vector_buckets": []
+    },
+    "tag_index_entries_not_found_by_owning_service": [
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_pB6vVbc7U",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_G448yMzbU",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_FFxyAYEwR"
+    ],
+    "verified_clean": true
+  },
+  "observed": "CLEAN",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:11:31+00:00",
+  "status": "PASS",
+  "test_id": "CLEANUP",
+  "verifies": [
+    "OPS-003"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 4,
+    "PASS": 0
+  },
+  "deployment": "tla-s01e02-sen-eligibility",
+  "finished_at": "2026-09-15T07:03:10+00:00",
+  "region": "us-east-1",
+  "run_id": "sen1-primary-20260915-variant",
+  "scope": "tests TST-ELG-003,TST-ELG-005,TST-ELG-006,TST-ELG-009",
+  "started_at": "2026-09-15T07:02:08+00:00",
+  "tests": [
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-011",
+        "CTL-017"
+      ],
+      "evidence": "evidence/TST-ELG-003.json",
+      "expected": "No BID-ORION canary for P-01, P-03\u2026P-07 in any channel, including immediately after P-02's identical question",
+      "level": "L3",
+      "observed": "precondition: P-02 retrieved D-03 \u00a74 immediately before; LEAKS [{'persona': 'P-01', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-01', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-03', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-03', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-04', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-04', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-05', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8']}, {'persona': 'P-05', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8']}, {'persona': 'P-06', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-06', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-07', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-07', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}]",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T07:02:49+00:00",
+      "status": "FAIL",
+      "test_id": "TST-ELG-003",
+      "verifies": [
+        "SEC-001",
+        "SEC-004"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-011"
+      ],
+      "evidence": "evidence/TST-ELG-005.json",
+      "expected": "P-03 (FIN-REPORTING) never receives the SEC-SIGNALLING vulnerability assessment",
+      "level": "L3",
+      "observed": "precondition: P-04 retrieved D-07; LEAKS [{'persona': 'P-03', 'question': 'sec_vuln', 'leaked': ['CANARY-HR2031-CASE-P8', 'CANARY-SEC-SIG-VULN-3F', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-03', 'question': 'What are the maintenance costs and weaknesses of the signalling controller?', 'leaked': ['CANARY-HR2031-CASE-P8', 'CANARY-SEC-SIG-VULN-3F', 'CANARY-SI0417-WITNESS-K2']}]",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T07:02:55+00:00",
+      "status": "FAIL",
+      "test_id": "TST-ELG-005",
+      "verifies": [
+        "SEC-001"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-012"
+      ],
+      "evidence": "evidence/TST-ELG-006.json",
+      "expected": "P-07 (senior director) receives no case canary; the restricted tier is not searched for P-07",
+      "level": "L3",
+      "observed": "preconditions: P-05 and P-06 retrieved their cases; leaks [{'persona': 'P-07', 'question': 'si0417_witness', 'leaked': ['CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-07', 'question': 'hr2031', 'leaked': ['CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}]; restricted tier called for P-07 in ['si0417_witness', 'hr2031']",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T07:03:04+00:00",
+      "status": "FAIL",
+      "test_id": "TST-ELG-006",
+      "verifies": [
+        "SEC-001",
+        "SEC-006"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-011",
+        "CTL-012"
+      ],
+      "evidence": "evidence/TST-ELG-009.json",
+      "expected": "Correct tier \u2260 authorization: zero HR-2031, FIN-REPORTING or SEC-SIGNALLING canaries although the tier was searched",
+      "level": "L3",
+      "observed": "P-05 restricted tier searched: True; P-02 shared tier searched: True; leaks [{'persona': 'P-05', 'question': 'hr2031', 'leaked': ['CANARY-HR2031-CASE-P8']}, {'persona': 'P-02', 'question': 'finance', 'leaked': ['CANARY-FIN-MONTHEND-9D', 'CANARY-HR2031-CASE-P8', 'CANARY-SEC-SIG-VULN-3F', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-02', 'question': 'sec_vuln', 'leaked': ['CANARY-HR2031-CASE-P8', 'CANARY-SEC-SIG-VULN-3F', 'CANARY-SI0417-WITNESS-K2']}]",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T07:03:10+00:00",
+      "status": "FAIL",
+      "test_id": "TST-ELG-009",
+      "verifies": [
+        "SEC-001",
+        "SEC-006"
+      ]
+    }
+  ],
+  "variant": "eligibility-removed"
+}

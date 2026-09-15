@@ -1,0 +1,44 @@
+{
+  "category": "cleanup",
+  "controls": [],
+  "evidence": "evidence/CLEANUP.json",
+  "expected": "no resource of the Episode 02 deployments remains (authoritative service lookups)",
+  "level": "L2/L5",
+  "observations": {
+    "remaining": {
+      "functions": [],
+      "http_apis": [],
+      "iam_roles": [],
+      "knowledge_bases": [],
+      "log_groups": [],
+      "s3_buckets": [],
+      "stacks": [],
+      "tables": [],
+      "tagged_resources_confirmed_by_owning_service": [],
+      "user_pools": [],
+      "vector_buckets": []
+    },
+    "tag_index_entries_not_found_by_owning_service": [
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_m7ukudxPl",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_pB6vVbc7U",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_G448yMzbU",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_Y3isegp94",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_tLCkzMmXD",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_FFxyAYEwR"
+    ],
+    "variants": [
+      "normal",
+      "eligibility-removed",
+      "labels-corrupted",
+      "claims-as-grants"
+    ]
+  },
+  "observed": "CLEAN \u2014 normal, eligibility-removed, labels-corrupted, claims-as-grants",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:28:43+00:00",
+  "status": "PASS",
+  "test_id": "CLEANUP",
+  "verifies": [
+    "OPS-003"
+  ]
+}

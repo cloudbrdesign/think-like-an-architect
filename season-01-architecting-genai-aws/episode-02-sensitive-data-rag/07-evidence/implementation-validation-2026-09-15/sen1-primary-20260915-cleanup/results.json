@@ -1,0 +1,31 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "PASS": 1
+  },
+  "deployment": null,
+  "finished_at": "2026-09-15T07:04:38+00:00",
+  "region": null,
+  "run_id": "sen1-primary-20260915-cleanup",
+  "scope": "cleanup eligibility-removed",
+  "started_at": "2026-09-15T07:04:38+00:00",
+  "tests": [
+    {
+      "category": "cleanup",
+      "controls": [],
+      "evidence": "evidence/CLEANUP.json",
+      "expected": "no resource of the eligibility-removed deployment remains",
+      "level": "L2",
+      "observed": "CLEAN",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T07:04:38+00:00",
+      "status": "PASS",
+      "test_id": "CLEANUP",
+      "verifies": [
+        "OPS-003"
+      ]
+    }
+  ],
+  "variant": null
+}

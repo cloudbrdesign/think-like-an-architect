@@ -1,0 +1,31 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "PASS": 1
+  },
+  "deployment": null,
+  "finished_at": "2026-09-15T08:15:26+00:00",
+  "region": null,
+  "run_id": "fresh-20260915-r2-interrupted-cleanup",
+  "scope": "cleanup",
+  "started_at": "2026-09-15T08:15:26+00:00",
+  "tests": [
+    {
+      "category": "cleanup",
+      "controls": [],
+      "evidence": "evidence/CLEANUP.json",
+      "expected": "no resource of the Episode 02 deployments remains (authoritative service lookups)",
+      "level": "L2/L5",
+      "observed": "CLEAN \u2014 normal, eligibility-removed, labels-corrupted, claims-as-grants",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T08:15:26+00:00",
+      "status": "PASS",
+      "test_id": "CLEANUP",
+      "verifies": [
+        "OPS-003"
+      ]
+    }
+  ],
+  "variant": null
+}

@@ -1,0 +1,295 @@
+{
+  "schema": "tla-e02-classification-records/1",
+  "note": "Synthetic. Malformed values are kept verbatim on purpose (D-09 missing, D-10 misspelt, D-11 no scope, D-15 lower case).",
+  "records": [
+    {
+      "document_id": "D-01",
+      "title": "Signalling maintenance procedure SMP-12",
+      "document_label": "INTERNAL",
+      "document_scope": null,
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Fault isolation",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        },
+        {
+          "section_id": "S2",
+          "title": "Post-maintenance tests",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-02",
+      "title": "Northfield depot safety induction",
+      "document_label": "INTERNAL",
+      "document_scope": null,
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Depot hazards",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        },
+        {
+          "section_id": "S2",
+          "title": "Protective equipment",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-03",
+      "title": "Project Orion delivery report",
+      "document_label": "INTERNAL",
+      "document_scope": null,
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Background",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        },
+        {
+          "section_id": "S2",
+          "title": "Delivery",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        },
+        {
+          "section_id": "S3",
+          "title": "Lessons learned",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        },
+        {
+          "section_id": "S4",
+          "title": "Commercial position and bid pricing",
+          "label": "CONFIDENTIAL",
+          "scope": "BID-ORION",
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-04",
+      "title": "Safety investigation SI-0417 report",
+      "document_label": "INTERNAL",
+      "document_scope": null,
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Sanitised findings",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        },
+        {
+          "section_id": "S2",
+          "title": "Witness statements",
+          "label": "RESTRICTED",
+          "scope": "SI-0417",
+          "special_category": false
+        },
+        {
+          "section_id": "S3",
+          "title": "Medical details",
+          "label": "RESTRICTED",
+          "scope": "SI-0417",
+          "special_category": true
+        }
+      ]
+    },
+    {
+      "document_id": "D-05",
+      "title": "HR case file HR-2031",
+      "document_label": "RESTRICTED",
+      "document_scope": "HR-2031",
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Case summary",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-06",
+      "title": "Working-hours and on-call policy",
+      "document_label": "INTERNAL",
+      "document_scope": null,
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "On-call and rest periods",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-07",
+      "title": "Vulnerability assessment of the signalling controller",
+      "document_label": "CONFIDENTIAL",
+      "document_scope": "SEC-SIGNALLING",
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Findings",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-08",
+      "title": "Finance month-end pack",
+      "document_label": "CONFIDENTIAL",
+      "document_scope": "FIN-REPORTING",
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Signalling cost variance",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-09",
+      "title": "Depot tooling list",
+      "document_label": null,
+      "document_scope": null,
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Relay cabinet tools",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-10",
+      "title": "Supplier review",
+      "document_label": "CONFIDENTAIL",
+      "document_scope": "BID-ORION",
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Cable supplier",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-11",
+      "title": "Depot access arrangements",
+      "document_label": "CONFIDENTIAL",
+      "document_scope": null,
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Contractor access",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-12",
+      "title": "Signalling fault-finding guide",
+      "document_label": "INTERNAL",
+      "document_scope": null,
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Finding a controller fault",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-13",
+      "title": "Northfield resilience review",
+      "document_label": "INTERNAL",
+      "document_scope": null,
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Recommendations",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-14",
+      "title": "Orion commercial summary",
+      "document_label": "CONFIDENTIAL",
+      "document_scope": "BID-ORION",
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Discount strategy",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    },
+    {
+      "document_id": "D-15",
+      "title": "Van parking guidance",
+      "document_label": "internal",
+      "document_scope": null,
+      "version": 1,
+      "sections": [
+        {
+          "section_id": "S1",
+          "title": "Parking",
+          "label": null,
+          "scope": null,
+          "special_category": false
+        }
+      ]
+    }
+  ]
+}

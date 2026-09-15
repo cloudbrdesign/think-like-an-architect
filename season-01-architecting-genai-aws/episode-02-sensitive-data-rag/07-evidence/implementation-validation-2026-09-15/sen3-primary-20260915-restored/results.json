@@ -1,0 +1,35 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "PASS": 1
+  },
+  "deployment": "tla-s01e02-normal",
+  "finished_at": "2026-09-15T07:17:40+00:00",
+  "region": "us-east-1",
+  "run_id": "sen3-primary-20260915-restored",
+  "scope": "tests TST-CHG-001",
+  "started_at": "2026-09-15T07:17:25+00:00",
+  "tests": [
+    {
+      "category": "change",
+      "controls": [
+        "CTL-003"
+      ],
+      "evidence": "evidence/TST-CHG-001.json",
+      "expected": "After P-02's BID-ORION grant is revoked in the grants store, the same still-valid token retrieves no BID-ORION content",
+      "level": "L4",
+      "observed": "same token: True (groups claim ['domain.BID-ORION']); before retrieved D-03 \u00a74: True; after revocation retrieved BID-ORION: []; decision domains [] grants_version 6 (revoked version 6)",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T07:17:40+00:00",
+      "status": "PASS",
+      "test_id": "TST-CHG-001",
+      "verifies": [
+        "SEC-010",
+        "SEC-003",
+        "BUS-002"
+      ]
+    }
+  ],
+  "variant": "normal"
+}

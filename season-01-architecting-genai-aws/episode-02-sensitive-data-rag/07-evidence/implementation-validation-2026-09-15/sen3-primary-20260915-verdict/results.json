@@ -1,0 +1,33 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "PASS": 1
+  },
+  "deployment": null,
+  "finished_at": "2026-09-15T07:17:40+00:00",
+  "region": null,
+  "run_id": "sen3-primary-20260915-verdict",
+  "scope": "experiment 3",
+  "started_at": "2026-09-15T07:17:40+00:00",
+  "tests": [
+    {
+      "category": "sensitivity",
+      "controls": [
+        "CTL-003"
+      ],
+      "evidence": "evidence/TST-SEN-003.json",
+      "expected": "Baseline PASS \u2192 variant target tests FAIL for the predicted reason \u2192 variant destroyed and verified \u2192 restored PASS",
+      "level": "L4",
+      "observed": "baseline PASS \u2192 variant FAIL (did not contain it: verification checks chunks against the request's decision, and the decision itself was built from stale claims) \u2192 variant destroyed, cleanup verified \u2192 restored PASS",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T07:17:40+00:00",
+      "status": "PASS",
+      "test_id": "TST-SEN-003",
+      "verifies": [
+        "SEC-010"
+      ]
+    }
+  ],
+  "variant": null
+}

@@ -1,0 +1,40 @@
+[
+  {
+    "quarantine": [],
+    "request_id": "ingest-4fc58cf9-04a1-4438-8d78-8d0a73f99e6a",
+    "special_category_excluded": []
+  },
+  {
+    "quarantine": [],
+    "request_id": "ingest-8c8a036e-a542-4c0d-9cd1-1e09efaca6cd",
+    "special_category_excluded": []
+  },
+  {
+    "quarantine": [
+      {
+        "document_id": "D-09",
+        "reason": "LABEL_MISSING",
+        "section_id": null
+      },
+      {
+        "document_id": "D-10",
+        "reason": "LABEL_INVALID",
+        "section_id": null
+      },
+      {
+        "document_id": "D-11",
+        "reason": "SCOPE_MISSING",
+        "section_id": null
+      },
+      {
+        "document_id": "D-15",
+        "reason": "LABEL_INVALID",
+        "section_id": null
+      }
+    ],
+    "request_id": "ingest-9334f2d6-40fd-4714-827c-507cbba14abe",
+    "special_category_excluded": [
+      "D-04-S3"
+    ]
+  }
+]

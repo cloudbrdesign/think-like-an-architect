@@ -1,0 +1,271 @@
+{
+  "all_accepted_honoured_last_grant": true,
+  "application_budget_bytes_default_separators": 12288,
+  "boundaries": {
+    "SYN-LONGER-PROBE-IDENTIFIER-": {
+      "largest_accepted": {
+        "accepted": true,
+        "compact_bytes": 9969,
+        "default_bytes": 10265,
+        "grants": 281,
+        "last_grant_honoured": true,
+        "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+      },
+      "smallest_rejected": {
+        "accepted": false,
+        "compact_bytes": 10004,
+        "default_bytes": 10301,
+        "grants": 282,
+        "layer": "S3Vectors",
+        "message": "Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 158d55cb-9d62-8f5c-a20e-a29c6a6a1470) (SDK Attempt Count: 1)",
+        "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+      }
+    },
+    "SYN-PROBE-": {
+      "largest_accepted": {
+        "accepted": true,
+        "compact_bytes": 9689,
+        "default_bytes": 10265,
+        "grants": 561,
+        "last_grant_honoured": true,
+        "prefix": "SYN-PROBE-"
+      },
+      "smallest_rejected": {
+        "accepted": false,
+        "compact_bytes": 9706,
+        "default_bytes": 10283,
+        "grants": 562,
+        "layer": "S3Vectors",
+        "message": "Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 1b4ef7f9-6949-8847-be53-36b42aad89b0) (SDK Attempt Count: 1)",
+        "prefix": "SYN-PROBE-"
+      }
+    }
+  },
+  "distinct_rejections": [
+    "Retrieve: The requested filter exceeds the maximum allowable size of 15360 bytes.",
+    "S3Vectors: Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 158d55cb-9d62-8f5c-a20e-a29c6a6a1470) (SDK Attempt Count: 1)",
+    "S3Vectors: Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 171f5f7e-7bbe-8302-8a53-c600905f80d5) (SDK Attempt Count: 1)",
+    "S3Vectors: Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 19036b33-3c9d-8201-82ca-0f1fcc36d10d) (SDK Attempt Count: 1)",
+    "S3Vectors: Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 19b4e5e5-c125-8234-95af-2625a8b2d42e) (SDK Attempt Count: 1)",
+    "S3Vectors: Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 1b4ef7f9-6949-8847-be53-36b42aad89b0) (SDK Attempt Count: 1)"
+  ],
+  "note": "OBSERVED PLATFORM BEHAVIOUR UNDER THE TESTED CONDITIONS \u2014 NOT AN ARCHITECTURAL CONSTANT.",
+  "series": [
+    {
+      "accepted": true,
+      "compact_bytes": 186,
+      "default_bytes": 203,
+      "grants": 2,
+      "last_grant_honoured": true,
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": false,
+      "compact_bytes": 20569,
+      "default_bytes": 21785,
+      "grants": 1201,
+      "layer": "Retrieve",
+      "message": "The requested filter exceeds the maximum allowable size of 15360 bytes.",
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": false,
+      "compact_bytes": 10369,
+      "default_bytes": 10985,
+      "grants": 601,
+      "layer": "S3Vectors",
+      "message": "Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 19036b33-3c9d-8201-82ca-0f1fcc36d10d) (SDK Attempt Count: 1)",
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 5269,
+      "default_bytes": 5585,
+      "grants": 301,
+      "last_grant_honoured": true,
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 7819,
+      "default_bytes": 8285,
+      "grants": 451,
+      "last_grant_honoured": true,
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9094,
+      "default_bytes": 9635,
+      "grants": 526,
+      "last_grant_honoured": true,
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": false,
+      "compact_bytes": 9723,
+      "default_bytes": 10301,
+      "grants": 563,
+      "layer": "S3Vectors",
+      "message": "Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 171f5f7e-7bbe-8302-8a53-c600905f80d5) (SDK Attempt Count: 1)",
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9400,
+      "default_bytes": 9959,
+      "grants": 544,
+      "last_grant_honoured": true,
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9553,
+      "default_bytes": 10121,
+      "grants": 553,
+      "last_grant_honoured": true,
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9638,
+      "default_bytes": 10211,
+      "grants": 558,
+      "last_grant_honoured": true,
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9672,
+      "default_bytes": 10247,
+      "grants": 560,
+      "last_grant_honoured": true,
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9689,
+      "default_bytes": 10265,
+      "grants": 561,
+      "last_grant_honoured": true,
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": false,
+      "compact_bytes": 9706,
+      "default_bytes": 10283,
+      "grants": 562,
+      "layer": "S3Vectors",
+      "message": "Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 1b4ef7f9-6949-8847-be53-36b42aad89b0) (SDK Attempt Count: 1)",
+      "prefix": "SYN-PROBE-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 204,
+      "default_bytes": 221,
+      "grants": 2,
+      "last_grant_honoured": true,
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": false,
+      "compact_bytes": 42169,
+      "default_bytes": 43385,
+      "grants": 1201,
+      "layer": "Retrieve",
+      "message": "The requested filter exceeds the maximum allowable size of 15360 bytes.",
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": false,
+      "compact_bytes": 21169,
+      "default_bytes": 21785,
+      "grants": 601,
+      "layer": "Retrieve",
+      "message": "The requested filter exceeds the maximum allowable size of 15360 bytes.",
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": false,
+      "compact_bytes": 10669,
+      "default_bytes": 10985,
+      "grants": 301,
+      "layer": "S3Vectors",
+      "message": "Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 19b4e5e5-c125-8234-95af-2625a8b2d42e) (SDK Attempt Count: 1)",
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 5419,
+      "default_bytes": 5585,
+      "grants": 151,
+      "last_grant_honoured": true,
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 8044,
+      "default_bytes": 8285,
+      "grants": 226,
+      "last_grant_honoured": true,
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9339,
+      "default_bytes": 9617,
+      "grants": 263,
+      "last_grant_honoured": true,
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": false,
+      "compact_bytes": 10004,
+      "default_bytes": 10301,
+      "grants": 282,
+      "layer": "S3Vectors",
+      "message": "Filter must have at most 10240 bytes (Service: S3Vectors, Status Code: 400, Request ID: 158d55cb-9d62-8f5c-a20e-a29c6a6a1470) (SDK Attempt Count: 1)",
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9654,
+      "default_bytes": 9941,
+      "grants": 272,
+      "last_grant_honoured": true,
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9829,
+      "default_bytes": 10121,
+      "grants": 277,
+      "last_grant_honoured": true,
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9899,
+      "default_bytes": 10193,
+      "grants": 279,
+      "last_grant_honoured": true,
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9934,
+      "default_bytes": 10229,
+      "grants": 280,
+      "last_grant_honoured": true,
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    },
+    {
+      "accepted": true,
+      "compact_bytes": 9969,
+      "default_bytes": 10265,
+      "grants": 281,
+      "last_grant_honoured": true,
+      "prefix": "SYN-LONGER-PROBE-IDENTIFIER-"
+    }
+  ]
+}

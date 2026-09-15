@@ -1,0 +1,158 @@
+{
+  "category": "eligibility",
+  "controls": [
+    "CTL-001",
+    "CTL-011",
+    "CTL-015"
+  ],
+  "evidence": "evidence/TST-ELG-001.json",
+  "expected": "P-01 is answered from SMP-12 (D-01 \u00a71), retrieved and cited",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "The fault isolation procedure in SMP-12 involves isolating the controller at the local distribution board, applying a personal lock, confirming isolation with a test lamp, and testing relay interlocks one at a time, recording each reading in the depot maintenance system. Marker CANARY-INT-SMP12.",
+        "citations": [
+          {
+            "document_id": "D-01",
+            "document_title": "Signalling maintenance procedure SMP-12",
+            "section_id": "S1",
+            "section_title": "Fault isolation"
+          },
+          {
+            "document_id": "D-01",
+            "document_title": "Signalling maintenance procedure SMP-12",
+            "section_id": "S2",
+            "section_title": "Post-maintenance tests"
+          },
+          {
+            "document_id": "D-12",
+            "document_title": "Signalling fault-finding guide",
+            "section_id": "S1",
+            "section_title": "Finding a controller fault"
+          },
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 78,
+          "generation": 349,
+          "retrieval": 470,
+          "total": 911,
+          "verification": 13
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-01",
+        "question": "smp12",
+        "relevance": {
+          "kept": [
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9",
+            "6c318803-a8fb-43ad-ba68-091fbce31e5c",
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff",
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5",
+            "7493209c-3f09-4ee3-b4a2-90eb8cb252fa"
+          ],
+          "min_score": 0.6,
+          "omitted": []
+        },
+        "request_id": "4403225c-b2d0-4e86-8ba7-b3423aae50fc",
+        "retrieved": [
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.88688,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.79603,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.709223,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.645892,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.604428,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-02": 1,
+            "D-04": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      }
+    ]
+  },
+  "observed": "outcome ANSWERED; retrieved ['D-01-S1', 'D-01-S2', 'D-02-S1', 'D-04-S1', 'D-12-S1']; cited ['D-01-S1', 'D-01-S2', 'D-02-S1', 'D-04-S1', 'D-12-S1']",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T09:43:03+00:00",
+  "status": "PASS",
+  "test_id": "TST-ELG-001",
+  "verifies": [
+    "BUS-001",
+    "FUN-001"
+  ]
+}

@@ -1,0 +1,510 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "PASS": 27
+  },
+  "deployment": "tla-s01e02-normal",
+  "finished_at": "2026-09-15T06:55:18+00:00",
+  "region": "us-east-1",
+  "run_id": "primary-20260915-normal-all",
+  "scope": "tests all",
+  "started_at": "2026-09-15T06:43:55+00:00",
+  "tests": [
+    {
+      "category": "change",
+      "controls": [
+        "CTL-003"
+      ],
+      "evidence": "evidence/TST-CHG-001.json",
+      "expected": "After P-02's BID-ORION grant is revoked in the grants store, the same still-valid token retrieves no BID-ORION content",
+      "level": "L4",
+      "observed": "same token: True (groups claim ['domain.BID-ORION']); before retrieved D-03 \u00a74: True; after revocation retrieved BID-ORION: []; decision domains [] grants_version 2 (revoked version 2)",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:47:27+00:00",
+      "status": "PASS",
+      "test_id": "TST-CHG-001",
+      "verifies": [
+        "SEC-010",
+        "SEC-003",
+        "BUS-002"
+      ]
+    },
+    {
+      "category": "change",
+      "controls": [
+        "CTL-014"
+      ],
+      "evidence": "evidence/TST-CHG-002.json",
+      "expected": "D-13 reclassified upward without re-index: withheld before generation for P-01 and P-07; answers resume after re-index",
+      "level": "L4",
+      "observed": "before: D-13 retrieved True; after reclassification: [('P-01', 'WITHHELD_VERIFICATION_MISMATCH'), ('P-07', 'WITHHELD_VERIFICATION_MISMATCH')]; after restore + re-index: ANSWERED",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:48:01+00:00",
+      "status": "PASS",
+      "test_id": "TST-CHG-002",
+      "verifies": [
+        "SEC-011"
+      ]
+    },
+    {
+      "category": "data",
+      "controls": [
+        "CTL-007"
+      ],
+      "evidence": "evidence/TST-DATA-001.json",
+      "expected": "Unlabelled D-09 is quarantined and reported; its canary is in neither tier",
+      "level": "L3",
+      "observed": "quarantine ['LABEL_MISSING']; absent from both tiers: True; P-01 retrieved ['D-01-S1', 'D-02-S1', 'D-02-S2', 'D-04-S1', 'D-13-S1']",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:45:48+00:00",
+      "status": "PASS",
+      "test_id": "TST-DATA-001",
+      "verifies": [
+        "DATA-005",
+        "SEC-007"
+      ]
+    },
+    {
+      "category": "data",
+      "controls": [
+        "CTL-007"
+      ],
+      "evidence": "evidence/TST-DATA-002.json",
+      "expected": "Misspelt (D-10), scope-less (D-11) and lower-case (D-15) labels are quarantined; canaries in neither tier",
+      "level": "L3",
+      "observed": "{'D-10': {'reasons': ['LABEL_INVALID'], 'absent': True, 'ok': True}, 'D-11': {'reasons': ['SCOPE_MISSING'], 'absent': True, 'ok': True}, 'D-15': {'reasons': ['LABEL_INVALID'], 'absent': True, 'ok': True}}; quarantined sections retrieved: []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:45:58+00:00",
+      "status": "PASS",
+      "test_id": "TST-DATA-002",
+      "verifies": [
+        "DATA-001",
+        "DATA-005",
+        "SEC-007"
+      ]
+    },
+    {
+      "category": "data",
+      "controls": [
+        "CTL-006"
+      ],
+      "evidence": "evidence/TST-DATA-003.json",
+      "expected": "D-14's text claims INTERNAL; it is indexed as CONFIDENTIAL BID-ORION; P-01 never retrieves it, P-02 does",
+      "level": "L3",
+      "observed": "D-14 chunks [('CONFIDENTIAL', 'BID-ORION', 'shared')]; P-01 retrieved D-14: False; P-02 retrieved D-14: True",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:46:02+00:00",
+      "status": "PASS",
+      "test_id": "TST-DATA-003",
+      "verifies": [
+        "DATA-002"
+      ]
+    },
+    {
+      "category": "data",
+      "controls": [
+        "CTL-009"
+      ],
+      "evidence": "evidence/TST-DATA-004.json",
+      "expected": "Special-category D-04 \u00a73 is absent from both tiers' storage and vectors, retrieval, answers, audit and logs",
+      "level": "L3",
+      "observed": "excluded at ingestion ['D-04-S3']; chunks 0; section objects []; retrieved/answered for []; audit hits False; log hits {}",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:46:30+00:00",
+      "status": "PASS",
+      "test_id": "TST-DATA-004",
+      "verifies": [
+        "DATA-004",
+        "CMP-001"
+      ]
+    },
+    {
+      "category": "data",
+      "controls": [
+        "CTL-008"
+      ],
+      "evidence": "evidence/TST-DATA-005.json",
+      "expected": "Every chunk carries document, section, label, scope and version equal to its record; no chunk spans sections or is less restrictive than its document",
+      "level": "L3",
+      "observed": "17 chunks checked; problems: []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:46:34+00:00",
+      "status": "PASS",
+      "test_id": "TST-DATA-005",
+      "verifies": [
+        "DATA-003",
+        "DATA-007"
+      ]
+    },
+    {
+      "category": "data",
+      "controls": [
+        "CTL-010",
+        "CTL-017"
+      ],
+      "evidence": "evidence/TST-DATA-006.json",
+      "expected": "Shared tier holds no RESTRICTED section, restricted tier only RESTRICTED; no cache resource or cached answer path",
+      "level": "L3",
+      "observed": "problems: []; cache resources []; cache settings []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:46:37+00:00",
+      "status": "PASS",
+      "test_id": "TST-DATA-006",
+      "verifies": [
+        "DATA-006"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-011",
+        "CTL-015"
+      ],
+      "evidence": "evidence/TST-ELG-001.json",
+      "expected": "P-01 is answered from SMP-12 (D-01 \u00a71), retrieved and cited",
+      "level": "L3",
+      "observed": "outcome ANSWERED; retrieved ['D-01-S1', 'D-01-S2', 'D-02-S1', 'D-04-S1', 'D-12-S1']; cited ['D-01-S1', 'D-01-S2', 'D-02-S1', 'D-04-S1', 'D-12-S1']",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:44:00+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-001",
+      "verifies": [
+        "BUS-001",
+        "FUN-001"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-011",
+        "CTL-015"
+      ],
+      "evidence": "evidence/TST-ELG-002.json",
+      "expected": "P-02 (BID-ORION) retrieves and is cited the Orion pricing section D-03 \u00a74",
+      "level": "L3",
+      "observed": "outcome ANSWERED; retrieved ['D-03-S1', 'D-03-S2', 'D-03-S3', 'D-03-S4', 'D-14-S1']; cited ['D-03-S1', 'D-03-S2', 'D-03-S3', 'D-03-S4', 'D-14-S1']",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:44:04+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-002",
+      "verifies": [
+        "FUN-002"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-011",
+        "CTL-017"
+      ],
+      "evidence": "evidence/TST-ELG-003.json",
+      "expected": "No BID-ORION canary for P-01, P-03\u2026P-07 in any channel, including immediately after P-02's identical question",
+      "level": "L3",
+      "observed": "precondition: P-02 retrieved D-03 \u00a74 immediately before; no ineligible canary for 6 personas \u00d7 2 questions",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:44:38+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-003",
+      "verifies": [
+        "SEC-001",
+        "SEC-004"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-008",
+        "CTL-011"
+      ],
+      "evidence": "evidence/TST-ELG-004.json",
+      "expected": "P-01 is answered from Orion lessons (D-03 \u00a73); D-03 \u00a74 is never retrieved",
+      "level": "L3",
+      "observed": "lessons retrieved+cited: True; D-03 \u00a74 retrieved in: []; leaks []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:44:42+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-004",
+      "verifies": [
+        "FUN-004",
+        "DATA-003"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-011"
+      ],
+      "evidence": "evidence/TST-ELG-005.json",
+      "expected": "P-03 (FIN-REPORTING) never receives the SEC-SIGNALLING vulnerability assessment",
+      "level": "L3",
+      "observed": "precondition: P-04 retrieved D-07; no SEC-SIGNALLING canary for P-03",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:44:48+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-005",
+      "verifies": [
+        "SEC-001"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-012"
+      ],
+      "evidence": "evidence/TST-ELG-006.json",
+      "expected": "P-07 (senior director) receives no case canary; the restricted tier is not searched for P-07",
+      "level": "L3",
+      "observed": "preconditions: P-05 and P-06 retrieved their cases; leaks []; restricted tier called for P-07 in []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:44:56+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-006",
+      "verifies": [
+        "SEC-001",
+        "SEC-006"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-012",
+        "CTL-015"
+      ],
+      "evidence": "evidence/TST-ELG-007.json",
+      "expected": "P-05 and P-06 each receive only their own case",
+      "level": "L3",
+      "observed": "own case retrieved+cited {'P-05 SI-0417': True, 'P-06 HR-2031': True}; leaks []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:45:06+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-007",
+      "verifies": [
+        "FUN-002",
+        "SEC-006"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-016"
+      ],
+      "evidence": "evidence/TST-ELG-008.json",
+      "expected": "A topic that exists only in restricted content and a topic that exists nowhere give identical responses to P-01",
+      "level": "L3",
+      "observed": "identical: True; both uniform: True; outcomes NO_RELEVANT_CONTENT / NO_RELEVANT_CONTENT; leaks []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:45:10+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-008",
+      "verifies": [
+        "FUN-003"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-011",
+        "CTL-012"
+      ],
+      "evidence": "evidence/TST-ELG-009.json",
+      "expected": "Correct tier \u2260 authorization: zero HR-2031, FIN-REPORTING or SEC-SIGNALLING canaries although the tier was searched",
+      "level": "L3",
+      "observed": "P-05 restricted tier searched: True; P-02 shared tier searched: True; leaks []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:45:16+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-009",
+      "verifies": [
+        "SEC-001",
+        "SEC-006"
+      ]
+    },
+    {
+      "category": "observability",
+      "controls": [
+        "CTL-018",
+        "CTL-019"
+      ],
+      "evidence": "evidence/TST-OBS-001.json",
+      "expected": "No canary and no question text in any audit record or operational log; decisions present; model logging disabled",
+      "level": "L3",
+      "observed": "252 audit items, 455 log events scanned; canary hits []; question hits 0; log hits {}; model logging enabled False",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:55:03+00:00",
+      "status": "PASS",
+      "test_id": "TST-OBS-001",
+      "verifies": [
+        "SEC-012",
+        "DATA-006"
+      ]
+    },
+    {
+      "category": "observability",
+      "controls": [
+        "CTL-020"
+      ],
+      "evidence": "evidence/TST-OBS-002.json",
+      "expected": "Three decisions reconstructed from audit records and stored versions match; reports list the quarantined fixtures and the TST-SEC-007 mismatch",
+      "level": "L3",
+      "observed": "reconstruction checks [{'decision': True, 'constraint_hashes': True, 'verification': True, 'outcome': True}, {'decision': True, 'constraint_hashes': True, 'verification': True, 'outcome': True}, {'decision': True, 'constraint_hashes': True, 'verification': True, 'outcome': True}]; quarantine report ['D-09', 'D-10', 'D-11', 'D-15']; mismatch report includes TST-SEC-007: True",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:54:54+00:00",
+      "status": "PASS",
+      "test_id": "TST-OBS-002",
+      "verifies": [
+        "OPS-001",
+        "OPS-002"
+      ]
+    },
+    {
+      "category": "scale",
+      "controls": [
+        "CTL-003",
+        "CTL-013"
+      ],
+      "evidence": "evidence/TST-SCALE-001.json",
+      "expected": "P-10 (40 grants) retrieves D-08 and nothing ineligible; the over-limit persona is refused before any search, never truncated; the largest constraint the application accepts is accepted by the service with its last grant honoured",
+      "level": "L4",
+      "observed": "P-10 retrieved D-08: True, leaks [], constraint [926] bytes, decision 5 ms; P-11 outcome REFUSED_CONSTRAINT_INCOMPLETE, tiers []; largest application-accepted constraint (445 grants, 8177 bytes) accepted by the service: True, last grant honoured: True; above the observed limit rejected: True (S3Vectors)",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:46:44+00:00",
+      "status": "PASS",
+      "test_id": "TST-SCALE-001",
+      "verifies": [
+        "NFR-001",
+        "NFR-002"
+      ]
+    },
+    {
+      "category": "security",
+      "controls": [
+        "CTL-002"
+      ],
+      "evidence": "evidence/TST-SEC-001.json",
+      "expected": "Missing, malformed, tampered, other-application and expired tokens are refused at the edge; no audit item",
+      "level": "L3",
+      "observed": "statuses {'missing': 401, 'malformed': 401, 'tampered_signature': 401, 'other_application': 401, 'expired': 401}; audit items before 258 after 258",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:55:18+00:00",
+      "status": "PASS",
+      "test_id": "TST-SEC-001",
+      "verifies": [
+        "SEC-002"
+      ]
+    },
+    {
+      "category": "security",
+      "controls": [
+        "CTL-003"
+      ],
+      "evidence": "evidence/TST-SEC-002.json",
+      "expected": "Forged domain and case in body, query, headers, question text and extra token groups do not change the decision",
+      "level": "L3",
+      "observed": "token groups ['domain.BID-ORION', 'case.HR-2031']; decision domains [] cases [] = store []/[] v1: True; tiers ['shared']; leaks []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:45:24+00:00",
+      "status": "PASS",
+      "test_id": "TST-SEC-002",
+      "verifies": [
+        "SEC-003"
+      ]
+    },
+    {
+      "category": "security",
+      "controls": [
+        "CTL-013"
+      ],
+      "evidence": "evidence/TST-SEC-003.json",
+      "expected": "Prompt attacks and a document carrying injected instructions leave the constraint identical; no ineligible canary",
+      "level": "L3",
+      "observed": "constraint hashes identical to baseline: True; D-12 (injected text) retrieved: True; leaks []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:45:32+00:00",
+      "status": "PASS",
+      "test_id": "TST-SEC-003",
+      "verifies": [
+        "SEC-005"
+      ]
+    },
+    {
+      "category": "security",
+      "controls": [
+        "CTL-005",
+        "CTL-010"
+      ],
+      "evidence": "evidence/TST-SEC-004.json",
+      "expected": "Only the query role can search either tier; each tier's sections are readable only by its own knowledge-base role; the query function cannot be invoked directly",
+      "level": "L1",
+      "observed": "every capability held only by its intended principal; direct invocation denied (AccessDeniedException)",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:47:15+00:00",
+      "status": "PASS",
+      "test_id": "TST-SEC-004",
+      "verifies": [
+        "SEC-009",
+        "SEC-013"
+      ]
+    },
+    {
+      "category": "security",
+      "controls": [
+        "CTL-004",
+        "CTL-016"
+      ],
+      "evidence": "evidence/TST-SEC-005.json",
+      "expected": "With the grants store unreadable: zero tier calls, uniform failure, content-free audit REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "level": "L4",
+      "observed": "during fault {'P-01': {'outcome': 'REFUSED_AUTHORIZATION_UNAVAILABLE', 'failing_control': 'CTL-004', 'tiers_called': [], 'retrieval': [], 'generation_invoked': False, 'uniform': True}, 'P-02': {'outcome': 'REFUSED_AUTHORIZATION_UNAVAILABLE', 'failing_control': 'CTL-004', 'tiers_called': [], 'retrieval': [], 'generation_invoked': False, 'uniform': True}, 'P-05': {'outcome': 'REFUSED_AUTHORIZATION_UNAVAILABLE', 'failing_control': 'CTL-004', 'tiers_called': [], 'retrieval': [], 'generation_invoked': False, 'uniform': True}}; fault removed, restored outcome ANSWERED after 302 s",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:54:44+00:00",
+      "status": "PASS",
+      "test_id": "TST-SEC-005",
+      "verifies": [
+        "SEC-007",
+        "NFR-003"
+      ]
+    },
+    {
+      "category": "security",
+      "controls": [
+        "CTL-004"
+      ],
+      "evidence": "evidence/TST-SEC-006.json",
+      "expected": "P-08 (inactive, stale grant) and P-09 (no record): no search call, uniform failure, no canary",
+      "level": "L3",
+      "observed": "4/4 refused with zero tier calls and the uniform response",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:45:40+00:00",
+      "status": "PASS",
+      "test_id": "TST-SEC-006",
+      "verifies": [
+        "SEC-007"
+      ]
+    },
+    {
+      "category": "security",
+      "controls": [
+        "CTL-014"
+      ],
+      "evidence": "evidence/TST-SEC-007.json",
+      "expected": "A chunk indexed with the wrong label is caught before generation: withheld, mismatch recorded, no generation",
+      "level": "L4",
+      "observed": "wrong-label chunk retrieved: True; outcome WITHHELD_VERIFICATION_MISMATCH; mismatches [{'chunk_id': '4a252927-0f8a-43d2-bd29-018487bc1971', 'reason': 'LABEL_MISMATCH'}]; generation invoked False; after re-ingest D-03 \u00a74 retrieved for P-01: False",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T06:47:46+00:00",
+      "status": "PASS",
+      "test_id": "TST-SEC-007",
+      "verifies": [
+        "SEC-008"
+      ]
+    }
+  ],
+  "variant": "normal"
+}

@@ -1,0 +1,15 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "PASS": 0
+  },
+  "deployment": "tla-s01e02-normal",
+  "finished_at": "2026-09-15T06:23:22+00:00",
+  "region": "us-east-1",
+  "run_id": "filter-limit-measurement",
+  "scope": "platform filter-size re-measurement",
+  "started_at": "2026-09-15T06:23:04+00:00",
+  "tests": [],
+  "variant": "normal"
+}
