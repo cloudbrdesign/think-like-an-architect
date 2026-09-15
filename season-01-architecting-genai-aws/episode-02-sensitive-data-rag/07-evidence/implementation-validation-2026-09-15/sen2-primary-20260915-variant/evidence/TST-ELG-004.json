@@ -1,0 +1,234 @@
+{
+  "category": "eligibility",
+  "controls": [
+    "CTL-008",
+    "CTL-011"
+  ],
+  "evidence": "evidence/TST-ELG-004.json",
+  "expected": "P-01 is answered from Orion lessons (D-03 \u00a73); D-03 \u00a74 is never retrieved",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 83,
+          "retrieval": 447,
+          "total": 538,
+          "verification": 8
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-01",
+        "question": "orion_lessons",
+        "relevance": null,
+        "request_id": "ddc8a9f9-62c9-499e-8e3a-cfab31ed7dab",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.928015,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.787396,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.780177,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.687413,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.556506,
+            "section_id": "S2",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "1116d320-a561-46c8-803f-1959094eca51",
+              "reason": "LABEL_MISMATCH"
+            },
+            {
+              "chunk_id": "0879bade-fcbd-4fa7-8f88-c9a4157ea8f8",
+              "reason": "LABEL_MISMATCH"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "retrieval": 386,
+          "total": 395,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-01",
+        "question": "orion_pricing",
+        "relevance": null,
+        "request_id": "e72007f0-c877-489b-ad5f-f7cad64f189f",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.91983,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.706255,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674973,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.530137,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "1116d320-a561-46c8-803f-1959094eca51",
+              "reason": "LABEL_MISMATCH"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-12": 1
+          },
+          "status": "MISMATCH"
+        }
+      }
+    ],
+    "leaks": [
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-01",
+        "question": "orion_lessons"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3"
+        ],
+        "persona": "P-01",
+        "question": "orion_pricing"
+      }
+    ]
+  },
+  "observed": "lessons retrieved+cited: False; D-03 \u00a74 retrieved in: ['orion_lessons', 'orion_pricing']; leaks [{'persona': 'P-01', 'question': 'orion_lessons', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-01', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3']}]",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:09:52+00:00",
+  "status": "FAIL",
+  "test_id": "TST-ELG-004",
+  "verifies": [
+    "FUN-004",
+    "DATA-003"
+  ]
+}

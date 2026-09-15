@@ -1,0 +1,29 @@
+{
+  "category": "observability",
+  "controls": [
+    "CTL-018",
+    "CTL-019"
+  ],
+  "evidence": "evidence/TST-OBS-001.json",
+  "expected": "No canary and no question text in any audit record or operational log; decisions present; model logging disabled",
+  "level": "L3",
+  "observations": {
+    "audit_items": 252,
+    "canary_hits_in_audit": [],
+    "items_without_outcome": [],
+    "log_events_scanned": 455,
+    "log_hits": {},
+    "model_invocation_logging_enabled": false,
+    "question_text_hits_in_audit": [],
+    "questions_searched": 21
+  },
+  "observed": "252 audit items, 455 log events scanned; canary hits []; question hits 0; log hits {}; model logging enabled False",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T06:55:03+00:00",
+  "status": "PASS",
+  "test_id": "TST-OBS-001",
+  "verifies": [
+    "SEC-012",
+    "DATA-006"
+  ]
+}

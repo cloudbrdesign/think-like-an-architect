@@ -1,0 +1,35 @@
+{
+  "deployment": "tla-s01e02-normal",
+  "estimated_usage_cost_total_usd": 0.0094,
+  "estimated_usage_cost_usd": {
+    "api_and_function_requests": 0.00037,
+    "embeddings": 0.0004,
+    "generation": 0.00786,
+    "vector_queries": 0.00078
+  },
+  "generation_calls": 244,
+  "ingestion_runs": 6,
+  "input_tokens": 75740,
+  "knowledge_base_searches": 311,
+  "not_included": "storage for hours, Lambda duration, DynamoDB requests, CloudWatch Logs, Cognito; see COST_AND_CLEANUP.md for the full model",
+  "outcomes": {
+    "ANSWERED": 135,
+    "NO_RELEVANT_CONTENT": 115,
+    "REFUSED_AUTHORIZATION_UNAVAILABLE": 37,
+    "REFUSED_CONSTRAINT_INCOMPLETE": 3,
+    "REFUSED_NO_ACTIVE_EMPLOYMENT": 10,
+    "WITHHELD_VERIFICATION_MISMATCH": 6
+  },
+  "output_tokens": 7505,
+  "prices": {
+    "http_api_requests_per_million": 1.0,
+    "lambda_requests_per_million": 0.2,
+    "nova_micro_input_per_million": 0.08,
+    "nova_micro_output_per_million": 0.24,
+    "titan_embeddings_per_million_tokens": 0.02,
+    "vector_queries_per_million": 2.5
+  },
+  "prices_date": "2026-09-14 (public AWS pricing pages, US East; not re-read)",
+  "query_requests": 306,
+  "sections_ingested": 44
+}

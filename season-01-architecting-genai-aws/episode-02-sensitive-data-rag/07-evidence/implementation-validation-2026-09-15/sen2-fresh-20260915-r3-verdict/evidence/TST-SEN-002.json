@@ -1,0 +1,181 @@
+{
+  "category": "sensitivity",
+  "controls": [
+    "CTL-008",
+    "CTL-014"
+  ],
+  "evidence": "evidence/TST-SEN-002.json",
+  "expected": "Baseline PASS \u2192 variant target tests FAIL for the predicted reason \u2192 variant destroyed and verified \u2192 restored PASS",
+  "level": "L4",
+  "observations": {
+    "baseline": {
+      "TST-DATA-005": "PASS",
+      "TST-DATA-006": "PASS",
+      "TST-ELG-004": "PASS"
+    },
+    "corrupted_metadata_changed_retrieval": true,
+    "fault": "label propagation corrupted (every section inherits its document label and is routed by it)",
+    "restored": {
+      "TST-DATA-005": "PASS",
+      "TST-DATA-006": "PASS",
+      "TST-ELG-004": "PASS"
+    },
+    "retrieval_layer_findings": [
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4",
+          "D-04-S2"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-01",
+        "question": "orion_lessons",
+        "test": "TST-ELG-004"
+      },
+      {
+        "contained_before_generation": true,
+        "generation_invoked": false,
+        "ineligible_sections_retrieved": [
+          "D-03-S4"
+        ],
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-01",
+        "question": "orion_pricing",
+        "test": "TST-ELG-004"
+      }
+    ],
+    "runs": {
+      "baseline": "sen2-fresh-20260915-r3-baseline",
+      "cleanup": "sen2-fresh-20260915-r3-cleanup",
+      "restored": "sen2-fresh-20260915-r3-restored",
+      "variant": "sen2-fresh-20260915-r3-variant"
+    },
+    "secondary_verification": "DETECTED the authoritative classification mismatch and withheld",
+    "steps": [
+      {
+        "command": "build labels-corrupted",
+        "exit": 0,
+        "output_tail": [
+          "built labels-corrupted/query.zip sha256 cda8b243d8e6eb1bc704370cf359bf59fa61df7011424c75a2c06b425e3e866c",
+          "built labels-corrupted/ingestion.zip sha256 16a1e0abcdd68876b9ec8f20f0ca86d63d7e118be931a<account>d3844ae",
+          "NOTE: failure-experiment build \u2014 core/sections.py is replaced. Deploy only through the experiment runner."
+        ],
+        "seconds": 0
+      },
+      {
+        "command": "deploy labels-corrupted",
+        "exit": 0,
+        "output_tail": [
+          "target account <redacted> \u00b7 region us-east-1 \u00b7 caller assumed-role/<account-foundation-resource>/tla-e02-build",
+          "creating stack tla-s01e02-sen-labels \u2026",
+          "deployed tla-s01e02-sen-labels (CREATE_COMPLETE) in 93 s"
+        ],
+        "seconds": 103
+      },
+      {
+        "command": "fixtures load",
+        "summary": {
+          "documents": 15,
+          "index_status": {
+            "D-01-S1": "INDEXED",
+            "D-01-S2": "INDEXED",
+            "D-02-S1": "INDEXED",
+            "D-02-S2": "INDEXED",
+            "D-03-S1": "INDEXED",
+            "D-03-S2": "INDEXED",
+            "D-03-S3": "INDEXED",
+            "D-03-S4": "INDEXED",
+            "D-04-S1": "INDEXED",
+            "D-04-S2": "INDEXED",
+            "D-05-S1": "INDEXED",
+            "D-06-S1": "INDEXED",
+            "D-07-S1": "INDEXED",
+            "D-08-S1": "INDEXED",
+            "D-12-S1": "INDEXED",
+            "D-13-S1": "INDEXED",
+            "D-14-S1": "INDEXED"
+          },
+          "objects": {
+            "restricted": 1,
+            "shared": 16
+          },
+          "personas": 11,
+          "quarantine": [
+            {
+              "document_id": "D-09",
+              "reason": "LABEL_MISSING",
+              "section_id": null
+            },
+            {
+              "document_id": "D-10",
+              "reason": "LABEL_INVALID",
+              "section_id": null
+            },
+            {
+              "document_id": "D-11",
+              "reason": "SCOPE_MISSING",
+              "section_id": null
+            },
+            {
+              "document_id": "D-15",
+              "reason": "LABEL_INVALID",
+              "section_id": null
+            }
+          ],
+          "special_category_excluded": [
+            "D-04-S3"
+          ]
+        }
+      },
+      {
+        "command": "export variant audit",
+        "usage": {
+          "deployment": "tla-s01e02-sen-labels",
+          "estimated_usage_cost_total_usd": 0.0001,
+          "estimated_usage_cost_usd": {
+            "api_and_function_requests": 0.0,
+            "embeddings": 9e-05,
+            "generation": 0.0,
+            "vector_queries": 0.0
+          },
+          "generation_calls": 0,
+          "ingestion_runs": 1,
+          "input_tokens": 0,
+          "knowledge_base_searches": 2,
+          "not_included": "storage for hours, Lambda duration, DynamoDB requests, CloudWatch Logs, Cognito; see COST_AND_CLEANUP.md for the full model",
+          "outcomes": {
+            "WITHHELD_VERIFICATION_MISMATCH": 2
+          },
+          "output_tokens": 0,
+          "prices": {
+            "http_api_requests_per_million": 1.0,
+            "lambda_requests_per_million": 0.2,
+            "nova_micro_input_per_million": 0.08,
+            "nova_micro_output_per_million": 0.24,
+            "titan_embeddings_per_million_tokens": 0.02,
+            "vector_queries_per_million": 2.5
+          },
+          "prices_date": "2026-09-14 (public AWS pricing pages, US East; not re-read)",
+          "query_requests": 2,
+          "sections_ingested": 17
+        }
+      }
+    ],
+    "variant": "labels-corrupted",
+    "variant_statuses": {
+      "TST-DATA-005": "FAIL",
+      "TST-DATA-006": "FAIL",
+      "TST-ELG-004": "FAIL"
+    }
+  },
+  "observed": "baseline PASS \u2192 variant FAIL (DETECTED the authoritative classification mismatch and withheld) \u2192 variant destroyed, cleanup verified \u2192 restored PASS",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T10:08:27+00:00",
+  "status": "PASS",
+  "test_id": "TST-SEN-002",
+  "verifies": [
+    "SEC-008",
+    "DATA-003"
+  ]
+}

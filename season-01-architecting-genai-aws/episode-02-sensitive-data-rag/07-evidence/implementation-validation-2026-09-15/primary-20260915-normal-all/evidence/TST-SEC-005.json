@@ -1,0 +1,157 @@
+{
+  "category": "security",
+  "controls": [
+    "CTL-004",
+    "CTL-016"
+  ],
+  "evidence": "evidence/TST-SEC-005.json",
+  "expected": "With the grants store unreadable: zero tier calls, uniform failure, content-free audit REFUSED_AUTHORIZATION_UNAVAILABLE",
+  "level": "L4",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": null,
+          "hr_version": null,
+          "status": "UNAVAILABLE"
+        },
+        "failing_control": "CTL-004",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 7,
+          "total": 7
+        },
+        "outcome": "REFUSED_AUTHORIZATION_UNAVAILABLE",
+        "persona": "P-01",
+        "question": "smp12",
+        "relevance": null,
+        "request_id": "9834afa0-1f08-4556-8ce2-28fa0c290491",
+        "retrieved": [],
+        "tiers_called": [],
+        "verification": {
+          "mismatches": [],
+          "status": "NOT_RUN"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": null,
+          "hr_version": null,
+          "status": "UNAVAILABLE"
+        },
+        "failing_control": "CTL-004",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 7,
+          "total": 7
+        },
+        "outcome": "REFUSED_AUTHORIZATION_UNAVAILABLE",
+        "persona": "P-02",
+        "question": "orion_pricing",
+        "relevance": null,
+        "request_id": "a98b7d3c-b796-4831-af55-1d9f79a852ec",
+        "retrieved": [],
+        "tiers_called": [],
+        "verification": {
+          "mismatches": [],
+          "status": "NOT_RUN"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": null,
+          "hr_version": null,
+          "status": "UNAVAILABLE"
+        },
+        "failing_control": "CTL-004",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 7,
+          "total": 7
+        },
+        "outcome": "REFUSED_AUTHORIZATION_UNAVAILABLE",
+        "persona": "P-05",
+        "question": "si0417_witness",
+        "relevance": null,
+        "request_id": "c0b9d837-038b-4f99-939b-39a89640a9ce",
+        "retrieved": [],
+        "tiers_called": [],
+        "verification": {
+          "mismatches": [],
+          "status": "NOT_RUN"
+        }
+      }
+    ],
+    "fault": {
+      "mechanism": "temporary explicit Deny on the grants table attached to the query role",
+      "policy_name": "tla-test-fault-grants-unavailable"
+    },
+    "note": "Every request during the fault and until access returned was refused with zero tier calls (fail closed)",
+    "propagation_probes": [
+      {
+        "outcome": "ANSWERED",
+        "seconds_after_fault": 1
+      },
+      {
+        "outcome": "ANSWERED",
+        "seconds_after_fault": 23
+      },
+      {
+        "outcome": "ANSWERED",
+        "seconds_after_fault": 46
+      },
+      {
+        "outcome": "ANSWERED",
+        "seconds_after_fault": 68
+      },
+      {
+        "outcome": "REFUSED_AUTHORIZATION_UNAVAILABLE",
+        "seconds_after_fault": 91
+      }
+    ],
+    "restoration_outcomes": [
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "REFUSED_AUTHORIZATION_UNAVAILABLE",
+      "ANSWERED"
+    ],
+    "restoration_seconds_after_fault_removed": 302
+  },
+  "observed": "during fault {'P-01': {'outcome': 'REFUSED_AUTHORIZATION_UNAVAILABLE', 'failing_control': 'CTL-004', 'tiers_called': [], 'retrieval': [], 'generation_invoked': False, 'uniform': True}, 'P-02': {'outcome': 'REFUSED_AUTHORIZATION_UNAVAILABLE', 'failing_control': 'CTL-004', 'tiers_called': [], 'retrieval': [], 'generation_invoked': False, 'uniform': True}, 'P-05': {'outcome': 'REFUSED_AUTHORIZATION_UNAVAILABLE', 'failing_control': 'CTL-004', 'tiers_called': [], 'retrieval': [], 'generation_invoked': False, 'uniform': True}}; fault removed, restored outcome ANSWERED after 302 s",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T06:54:44+00:00",
+  "status": "PASS",
+  "test_id": "TST-SEC-005",
+  "verifies": [
+    "SEC-007",
+    "NFR-003"
+  ]
+}

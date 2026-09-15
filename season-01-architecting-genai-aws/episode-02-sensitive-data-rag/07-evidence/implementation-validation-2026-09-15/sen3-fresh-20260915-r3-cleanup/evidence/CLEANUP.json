@@ -1,0 +1,51 @@
+{
+  "category": "cleanup",
+  "controls": [],
+  "evidence": "evidence/CLEANUP.json",
+  "expected": "no resource of the claims-as-grants deployment remains",
+  "level": "L2",
+  "observations": {
+    "cleanup_failed": false,
+    "lines": [
+      "[claims-as-grants] records bucket objects removed: 15",
+      "[claims-as-grants] shared-sections bucket objects removed: 15",
+      "[claims-as-grants] restricted-sections bucket objects removed: 2",
+      "[claims-as-grants] stack tla-s01e02-sen-claims: DELETE_COMPLETE",
+      "[claims-as-grants] artifact bucket: deleted (2 objects)"
+    ],
+    "remaining": {
+      "functions": [],
+      "http_apis": [],
+      "iam_roles": [],
+      "knowledge_bases": [],
+      "log_groups": [],
+      "s3_buckets": [],
+      "stacks": [],
+      "tables": [],
+      "tagged_resources_confirmed_by_owning_service": [],
+      "user_pools": [],
+      "vector_buckets": []
+    },
+    "tag_index_entries_not_found_by_owning_service": [
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_LlGlWT8fZ",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_m7ukudxPl",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_pB6vVbc7U",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_FZh7z6Dax",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_G448yMzbU",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_tLCkzMmXD",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_E8FP9zmaK",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_GUyYFr4F1",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_FFxyAYEwR",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_vRrhaGOZy"
+    ],
+    "verified_clean": true
+  },
+  "observed": "CLEAN",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T10:14:01+00:00",
+  "status": "PASS",
+  "test_id": "CLEANUP",
+  "verifies": [
+    "OPS-003"
+  ]
+}

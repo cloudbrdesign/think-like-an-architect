@@ -1,0 +1,1077 @@
+{
+  "category": "data",
+  "controls": [
+    "CTL-009"
+  ],
+  "evidence": "evidence/TST-DATA-004.json",
+  "expected": "Special-category D-04 \u00a73 is absent from both tiers' storage and vectors, retrieval, answers, audit and logs",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question. The sources provided do not include information about injuries and medical treatment recorded in safety investigation SI-0417.",
+        "citations": [
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 244,
+          "retrieval": 340,
+          "total": 593,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-01",
+        "question": "si0417_medical",
+        "relevance": {
+          "kept": [
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5",
+            "7493209c-3f09-4ee3-b4a2-90eb8cb252fa"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "71a9e8eb-ad44-467d-98ba-1525a5a068e9",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9",
+            "6c318803-a8fb-43ad-ba68-091fbce31e5c"
+          ]
+        },
+        "request_id": "4eca8d57-a01e-4158-978e-9a7ab0117c14",
+        "retrieved": [
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.771713,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.60554,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.595888,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.5889,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.582993,
+            "section_id": "S2",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-02": 1,
+            "D-04": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question. The sources provided do not include information about injuries and medical treatment recorded in safety investigation SI-0417.",
+        "citations": [
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 181,
+            "sha256": "8ed7671b959cc64341f3e2245c7c66922e249b8c09e0382d4732beccca64734d",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "BID-ORION"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 262,
+          "retrieval": 315,
+          "total": 587,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-02",
+        "question": "si0417_medical",
+        "relevance": {
+          "kept": [
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5",
+            "7493209c-3f09-4ee3-b4a2-90eb8cb252fa"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "71a9e8eb-ad44-467d-98ba-1525a5a068e9",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9",
+            "6c318803-a8fb-43ad-ba68-091fbce31e5c"
+          ]
+        },
+        "request_id": "5ddde4a3-9002-4045-a5b0-c04cdf1fe433",
+        "retrieved": [
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.771713,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.60554,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.595888,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.5889,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.582993,
+            "section_id": "S2",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-02": 1,
+            "D-04": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question. The sources provided do not include information about injuries and medical treatment recorded in safety investigation SI-0417.",
+        "citations": [
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 185,
+            "sha256": "12460fafad8be9deafdae0e34f454f0b43e9755fc963004fd813d6bb949fb2a1",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "FIN-REPORTING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 249,
+          "retrieval": 310,
+          "total": 569,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-03",
+        "question": "si0417_medical",
+        "relevance": {
+          "kept": [
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5",
+            "7493209c-3f09-4ee3-b4a2-90eb8cb252fa"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "71a9e8eb-ad44-467d-98ba-1525a5a068e9",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9",
+            "6c318803-a8fb-43ad-ba68-091fbce31e5c"
+          ]
+        },
+        "request_id": "73e02aa7-a8d2-42bf-8099-335e82463a65",
+        "retrieved": [
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.771713,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.60554,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.595888,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.5889,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.582993,
+            "section_id": "S2",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-02": 1,
+            "D-04": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question. The sources provided do not include information about injuries and medical treatment recorded in safety investigation SI-0417.",
+        "citations": [
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 186,
+            "sha256": "2dbe720b1327111515d5dc32f2be78871a2fef8d0e5df8c4e3d8273672d12077",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "SEC-SIGNALLING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 254,
+          "retrieval": 376,
+          "total": 641,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-04",
+        "question": "si0417_medical",
+        "relevance": {
+          "kept": [
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5",
+            "7493209c-3f09-4ee3-b4a2-90eb8cb252fa"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "71a9e8eb-ad44-467d-98ba-1525a5a068e9",
+            "000d96ba-9848-4b3d-bb53-99aa6026eaef",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9"
+          ]
+        },
+        "request_id": "dc883c3d-102a-4296-80fd-0d61e2596a4e",
+        "retrieved": [
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.771713,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.60554,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.595888,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-07",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "SEC-SIGNALLING",
+            "score": 0.593407,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.5889,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-02": 1,
+            "D-04": 1,
+            "D-07": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question. [1], [2], [3]",
+        "citations": [
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S2",
+            "section_title": "Witness statements"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          },
+          {
+            "bytes": 113,
+            "sha256": "ab43fe1f84c8609a2741ca6bceb2d6d6e23bffe2fb6aa437a77b647fc8a15f8a",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "SI-0417"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 225,
+          "retrieval": 661,
+          "total": 895,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-05",
+        "question": "si0417_medical",
+        "relevance": {
+          "kept": [
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5",
+            "2ccc5d23-a940-42d3-8f0b-e6c020f66682",
+            "7493209c-3f09-4ee3-b4a2-90eb8cb252fa"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "71a9e8eb-ad44-467d-98ba-1525a5a068e9",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9",
+            "6c318803-a8fb-43ad-ba68-091fbce31e5c"
+          ]
+        },
+        "request_id": "a32939fb-005f-4e8b-a6f4-01f1771c6c48",
+        "retrieved": [
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.771713,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.681093,
+            "section_id": "S2",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.60554,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.595888,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.5889,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.582993,
+            "section_id": "S2",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-02": 1,
+            "D-04": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question. The sources provided do not include information about injuries and medical treatment recorded in safety investigation SI-0417.",
+        "citations": [
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          },
+          {
+            "bytes": 113,
+            "sha256": "2aea5ddfc94ccbf254c17f5b75b238e802127a0681227565675f2660992bdb13",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "HR-2031"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "generation": 261,
+          "retrieval": 765,
+          "total": 1036,
+          "verification": 5
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-06",
+        "question": "si0417_medical",
+        "relevance": {
+          "kept": [
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5",
+            "7493209c-3f09-4ee3-b4a2-90eb8cb252fa"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "71a9e8eb-ad44-467d-98ba-1525a5a068e9",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9",
+            "54161ac0-b52f-44b0-9eeb-658c227465dd",
+            "6c318803-a8fb-43ad-ba68-091fbce31e5c"
+          ]
+        },
+        "request_id": "de9566f4-5773-48b8-9abd-37b75bcfec56",
+        "retrieved": [
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.771713,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.60554,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.595888,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.5889,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.587966,
+            "section_id": "S1",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.582993,
+            "section_id": "S2",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-02": 1,
+            "D-04": 1,
+            "D-05": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question. The sources provided do not include information about injuries and medical treatment recorded in safety investigation SI-0417.",
+        "citations": [
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 186,
+            "sha256": "d89494e936bbef9421b44d4c598790e1cdbc36352d1202b340e09962754478ea",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "OPS-LEADERSHIP"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 283,
+          "retrieval": 331,
+          "total": 624,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-07",
+        "question": "si0417_medical",
+        "relevance": {
+          "kept": [
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5",
+            "7493209c-3f09-4ee3-b4a2-90eb8cb252fa"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "71a9e8eb-ad44-467d-98ba-1525a5a068e9",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9",
+            "6c318803-a8fb-43ad-ba68-091fbce31e5c"
+          ]
+        },
+        "request_id": "1a749430-2dab-4c33-ada1-4133fae3ba71",
+        "retrieved": [
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.771713,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.60554,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.595888,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.5889,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.582993,
+            "section_id": "S2",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-02": 1,
+            "D-04": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": null,
+          "hr_version": 1,
+          "status": "DENIED"
+        },
+        "failing_control": "CTL-004",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "total": 3
+        },
+        "outcome": "REFUSED_NO_ACTIVE_EMPLOYMENT",
+        "persona": "P-08",
+        "question": "si0417_medical",
+        "relevance": null,
+        "request_id": "c59c8f9e-6611-45bf-a73a-a69adf91fbbc",
+        "retrieved": [],
+        "tiers_called": [],
+        "verification": {
+          "mismatches": [],
+          "status": "NOT_RUN"
+        }
+      },
+      {
+        "answer": "I can't answer that question. The sources provided do not include information about injuries and medical treatment recorded in safety investigation SI-0417.",
+        "citations": [
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 926,
+            "sha256": "76688996ba921a9bea9838a25509c91fa6f51423707b2da7699e540a25ec454a",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "FIN-REPORTING",
+            "SYN-DOMAIN-0001",
+            "SYN-DOMAIN-0002",
+            "SYN-DOMAIN-0003",
+            "SYN-DOMAIN-0004",
+            "SYN-DOMAIN-0005",
+            "SYN-DOMAIN-0006",
+            "SYN-DOMAIN-0007",
+            "SYN-DOMAIN-0008",
+            "SYN-DOMAIN-0009",
+            "SYN-DOMAIN-0010",
+            "SYN-DOMAIN-0011",
+            "SYN-DOMAIN-0012",
+            "SYN-DOMAIN-0013",
+            "SYN-DOMAIN-0014",
+            "SYN-DOMAIN-0015",
+            "SYN-DOMAIN-0016",
+            "SYN-DOMAIN-0017",
+            "SYN-DOMAIN-0018",
+            "SYN-DOMAIN-0019",
+            "SYN-DOMAIN-0020",
+            "SYN-DOMAIN-0021",
+            "SYN-DOMAIN-0022",
+            "SYN-DOMAIN-0023",
+            "SYN-DOMAIN-0024",
+            "SYN-DOMAIN-0025",
+            "SYN-DOMAIN-0026",
+            "SYN-DOMAIN-0027",
+            "SYN-DOMAIN-0028",
+            "SYN-DOMAIN-0029",
+            "SYN-DOMAIN-0030",
+            "SYN-DOMAIN-0031",
+            "SYN-DOMAIN-0032",
+            "SYN-DOMAIN-0033",
+            "SYN-DOMAIN-0034",
+            "SYN-DOMAIN-0035",
+            "SYN-DOMAIN-0036",
+            "SYN-DOMAIN-0037",
+            "SYN-DOMAIN-0038",
+            "SYN-DOMAIN-0039"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 244,
+          "retrieval": 309,
+          "total": 562,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-10",
+        "question": "si0417_medical",
+        "relevance": {
+          "kept": [
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5",
+            "7493209c-3f09-4ee3-b4a2-90eb8cb252fa"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "71a9e8eb-ad44-467d-98ba-1525a5a068e9",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9",
+            "6c318803-a8fb-43ad-ba68-091fbce31e5c"
+          ]
+        },
+        "request_id": "869aa13c-0a96-4ebe-b30d-4c958d79b48c",
+        "retrieved": [
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.771713,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.60554,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.595888,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.5889,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.582993,
+            "section_id": "S2",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-02": 1,
+            "D-04": 1
+          },
+          "status": "PASS"
+        }
+      }
+    ],
+    "ingestion_excluded": [
+      "D-04-S3"
+    ],
+    "model_inputs": "model inputs are built only from verified chunks retrieved from the tiers, which hold no such chunk"
+  },
+  "observed": "excluded at ingestion ['D-04-S3']; chunks 0; section objects []; retrieved/answered for []; audit hits False; log hits {}",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T09:45:29+00:00",
+  "status": "PASS",
+  "test_id": "TST-DATA-004",
+  "verifies": [
+    "DATA-004",
+    "CMP-001"
+  ]
+}

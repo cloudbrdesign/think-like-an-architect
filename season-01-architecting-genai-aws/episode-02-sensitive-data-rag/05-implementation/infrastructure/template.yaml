@@ -1,0 +1,660 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Think Like an Architect S01E02 - Kestrelmoor Knowledge Assistant (educational implementation). Every resource and every
+  permission is in this one file. Read the IAM roles and bucket policies to answer "who can search each tier?",
+  "who can write each tier?", "who can read the authoritative grants?" and "who can invoke the query function?".
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Variant and NamePrefix only name and tag resources. A failure experiment differs from the normal deployment ONLY in
+# the function code package built for it (scripts/tla_ops.py build <variant>); this template never switches behaviour.
+# ---------------------------------------------------------------------------------------------------------------------
+Parameters:
+  NamePrefix:
+    Type: String
+    Default: tla-s01e02-normal
+    AllowedPattern: "^tla-s01e02-(normal|sen-eligibility|sen-labels|sen-claims)$"
+  Variant:
+    Type: String
+    Default: normal
+    AllowedValues: [normal, eligibility-removed, labels-corrupted, claims-as-grants]
+  ArtifactBucket:
+    Type: String
+    Description: Bucket holding the function packages (created by scripts/tla_ops.py deploy)
+  QueryCodeKey:
+    Type: String
+  IngestionCodeKey:
+    Type: String
+  GenerationModelId:
+    Type: String
+    Default: amazon.nova-micro-v1:0
+    AllowedPattern: "^amazon\\.[a-z0-9-]+-v[0-9]+:[0-9]+$"
+    Description: In-Region foundation-model ID (never a cross-region inference profile)
+  RelevanceMinScore:
+    Type: String
+    Default: "0.60"
+    AllowedPattern: "^0(\\.[0-9]{1,3})?$|^1(\\.0{1,3})?$"
+    Description: >-
+      Answer-quality threshold calibrated on the synthetic corpus (07-evidence relevance calibration). Relevance is not
+      authorization - it only decides whether an already eligible, verified chunk is useful enough to answer with.
+  RolePath:
+    Type: String
+    Default: /tla/s01e02/
+    Description: IAM path for the application roles. Some accounts require a specific path.
+  PermissionsBoundaryArn:
+    Type: String
+    Default: ""
+    Description: Optional permissions boundary for the application roles. Leave empty unless your account requires one.
+
+Conditions:
+  HasPermissionsBoundary: !Not [!Equals [!Ref PermissionsBoundaryArn, ""]]
+
+Resources:
+  # ===================================================================================================================
+  # Authoritative stores (TS-E02-02, TS-E02-05). Grants and classification are read per request by the query role;
+  # the query role can only PUT audit items. Keys: authorization (requester_sub, record: HR | GRANTS | history);
+  # classification (document_id); audit (request_id).
+  # ===================================================================================================================
+  AuthorizationTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${NamePrefix}-authorization"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - {AttributeName: requester_sub, AttributeType: S}
+        - {AttributeName: record, AttributeType: S}
+      KeySchema:
+        - {AttributeName: requester_sub, KeyType: HASH}
+        - {AttributeName: record, KeyType: RANGE}
+
+  ClassificationTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${NamePrefix}-classification"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - {AttributeName: document_id, AttributeType: S}
+      KeySchema:
+        - {AttributeName: document_id, KeyType: HASH}
+
+  AuditTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${NamePrefix}-audit"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - {AttributeName: request_id, AttributeType: S}
+      KeySchema:
+        - {AttributeName: request_id, KeyType: HASH}
+
+  # ===================================================================================================================
+  # Simulated records system: synthetic source documents. Only the ingestion role may read them.
+  # ===================================================================================================================
+  RecordsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${NamePrefix}-records-${AWS::AccountId}"
+      PublicAccessBlockConfiguration: {BlockPublicAcls: true, BlockPublicPolicy: true, IgnorePublicAcls: true, RestrictPublicBuckets: true}
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+
+  RecordsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref RecordsBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:*"
+            Resource: [!GetAtt RecordsBucket.Arn, !Sub "${RecordsBucket.Arn}/*"]
+            Condition: {Bool: {aws:SecureTransport: "false"}}
+          - Sid: DenyRecordReadsExceptIngestion
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "${RecordsBucket.Arn}/*"
+            Condition: {ArnNotEquals: {aws:PrincipalArn: !GetAtt IngestionRole.Arn}}
+
+  # ===================================================================================================================
+  # TIER 1 of D3 — blast-radius reduction. Each tier has its own section bucket, vector bucket, index, knowledge base
+  # and knowledge-base service role. Only ingestion writes a tier; only that tier's service role reads it.
+  # THE TIER IS NOT THE AUTHORIZATION BOUNDARY: each tier holds many scopes, and the mandatory constraint sent by the
+  # query function's retrieval gateway decides which of them a requester may retrieve.
+  # ===================================================================================================================
+  SharedSectionBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${NamePrefix}-shared-sections-${AWS::AccountId}"
+      PublicAccessBlockConfiguration: {BlockPublicAcls: true, BlockPublicPolicy: true, IgnorePublicAcls: true, RestrictPublicBuckets: true}
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+
+  SharedSectionBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref SharedSectionBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:*"
+            Resource: [!GetAtt SharedSectionBucket.Arn, !Sub "${SharedSectionBucket.Arn}/*"]
+            Condition: {Bool: {aws:SecureTransport: "false"}}
+          - Sid: DenySectionWritesExceptIngestion
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:PutObject"
+            Resource: !Sub "${SharedSectionBucket.Arn}/*"
+            Condition: {ArnNotEquals: {aws:PrincipalArn: !GetAtt IngestionRole.Arn}}
+          - Sid: DenySectionReadsExceptThisTiersKnowledgeBase
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "${SharedSectionBucket.Arn}/*"
+            Condition: {ArnNotEquals: {aws:PrincipalArn: !GetAtt SharedKnowledgeBaseRole.Arn}}
+
+  RestrictedSectionBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${NamePrefix}-restricted-sections-${AWS::AccountId}"
+      PublicAccessBlockConfiguration: {BlockPublicAcls: true, BlockPublicPolicy: true, IgnorePublicAcls: true, RestrictPublicBuckets: true}
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+
+  RestrictedSectionBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref RestrictedSectionBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:*"
+            Resource: [!GetAtt RestrictedSectionBucket.Arn, !Sub "${RestrictedSectionBucket.Arn}/*"]
+            Condition: {Bool: {aws:SecureTransport: "false"}}
+          - Sid: DenySectionWritesExceptIngestion
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:PutObject"
+            Resource: !Sub "${RestrictedSectionBucket.Arn}/*"
+            Condition: {ArnNotEquals: {aws:PrincipalArn: !GetAtt IngestionRole.Arn}}
+          - Sid: DenySectionReadsExceptThisTiersKnowledgeBase
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "${RestrictedSectionBucket.Arn}/*"
+            Condition: {ArnNotEquals: {aws:PrincipalArn: !GetAtt RestrictedKnowledgeBaseRole.Arn}}
+
+  SharedVectorBucket:
+    Type: AWS::S3Vectors::VectorBucket
+    Properties:
+      VectorBucketName: !Sub "${NamePrefix}-shared-vectors"
+
+  SharedVectorIndex:
+    Type: AWS::S3Vectors::Index
+    DependsOn: SharedVectorBucket
+    Properties:
+      VectorBucketName: !Sub "${NamePrefix}-shared-vectors"
+      IndexName: !Sub "${NamePrefix}-shared-index"
+      DataType: float32
+      Dimension: 1024
+      DistanceMetric: cosine
+      MetadataConfiguration:
+        NonFilterableMetadataKeys: [AMAZON_BEDROCK_TEXT, AMAZON_BEDROCK_METADATA]
+
+  RestrictedVectorBucket:
+    Type: AWS::S3Vectors::VectorBucket
+    Properties:
+      VectorBucketName: !Sub "${NamePrefix}-restricted-vectors"
+
+  RestrictedVectorIndex:
+    Type: AWS::S3Vectors::Index
+    DependsOn: RestrictedVectorBucket
+    Properties:
+      VectorBucketName: !Sub "${NamePrefix}-restricted-vectors"
+      IndexName: !Sub "${NamePrefix}-restricted-index"
+      DataType: float32
+      Dimension: 1024
+      DistanceMetric: cosine
+      MetadataConfiguration:
+        NonFilterableMetadataKeys: [AMAZON_BEDROCK_TEXT, AMAZON_BEDROCK_METADATA]
+
+  SharedKnowledgeBaseRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-shared-kb"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: {Service: bedrock.amazonaws.com}
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals: {aws:SourceAccount: !Ref "AWS::AccountId"}
+              ArnLike: {aws:SourceArn: !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:knowledge-base/*"}
+      Policies:
+        - PolicyName: shared-tier-indexing
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: EmbedWithInRegionModelOnly
+                Effect: Allow
+                Action: bedrock:InvokeModel
+                Resource: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0"
+              - Sid: SharedVectorIndexOnly
+                Effect: Allow
+                Action: [s3vectors:PutVectors, s3vectors:GetVectors, s3vectors:DeleteVectors, s3vectors:QueryVectors, s3vectors:GetIndex]
+                Resource: !Ref SharedVectorIndex
+              - Sid: ReadSharedSectionsOnly
+                Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub "arn:aws:s3:::${NamePrefix}-shared-sections-${AWS::AccountId}/sections/*"
+
+  RestrictedKnowledgeBaseRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-restricted-kb"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: {Service: bedrock.amazonaws.com}
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals: {aws:SourceAccount: !Ref "AWS::AccountId"}
+              ArnLike: {aws:SourceArn: !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:knowledge-base/*"}
+      Policies:
+        - PolicyName: restricted-tier-indexing
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: EmbedWithInRegionModelOnly
+                Effect: Allow
+                Action: bedrock:InvokeModel
+                Resource: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0"
+              - Sid: RestrictedVectorIndexOnly
+                Effect: Allow
+                Action: [s3vectors:PutVectors, s3vectors:GetVectors, s3vectors:DeleteVectors, s3vectors:QueryVectors, s3vectors:GetIndex]
+                Resource: !Ref RestrictedVectorIndex
+              - Sid: ReadRestrictedSectionsOnly
+                Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub "arn:aws:s3:::${NamePrefix}-restricted-sections-${AWS::AccountId}/sections/*"
+
+  SharedKnowledgeBase:
+    Type: AWS::Bedrock::KnowledgeBase
+    Properties:
+      Name: !Sub "${NamePrefix}-shared-kb"
+      RoleArn: !GetAtt SharedKnowledgeBaseRole.Arn
+      KnowledgeBaseConfiguration:
+        Type: VECTOR
+        VectorKnowledgeBaseConfiguration:
+          EmbeddingModelArn: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0"
+          EmbeddingModelConfiguration:
+            BedrockEmbeddingModelConfiguration: {Dimensions: 1024, EmbeddingDataType: FLOAT32}
+      StorageConfiguration:
+        Type: S3_VECTORS
+        S3VectorsConfiguration:
+          IndexArn: !Ref SharedVectorIndex
+
+  SharedDataSource:
+    Type: AWS::Bedrock::DataSource
+    Properties:
+      Name: !Sub "${NamePrefix}-shared-sections"
+      KnowledgeBaseId: !Ref SharedKnowledgeBase
+      DataDeletionPolicy: DELETE
+      DataSourceConfiguration:
+        Type: CUSTOM
+
+  RestrictedKnowledgeBase:
+    Type: AWS::Bedrock::KnowledgeBase
+    Properties:
+      Name: !Sub "${NamePrefix}-restricted-kb"
+      RoleArn: !GetAtt RestrictedKnowledgeBaseRole.Arn
+      KnowledgeBaseConfiguration:
+        Type: VECTOR
+        VectorKnowledgeBaseConfiguration:
+          EmbeddingModelArn: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0"
+          EmbeddingModelConfiguration:
+            BedrockEmbeddingModelConfiguration: {Dimensions: 1024, EmbeddingDataType: FLOAT32}
+      StorageConfiguration:
+        Type: S3_VECTORS
+        S3VectorsConfiguration:
+          IndexArn: !Ref RestrictedVectorIndex
+
+  RestrictedDataSource:
+    Type: AWS::Bedrock::DataSource
+    Properties:
+      Name: !Sub "${NamePrefix}-restricted-sections"
+      KnowledgeBaseId: !Ref RestrictedKnowledgeBase
+      DataDeletionPolicy: DELETE
+      DataSourceConfiguration:
+        Type: CUSTOM
+
+  # ===================================================================================================================
+  # Identity provider stand-in (CTL-002). Groups exist only so experiment 3 has token claims to (wrongly) trust; the
+  # normal query function ignores them. OtherAppClient issues valid tokens for a different application (TST-SEC-001).
+  # ===================================================================================================================
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: !Sub "${NamePrefix}-users"
+      AdminCreateUserConfig: {AllowAdminCreateUserOnly: true}
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - {Name: admin_only, Priority: 1}
+      Policies:
+        PasswordPolicy: {MinimumLength: 16, RequireLowercase: true, RequireUppercase: true, RequireNumbers: true, RequireSymbols: true}
+
+  AppClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref UserPool
+      ClientName: !Sub "${NamePrefix}-app"
+      GenerateSecret: false
+      ExplicitAuthFlows: [ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_REFRESH_TOKEN_AUTH]
+      PreventUserExistenceErrors: ENABLED
+      AccessTokenValidity: 5
+      IdTokenValidity: 5
+      RefreshTokenValidity: 60
+      TokenValidityUnits: {AccessToken: minutes, IdToken: minutes, RefreshToken: minutes}
+
+  OtherAppClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref UserPool
+      ClientName: !Sub "${NamePrefix}-other-app"
+      GenerateSecret: false
+      ExplicitAuthFlows: [ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_REFRESH_TOKEN_AUTH]
+      PreventUserExistenceErrors: ENABLED
+
+  # ===================================================================================================================
+  # Application roles (CTL-005). ONLY QueryRole can search either tier and read the grants; ONLY IngestionRole can write
+  # section objects and ingest; neither can change the authoritative stores.
+  # ===================================================================================================================
+  QueryRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-query"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - {Effect: Allow, Principal: {Service: lambda.amazonaws.com}, Action: sts:AssumeRole}
+      Policies:
+        - PolicyName: query-function
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: ReadAuthoritativeGrantsPerRequest
+                Effect: Allow
+                Action: [dynamodb:BatchGetItem, dynamodb:GetItem]
+                Resource: !GetAtt AuthorizationTable.Arn
+              - Sid: ReadCurrentClassificationRecords
+                Effect: Allow
+                Action: [dynamodb:BatchGetItem, dynamodb:GetItem]
+                Resource: !GetAtt ClassificationTable.Arn
+              - Sid: SearchSharedTierOnlyFromTheGateway
+                Effect: Allow
+                Action: bedrock:Retrieve
+                Resource: !GetAtt SharedKnowledgeBase.KnowledgeBaseArn
+              - Sid: SearchRestrictedTierOnlyFromTheGateway
+                Effect: Allow
+                Action: bedrock:Retrieve
+                Resource: !GetAtt RestrictedKnowledgeBase.KnowledgeBaseArn
+              - Sid: GenerateWithInRegionModelOnly
+                Effect: Allow
+                Action: bedrock:InvokeModel
+                Resource: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/${GenerationModelId}"
+              - Sid: WriteAuditRecordsOnly
+                Effect: Allow
+                Action: dynamodb:PutItem
+                Resource: !GetAtt AuditTable.Arn
+              - Sid: OwnLogGroup
+                Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !GetAtt QueryLogGroup.Arn
+
+  IngestionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-ingestion"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - {Effect: Allow, Principal: {Service: lambda.amazonaws.com}, Action: sts:AssumeRole}
+      Policies:
+        - PolicyName: ingestion-job
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: ReadClassificationRecords
+                Effect: Allow
+                Action: [dynamodb:BatchGetItem, dynamodb:GetItem]
+                Resource: !GetAtt ClassificationTable.Arn
+              - Sid: ReadSourceRecords
+                Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub "arn:aws:s3:::${NamePrefix}-records-${AWS::AccountId}/records/*"
+              - Sid: WriteSharedTierSections
+                Effect: Allow
+                Action: s3:PutObject
+                Resource: !Sub "arn:aws:s3:::${NamePrefix}-shared-sections-${AWS::AccountId}/sections/*"
+              - Sid: WriteRestrictedTierSections
+                Effect: Allow
+                Action: s3:PutObject
+                Resource: !Sub "arn:aws:s3:::${NamePrefix}-restricted-sections-${AWS::AccountId}/sections/*"
+              - Sid: IngestIntoEachTier
+                Effect: Allow
+                Action:
+                  - bedrock:IngestKnowledgeBaseDocuments
+                  - bedrock:GetKnowledgeBaseDocuments
+                  - bedrock:StartIngestionJob
+                  - bedrock:AssociateThirdPartyKnowledgeBase
+                Resource:
+                  - !GetAtt SharedKnowledgeBase.KnowledgeBaseArn
+                  - !GetAtt RestrictedKnowledgeBase.KnowledgeBaseArn
+              - Sid: WriteIngestionReports
+                Effect: Allow
+                Action: dynamodb:PutItem
+                Resource: !GetAtt AuditTable.Arn
+              - Sid: OwnLogGroup
+                Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !GetAtt IngestionLogGroup.Arn
+
+  # ===================================================================================================================
+  # Functions and log groups (1-day retention; structured, content-free log lines — CTL-019).
+  # ===================================================================================================================
+  QueryLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${NamePrefix}-query"
+      RetentionInDays: 1
+
+  IngestionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${NamePrefix}-ingestion"
+      RetentionInDays: 1
+
+  ApiAccessLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/tla/${NamePrefix}/api-access"
+      RetentionInDays: 1
+
+  QueryFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${NamePrefix}-query"
+      Runtime: python3.13
+      Handler: query.handler.handler
+      MemorySize: 512
+      Timeout: 60
+      Role: !GetAtt QueryRole.Arn
+      Code: {S3Bucket: !Ref ArtifactBucket, S3Key: !Ref QueryCodeKey}
+      LoggingConfig: {LogGroup: !Ref QueryLogGroup}
+      Environment:
+        Variables:
+          DEPLOYMENT_NAME: !Ref NamePrefix
+          AUTHORIZATION_TABLE: !Ref AuthorizationTable
+          CLASSIFICATION_TABLE: !Ref ClassificationTable
+          AUDIT_TABLE: !Ref AuditTable
+          SHARED_KNOWLEDGE_BASE_ID: !Ref SharedKnowledgeBase
+          RESTRICTED_KNOWLEDGE_BASE_ID: !Ref RestrictedKnowledgeBase
+          GENERATION_MODEL_ID: !Ref GenerationModelId
+          RELEVANCE_MIN_SCORE: !Ref RelevanceMinScore
+
+  IngestionFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${NamePrefix}-ingestion"
+      Runtime: python3.13
+      Handler: ingestion.handler.handler
+      MemorySize: 256
+      Timeout: 300
+      Role: !GetAtt IngestionRole.Arn
+      Code: {S3Bucket: !Ref ArtifactBucket, S3Key: !Ref IngestionCodeKey}
+      LoggingConfig: {LogGroup: !Ref IngestionLogGroup}
+      Environment:
+        Variables:
+          DEPLOYMENT_NAME: !Ref NamePrefix
+          CLASSIFICATION_TABLE: !Ref ClassificationTable
+          AUDIT_TABLE: !Ref AuditTable
+          RECORDS_BUCKET: !Ref RecordsBucket
+          SHARED_SECTION_BUCKET: !Ref SharedSectionBucket
+          RESTRICTED_SECTION_BUCKET: !Ref RestrictedSectionBucket
+          SHARED_KNOWLEDGE_BASE_ID: !Ref SharedKnowledgeBase
+          SHARED_DATA_SOURCE_ID: !GetAtt SharedDataSource.DataSourceId
+          RESTRICTED_KNOWLEDGE_BASE_ID: !Ref RestrictedKnowledgeBase
+          RESTRICTED_DATA_SOURCE_ID: !GetAtt RestrictedDataSource.DataSourceId
+
+  # ===================================================================================================================
+  # API edge (CTL-002): JWT authorizer on the only route. Invocation boundary: the query function may be invoked by
+  # this API only; every other caller — including account administrators — is explicitly denied. The ingestion job has
+  # no route: it is started by the operator.
+  # ===================================================================================================================
+  HttpApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Sub "${NamePrefix}-api"
+      ProtocolType: HTTP
+
+  JwtAuthorizer:
+    Type: AWS::ApiGatewayV2::Authorizer
+    Properties:
+      ApiId: !Ref HttpApi
+      Name: !Sub "${NamePrefix}-jwt"
+      AuthorizerType: JWT
+      IdentitySource: ["$request.header.Authorization"]
+      JwtConfiguration:
+        Issuer: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}"
+        Audience: [!Ref AppClient]
+
+  QueryIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApi
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt QueryFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  AskRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: POST /ask
+      AuthorizationType: JWT
+      AuthorizerId: !Ref JwtAuthorizer
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+      Target: !Sub "integrations/${QueryIntegration}"
+
+  DefaultStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref HttpApi
+      StageName: $default
+      AutoDeploy: true
+      DefaultRouteSettings: {ThrottlingBurstLimit: 20, ThrottlingRateLimit: 10}
+      AccessLogSettings:
+        DestinationArn: !GetAtt ApiAccessLogGroup.Arn
+        Format: '{"requestId":"$context.requestId","routeKey":"$context.routeKey","status":"$context.status","authorizerError":"$context.authorizer.error","integrationError":"$context.integrationErrorMessage","requestTime":"$context.requestTime"}'
+
+  QueryInvokeOnlyThroughApi:
+    Type: AWS::Lambda::ResourcePolicy
+    Properties:
+      ResourceArn: !GetAtt QueryFunction.Arn
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: AllowThisApiOnly
+            Effect: Allow
+            Principal: {Service: apigateway.amazonaws.com}
+            Action: lambda:InvokeFunction
+            Resource: !GetAtt QueryFunction.Arn
+            Condition: {ArnLike: {aws:SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*"}}
+          - Sid: DenyEveryOtherCaller
+            Effect: Deny
+            Principal: "*"
+            Action: lambda:InvokeFunction
+            Resource: !GetAtt QueryFunction.Arn
+            Condition: {ArnNotLike: {aws:SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*"}}
+
+Outputs:
+  Variant: {Value: !Ref Variant}
+  NamePrefix: {Value: !Ref NamePrefix}
+  ApiEndpoint: {Value: !GetAtt HttpApi.ApiEndpoint}
+  UserPoolId: {Value: !Ref UserPool}
+  AppClientId: {Value: !Ref AppClient}
+  OtherAppClientId: {Value: !Ref OtherAppClient}
+  AuthorizationTable: {Value: !Ref AuthorizationTable}
+  ClassificationTable: {Value: !Ref ClassificationTable}
+  AuditTable: {Value: !Ref AuditTable}
+  RecordsBucket: {Value: !Ref RecordsBucket}
+  SharedSectionBucket: {Value: !Ref SharedSectionBucket}
+  RestrictedSectionBucket: {Value: !Ref RestrictedSectionBucket}
+  SharedVectorBucket: {Value: !Sub "${NamePrefix}-shared-vectors"}
+  RestrictedVectorBucket: {Value: !Sub "${NamePrefix}-restricted-vectors"}
+  SharedVectorIndex: {Value: !Sub "${NamePrefix}-shared-index"}
+  RestrictedVectorIndex: {Value: !Sub "${NamePrefix}-restricted-index"}
+  SharedVectorIndexArn: {Value: !Ref SharedVectorIndex}
+  RestrictedVectorIndexArn: {Value: !Ref RestrictedVectorIndex}
+  SharedKnowledgeBaseId: {Value: !Ref SharedKnowledgeBase}
+  SharedKnowledgeBaseArn: {Value: !GetAtt SharedKnowledgeBase.KnowledgeBaseArn}
+  SharedDataSourceId: {Value: !GetAtt SharedDataSource.DataSourceId}
+  RestrictedKnowledgeBaseId: {Value: !Ref RestrictedKnowledgeBase}
+  RestrictedKnowledgeBaseArn: {Value: !GetAtt RestrictedKnowledgeBase.KnowledgeBaseArn}
+  RestrictedDataSourceId: {Value: !GetAtt RestrictedDataSource.DataSourceId}
+  QueryFunctionName: {Value: !Ref QueryFunction}
+  IngestionFunctionName: {Value: !Ref IngestionFunction}
+  QueryRoleArn: {Value: !GetAtt QueryRole.Arn}
+  QueryRoleName: {Value: !Ref QueryRole}
+  IngestionRoleArn: {Value: !GetAtt IngestionRole.Arn}
+  SharedKnowledgeBaseRoleArn: {Value: !GetAtt SharedKnowledgeBaseRole.Arn}
+  RestrictedKnowledgeBaseRoleArn: {Value: !GetAtt RestrictedKnowledgeBaseRole.Arn}

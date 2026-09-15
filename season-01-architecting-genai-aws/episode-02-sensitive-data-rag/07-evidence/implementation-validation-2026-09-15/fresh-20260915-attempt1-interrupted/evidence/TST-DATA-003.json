@@ -1,0 +1,265 @@
+{
+  "category": "data",
+  "controls": [
+    "CTL-006"
+  ],
+  "evidence": "evidence/TST-DATA-003.json",
+  "expected": "D-14's text claims INTERNAL; it is indexed as CONFIDENTIAL BID-ORION; P-01 never retrieves it, P-02 does",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 215,
+          "retrieval": 343,
+          "total": 568,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-01",
+        "question": "orion_discount",
+        "relevance": {
+          "kept": [
+            "31299997-aab8-40f3-8e07-a671a540871e",
+            "5140ac23-0a96-4836-9fdc-98f35953a183",
+            "00b8124f-a4ac-43be-a93e-7ab8f6004609"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "fe7f5f86-d00f-4525-add2-fd113961d025",
+            "3f6ce34b-4817-41c6-8c41-0c9b50f913e8"
+          ]
+        },
+        "request_id": "52f67408-6b43-400f-a862-598852aca2cb",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.539872,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.526568,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "The Orion commercial summary states that the discount strategy for the follow-on tender is a staged discount tied to placeholder band ZETA-15. Marker CANARY-CLAIMS-INTERNAL.",
+        "citations": [
+          {
+            "document_id": "D-14",
+            "document_title": "Orion commercial summary",
+            "section_id": "S1",
+            "section_title": "Discount strategy"
+          },
+          {
+            "document_id": "D-03",
+            "document_title": "Project Orion delivery report",
+            "section_id": "S4",
+            "section_title": "Commercial position and bid pricing"
+          },
+          {
+            "document_id": "D-03",
+            "document_title": "Project Orion delivery report",
+            "section_id": "S3",
+            "section_title": "Lessons learned"
+          },
+          {
+            "document_id": "D-03",
+            "document_title": "Project Orion delivery report",
+            "section_id": "S2",
+            "section_title": "Delivery"
+          },
+          {
+            "document_id": "D-03",
+            "document_title": "Project Orion delivery report",
+            "section_id": "S1",
+            "section_title": "Background"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 181,
+            "sha256": "8ed7671b959cc64341f3e2245c7c66922e249b8c09e0382d4732beccca64734d",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "BID-ORION"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 298,
+          "retrieval": 370,
+          "total": 678,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-02",
+        "question": "orion_discount",
+        "relevance": {
+          "kept": [
+            "2a647291-9f0b-4803-adf0-1324b9bf0009",
+            "bc433406-0a28-495a-8237-00ebf87859e8",
+            "31299997-aab8-40f3-8e07-a671a540871e",
+            "5140ac23-0a96-4836-9fdc-98f35953a183",
+            "00b8124f-a4ac-43be-a93e-7ab8f6004609"
+          ],
+          "min_score": 0.6,
+          "omitted": []
+        },
+        "request_id": "246a78da-5a83-4828-8453-2dcc4756bd5b",
+        "retrieved": [
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.916425,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.68808,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-03": 1,
+            "D-14": 1
+          },
+          "status": "PASS"
+        }
+      }
+    ],
+    "d14_chunks": [
+      [
+        "CONFIDENTIAL",
+        "BID-ORION",
+        "shared"
+      ]
+    ]
+  },
+  "observed": "D-14 chunks [('CONFIDENTIAL', 'BID-ORION', 'shared')]; P-01 retrieved D-14: False; P-02 retrieved D-14: True",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:34:40+00:00",
+  "status": "PASS",
+  "test_id": "TST-DATA-003",
+  "verifies": [
+    "DATA-002"
+  ]
+}

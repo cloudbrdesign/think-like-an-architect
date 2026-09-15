@@ -1,0 +1,218 @@
+{
+  "restricted": {
+    "chunks": [
+      {
+        "canaries": [
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "document_id": "D-04",
+        "vector_id": "0973354e-8635-4bc8-be72-be39f8bf76a0",
+        "label": "RESTRICTED",
+        "record_version": "1",
+        "scope": "SI-0417",
+        "section_id": "S2"
+      },
+      {
+        "canaries": [
+          "CANARY-HR2031-CASE-P8"
+        ],
+        "document_id": "D-05",
+        "vector_id": "ec17a67f-0d6b-439c-adbd-6ab9309299a3",
+        "label": "RESTRICTED",
+        "record_version": "1",
+        "scope": "HR-2031",
+        "section_id": "S1"
+      }
+    ],
+    "section_objects": [
+      "sections/D-04/S2.txt",
+      "sections/D-05/S1.txt"
+    ]
+  },
+  "shared": {
+    "chunks": [
+      {
+        "canaries": [
+          "CANARY-FIN-MONTHEND-9D"
+        ],
+        "document_id": "D-08",
+        "vector_id": "75763923-6dcb-4abb-953a-a4bb45fd2a15",
+        "label": "CONFIDENTIAL",
+        "record_version": "1",
+        "scope": "FIN-REPORTING",
+        "section_id": "S1"
+      },
+      {
+        "canaries": [
+          "CANARY-INT-ONCALL"
+        ],
+        "document_id": "D-06",
+        "vector_id": "18905331-3e5b-439f-a895-636299106fb0",
+        "label": "INTERNAL",
+        "record_version": "1",
+        "scope": "NONE",
+        "section_id": "S1"
+      },
+      {
+        "canaries": [
+          "CANARY-BID-ORION-PRICING-7Q3"
+        ],
+        "document_id": "D-03",
+        "vector_id": "04cd5954-f27f-4b41-81ab-8a7b5bcd2970",
+        "label": "CONFIDENTIAL",
+        "record_version": "1",
+        "scope": "BID-ORION",
+        "section_id": "S4"
+      },
+      {
+        "canaries": [
+          "CANARY-INT-SMP12-TESTS"
+        ],
+        "document_id": "D-01",
+        "vector_id": "7d33ed46-4b8d-47d9-a22b-77110697ce94",
+        "label": "INTERNAL",
+        "record_version": "1",
+        "scope": "NONE",
+        "section_id": "S2"
+      },
+      {
+        "canaries": [
+          "CANARY-INT-INDUCTION"
+        ],
+        "document_id": "D-02",
+        "vector_id": "063b6387-6da2-4c81-bfd7-5ea01405b5be",
+        "label": "INTERNAL",
+        "record_version": "1",
+        "scope": "NONE",
+        "section_id": "S1"
+      },
+      {
+        "canaries": [
+          "CANARY-SEC-SIG-VULN-3F"
+        ],
+        "document_id": "D-07",
+        "vector_id": "f9c19f0f-4137-4a9f-bdb6-dad5cc796a11",
+        "label": "CONFIDENTIAL",
+        "record_version": "1",
+        "scope": "SEC-SIGNALLING",
+        "section_id": "S1"
+      },
+      {
+        "canaries": [
+          "CANARY-CLAIMS-INTERNAL"
+        ],
+        "document_id": "D-14",
+        "vector_id": "406a322d-4c55-47d1-af48-2e8f376a1a29",
+        "label": "CONFIDENTIAL",
+        "record_version": "1",
+        "scope": "BID-ORION",
+        "section_id": "S1"
+      },
+      {
+        "canaries": [
+          "CANARY-INT-SMP12"
+        ],
+        "document_id": "D-01",
+        "vector_id": "cfda44dc-5054-475c-950a-9d74f50b64f1",
+        "label": "INTERNAL",
+        "record_version": "1",
+        "scope": "NONE",
+        "section_id": "S1"
+      },
+      {
+        "canaries": [
+          "CANARY-INT-ORION-LESSONS"
+        ],
+        "document_id": "D-03",
+        "vector_id": "534727a9-ee0c-4668-bcec-40d62fce6761",
+        "label": "INTERNAL",
+        "record_version": "1",
+        "scope": "NONE",
+        "section_id": "S3"
+      },
+      {
+        "canaries": [
+          "CANARY-INT-ORION-BACKGROUND"
+        ],
+        "document_id": "D-03",
+        "vector_id": "8d181e82-7c0b-4efe-b476-98a547f5980f",
+        "label": "INTERNAL",
+        "record_version": "1",
+        "scope": "NONE",
+        "section_id": "S1"
+      },
+      {
+        "canaries": [
+          "CANARY-INT-FAULTS"
+        ],
+        "document_id": "D-12",
+        "vector_id": "56f6e954-7512-4740-94b2-5e6bcfe6781d",
+        "label": "INTERNAL",
+        "record_version": "1",
+        "scope": "NONE",
+        "section_id": "S1"
+      },
+      {
+        "canaries": [
+          "CANARY-INT-INDUCTION-PPE"
+        ],
+        "document_id": "D-02",
+        "vector_id": "8b81fd7b-08f4-4f51-9112-87bb71f0816e",
+        "label": "INTERNAL",
+        "record_version": "1",
+        "scope": "NONE",
+        "section_id": "S2"
+      },
+      {
+        "canaries": [
+          "CANARY-INT-SI0417-FINDINGS"
+        ],
+        "document_id": "D-04",
+        "vector_id": "16fbbfe2-cf3c-4573-9c50-9ef9feb6a062",
+        "label": "INTERNAL",
+        "record_version": "1",
+        "scope": "NONE",
+        "section_id": "S1"
+      },
+      {
+        "canaries": [
+          "CANARY-INT-ORION-DELIVERY"
+        ],
+        "document_id": "D-03",
+        "vector_id": "4bf870b8-9a76-49b8-b64f-a9e2da8be418",
+        "label": "INTERNAL",
+        "record_version": "1",
+        "scope": "NONE",
+        "section_id": "S2"
+      },
+      {
+        "canaries": [
+          "CANARY-RECLASS-RESILIENCE"
+        ],
+        "document_id": "D-13",
+        "vector_id": "7d8dda8e-c4ee-4dba-954a-0c65cd77b31d",
+        "label": "INTERNAL",
+        "record_version": "1",
+        "scope": "NONE",
+        "section_id": "S1"
+      }
+    ],
+    "section_objects": [
+      "sections/D-01/S1.txt",
+      "sections/D-01/S2.txt",
+      "sections/D-02/S1.txt",
+      "sections/D-02/S2.txt",
+      "sections/D-03/S1.txt",
+      "sections/D-03/S2.txt",
+      "sections/D-03/S3.txt",
+      "sections/D-03/S4.txt",
+      "sections/D-04/S1.txt",
+      "sections/D-06/S1.txt",
+      "sections/D-07/S1.txt",
+      "sections/D-08/S1.txt",
+      "sections/D-12/S1.txt",
+      "sections/D-13/S1.txt",
+      "sections/D-14/S1.txt"
+    ]
+  }
+}

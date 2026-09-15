@@ -1,0 +1,10 @@
+{
+  "audit_items": 252,
+  "canary_hits_in_audit": [],
+  "items_without_outcome": [],
+  "log_events_scanned": 455,
+  "log_hits": {},
+  "model_invocation_logging_enabled": false,
+  "question_text_hits_in_audit": [],
+  "questions_searched": 21
+}

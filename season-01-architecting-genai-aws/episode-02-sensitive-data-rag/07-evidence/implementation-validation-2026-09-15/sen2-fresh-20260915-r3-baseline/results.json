@@ -1,0 +1,71 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "PASS": 3
+  },
+  "deployment": "tla-s01e02-normal",
+  "finished_at": "2026-09-15T10:02:55+00:00",
+  "region": "us-east-1",
+  "run_id": "sen2-fresh-20260915-r3-baseline",
+  "scope": "tests TST-ELG-004,TST-DATA-005,TST-DATA-006",
+  "started_at": "2026-09-15T10:02:37+00:00",
+  "tests": [
+    {
+      "category": "data",
+      "controls": [
+        "CTL-008"
+      ],
+      "evidence": "evidence/TST-DATA-005.json",
+      "expected": "Every chunk carries document, section, label, scope and version equal to its record; no chunk spans sections or is less restrictive than its document",
+      "level": "L3",
+      "observed": "17 chunks checked; problems: []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T10:02:52+00:00",
+      "status": "PASS",
+      "test_id": "TST-DATA-005",
+      "verifies": [
+        "DATA-003",
+        "DATA-007"
+      ]
+    },
+    {
+      "category": "data",
+      "controls": [
+        "CTL-010",
+        "CTL-017"
+      ],
+      "evidence": "evidence/TST-DATA-006.json",
+      "expected": "Shared tier holds no RESTRICTED section, restricted tier only RESTRICTED; no cache resource or cached answer path",
+      "level": "L3",
+      "observed": "problems: []; cache resources []; cache settings []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T10:02:55+00:00",
+      "status": "PASS",
+      "test_id": "TST-DATA-006",
+      "verifies": [
+        "DATA-006"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-008",
+        "CTL-011"
+      ],
+      "evidence": "evidence/TST-ELG-004.json",
+      "expected": "P-01 is answered from Orion lessons (D-03 \u00a73); D-03 \u00a74 is never retrieved",
+      "level": "L3",
+      "observed": "lessons retrieved+cited: True; D-03 \u00a74 retrieved in: []; leaks []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T10:02:44+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-004",
+      "verifies": [
+        "FUN-004",
+        "DATA-003"
+      ]
+    }
+  ],
+  "variant": "normal"
+}

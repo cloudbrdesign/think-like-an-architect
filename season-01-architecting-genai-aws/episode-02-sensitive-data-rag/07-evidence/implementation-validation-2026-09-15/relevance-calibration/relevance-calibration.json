@@ -1,0 +1,6102 @@
+{
+  "independence": {
+    "D-03-S4_in_constrained_results": false,
+    "D-03-S4_rank_unconstrained": 1,
+    "constrained_search": [
+      [
+        "D-03-S1",
+        0.7058,
+        "shared"
+      ],
+      [
+        "D-03-S2",
+        0.6749,
+        "shared"
+      ],
+      [
+        "D-03-S3",
+        0.6412,
+        "shared"
+      ],
+      [
+        "D-12-S1",
+        0.5302,
+        "shared"
+      ],
+      [
+        "D-01-S1",
+        0.4999,
+        "shared"
+      ]
+    ],
+    "ineligible_high_relevance_section": "D-03-S4",
+    "persona": "P-01",
+    "question": "orion_pricing",
+    "unconstrained_operator_search_privileged": [
+      [
+        "D-03-S4",
+        0.9198,
+        "shared"
+      ],
+      [
+        "D-14-S1",
+        0.7175,
+        "shared"
+      ],
+      [
+        "D-03-S1",
+        0.7058,
+        "shared"
+      ],
+      [
+        "D-03-S2",
+        0.6749,
+        "shared"
+      ],
+      [
+        "D-03-S3",
+        0.6412,
+        "shared"
+      ]
+    ]
+  },
+  "method": "Relevance calibration (IMPLEMENTATION_DESIGN \u00a75.5, TS-E02-07). ANSWER QUALITY ONLY \u2014 relevance is not authorization.\n\nMethod:\n  * For every persona that can be answered at all, and every non-attack question, search each tier the persona's\n    decision selects WITH that persona's mandatory constraint (built by core/constraints.py \u2014 the same builder the\n    query function uses). Operator credentials (privileged), no generation, no answers.\n  * Classes: `answerable` (the question's target section is indexed and eligible for the persona) \u2192 its score must\n    clear the threshold; `no_target` (the question's topic exists nowhere the persona may see) \u2192 its best score\n    should not; `not_answerable` (target not eligible, related eligible content may exist) \u2192 informational only.\n  * Every candidate threshold is scored: false negatives (answerable targets below it) and no-target questions kept.\n  * Selection rule (coarse on purpose, so one query cannot tune it): on a 0.05 grid, the highest threshold that stays\n    at least MARGIN below the weakest answerable target score. Recall of eligible answers comes first; a kept but\n    unhelpful chunk is handled by the model's instruction to give the uniform no-answer sentence. If no grid value\n    satisfies the rule, the scores do not support a stable threshold and none is invented.\nIt also records the two authorization-independence observations the validation plan asks for.",
+  "observations": [
+    {
+      "class": "answerable",
+      "persona": "P-01",
+      "question": "smp12",
+      "results": [
+        [
+          "D-01-S1",
+          0.8869,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.796,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.7092,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.646,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6045,
+          "shared"
+        ]
+      ],
+      "target": "D-01-S1",
+      "target_score": 0.8869,
+      "top_score": 0.8869
+    },
+    {
+      "class": "answerable",
+      "persona": "P-01",
+      "question": "induction_ppe",
+      "results": [
+        [
+          "D-02-S2",
+          0.9152,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8147,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6588,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.63,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6104,
+          "shared"
+        ]
+      ],
+      "target": "D-02-S2",
+      "target_score": 0.9152,
+      "top_score": 0.9152
+    },
+    {
+      "class": "answerable",
+      "persona": "P-01",
+      "question": "orion_lessons",
+      "results": [
+        [
+          "D-03-S3",
+          0.9279,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.7871,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.7801,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5487,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5445,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S3",
+      "target_score": 0.9279,
+      "top_score": 0.9279
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-01",
+      "question": "orion_pricing",
+      "results": [
+        [
+          "D-03-S1",
+          0.7058,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6749,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6412,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5302,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.4999,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S4",
+      "target_score": null,
+      "top_score": 0.7058
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-01",
+      "question": "orion_discount",
+      "results": [
+        [
+          "D-03-S3",
+          0.6509,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6294,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5399,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5263,
+          "shared"
+        ]
+      ],
+      "target": "D-14-S1",
+      "target_score": null,
+      "top_score": 0.6509
+    },
+    {
+      "class": "answerable",
+      "persona": "P-01",
+      "question": "si0417_findings",
+      "results": [
+        [
+          "D-04-S1",
+          0.8547,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8168,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.7387,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6903,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6187,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S1",
+      "target_score": 0.8547,
+      "top_score": 0.8547
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-01",
+      "question": "si0417_witness",
+      "results": [
+        [
+          "D-04-S1",
+          0.8148,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.7198,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6695,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6527,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6151,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.8148
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-01",
+      "question": "si0417_medical",
+      "results": [
+        [
+          "D-04-S1",
+          0.7712,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6055,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5958,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5889,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.583,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S3",
+      "target_score": null,
+      "top_score": 0.7712
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-01",
+      "question": "hr2031",
+      "results": [
+        [
+          "D-06-S1",
+          0.6755,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5585,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5521,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.542,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5375,
+          "shared"
+        ]
+      ],
+      "target": "D-05-S1",
+      "target_score": null,
+      "top_score": 0.6755
+    },
+    {
+      "class": "answerable",
+      "persona": "P-01",
+      "question": "oncall",
+      "results": [
+        [
+          "D-06-S1",
+          0.9106,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6428,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6209,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5914,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5912,
+          "shared"
+        ]
+      ],
+      "target": "D-06-S1",
+      "target_score": 0.9106,
+      "top_score": 0.9106
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-01",
+      "question": "sec_vuln",
+      "results": [
+        [
+          "D-12-S1",
+          0.7478,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.7407,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.7101,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6514,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6144,
+          "shared"
+        ]
+      ],
+      "target": "D-07-S1",
+      "target_score": null,
+      "top_score": 0.7478
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-01",
+      "question": "finance",
+      "results": [
+        [
+          "D-01-S1",
+          0.6237,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.617,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6022,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5948,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5789,
+          "shared"
+        ]
+      ],
+      "target": "D-08-S1",
+      "target_score": null,
+      "top_score": 0.6237
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-01",
+      "question": "tooling",
+      "results": [
+        [
+          "D-04-S1",
+          0.6539,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6307,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6304,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6082,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.607,
+          "shared"
+        ]
+      ],
+      "target": "D-09-S1",
+      "target_score": null,
+      "top_score": 0.6539
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-01",
+      "question": "supplier",
+      "results": [
+        [
+          "D-03-S1",
+          0.6849,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6784,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6725,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6093,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6027,
+          "shared"
+        ]
+      ],
+      "target": "D-10-S1",
+      "target_score": null,
+      "top_score": 0.6849
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-01",
+      "question": "access",
+      "results": [
+        [
+          "D-06-S1",
+          0.687,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.657,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.636,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6104,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5749,
+          "shared"
+        ]
+      ],
+      "target": "D-11-S1",
+      "target_score": null,
+      "top_score": 0.687
+    },
+    {
+      "class": "answerable",
+      "persona": "P-01",
+      "question": "faults",
+      "results": [
+        [
+          "D-12-S1",
+          0.9257,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.758,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6998,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6165,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.5879,
+          "shared"
+        ]
+      ],
+      "target": "D-12-S1",
+      "target_score": 0.9257,
+      "top_score": 0.9257
+    },
+    {
+      "class": "answerable",
+      "persona": "P-01",
+      "question": "resilience",
+      "results": [
+        [
+          "D-13-S1",
+          0.9011,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6566,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6103,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5752,
+          "shared"
+        ]
+      ],
+      "target": "D-13-S1",
+      "target_score": 0.9011,
+      "top_score": 0.9011
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-01",
+      "question": "parking",
+      "results": [
+        [
+          "D-02-S1",
+          0.6155,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6145,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5988,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5856,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5845,
+          "shared"
+        ]
+      ],
+      "target": "D-15-S1",
+      "target_score": null,
+      "top_score": 0.6155
+    },
+    {
+      "class": "no_target",
+      "persona": "P-01",
+      "question": "restricted_only",
+      "results": [
+        [
+          "D-04-S1",
+          0.5488,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5416,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5313,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.5306,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.529,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.5488
+    },
+    {
+      "class": "no_target",
+      "persona": "P-01",
+      "question": "nonexistent",
+      "results": [
+        [
+          "D-04-S1",
+          0.5588,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.5361,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5298,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5293,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5257,
+          "shared"
+        ]
+      ],
+      "target": null,
+      "target_score": null,
+      "top_score": 0.5588
+    },
+    {
+      "class": "answerable",
+      "persona": "P-02",
+      "question": "smp12",
+      "results": [
+        [
+          "D-01-S1",
+          0.8869,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.796,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.7092,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.646,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6045,
+          "shared"
+        ]
+      ],
+      "target": "D-01-S1",
+      "target_score": 0.8869,
+      "top_score": 0.8869
+    },
+    {
+      "class": "answerable",
+      "persona": "P-02",
+      "question": "induction_ppe",
+      "results": [
+        [
+          "D-02-S2",
+          0.9152,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8147,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6588,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.63,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6104,
+          "shared"
+        ]
+      ],
+      "target": "D-02-S2",
+      "target_score": 0.9152,
+      "top_score": 0.9152
+    },
+    {
+      "class": "answerable",
+      "persona": "P-02",
+      "question": "orion_lessons",
+      "results": [
+        [
+          "D-03-S3",
+          0.9279,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.7871,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.7801,
+          "shared"
+        ],
+        [
+          "D-03-S4",
+          0.6874,
+          "shared"
+        ],
+        [
+          "D-14-S1",
+          0.6552,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S3",
+      "target_score": 0.9279,
+      "top_score": 0.9279
+    },
+    {
+      "class": "answerable",
+      "persona": "P-02",
+      "question": "orion_pricing",
+      "results": [
+        [
+          "D-03-S4",
+          0.9198,
+          "shared"
+        ],
+        [
+          "D-14-S1",
+          0.7175,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.7058,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6749,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6412,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S4",
+      "target_score": 0.9198,
+      "top_score": 0.9198
+    },
+    {
+      "class": "answerable",
+      "persona": "P-02",
+      "question": "orion_discount",
+      "results": [
+        [
+          "D-14-S1",
+          0.9164,
+          "shared"
+        ],
+        [
+          "D-03-S4",
+          0.6881,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6509,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6294,
+          "shared"
+        ]
+      ],
+      "target": "D-14-S1",
+      "target_score": 0.9164,
+      "top_score": 0.9164
+    },
+    {
+      "class": "answerable",
+      "persona": "P-02",
+      "question": "si0417_findings",
+      "results": [
+        [
+          "D-04-S1",
+          0.8547,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8168,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.7387,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6903,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6187,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S1",
+      "target_score": 0.8547,
+      "top_score": 0.8547
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-02",
+      "question": "si0417_witness",
+      "results": [
+        [
+          "D-04-S1",
+          0.8148,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.7198,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6695,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6527,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6151,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.8148
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-02",
+      "question": "si0417_medical",
+      "results": [
+        [
+          "D-04-S1",
+          0.7712,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6055,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5958,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5889,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.583,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S3",
+      "target_score": null,
+      "top_score": 0.7712
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-02",
+      "question": "hr2031",
+      "results": [
+        [
+          "D-06-S1",
+          0.6755,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5585,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5521,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.542,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5375,
+          "shared"
+        ]
+      ],
+      "target": "D-05-S1",
+      "target_score": null,
+      "top_score": 0.6755
+    },
+    {
+      "class": "answerable",
+      "persona": "P-02",
+      "question": "oncall",
+      "results": [
+        [
+          "D-06-S1",
+          0.9106,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6428,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6209,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5914,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5912,
+          "shared"
+        ]
+      ],
+      "target": "D-06-S1",
+      "target_score": 0.9106,
+      "top_score": 0.9106
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-02",
+      "question": "sec_vuln",
+      "results": [
+        [
+          "D-12-S1",
+          0.7478,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.7407,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.7101,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6514,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6144,
+          "shared"
+        ]
+      ],
+      "target": "D-07-S1",
+      "target_score": null,
+      "top_score": 0.7478
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-02",
+      "question": "finance",
+      "results": [
+        [
+          "D-03-S4",
+          0.6345,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.6237,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.617,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6022,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5948,
+          "shared"
+        ]
+      ],
+      "target": "D-08-S1",
+      "target_score": null,
+      "top_score": 0.6345
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-02",
+      "question": "tooling",
+      "results": [
+        [
+          "D-04-S1",
+          0.6539,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6307,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6304,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6082,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.607,
+          "shared"
+        ]
+      ],
+      "target": "D-09-S1",
+      "target_score": null,
+      "top_score": 0.6539
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-02",
+      "question": "supplier",
+      "results": [
+        [
+          "D-03-S1",
+          0.6849,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6784,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6725,
+          "shared"
+        ],
+        [
+          "D-14-S1",
+          0.6635,
+          "shared"
+        ],
+        [
+          "D-03-S4",
+          0.6314,
+          "shared"
+        ]
+      ],
+      "target": "D-10-S1",
+      "target_score": null,
+      "top_score": 0.6849
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-02",
+      "question": "access",
+      "results": [
+        [
+          "D-06-S1",
+          0.687,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.657,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.636,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6104,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5749,
+          "shared"
+        ]
+      ],
+      "target": "D-11-S1",
+      "target_score": null,
+      "top_score": 0.687
+    },
+    {
+      "class": "answerable",
+      "persona": "P-02",
+      "question": "faults",
+      "results": [
+        [
+          "D-12-S1",
+          0.9257,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.758,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6998,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6165,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.5879,
+          "shared"
+        ]
+      ],
+      "target": "D-12-S1",
+      "target_score": 0.9257,
+      "top_score": 0.9257
+    },
+    {
+      "class": "answerable",
+      "persona": "P-02",
+      "question": "resilience",
+      "results": [
+        [
+          "D-13-S1",
+          0.9011,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6566,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6103,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5752,
+          "shared"
+        ]
+      ],
+      "target": "D-13-S1",
+      "target_score": 0.9011,
+      "top_score": 0.9011
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-02",
+      "question": "parking",
+      "results": [
+        [
+          "D-02-S1",
+          0.6155,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6145,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5988,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5856,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5845,
+          "shared"
+        ]
+      ],
+      "target": "D-15-S1",
+      "target_score": null,
+      "top_score": 0.6155
+    },
+    {
+      "class": "no_target",
+      "persona": "P-02",
+      "question": "restricted_only",
+      "results": [
+        [
+          "D-04-S1",
+          0.5488,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5416,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5313,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.5306,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.529,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.5488
+    },
+    {
+      "class": "no_target",
+      "persona": "P-02",
+      "question": "nonexistent",
+      "results": [
+        [
+          "D-04-S1",
+          0.5588,
+          "shared"
+        ],
+        [
+          "D-14-S1",
+          0.5383,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.5361,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5298,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5293,
+          "shared"
+        ]
+      ],
+      "target": null,
+      "target_score": null,
+      "top_score": 0.5588
+    },
+    {
+      "class": "answerable",
+      "persona": "P-03",
+      "question": "smp12",
+      "results": [
+        [
+          "D-01-S1",
+          0.8869,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.796,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.7092,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.646,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6045,
+          "shared"
+        ]
+      ],
+      "target": "D-01-S1",
+      "target_score": 0.8869,
+      "top_score": 0.8869
+    },
+    {
+      "class": "answerable",
+      "persona": "P-03",
+      "question": "induction_ppe",
+      "results": [
+        [
+          "D-02-S2",
+          0.9152,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8147,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6588,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.63,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6104,
+          "shared"
+        ]
+      ],
+      "target": "D-02-S2",
+      "target_score": 0.9152,
+      "top_score": 0.9152
+    },
+    {
+      "class": "answerable",
+      "persona": "P-03",
+      "question": "orion_lessons",
+      "results": [
+        [
+          "D-03-S3",
+          0.9279,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.7871,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.7801,
+          "shared"
+        ],
+        [
+          "D-08-S1",
+          0.549,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5487,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S3",
+      "target_score": 0.9279,
+      "top_score": 0.9279
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-03",
+      "question": "orion_pricing",
+      "results": [
+        [
+          "D-03-S1",
+          0.7058,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6749,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6412,
+          "shared"
+        ],
+        [
+          "D-08-S1",
+          0.6173,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5302,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S4",
+      "target_score": null,
+      "top_score": 0.7058
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-03",
+      "question": "orion_discount",
+      "results": [
+        [
+          "D-03-S3",
+          0.6509,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6294,
+          "shared"
+        ],
+        [
+          "D-08-S1",
+          0.5509,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5399,
+          "shared"
+        ]
+      ],
+      "target": "D-14-S1",
+      "target_score": null,
+      "top_score": 0.6509
+    },
+    {
+      "class": "answerable",
+      "persona": "P-03",
+      "question": "si0417_findings",
+      "results": [
+        [
+          "D-04-S1",
+          0.8547,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8168,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.7387,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6903,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6187,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S1",
+      "target_score": 0.8547,
+      "top_score": 0.8547
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-03",
+      "question": "si0417_witness",
+      "results": [
+        [
+          "D-04-S1",
+          0.8148,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.7198,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6695,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6527,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6151,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.8148
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-03",
+      "question": "si0417_medical",
+      "results": [
+        [
+          "D-04-S1",
+          0.7712,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6055,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5958,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5889,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.583,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S3",
+      "target_score": null,
+      "top_score": 0.7712
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-03",
+      "question": "hr2031",
+      "results": [
+        [
+          "D-06-S1",
+          0.6755,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5585,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5521,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.542,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5375,
+          "shared"
+        ]
+      ],
+      "target": "D-05-S1",
+      "target_score": null,
+      "top_score": 0.6755
+    },
+    {
+      "class": "answerable",
+      "persona": "P-03",
+      "question": "oncall",
+      "results": [
+        [
+          "D-06-S1",
+          0.9106,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6428,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6209,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5914,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5912,
+          "shared"
+        ]
+      ],
+      "target": "D-06-S1",
+      "target_score": 0.9106,
+      "top_score": 0.9106
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-03",
+      "question": "sec_vuln",
+      "results": [
+        [
+          "D-12-S1",
+          0.7478,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.7407,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.7101,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6514,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6144,
+          "shared"
+        ]
+      ],
+      "target": "D-07-S1",
+      "target_score": null,
+      "top_score": 0.7478
+    },
+    {
+      "class": "answerable",
+      "persona": "P-03",
+      "question": "finance",
+      "results": [
+        [
+          "D-08-S1",
+          0.9058,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.6237,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.617,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6022,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5948,
+          "shared"
+        ]
+      ],
+      "target": "D-08-S1",
+      "target_score": 0.9058,
+      "top_score": 0.9058
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-03",
+      "question": "tooling",
+      "results": [
+        [
+          "D-04-S1",
+          0.6539,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6307,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6304,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6082,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.607,
+          "shared"
+        ]
+      ],
+      "target": "D-09-S1",
+      "target_score": null,
+      "top_score": 0.6539
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-03",
+      "question": "supplier",
+      "results": [
+        [
+          "D-03-S1",
+          0.6849,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6784,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6725,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6093,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6027,
+          "shared"
+        ]
+      ],
+      "target": "D-10-S1",
+      "target_score": null,
+      "top_score": 0.6849
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-03",
+      "question": "access",
+      "results": [
+        [
+          "D-06-S1",
+          0.687,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.657,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.636,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6104,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5749,
+          "shared"
+        ]
+      ],
+      "target": "D-11-S1",
+      "target_score": null,
+      "top_score": 0.687
+    },
+    {
+      "class": "answerable",
+      "persona": "P-03",
+      "question": "faults",
+      "results": [
+        [
+          "D-12-S1",
+          0.9257,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.758,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6998,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6165,
+          "shared"
+        ],
+        [
+          "D-08-S1",
+          0.6009,
+          "shared"
+        ]
+      ],
+      "target": "D-12-S1",
+      "target_score": 0.9257,
+      "top_score": 0.9257
+    },
+    {
+      "class": "answerable",
+      "persona": "P-03",
+      "question": "resilience",
+      "results": [
+        [
+          "D-13-S1",
+          0.9011,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6566,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6103,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5752,
+          "shared"
+        ]
+      ],
+      "target": "D-13-S1",
+      "target_score": 0.9011,
+      "top_score": 0.9011
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-03",
+      "question": "parking",
+      "results": [
+        [
+          "D-02-S1",
+          0.6155,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6145,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5988,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5856,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5845,
+          "shared"
+        ]
+      ],
+      "target": "D-15-S1",
+      "target_score": null,
+      "top_score": 0.6155
+    },
+    {
+      "class": "no_target",
+      "persona": "P-03",
+      "question": "restricted_only",
+      "results": [
+        [
+          "D-04-S1",
+          0.5488,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5416,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5313,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.5306,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.529,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.5488
+    },
+    {
+      "class": "no_target",
+      "persona": "P-03",
+      "question": "nonexistent",
+      "results": [
+        [
+          "D-04-S1",
+          0.5588,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.5361,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5298,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5293,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5257,
+          "shared"
+        ]
+      ],
+      "target": null,
+      "target_score": null,
+      "top_score": 0.5588
+    },
+    {
+      "class": "answerable",
+      "persona": "P-04",
+      "question": "smp12",
+      "results": [
+        [
+          "D-01-S1",
+          0.8869,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.796,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.7092,
+          "shared"
+        ],
+        [
+          "D-07-S1",
+          0.6609,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.646,
+          "shared"
+        ]
+      ],
+      "target": "D-01-S1",
+      "target_score": 0.8869,
+      "top_score": 0.8869
+    },
+    {
+      "class": "answerable",
+      "persona": "P-04",
+      "question": "induction_ppe",
+      "results": [
+        [
+          "D-02-S2",
+          0.9152,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8147,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6588,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.63,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6104,
+          "shared"
+        ]
+      ],
+      "target": "D-02-S2",
+      "target_score": 0.9152,
+      "top_score": 0.9152
+    },
+    {
+      "class": "answerable",
+      "persona": "P-04",
+      "question": "orion_lessons",
+      "results": [
+        [
+          "D-03-S3",
+          0.9279,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.7871,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.7801,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5487,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5445,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S3",
+      "target_score": 0.9279,
+      "top_score": 0.9279
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-04",
+      "question": "orion_pricing",
+      "results": [
+        [
+          "D-03-S1",
+          0.7058,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6749,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6412,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5302,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.4999,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S4",
+      "target_score": null,
+      "top_score": 0.7058
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-04",
+      "question": "orion_discount",
+      "results": [
+        [
+          "D-03-S3",
+          0.6509,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6294,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5399,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5263,
+          "shared"
+        ]
+      ],
+      "target": "D-14-S1",
+      "target_score": null,
+      "top_score": 0.6509
+    },
+    {
+      "class": "answerable",
+      "persona": "P-04",
+      "question": "si0417_findings",
+      "results": [
+        [
+          "D-04-S1",
+          0.8547,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8168,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.7387,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6903,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6187,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S1",
+      "target_score": 0.8547,
+      "top_score": 0.8547
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-04",
+      "question": "si0417_witness",
+      "results": [
+        [
+          "D-04-S1",
+          0.8148,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.7198,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6695,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6527,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6151,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.8148
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-04",
+      "question": "si0417_medical",
+      "results": [
+        [
+          "D-04-S1",
+          0.7712,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6055,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5958,
+          "shared"
+        ],
+        [
+          "D-07-S1",
+          0.5934,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5889,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S3",
+      "target_score": null,
+      "top_score": 0.7712
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-04",
+      "question": "hr2031",
+      "results": [
+        [
+          "D-06-S1",
+          0.6755,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5585,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5521,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.542,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5375,
+          "shared"
+        ]
+      ],
+      "target": "D-05-S1",
+      "target_score": null,
+      "top_score": 0.6755
+    },
+    {
+      "class": "answerable",
+      "persona": "P-04",
+      "question": "oncall",
+      "results": [
+        [
+          "D-06-S1",
+          0.9106,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6428,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6209,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5914,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5912,
+          "shared"
+        ]
+      ],
+      "target": "D-06-S1",
+      "target_score": 0.9106,
+      "top_score": 0.9106
+    },
+    {
+      "class": "answerable",
+      "persona": "P-04",
+      "question": "sec_vuln",
+      "results": [
+        [
+          "D-07-S1",
+          0.88,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.7478,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.7407,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.7101,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6514,
+          "shared"
+        ]
+      ],
+      "target": "D-07-S1",
+      "target_score": 0.88,
+      "top_score": 0.88
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-04",
+      "question": "finance",
+      "results": [
+        [
+          "D-01-S1",
+          0.6237,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.617,
+          "shared"
+        ],
+        [
+          "D-07-S1",
+          0.6052,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6022,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5948,
+          "shared"
+        ]
+      ],
+      "target": "D-08-S1",
+      "target_score": null,
+      "top_score": 0.6237
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-04",
+      "question": "tooling",
+      "results": [
+        [
+          "D-04-S1",
+          0.6539,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6307,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6304,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6082,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.607,
+          "shared"
+        ]
+      ],
+      "target": "D-09-S1",
+      "target_score": null,
+      "top_score": 0.6539
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-04",
+      "question": "supplier",
+      "results": [
+        [
+          "D-03-S1",
+          0.6849,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6784,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6725,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6093,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6027,
+          "shared"
+        ]
+      ],
+      "target": "D-10-S1",
+      "target_score": null,
+      "top_score": 0.6849
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-04",
+      "question": "access",
+      "results": [
+        [
+          "D-06-S1",
+          0.687,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.657,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.636,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6104,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5749,
+          "shared"
+        ]
+      ],
+      "target": "D-11-S1",
+      "target_score": null,
+      "top_score": 0.687
+    },
+    {
+      "class": "answerable",
+      "persona": "P-04",
+      "question": "faults",
+      "results": [
+        [
+          "D-12-S1",
+          0.9257,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.758,
+          "shared"
+        ],
+        [
+          "D-07-S1",
+          0.7521,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6998,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6165,
+          "shared"
+        ]
+      ],
+      "target": "D-12-S1",
+      "target_score": 0.9257,
+      "top_score": 0.9257
+    },
+    {
+      "class": "answerable",
+      "persona": "P-04",
+      "question": "resilience",
+      "results": [
+        [
+          "D-13-S1",
+          0.9011,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6566,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6103,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5752,
+          "shared"
+        ]
+      ],
+      "target": "D-13-S1",
+      "target_score": 0.9011,
+      "top_score": 0.9011
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-04",
+      "question": "parking",
+      "results": [
+        [
+          "D-02-S1",
+          0.6155,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6145,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5988,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5856,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5845,
+          "shared"
+        ]
+      ],
+      "target": "D-15-S1",
+      "target_score": null,
+      "top_score": 0.6155
+    },
+    {
+      "class": "no_target",
+      "persona": "P-04",
+      "question": "restricted_only",
+      "results": [
+        [
+          "D-04-S1",
+          0.5488,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5416,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5313,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.5306,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.529,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.5488
+    },
+    {
+      "class": "no_target",
+      "persona": "P-04",
+      "question": "nonexistent",
+      "results": [
+        [
+          "D-04-S1",
+          0.5588,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.5361,
+          "shared"
+        ],
+        [
+          "D-07-S1",
+          0.5299,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5298,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5293,
+          "shared"
+        ]
+      ],
+      "target": null,
+      "target_score": null,
+      "top_score": 0.5588
+    },
+    {
+      "class": "answerable",
+      "persona": "P-05",
+      "question": "smp12",
+      "results": [
+        [
+          "D-01-S1",
+          0.8869,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.796,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.7092,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.646,
+          "shared"
+        ],
+        [
+          "D-04-S2",
+          0.606,
+          "restricted"
+        ]
+      ],
+      "target": "D-01-S1",
+      "target_score": 0.8869,
+      "top_score": 0.8869
+    },
+    {
+      "class": "answerable",
+      "persona": "P-05",
+      "question": "induction_ppe",
+      "results": [
+        [
+          "D-02-S2",
+          0.9152,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8147,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6588,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.63,
+          "shared"
+        ],
+        [
+          "D-04-S2",
+          0.6191,
+          "restricted"
+        ]
+      ],
+      "target": "D-02-S2",
+      "target_score": 0.9152,
+      "top_score": 0.9152
+    },
+    {
+      "class": "answerable",
+      "persona": "P-05",
+      "question": "orion_lessons",
+      "results": [
+        [
+          "D-03-S3",
+          0.9279,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.7871,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.7801,
+          "shared"
+        ],
+        [
+          "D-04-S2",
+          0.5566,
+          "restricted"
+        ],
+        [
+          "D-12-S1",
+          0.5487,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S3",
+      "target_score": 0.9279,
+      "top_score": 0.9279
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-05",
+      "question": "orion_pricing",
+      "results": [
+        [
+          "D-03-S1",
+          0.7058,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6749,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6412,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5302,
+          "shared"
+        ],
+        [
+          "D-04-S2",
+          0.5009,
+          "restricted"
+        ]
+      ],
+      "target": "D-03-S4",
+      "target_score": null,
+      "top_score": 0.7058
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-05",
+      "question": "orion_discount",
+      "results": [
+        [
+          "D-03-S3",
+          0.6509,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6294,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5399,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5263,
+          "shared"
+        ]
+      ],
+      "target": "D-14-S1",
+      "target_score": null,
+      "top_score": 0.6509
+    },
+    {
+      "class": "answerable",
+      "persona": "P-05",
+      "question": "si0417_findings",
+      "results": [
+        [
+          "D-04-S1",
+          0.8547,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8168,
+          "shared"
+        ],
+        [
+          "D-04-S2",
+          0.7574,
+          "restricted"
+        ],
+        [
+          "D-02-S2",
+          0.7387,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6903,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S1",
+      "target_score": 0.8547,
+      "top_score": 0.8547
+    },
+    {
+      "class": "answerable",
+      "persona": "P-05",
+      "question": "si0417_witness",
+      "results": [
+        [
+          "D-04-S2",
+          0.9072,
+          "restricted"
+        ],
+        [
+          "D-04-S1",
+          0.8148,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.7198,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6695,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6527,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": 0.9072,
+      "top_score": 0.9072
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-05",
+      "question": "si0417_medical",
+      "results": [
+        [
+          "D-04-S1",
+          0.7712,
+          "shared"
+        ],
+        [
+          "D-04-S2",
+          0.6811,
+          "restricted"
+        ],
+        [
+          "D-02-S1",
+          0.6055,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5958,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5889,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S3",
+      "target_score": null,
+      "top_score": 0.7712
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-05",
+      "question": "hr2031",
+      "results": [
+        [
+          "D-06-S1",
+          0.6755,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5585,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5521,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.542,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5375,
+          "shared"
+        ]
+      ],
+      "target": "D-05-S1",
+      "target_score": null,
+      "top_score": 0.6755
+    },
+    {
+      "class": "answerable",
+      "persona": "P-05",
+      "question": "oncall",
+      "results": [
+        [
+          "D-06-S1",
+          0.9106,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6428,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6209,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5914,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5912,
+          "shared"
+        ]
+      ],
+      "target": "D-06-S1",
+      "target_score": 0.9106,
+      "top_score": 0.9106
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-05",
+      "question": "sec_vuln",
+      "results": [
+        [
+          "D-12-S1",
+          0.7478,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.7407,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.7101,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6514,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6144,
+          "shared"
+        ]
+      ],
+      "target": "D-07-S1",
+      "target_score": null,
+      "top_score": 0.7478
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-05",
+      "question": "finance",
+      "results": [
+        [
+          "D-01-S1",
+          0.6237,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.617,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6022,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5948,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5789,
+          "shared"
+        ]
+      ],
+      "target": "D-08-S1",
+      "target_score": null,
+      "top_score": 0.6237
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-05",
+      "question": "tooling",
+      "results": [
+        [
+          "D-04-S2",
+          0.6645,
+          "restricted"
+        ],
+        [
+          "D-04-S1",
+          0.6539,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6307,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6304,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6082,
+          "shared"
+        ]
+      ],
+      "target": "D-09-S1",
+      "target_score": null,
+      "top_score": 0.6645
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-05",
+      "question": "supplier",
+      "results": [
+        [
+          "D-03-S1",
+          0.6849,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6784,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6725,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6093,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6027,
+          "shared"
+        ]
+      ],
+      "target": "D-10-S1",
+      "target_score": null,
+      "top_score": 0.6849
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-05",
+      "question": "access",
+      "results": [
+        [
+          "D-06-S1",
+          0.687,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.657,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.636,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6104,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5749,
+          "shared"
+        ]
+      ],
+      "target": "D-11-S1",
+      "target_score": null,
+      "top_score": 0.687
+    },
+    {
+      "class": "answerable",
+      "persona": "P-05",
+      "question": "faults",
+      "results": [
+        [
+          "D-12-S1",
+          0.9257,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.758,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6998,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6165,
+          "shared"
+        ],
+        [
+          "D-04-S2",
+          0.5819,
+          "restricted"
+        ]
+      ],
+      "target": "D-12-S1",
+      "target_score": 0.9257,
+      "top_score": 0.9257
+    },
+    {
+      "class": "answerable",
+      "persona": "P-05",
+      "question": "resilience",
+      "results": [
+        [
+          "D-13-S1",
+          0.9011,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6566,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-04-S2",
+          0.6194,
+          "restricted"
+        ],
+        [
+          "D-04-S1",
+          0.6103,
+          "shared"
+        ]
+      ],
+      "target": "D-13-S1",
+      "target_score": 0.9011,
+      "top_score": 0.9011
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-05",
+      "question": "parking",
+      "results": [
+        [
+          "D-02-S1",
+          0.6155,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6145,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5988,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5856,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5845,
+          "shared"
+        ]
+      ],
+      "target": "D-15-S1",
+      "target_score": null,
+      "top_score": 0.6155
+    },
+    {
+      "class": "answerable",
+      "persona": "P-05",
+      "question": "restricted_only",
+      "results": [
+        [
+          "D-04-S2",
+          0.6696,
+          "restricted"
+        ],
+        [
+          "D-04-S1",
+          0.5488,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5416,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5313,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.5306,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": 0.6696,
+      "top_score": 0.6696
+    },
+    {
+      "class": "no_target",
+      "persona": "P-05",
+      "question": "nonexistent",
+      "results": [
+        [
+          "D-04-S2",
+          0.6217,
+          "restricted"
+        ],
+        [
+          "D-04-S1",
+          0.5588,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.5361,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5298,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5293,
+          "shared"
+        ]
+      ],
+      "target": null,
+      "target_score": null,
+      "top_score": 0.6217
+    },
+    {
+      "class": "answerable",
+      "persona": "P-06",
+      "question": "smp12",
+      "results": [
+        [
+          "D-01-S1",
+          0.8869,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.796,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.7092,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.646,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6045,
+          "shared"
+        ]
+      ],
+      "target": "D-01-S1",
+      "target_score": 0.8869,
+      "top_score": 0.8869
+    },
+    {
+      "class": "answerable",
+      "persona": "P-06",
+      "question": "induction_ppe",
+      "results": [
+        [
+          "D-02-S2",
+          0.9152,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8147,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6588,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.63,
+          "shared"
+        ],
+        [
+          "D-05-S1",
+          0.6109,
+          "restricted"
+        ]
+      ],
+      "target": "D-02-S2",
+      "target_score": 0.9152,
+      "top_score": 0.9152
+    },
+    {
+      "class": "answerable",
+      "persona": "P-06",
+      "question": "orion_lessons",
+      "results": [
+        [
+          "D-03-S3",
+          0.9279,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.7871,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.7801,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5487,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5445,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S3",
+      "target_score": 0.9279,
+      "top_score": 0.9279
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-06",
+      "question": "orion_pricing",
+      "results": [
+        [
+          "D-03-S1",
+          0.7058,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6749,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6412,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5302,
+          "shared"
+        ],
+        [
+          "D-05-S1",
+          0.5053,
+          "restricted"
+        ]
+      ],
+      "target": "D-03-S4",
+      "target_score": null,
+      "top_score": 0.7058
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-06",
+      "question": "orion_discount",
+      "results": [
+        [
+          "D-03-S3",
+          0.6509,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6294,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5399,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5263,
+          "shared"
+        ]
+      ],
+      "target": "D-14-S1",
+      "target_score": null,
+      "top_score": 0.6509
+    },
+    {
+      "class": "answerable",
+      "persona": "P-06",
+      "question": "si0417_findings",
+      "results": [
+        [
+          "D-04-S1",
+          0.8547,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8168,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.7387,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6903,
+          "shared"
+        ],
+        [
+          "D-05-S1",
+          0.6539,
+          "restricted"
+        ]
+      ],
+      "target": "D-04-S1",
+      "target_score": 0.8547,
+      "top_score": 0.8547
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-06",
+      "question": "si0417_witness",
+      "results": [
+        [
+          "D-04-S1",
+          0.8148,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.7198,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6695,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6527,
+          "shared"
+        ],
+        [
+          "D-05-S1",
+          0.6176,
+          "restricted"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.8148
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-06",
+      "question": "si0417_medical",
+      "results": [
+        [
+          "D-04-S1",
+          0.7712,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6055,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5958,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5889,
+          "shared"
+        ],
+        [
+          "D-05-S1",
+          0.588,
+          "restricted"
+        ]
+      ],
+      "target": "D-04-S3",
+      "target_score": null,
+      "top_score": 0.7712
+    },
+    {
+      "class": "answerable",
+      "persona": "P-06",
+      "question": "hr2031",
+      "results": [
+        [
+          "D-05-S1",
+          0.8385,
+          "restricted"
+        ],
+        [
+          "D-06-S1",
+          0.6755,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5585,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5521,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.542,
+          "shared"
+        ]
+      ],
+      "target": "D-05-S1",
+      "target_score": 0.8385,
+      "top_score": 0.8385
+    },
+    {
+      "class": "answerable",
+      "persona": "P-06",
+      "question": "oncall",
+      "results": [
+        [
+          "D-06-S1",
+          0.9106,
+          "shared"
+        ],
+        [
+          "D-05-S1",
+          0.6685,
+          "restricted"
+        ],
+        [
+          "D-02-S1",
+          0.6428,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6209,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5914,
+          "shared"
+        ]
+      ],
+      "target": "D-06-S1",
+      "target_score": 0.9106,
+      "top_score": 0.9106
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-06",
+      "question": "sec_vuln",
+      "results": [
+        [
+          "D-12-S1",
+          0.7478,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.7407,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.7101,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6514,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6144,
+          "shared"
+        ]
+      ],
+      "target": "D-07-S1",
+      "target_score": null,
+      "top_score": 0.7478
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-06",
+      "question": "finance",
+      "results": [
+        [
+          "D-01-S1",
+          0.6237,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.617,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6022,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5948,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5789,
+          "shared"
+        ]
+      ],
+      "target": "D-08-S1",
+      "target_score": null,
+      "top_score": 0.6237
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-06",
+      "question": "tooling",
+      "results": [
+        [
+          "D-04-S1",
+          0.6539,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6307,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6304,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6082,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.607,
+          "shared"
+        ]
+      ],
+      "target": "D-09-S1",
+      "target_score": null,
+      "top_score": 0.6539
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-06",
+      "question": "supplier",
+      "results": [
+        [
+          "D-03-S1",
+          0.6849,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6784,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6725,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6093,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6027,
+          "shared"
+        ]
+      ],
+      "target": "D-10-S1",
+      "target_score": null,
+      "top_score": 0.6849
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-06",
+      "question": "access",
+      "results": [
+        [
+          "D-06-S1",
+          0.687,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.657,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.636,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6104,
+          "shared"
+        ],
+        [
+          "D-05-S1",
+          0.5829,
+          "restricted"
+        ]
+      ],
+      "target": "D-11-S1",
+      "target_score": null,
+      "top_score": 0.687
+    },
+    {
+      "class": "answerable",
+      "persona": "P-06",
+      "question": "faults",
+      "results": [
+        [
+          "D-12-S1",
+          0.9257,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.758,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6998,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6165,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.5879,
+          "shared"
+        ]
+      ],
+      "target": "D-12-S1",
+      "target_score": 0.9257,
+      "top_score": 0.9257
+    },
+    {
+      "class": "answerable",
+      "persona": "P-06",
+      "question": "resilience",
+      "results": [
+        [
+          "D-13-S1",
+          0.9011,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6566,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6103,
+          "shared"
+        ],
+        [
+          "D-05-S1",
+          0.6069,
+          "restricted"
+        ]
+      ],
+      "target": "D-13-S1",
+      "target_score": 0.9011,
+      "top_score": 0.9011
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-06",
+      "question": "parking",
+      "results": [
+        [
+          "D-02-S1",
+          0.6155,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6145,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5988,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5856,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5845,
+          "shared"
+        ]
+      ],
+      "target": "D-15-S1",
+      "target_score": null,
+      "top_score": 0.6155
+    },
+    {
+      "class": "no_target",
+      "persona": "P-06",
+      "question": "restricted_only",
+      "results": [
+        [
+          "D-04-S1",
+          0.5488,
+          "shared"
+        ],
+        [
+          "D-05-S1",
+          0.5471,
+          "restricted"
+        ],
+        [
+          "D-03-S3",
+          0.5416,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5313,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.5306,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.5488
+    },
+    {
+      "class": "no_target",
+      "persona": "P-06",
+      "question": "nonexistent",
+      "results": [
+        [
+          "D-04-S1",
+          0.5588,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.5361,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5298,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5293,
+          "shared"
+        ],
+        [
+          "D-05-S1",
+          0.5259,
+          "restricted"
+        ]
+      ],
+      "target": null,
+      "target_score": null,
+      "top_score": 0.5588
+    },
+    {
+      "class": "answerable",
+      "persona": "P-07",
+      "question": "smp12",
+      "results": [
+        [
+          "D-01-S1",
+          0.8869,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.796,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.7092,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.646,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6045,
+          "shared"
+        ]
+      ],
+      "target": "D-01-S1",
+      "target_score": 0.8869,
+      "top_score": 0.8869
+    },
+    {
+      "class": "answerable",
+      "persona": "P-07",
+      "question": "induction_ppe",
+      "results": [
+        [
+          "D-02-S2",
+          0.9152,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8147,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6588,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.63,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6104,
+          "shared"
+        ]
+      ],
+      "target": "D-02-S2",
+      "target_score": 0.9152,
+      "top_score": 0.9152
+    },
+    {
+      "class": "answerable",
+      "persona": "P-07",
+      "question": "orion_lessons",
+      "results": [
+        [
+          "D-03-S3",
+          0.9279,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.7871,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.7801,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5487,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5445,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S3",
+      "target_score": 0.9279,
+      "top_score": 0.9279
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-07",
+      "question": "orion_pricing",
+      "results": [
+        [
+          "D-03-S1",
+          0.7058,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6749,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6412,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5302,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.4999,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S4",
+      "target_score": null,
+      "top_score": 0.7058
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-07",
+      "question": "orion_discount",
+      "results": [
+        [
+          "D-03-S3",
+          0.6509,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6294,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5399,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5263,
+          "shared"
+        ]
+      ],
+      "target": "D-14-S1",
+      "target_score": null,
+      "top_score": 0.6509
+    },
+    {
+      "class": "answerable",
+      "persona": "P-07",
+      "question": "si0417_findings",
+      "results": [
+        [
+          "D-04-S1",
+          0.8547,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8168,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.7387,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6903,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6187,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S1",
+      "target_score": 0.8547,
+      "top_score": 0.8547
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-07",
+      "question": "si0417_witness",
+      "results": [
+        [
+          "D-04-S1",
+          0.8148,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.7198,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6695,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6527,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6151,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.8148
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-07",
+      "question": "si0417_medical",
+      "results": [
+        [
+          "D-04-S1",
+          0.7712,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6055,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5958,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5889,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.583,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S3",
+      "target_score": null,
+      "top_score": 0.7712
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-07",
+      "question": "hr2031",
+      "results": [
+        [
+          "D-06-S1",
+          0.6755,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5585,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5521,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.542,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5375,
+          "shared"
+        ]
+      ],
+      "target": "D-05-S1",
+      "target_score": null,
+      "top_score": 0.6755
+    },
+    {
+      "class": "answerable",
+      "persona": "P-07",
+      "question": "oncall",
+      "results": [
+        [
+          "D-06-S1",
+          0.9106,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6428,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6209,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5914,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5912,
+          "shared"
+        ]
+      ],
+      "target": "D-06-S1",
+      "target_score": 0.9106,
+      "top_score": 0.9106
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-07",
+      "question": "sec_vuln",
+      "results": [
+        [
+          "D-12-S1",
+          0.7478,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.7407,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.7101,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6514,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6144,
+          "shared"
+        ]
+      ],
+      "target": "D-07-S1",
+      "target_score": null,
+      "top_score": 0.7478
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-07",
+      "question": "finance",
+      "results": [
+        [
+          "D-01-S1",
+          0.6237,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.617,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6022,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5948,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5789,
+          "shared"
+        ]
+      ],
+      "target": "D-08-S1",
+      "target_score": null,
+      "top_score": 0.6237
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-07",
+      "question": "tooling",
+      "results": [
+        [
+          "D-04-S1",
+          0.6539,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6307,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6304,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6082,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.607,
+          "shared"
+        ]
+      ],
+      "target": "D-09-S1",
+      "target_score": null,
+      "top_score": 0.6539
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-07",
+      "question": "supplier",
+      "results": [
+        [
+          "D-03-S1",
+          0.6849,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6784,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6725,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6093,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6027,
+          "shared"
+        ]
+      ],
+      "target": "D-10-S1",
+      "target_score": null,
+      "top_score": 0.6849
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-07",
+      "question": "access",
+      "results": [
+        [
+          "D-06-S1",
+          0.687,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.657,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.636,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6104,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5749,
+          "shared"
+        ]
+      ],
+      "target": "D-11-S1",
+      "target_score": null,
+      "top_score": 0.687
+    },
+    {
+      "class": "answerable",
+      "persona": "P-07",
+      "question": "faults",
+      "results": [
+        [
+          "D-12-S1",
+          0.9257,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.758,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6998,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6165,
+          "shared"
+        ]
+      ],
+      "target": "D-12-S1",
+      "target_score": 0.9257,
+      "top_score": 0.9257
+    },
+    {
+      "class": "answerable",
+      "persona": "P-07",
+      "question": "resilience",
+      "results": [
+        [
+          "D-13-S1",
+          0.9011,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6566,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6103,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5752,
+          "shared"
+        ]
+      ],
+      "target": "D-13-S1",
+      "target_score": 0.9011,
+      "top_score": 0.9011
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-07",
+      "question": "parking",
+      "results": [
+        [
+          "D-02-S1",
+          0.6155,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6145,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5988,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5856,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5845,
+          "shared"
+        ]
+      ],
+      "target": "D-15-S1",
+      "target_score": null,
+      "top_score": 0.6155
+    },
+    {
+      "class": "no_target",
+      "persona": "P-07",
+      "question": "restricted_only",
+      "results": [
+        [
+          "D-04-S1",
+          0.5488,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5416,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5313,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.5306,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.529,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.5488
+    },
+    {
+      "class": "no_target",
+      "persona": "P-07",
+      "question": "nonexistent",
+      "results": [
+        [
+          "D-04-S1",
+          0.5588,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.5361,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5298,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5293,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5257,
+          "shared"
+        ]
+      ],
+      "target": null,
+      "target_score": null,
+      "top_score": 0.5588
+    },
+    {
+      "class": "answerable",
+      "persona": "P-10",
+      "question": "smp12",
+      "results": [
+        [
+          "D-01-S1",
+          0.8869,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.796,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.7092,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.646,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6045,
+          "shared"
+        ]
+      ],
+      "target": "D-01-S1",
+      "target_score": 0.8869,
+      "top_score": 0.8869
+    },
+    {
+      "class": "answerable",
+      "persona": "P-10",
+      "question": "induction_ppe",
+      "results": [
+        [
+          "D-02-S2",
+          0.9152,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8147,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6588,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.63,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6104,
+          "shared"
+        ]
+      ],
+      "target": "D-02-S2",
+      "target_score": 0.9152,
+      "top_score": 0.9152
+    },
+    {
+      "class": "answerable",
+      "persona": "P-10",
+      "question": "orion_lessons",
+      "results": [
+        [
+          "D-03-S3",
+          0.9279,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.7871,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.7801,
+          "shared"
+        ],
+        [
+          "D-08-S1",
+          0.549,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5487,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S3",
+      "target_score": 0.9279,
+      "top_score": 0.9279
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-10",
+      "question": "orion_pricing",
+      "results": [
+        [
+          "D-03-S1",
+          0.7058,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6749,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6412,
+          "shared"
+        ],
+        [
+          "D-08-S1",
+          0.6173,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5302,
+          "shared"
+        ]
+      ],
+      "target": "D-03-S4",
+      "target_score": null,
+      "top_score": 0.7058
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-10",
+      "question": "orion_discount",
+      "results": [
+        [
+          "D-03-S3",
+          0.6509,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6294,
+          "shared"
+        ],
+        [
+          "D-08-S1",
+          0.5509,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5399,
+          "shared"
+        ]
+      ],
+      "target": "D-14-S1",
+      "target_score": null,
+      "top_score": 0.6509
+    },
+    {
+      "class": "answerable",
+      "persona": "P-10",
+      "question": "si0417_findings",
+      "results": [
+        [
+          "D-04-S1",
+          0.8547,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.8168,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.7387,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6903,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6187,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S1",
+      "target_score": 0.8547,
+      "top_score": 0.8547
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-10",
+      "question": "si0417_witness",
+      "results": [
+        [
+          "D-04-S1",
+          0.8148,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.7198,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6695,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6527,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6151,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.8148
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-10",
+      "question": "si0417_medical",
+      "results": [
+        [
+          "D-04-S1",
+          0.7712,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6055,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5958,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5889,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.583,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S3",
+      "target_score": null,
+      "top_score": 0.7712
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-10",
+      "question": "hr2031",
+      "results": [
+        [
+          "D-06-S1",
+          0.6755,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5585,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.5521,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.542,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5375,
+          "shared"
+        ]
+      ],
+      "target": "D-05-S1",
+      "target_score": null,
+      "top_score": 0.6755
+    },
+    {
+      "class": "answerable",
+      "persona": "P-10",
+      "question": "oncall",
+      "results": [
+        [
+          "D-06-S1",
+          0.9106,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6428,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6209,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5914,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.5912,
+          "shared"
+        ]
+      ],
+      "target": "D-06-S1",
+      "target_score": 0.9106,
+      "top_score": 0.9106
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-10",
+      "question": "sec_vuln",
+      "results": [
+        [
+          "D-12-S1",
+          0.7478,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.7407,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.7101,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6514,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.6144,
+          "shared"
+        ]
+      ],
+      "target": "D-07-S1",
+      "target_score": null,
+      "top_score": 0.7478
+    },
+    {
+      "class": "answerable",
+      "persona": "P-10",
+      "question": "finance",
+      "results": [
+        [
+          "D-08-S1",
+          0.9058,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.6237,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.617,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6022,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5948,
+          "shared"
+        ]
+      ],
+      "target": "D-08-S1",
+      "target_score": 0.9058,
+      "top_score": 0.9058
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-10",
+      "question": "tooling",
+      "results": [
+        [
+          "D-04-S1",
+          0.6539,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6307,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6304,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6082,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.607,
+          "shared"
+        ]
+      ],
+      "target": "D-09-S1",
+      "target_score": null,
+      "top_score": 0.6539
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-10",
+      "question": "supplier",
+      "results": [
+        [
+          "D-03-S1",
+          0.6849,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6784,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.6725,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.6093,
+          "shared"
+        ],
+        [
+          "D-13-S1",
+          0.6027,
+          "shared"
+        ]
+      ],
+      "target": "D-10-S1",
+      "target_score": null,
+      "top_score": 0.6849
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-10",
+      "question": "access",
+      "results": [
+        [
+          "D-06-S1",
+          0.687,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.657,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.636,
+          "shared"
+        ],
+        [
+          "D-03-S2",
+          0.6104,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5749,
+          "shared"
+        ]
+      ],
+      "target": "D-11-S1",
+      "target_score": null,
+      "top_score": 0.687
+    },
+    {
+      "class": "answerable",
+      "persona": "P-10",
+      "question": "faults",
+      "results": [
+        [
+          "D-12-S1",
+          0.9257,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.758,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.6998,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6165,
+          "shared"
+        ],
+        [
+          "D-08-S1",
+          0.6009,
+          "shared"
+        ]
+      ],
+      "target": "D-12-S1",
+      "target_score": 0.9257,
+      "top_score": 0.9257
+    },
+    {
+      "class": "answerable",
+      "persona": "P-10",
+      "question": "resilience",
+      "results": [
+        [
+          "D-13-S1",
+          0.9011,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.6566,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.6392,
+          "shared"
+        ],
+        [
+          "D-04-S1",
+          0.6103,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5752,
+          "shared"
+        ]
+      ],
+      "target": "D-13-S1",
+      "target_score": 0.9011,
+      "top_score": 0.9011
+    },
+    {
+      "class": "not_answerable",
+      "persona": "P-10",
+      "question": "parking",
+      "results": [
+        [
+          "D-02-S1",
+          0.6155,
+          "shared"
+        ],
+        [
+          "D-06-S1",
+          0.6145,
+          "shared"
+        ],
+        [
+          "D-01-S2",
+          0.5988,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5856,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5845,
+          "shared"
+        ]
+      ],
+      "target": "D-15-S1",
+      "target_score": null,
+      "top_score": 0.6155
+    },
+    {
+      "class": "no_target",
+      "persona": "P-10",
+      "question": "restricted_only",
+      "results": [
+        [
+          "D-04-S1",
+          0.5488,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5416,
+          "shared"
+        ],
+        [
+          "D-02-S2",
+          0.5313,
+          "shared"
+        ],
+        [
+          "D-03-S1",
+          0.5306,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.529,
+          "shared"
+        ]
+      ],
+      "target": "D-04-S2",
+      "target_score": null,
+      "top_score": 0.5488
+    },
+    {
+      "class": "no_target",
+      "persona": "P-10",
+      "question": "nonexistent",
+      "results": [
+        [
+          "D-04-S1",
+          0.5588,
+          "shared"
+        ],
+        [
+          "D-02-S1",
+          0.5361,
+          "shared"
+        ],
+        [
+          "D-01-S1",
+          0.5298,
+          "shared"
+        ],
+        [
+          "D-03-S3",
+          0.5293,
+          "shared"
+        ],
+        [
+          "D-12-S1",
+          0.5257,
+          "shared"
+        ]
+      ],
+      "target": null,
+      "target_score": null,
+      "top_score": 0.5588
+    }
+  ],
+  "reason": "highest 0.05-grid value at least 0.05 below the weakest answerable target score 0.6696: 0 of 64 answerable pairs lost; 1 of 15 no-target pairs keep a chunk (then the model must reply with the uniform sentence); 81 of 81 not-answerable pairs keep related eligible content",
+  "selected_threshold": 0.6,
+  "summary": {
+    "answerable_pairs": 64,
+    "answerable_target_score_min": 0.6696,
+    "no_target_pairs": 15,
+    "no_target_top_score_max": 0.6217,
+    "not_answerable_top_score_range": [
+      0.6155,
+      0.8148
+    ],
+    "retrieval_misses": []
+  },
+  "threshold_table": [
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.2
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.21
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.22
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.23
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.24
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.25
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.26
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.27
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.28
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.29
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.3
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.31
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.32
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.33
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.34
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.35
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.36
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.37
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.38
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.39
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.4
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.41
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.42
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.43
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.44
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.45
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.46
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.47
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.48
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.49
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.5
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.51
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.52
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.53
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 15,
+      "not_answerable_kept": 81,
+      "threshold": 0.54
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 8,
+      "not_answerable_kept": 81,
+      "threshold": 0.55
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 1,
+      "not_answerable_kept": 81,
+      "threshold": 0.56
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 1,
+      "not_answerable_kept": 81,
+      "threshold": 0.57
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 1,
+      "not_answerable_kept": 81,
+      "threshold": 0.58
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 1,
+      "not_answerable_kept": 81,
+      "threshold": 0.59
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 1,
+      "not_answerable_kept": 81,
+      "threshold": 0.6
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 1,
+      "not_answerable_kept": 81,
+      "threshold": 0.61
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 1,
+      "not_answerable_kept": 73,
+      "threshold": 0.62
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 0,
+      "not_answerable_kept": 68,
+      "threshold": 0.63
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 0,
+      "not_answerable_kept": 67,
+      "threshold": 0.64
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 0,
+      "not_answerable_kept": 67,
+      "threshold": 0.65
+    },
+    {
+      "false_negatives": 0,
+      "no_target_kept": 0,
+      "not_answerable_kept": 53,
+      "threshold": 0.66
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 52,
+      "threshold": 0.67
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 45,
+      "threshold": 0.68
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 29,
+      "threshold": 0.69
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 29,
+      "threshold": 0.7
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 22,
+      "threshold": 0.71
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 22,
+      "threshold": 0.72
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 22,
+      "threshold": 0.73
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 22,
+      "threshold": 0.74
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 15,
+      "threshold": 0.75
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 15,
+      "threshold": 0.76
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 15,
+      "threshold": 0.77
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 7,
+      "threshold": 0.78
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 7,
+      "threshold": 0.79
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 7,
+      "threshold": 0.8
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 7,
+      "threshold": 0.81
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 0,
+      "threshold": 0.82
+    },
+    {
+      "false_negatives": 1,
+      "no_target_kept": 0,
+      "not_answerable_kept": 0,
+      "threshold": 0.83
+    },
+    {
+      "false_negatives": 2,
+      "no_target_kept": 0,
+      "not_answerable_kept": 0,
+      "threshold": 0.84
+    },
+    {
+      "false_negatives": 2,
+      "no_target_kept": 0,
+      "not_answerable_kept": 0,
+      "threshold": 0.85
+    },
+    {
+      "false_negatives": 10,
+      "no_target_kept": 0,
+      "not_answerable_kept": 0,
+      "threshold": 0.86
+    },
+    {
+      "false_negatives": 10,
+      "no_target_kept": 0,
+      "not_answerable_kept": 0,
+      "threshold": 0.87
+    },
+    {
+      "false_negatives": 10,
+      "no_target_kept": 0,
+      "not_answerable_kept": 0,
+      "threshold": 0.88
+    },
+    {
+      "false_negatives": 19,
+      "no_target_kept": 0,
+      "not_answerable_kept": 0,
+      "threshold": 0.89
+    },
+    {
+      "false_negatives": 19,
+      "no_target_kept": 0,
+      "not_answerable_kept": 0,
+      "threshold": 0.9
+    }
+  ]
+}

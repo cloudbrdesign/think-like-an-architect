@@ -1,0 +1,92 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "PASS": 4
+  },
+  "deployment": "tla-s01e02-normal",
+  "finished_at": "2026-09-15T09:55:23+00:00",
+  "region": "us-east-1",
+  "run_id": "sen1-fresh-20260915-r3-baseline",
+  "scope": "tests TST-ELG-003,TST-ELG-005,TST-ELG-006,TST-ELG-009",
+  "started_at": "2026-09-15T09:54:22+00:00",
+  "tests": [
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-011",
+        "CTL-017"
+      ],
+      "evidence": "evidence/TST-ELG-003.json",
+      "expected": "No BID-ORION canary for P-01, P-03\u2026P-07 in any channel, including immediately after P-02's identical question",
+      "level": "L3",
+      "observed": "precondition: P-02 retrieved D-03 \u00a74 immediately before; no ineligible canary for 6 personas \u00d7 2 questions",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T09:55:01+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-003",
+      "verifies": [
+        "SEC-001",
+        "SEC-004"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-011"
+      ],
+      "evidence": "evidence/TST-ELG-005.json",
+      "expected": "P-03 (FIN-REPORTING) never receives the SEC-SIGNALLING vulnerability assessment",
+      "level": "L3",
+      "observed": "precondition: P-04 retrieved D-07; no SEC-SIGNALLING canary for P-03",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T09:55:07+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-005",
+      "verifies": [
+        "SEC-001"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-001",
+        "CTL-012"
+      ],
+      "evidence": "evidence/TST-ELG-006.json",
+      "expected": "P-07 (senior director) receives no case canary; the restricted tier is not searched for P-07",
+      "level": "L3",
+      "observed": "preconditions: P-05 and P-06 retrieved their cases; leaks []; restricted tier called for P-07 in []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T09:55:16+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-006",
+      "verifies": [
+        "SEC-001",
+        "SEC-006"
+      ]
+    },
+    {
+      "category": "eligibility",
+      "controls": [
+        "CTL-011",
+        "CTL-012"
+      ],
+      "evidence": "evidence/TST-ELG-009.json",
+      "expected": "Correct tier \u2260 authorization: zero HR-2031, FIN-REPORTING or SEC-SIGNALLING canaries although the tier was searched",
+      "level": "L3",
+      "observed": "P-05 restricted tier searched: True; P-02 shared tier searched: True; leaks []",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T09:55:23+00:00",
+      "status": "PASS",
+      "test_id": "TST-ELG-009",
+      "verifies": [
+        "SEC-001",
+        "SEC-006"
+      ]
+    }
+  ],
+  "variant": "normal"
+}

@@ -1,0 +1,490 @@
+{
+  "category": "change",
+  "controls": [
+    "CTL-014"
+  ],
+  "evidence": "evidence/TST-CHG-002.json",
+  "expected": "D-13 reclassified upward without re-index: withheld before generation for P-01 and P-07; answers resume after re-index",
+  "level": "L4",
+  "observations": {
+    "after": {
+      "answer": "The Northfield resilience review recommended a second power feed for the depot signalling equipment room and spare relay stock held on site. Marker CANARY-RECLASS-RESILIENCE.",
+      "citations": [
+        {
+          "document_id": "D-13",
+          "document_title": "Northfield resilience review",
+          "section_id": "S1",
+          "section_title": "Recommendations"
+        },
+        {
+          "document_id": "D-02",
+          "document_title": "Northfield depot safety induction",
+          "section_id": "S1",
+          "section_title": "Depot hazards"
+        },
+        {
+          "document_id": "D-02",
+          "document_title": "Northfield depot safety induction",
+          "section_id": "S2",
+          "section_title": "Protective equipment"
+        },
+        {
+          "document_id": "D-04",
+          "document_title": "Safety investigation SI-0417 report",
+          "section_id": "S1",
+          "section_title": "Sanitised findings"
+        }
+      ],
+      "constraints": [
+        {
+          "bytes": 49,
+          "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+          "tier": "shared"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": null,
+      "generation_invoked": true,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 4,
+        "generation": 215,
+        "retrieval": 349,
+        "total": 575,
+        "verification": 5
+      },
+      "outcome": "ANSWERED",
+      "persona": "P-01",
+      "question": "resilience",
+      "relevance": {
+        "kept": [
+          "14753575-c6cd-4690-ac2d-4dbaa502fab4",
+          "191fc339-3a1c-4d0f-98df-e211b00a68f1",
+          "7da1fd04-27d2-48cb-bfa5-00031f4947bd",
+          "3f6ce34b-4817-41c6-8c41-0c9b50f913e8"
+        ],
+        "min_score": 0.6,
+        "omitted": [
+          "31299997-aab8-40f3-8e07-a671a540871e"
+        ]
+      },
+      "request_id": "209c43e7-59f7-4226-82c4-0547630564d3",
+      "retrieved": [
+        {
+          "document_id": "D-13",
+          "label": "INTERNAL",
+          "record_version": "3",
+          "scope": "NONE",
+          "score": 0.901085,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-02",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.656573,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-02",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.639191,
+          "section_id": "S2",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-04",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.610304,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.575248,
+          "section_id": "S3",
+          "tier": "shared"
+        }
+      ],
+      "tiers_called": [
+        "shared"
+      ],
+      "verification": {
+        "mismatches": [],
+        "record_versions": {
+          "D-02": 1,
+          "D-03": 1,
+          "D-04": 1,
+          "D-13": 3
+        },
+        "status": "PASS"
+      }
+    },
+    "before": {
+      "answer": "The Northfield resilience review recommended a second power feed for the depot signalling equipment room and spare relay stock held on site. Marker CANARY-RECLASS-RESILIENCE.",
+      "citations": [
+        {
+          "document_id": "D-13",
+          "document_title": "Northfield resilience review",
+          "section_id": "S1",
+          "section_title": "Recommendations"
+        },
+        {
+          "document_id": "D-02",
+          "document_title": "Northfield depot safety induction",
+          "section_id": "S1",
+          "section_title": "Depot hazards"
+        },
+        {
+          "document_id": "D-02",
+          "document_title": "Northfield depot safety induction",
+          "section_id": "S2",
+          "section_title": "Protective equipment"
+        },
+        {
+          "document_id": "D-04",
+          "document_title": "Safety investigation SI-0417 report",
+          "section_id": "S1",
+          "section_title": "Sanitised findings"
+        }
+      ],
+      "constraints": [
+        {
+          "bytes": 49,
+          "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+          "tier": "shared"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": null,
+      "generation_invoked": true,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 4,
+        "generation": 253,
+        "retrieval": 386,
+        "total": 649,
+        "verification": 4
+      },
+      "outcome": "ANSWERED",
+      "persona": "P-01",
+      "question": "resilience",
+      "relevance": {
+        "kept": [
+          "14753575-c6cd-4690-ac2d-4dbaa502fab4",
+          "191fc339-3a1c-4d0f-98df-e211b00a68f1",
+          "7da1fd04-27d2-48cb-bfa5-00031f4947bd",
+          "3f6ce34b-4817-41c6-8c41-0c9b50f913e8"
+        ],
+        "min_score": 0.6,
+        "omitted": [
+          "31299997-aab8-40f3-8e07-a671a540871e"
+        ]
+      },
+      "request_id": "104fdd11-08f6-4788-8e96-2f5e28e1015f",
+      "retrieved": [
+        {
+          "document_id": "D-13",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.901729,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-02",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.656573,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-02",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.639191,
+          "section_id": "S2",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-04",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.610304,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.575248,
+          "section_id": "S3",
+          "tier": "shared"
+        }
+      ],
+      "tiers_called": [
+        "shared"
+      ],
+      "verification": {
+        "mismatches": [],
+        "record_versions": {
+          "D-02": 1,
+          "D-03": 1,
+          "D-04": 1,
+          "D-13": 1
+        },
+        "status": "PASS"
+      }
+    },
+    "episode_03_boundary": "answers resume only after re-indexing; propagating classification changes to the index is Episode 03",
+    "reclassified": {
+      "from": [
+        "INTERNAL",
+        null
+      ],
+      "to": [
+        "CONFIDENTIAL",
+        "OPS-LEADERSHIP"
+      ],
+      "version": 2
+    },
+    "restore_ingestion": {
+      "D-13-S1": "INDEXED"
+    },
+    "withheld": [
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "retrieval": 430,
+          "total": 439,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-01",
+        "question": "resilience",
+        "relevance": null,
+        "request_id": "b92c2d4f-edcc-4795-988c-55edb1a7fdd9",
+        "retrieved": [
+          {
+            "document_id": "D-13",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.901729,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.656573,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.639191,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.610304,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.575248,
+            "section_id": "S3",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "14753575-c6cd-4690-ac2d-4dbaa502fab4",
+              "reason": "LABEL_MISMATCH"
+            }
+          ],
+          "record_versions": {
+            "D-02": 1,
+            "D-03": 1,
+            "D-04": 1,
+            "D-13": 2
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 186,
+            "sha256": "d89494e936bbef9421b44d4c598790e1cdbc36352d1202b340e09962754478ea",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "OPS-LEADERSHIP"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "retrieval": 340,
+          "total": 364,
+          "verification": 19
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-07",
+        "question": "resilience",
+        "relevance": null,
+        "request_id": "d0c96aa1-358a-41a5-86f9-d82227e83a92",
+        "retrieved": [
+          {
+            "document_id": "D-13",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.901729,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.656573,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.639191,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.610304,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.575248,
+            "section_id": "S3",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "14753575-c6cd-4690-ac2d-4dbaa502fab4",
+              "reason": "LABEL_MISMATCH"
+            }
+          ],
+          "record_versions": {
+            "D-02": 1,
+            "D-03": 1,
+            "D-04": 1,
+            "D-13": 2
+          },
+          "status": "MISMATCH"
+        }
+      }
+    ]
+  },
+  "observed": "before: D-13 retrieved True; after reclassification: [('P-01', 'WITHHELD_VERIFICATION_MISMATCH'), ('P-07', 'WITHHELD_VERIFICATION_MISMATCH')]; after restore + re-index: ANSWERED",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:36:36+00:00",
+  "status": "PASS",
+  "test_id": "TST-CHG-002",
+  "verifies": [
+    "SEC-011"
+  ]
+}

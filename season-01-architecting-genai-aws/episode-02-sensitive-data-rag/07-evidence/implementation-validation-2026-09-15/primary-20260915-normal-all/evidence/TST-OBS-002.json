@@ -1,0 +1,122 @@
+{
+  "category": "observability",
+  "controls": [
+    "CTL-020"
+  ],
+  "evidence": "evidence/TST-OBS-002.json",
+  "expected": "Three decisions reconstructed from audit records and stored versions match; reports list the quarantined fixtures and the TST-SEC-007 mismatch",
+  "level": "L3",
+  "observations": {
+    "mismatch_requests": 6,
+    "quarantined_documents": [
+      "D-09",
+      "D-10",
+      "D-11",
+      "D-15"
+    ],
+    "reconstructions": [
+      {
+        "audit_outcome": "NO_RELEVANT_CONTENT",
+        "checks": {
+          "constraint_hashes": true,
+          "decision": true,
+          "outcome": true,
+          "verification": true
+        },
+        "reconstructed": {
+          "constraint_hashes": [
+            "12460fafad8be9deafdae0e34f454f0b43e9755fc963004fd813d6bb949fb2a1"
+          ],
+          "decision": {
+            "cases": [],
+            "domains": [
+              "FIN-REPORTING"
+            ],
+            "grants_version": 1,
+            "hr_version": 1,
+            "status": "ALLOW"
+          },
+          "expected_outcome": "ANSWERED_OR_NOT_RELEVANT",
+          "verification": {
+            "mismatches": [],
+            "status": "PASS"
+          }
+        },
+        "request_id": "d0d8b8f7-eb44-474c-bfa8-f1f168e04918"
+      },
+      {
+        "audit_outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "checks": {
+          "constraint_hashes": true,
+          "decision": true,
+          "outcome": true,
+          "verification": true
+        },
+        "reconstructed": {
+          "constraint_hashes": [
+            "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876"
+          ],
+          "decision": {
+            "cases": [],
+            "domains": [],
+            "grants_version": 1,
+            "hr_version": 1,
+            "status": "ALLOW"
+          },
+          "expected_outcome": "WITHHELD_VERIFICATION_MISMATCH",
+          "verification": {
+            "mismatches": [
+              [
+                "4a252927-0f8a-43d2-bd29-018487bc1971",
+                "LABEL_MISMATCH"
+              ]
+            ],
+            "status": "MISMATCH"
+          }
+        },
+        "request_id": "d249f232-2477-4ddb-b7d0-948857bb13e1"
+      },
+      {
+        "audit_outcome": "NO_RELEVANT_CONTENT",
+        "checks": {
+          "constraint_hashes": true,
+          "decision": true,
+          "outcome": true,
+          "verification": true
+        },
+        "reconstructed": {
+          "constraint_hashes": [
+            "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876"
+          ],
+          "decision": {
+            "cases": [],
+            "domains": [],
+            "grants_version": 1,
+            "hr_version": 1,
+            "status": "ALLOW"
+          },
+          "expected_outcome": "ANSWERED_OR_NOT_RELEVANT",
+          "verification": {
+            "mismatches": [],
+            "status": "PASS"
+          }
+        },
+        "request_id": "6634899a-c344-45b9-8d5f-47120bba23af"
+      }
+    ],
+    "sources": {
+      "TST-DATA-001": "6634899a-c344-45b9-8d5f-47120bba23af",
+      "TST-ELG-003": "d0d8b8f7-eb44-474c-bfa8-f1f168e04918",
+      "TST-SEC-007": "d249f232-2477-4ddb-b7d0-948857bb13e1"
+    }
+  },
+  "observed": "reconstruction checks [{'decision': True, 'constraint_hashes': True, 'verification': True, 'outcome': True}, {'decision': True, 'constraint_hashes': True, 'verification': True, 'outcome': True}, {'decision': True, 'constraint_hashes': True, 'verification': True, 'outcome': True}]; quarantine report ['D-09', 'D-10', 'D-11', 'D-15']; mismatch report includes TST-SEC-007: True",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T06:54:54+00:00",
+  "status": "PASS",
+  "test_id": "TST-OBS-002",
+  "verifies": [
+    "OPS-001",
+    "OPS-002"
+  ]
+}

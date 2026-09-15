@@ -1,0 +1,239 @@
+{
+  "category": "eligibility",
+  "controls": [
+    "CTL-016"
+  ],
+  "evidence": "evidence/TST-ELG-008.json",
+  "expected": "A topic that exists only in restricted content and a topic that exists nowhere give identical responses to P-01",
+  "level": "L3",
+  "observations": {
+    "nonexistent": {
+      "answer": "I can't answer that question.",
+      "citations": [],
+      "constraints": [
+        {
+          "bytes": 49,
+          "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+          "tier": "shared"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": null,
+      "generation_invoked": false,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 4,
+        "retrieval": 347,
+        "total": 356,
+        "verification": 4
+      },
+      "outcome": "NO_RELEVANT_CONTENT",
+      "persona": "P-01",
+      "question": "nonexistent",
+      "relevance": {
+        "kept": [],
+        "min_score": 0.6,
+        "omitted": [
+          "3f6ce34b-4817-41c6-8c41-0c9b50f913e8",
+          "191fc339-3a1c-4d0f-98df-e211b00a68f1",
+          "31299997-aab8-40f3-8e07-a671a540871e",
+          "05686f31-9cb7-493e-8234-f75b06855729",
+          "fe7f5f86-d00f-4525-add2-fd113961d025"
+        ]
+      },
+      "request_id": "402e2daf-cf50-4615-a405-5d1f35126691",
+      "response_shape": {
+        "body": {
+          "answer": "I can't answer that question.",
+          "citations": []
+        },
+        "content-type": "application/json",
+        "status": 200
+      },
+      "retrieved": [
+        {
+          "document_id": "D-04",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.558493,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-02",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.536083,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.530175,
+          "section_id": "S3",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-01",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.529812,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-12",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.525663,
+          "section_id": "S1",
+          "tier": "shared"
+        }
+      ],
+      "tiers_called": [
+        "shared"
+      ],
+      "verification": {
+        "mismatches": [],
+        "record_versions": {
+          "D-01": 1,
+          "D-02": 1,
+          "D-03": 1,
+          "D-04": 1,
+          "D-12": 1
+        },
+        "status": "PASS"
+      }
+    },
+    "restricted_only": {
+      "answer": "I can't answer that question.",
+      "citations": [],
+      "constraints": [
+        {
+          "bytes": 49,
+          "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+          "tier": "shared"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": null,
+      "generation_invoked": false,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 4,
+        "retrieval": 285,
+        "total": 293,
+        "verification": 4
+      },
+      "outcome": "NO_RELEVANT_CONTENT",
+      "persona": "P-01",
+      "question": "restricted_only",
+      "relevance": {
+        "kept": [],
+        "min_score": 0.6,
+        "omitted": [
+          "3f6ce34b-4817-41c6-8c41-0c9b50f913e8",
+          "31299997-aab8-40f3-8e07-a671a540871e",
+          "7da1fd04-27d2-48cb-bfa5-00031f4947bd",
+          "00b8124f-a4ac-43be-a93e-7ab8f6004609",
+          "191fc339-3a1c-4d0f-98df-e211b00a68f1"
+        ]
+      },
+      "request_id": "5747a3d7-b0c9-4d16-98a0-1c2ed970254d",
+      "response_shape": {
+        "body": {
+          "answer": "I can't answer that question.",
+          "citations": []
+        },
+        "content-type": "application/json",
+        "status": 200
+      },
+      "retrieved": [
+        {
+          "document_id": "D-04",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.547715,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.5422,
+          "section_id": "S3",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-02",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.531262,
+          "section_id": "S2",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.530574,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-02",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.529036,
+          "section_id": "S1",
+          "tier": "shared"
+        }
+      ],
+      "tiers_called": [
+        "shared"
+      ],
+      "verification": {
+        "mismatches": [],
+        "record_versions": {
+          "D-02": 1,
+          "D-03": 1,
+          "D-04": 1
+        },
+        "status": "PASS"
+      }
+    }
+  },
+  "observed": "identical: True; both uniform: True; outcomes NO_RELEVANT_CONTENT / NO_RELEVANT_CONTENT; leaks []",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:33:50+00:00",
+  "status": "PASS",
+  "test_id": "TST-ELG-008",
+  "verifies": [
+    "FUN-003"
+  ]
+}

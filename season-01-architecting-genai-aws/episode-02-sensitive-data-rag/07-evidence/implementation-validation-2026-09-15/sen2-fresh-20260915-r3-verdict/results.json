@@ -1,0 +1,35 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "PASS": 1
+  },
+  "deployment": null,
+  "finished_at": "2026-09-15T10:08:27+00:00",
+  "region": null,
+  "run_id": "sen2-fresh-20260915-r3-verdict",
+  "scope": "experiment 2",
+  "started_at": "2026-09-15T10:08:27+00:00",
+  "tests": [
+    {
+      "category": "sensitivity",
+      "controls": [
+        "CTL-008",
+        "CTL-014"
+      ],
+      "evidence": "evidence/TST-SEN-002.json",
+      "expected": "Baseline PASS \u2192 variant target tests FAIL for the predicted reason \u2192 variant destroyed and verified \u2192 restored PASS",
+      "level": "L4",
+      "observed": "baseline PASS \u2192 variant FAIL (DETECTED the authoritative classification mismatch and withheld) \u2192 variant destroyed, cleanup verified \u2192 restored PASS",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T10:08:27+00:00",
+      "status": "PASS",
+      "test_id": "TST-SEN-002",
+      "verifies": [
+        "SEC-008",
+        "DATA-003"
+      ]
+    }
+  ],
+  "variant": null
+}

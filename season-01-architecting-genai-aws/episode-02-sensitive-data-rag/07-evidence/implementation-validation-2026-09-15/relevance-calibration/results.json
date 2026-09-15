@@ -1,0 +1,15 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "PASS": 0
+  },
+  "deployment": "tla-s01e02-normal",
+  "finished_at": "2026-09-15T07:22:05+00:00",
+  "region": "us-east-1",
+  "run_id": "relevance-calibration",
+  "scope": "relevance calibration",
+  "started_at": "2026-09-15T07:19:46+00:00",
+  "tests": [],
+  "variant": "normal"
+}

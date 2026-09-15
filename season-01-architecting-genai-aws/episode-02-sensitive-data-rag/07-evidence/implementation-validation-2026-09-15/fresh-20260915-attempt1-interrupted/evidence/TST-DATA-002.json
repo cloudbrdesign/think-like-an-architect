@@ -1,0 +1,394 @@
+{
+  "category": "data",
+  "controls": [
+    "CTL-007"
+  ],
+  "evidence": "evidence/TST-DATA-002.json",
+  "expected": "Misspelt (D-10), scope-less (D-11) and lower-case (D-15) labels are quarantined; canaries in neither tier",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 181,
+            "sha256": "8ed7671b959cc64341f3e2245c7c66922e249b8c09e0382d4732beccca64734d",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "BID-ORION"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 249,
+          "retrieval": 375,
+          "total": 633,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-02",
+        "question": "supplier",
+        "relevance": {
+          "kept": [
+            "00b8124f-a4ac-43be-a93e-7ab8f6004609",
+            "5140ac23-0a96-4836-9fdc-98f35953a183",
+            "31299997-aab8-40f3-8e07-a671a540871e",
+            "2a647291-9f0b-4803-adf0-1324b9bf0009",
+            "bc433406-0a28-495a-8237-00ebf87859e8"
+          ],
+          "min_score": 0.6,
+          "omitted": []
+        },
+        "request_id": "2e55a4d9-24ea-420e-92b8-877bb107451b",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.684949,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.678356,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.67317,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.663506,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.631333,
+            "section_id": "S4",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-03": 1,
+            "D-14": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question. [1][2][3][4]",
+        "citations": [
+          {
+            "document_id": "D-06",
+            "document_title": "Working-hours and on-call policy",
+            "section_id": "S1",
+            "section_title": "On-call and rest periods"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          },
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S2",
+            "section_title": "Protective equipment"
+          },
+          {
+            "document_id": "D-03",
+            "document_title": "Project Orion delivery report",
+            "section_id": "S2",
+            "section_title": "Delivery"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 246,
+          "retrieval": 343,
+          "total": 598,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-01",
+        "question": "access",
+        "relevance": {
+          "kept": [
+            "07571b79-76a2-4790-be25-c22746691f5d",
+            "191fc339-3a1c-4d0f-98df-e211b00a68f1",
+            "7da1fd04-27d2-48cb-bfa5-00031f4947bd",
+            "5140ac23-0a96-4836-9fdc-98f35953a183"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "26385d1b-eeeb-415d-961d-255b628a2331"
+          ]
+        },
+        "request_id": "d6761d45-15f9-4ee7-a22a-e2020fd6ade6",
+        "retrieved": [
+          {
+            "document_id": "D-06",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.686918,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.656943,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.636012,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.610396,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.574903,
+            "section_id": "S2",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-02": 1,
+            "D-03": 1,
+            "D-06": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question. [1] and [2] do not provide information on where maintenance vans should park at the depot.",
+        "citations": [
+          {
+            "document_id": "D-02",
+            "document_title": "Northfield depot safety induction",
+            "section_id": "S1",
+            "section_title": "Depot hazards"
+          },
+          {
+            "document_id": "D-06",
+            "document_title": "Working-hours and on-call policy",
+            "section_id": "S1",
+            "section_title": "On-call and rest periods"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 315,
+          "retrieval": 396,
+          "total": 720,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-01",
+        "question": "parking",
+        "relevance": {
+          "kept": [
+            "191fc339-3a1c-4d0f-98df-e211b00a68f1",
+            "07571b79-76a2-4790-be25-c22746691f5d"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "26385d1b-eeeb-415d-961d-255b628a2331",
+            "05686f31-9cb7-493e-8234-f75b06855729",
+            "7da1fd04-27d2-48cb-bfa5-00031f4947bd"
+          ]
+        },
+        "request_id": "8532572d-2581-441f-ae5d-c7bf06935eb4",
+        "retrieved": [
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.615545,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-06",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.614477,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.598877,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.585638,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-02",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.58446,
+            "section_id": "S2",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-02": 1,
+            "D-06": 1
+          },
+          "status": "PASS"
+        }
+      }
+    ],
+    "findings": {
+      "D-10": {
+        "absent": true,
+        "ok": true,
+        "reasons": [
+          "LABEL_INVALID"
+        ]
+      },
+      "D-11": {
+        "absent": true,
+        "ok": true,
+        "reasons": [
+          "SCOPE_MISSING"
+        ]
+      },
+      "D-15": {
+        "absent": true,
+        "ok": true,
+        "reasons": [
+          "LABEL_INVALID"
+        ]
+      }
+    }
+  },
+  "observed": "{'D-10': {'reasons': ['LABEL_INVALID'], 'absent': True, 'ok': True}, 'D-11': {'reasons': ['SCOPE_MISSING'], 'absent': True, 'ok': True}, 'D-15': {'reasons': ['LABEL_INVALID'], 'absent': True, 'ok': True}}; quarantined sections retrieved: []",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:34:36+00:00",
+  "status": "PASS",
+  "test_id": "TST-DATA-002",
+  "verifies": [
+    "DATA-001",
+    "DATA-005",
+    "SEC-007"
+  ]
+}

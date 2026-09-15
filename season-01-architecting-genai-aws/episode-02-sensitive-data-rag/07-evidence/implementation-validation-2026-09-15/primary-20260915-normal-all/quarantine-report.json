@@ -1,0 +1,78 @@
+[
+  {
+    "quarantine": [],
+    "request_id": "ingest-21a5b271-91f7-40ec-afa3-864fc127d60b",
+    "special_category_excluded": []
+  },
+  {
+    "quarantine": [],
+    "request_id": "ingest-869c7453-3ca7-40e3-8698-b710b2703c8f",
+    "special_category_excluded": []
+  },
+  {
+    "quarantine": [],
+    "request_id": "ingest-b6055f9a-132b-4304-8aea-dc33b5df1217",
+    "special_category_excluded": []
+  },
+  {
+    "quarantine": [],
+    "request_id": "ingest-b613f270-f64f-41cb-847a-9f000a08b06d",
+    "special_category_excluded": []
+  },
+  {
+    "quarantine": [
+      {
+        "document_id": "D-09",
+        "reason": "LABEL_MISSING",
+        "section_id": null
+      },
+      {
+        "document_id": "D-10",
+        "reason": "LABEL_INVALID",
+        "section_id": null
+      },
+      {
+        "document_id": "D-11",
+        "reason": "SCOPE_MISSING",
+        "section_id": null
+      },
+      {
+        "document_id": "D-15",
+        "reason": "LABEL_INVALID",
+        "section_id": null
+      }
+    ],
+    "request_id": "ingest-b7dd04ab-6082-492d-9ea3-9f14821edc3f",
+    "special_category_excluded": [
+      "D-04-S3"
+    ]
+  },
+  {
+    "quarantine": [
+      {
+        "document_id": "D-09",
+        "reason": "LABEL_MISSING",
+        "section_id": null
+      },
+      {
+        "document_id": "D-10",
+        "reason": "LABEL_INVALID",
+        "section_id": null
+      },
+      {
+        "document_id": "D-11",
+        "reason": "SCOPE_MISSING",
+        "section_id": null
+      },
+      {
+        "document_id": "D-15",
+        "reason": "LABEL_INVALID",
+        "section_id": null
+      }
+    ],
+    "request_id": "ingest-bf5841b6-347c-4c2e-8203-47c5903f753f",
+    "special_category_excluded": [
+      "D-04-S3"
+    ]
+  }
+]

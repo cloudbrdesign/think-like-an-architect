@@ -1,0 +1,43 @@
+{
+  "category": "cleanup",
+  "controls": [],
+  "evidence": "evidence/CLEANUP.json",
+  "expected": "no resource of the eligibility-removed deployment remains",
+  "level": "L2",
+  "observations": {
+    "cleanup_failed": false,
+    "lines": [
+      "[eligibility-removed] records bucket objects removed: 15",
+      "[eligibility-removed] shared-sections bucket objects removed: 15",
+      "[eligibility-removed] restricted-sections bucket objects removed: 2",
+      "[eligibility-removed] stack tla-s01e02-sen-eligibility: DELETE_COMPLETE",
+      "[eligibility-removed] artifact bucket: deleted (2 objects)"
+    ],
+    "remaining": {
+      "functions": [],
+      "http_apis": [],
+      "iam_roles": [],
+      "knowledge_bases": [],
+      "log_groups": [],
+      "s3_buckets": [],
+      "stacks": [],
+      "tables": [],
+      "tagged_resources_confirmed_by_owning_service": [],
+      "user_pools": [],
+      "vector_buckets": []
+    },
+    "tag_index_entries_not_found_by_owning_service": [
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_pB6vVbc7U",
+      "arn:aws:cognito-idp:us-east-1:<account>:userpool/us-east-1_G448yMzbU"
+    ],
+    "verified_clean": true
+  },
+  "observed": "CLEAN",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:04:38+00:00",
+  "status": "PASS",
+  "test_id": "CLEANUP",
+  "verifies": [
+    "OPS-003"
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "schema": "tla-e02-personas/1",
+  "note": "Synthetic employees. P-09 has a valid identity but no authorization record. P-11 is the over-limit persona (TST-SCALE-001). Token groups mirror domains and cases only so experiment 3 has stale claims to read; the normal build ignores them.",
+  "personas": [
+    {
+      "persona": "P-01",
+      "username": "p01-depot-engineer",
+      "registered": true,
+      "employee_id": "E-1001",
+      "employment_status": "ACTIVE",
+      "hr_version": 1,
+      "grants_version": 1,
+      "domains": [],
+      "cases": [],
+      "mirror_to_token_groups": true
+    },
+    {
+      "persona": "P-02",
+      "username": "p02-bid-lead",
+      "registered": true,
+      "employee_id": "E-1002",
+      "employment_status": "ACTIVE",
+      "hr_version": 1,
+      "grants_version": 1,
+      "domains": [
+        "BID-ORION"
+      ],
+      "cases": [],
+      "mirror_to_token_groups": true
+    },
+    {
+      "persona": "P-03",
+      "username": "p03-finance-analyst",
+      "registered": true,
+      "employee_id": "E-1003",
+      "employment_status": "ACTIVE",
+      "hr_version": 1,
+      "grants_version": 1,
+      "domains": [
+        "FIN-REPORTING"
+      ],
+      "cases": [],
+      "mirror_to_token_groups": true
+    },
+    {
+      "persona": "P-04",
+      "username": "p04-security-engineer",
+      "registered": true,
+      "employee_id": "E-1004",
+      "employment_status": "ACTIVE",
+      "hr_version": 1,
+      "grants_version": 1,
+      "domains": [
+        "SEC-SIGNALLING"
+      ],
+      "cases": [],
+      "mirror_to_token_groups": true
+    },
+    {
+      "persona": "P-05",
+      "username": "p05-safety-investigator",
+      "registered": true,
+      "employee_id": "E-1005",
+      "employment_status": "ACTIVE",
+      "hr_version": 1,
+      "grants_version": 1,
+      "domains": [],
+      "cases": [
+        "SI-0417"
+      ],
+      "mirror_to_token_groups": true
+    },
+    {
+      "persona": "P-06",
+      "username": "p06-hr-caseworker",
+      "registered": true,
+      "employee_id": "E-1006",
+      "employment_status": "ACTIVE",
+      "hr_version": 1,
+      "grants_version": 1,
+      "domains": [],
+      "cases": [
+        "HR-2031"
+      ],
+      "mirror_to_token_groups": true
+    },
+    {
+      "persona": "P-07",
+      "username": "p07-operations-director",
+      "registered": true,
+      "employee_id": "E-1007",
+      "employment_status": "ACTIVE",
+      "hr_version": 1,
+      "grants_version": 1,
+      "domains": [
+        "OPS-LEADERSHIP"
+      ],
+      "cases": [],
+      "mirror_to_token_groups": true
+    },
+    {
+      "persona": "P-08",
+      "username": "p08-former-employee",
+      "registered": true,
+      "employee_id": "E-1008",
+      "employment_status": "INACTIVE",
+      "hr_version": 1,
+      "grants_version": 1,
+      "domains": [
+        "BID-ORION"
+      ],
+      "cases": [],
+      "mirror_to_token_groups": true
+    },
+    {
+      "persona": "P-09",
+      "username": "p09-unregistered",
+      "registered": false,
+      "employee_id": null,
+      "employment_status": null,
+      "hr_version": null,
+      "grants_version": null,
+      "domains": [],
+      "cases": [],
+      "mirror_to_token_groups": true
+    },
+    {
+      "persona": "P-10",
+      "username": "p10-many-grants",
+      "registered": true,
+      "employee_id": "E-1010",
+      "employment_status": "ACTIVE",
+      "hr_version": 1,
+      "grants_version": 1,
+      "domains": [
+        "SYN-DOMAIN-0001",
+        "SYN-DOMAIN-0002",
+        "SYN-DOMAIN-0003",
+        "SYN-DOMAIN-0004",
+        "SYN-DOMAIN-0005",
+        "SYN-DOMAIN-0006",
+        "SYN-DOMAIN-0007",
+        "SYN-DOMAIN-0008",
+        "SYN-DOMAIN-0009",
+        "SYN-DOMAIN-0010",
+        "SYN-DOMAIN-0011",
+        "SYN-DOMAIN-0012",
+        "SYN-DOMAIN-0013",
+        "SYN-DOMAIN-0014",
+        "SYN-DOMAIN-0015",
+        "SYN-DOMAIN-0016",
+        "SYN-DOMAIN-0017",
+        "SYN-DOMAIN-0018",
+        "SYN-DOMAIN-0019",
+        "SYN-DOMAIN-0020",
+        "SYN-DOMAIN-0021",
+        "SYN-DOMAIN-0022",
+        "SYN-DOMAIN-0023",
+        "SYN-DOMAIN-0024",
+        "SYN-DOMAIN-0025",
+        "SYN-DOMAIN-0026",
+        "SYN-DOMAIN-0027",
+        "SYN-DOMAIN-0028",
+        "SYN-DOMAIN-0029",
+        "SYN-DOMAIN-0030",
+        "SYN-DOMAIN-0031",
+        "SYN-DOMAIN-0032",
+        "SYN-DOMAIN-0033",
+        "SYN-DOMAIN-0034",
+        "SYN-DOMAIN-0035",
+        "SYN-DOMAIN-0036",
+        "SYN-DOMAIN-0037",
+        "SYN-DOMAIN-0038",
+        "SYN-DOMAIN-0039",
+        "FIN-REPORTING"
+      ],
+      "cases": [],
+      "mirror_to_token_groups": false
+    },
+    {
+      "persona": "P-11",
+      "username": "p11-over-limit",
+      "registered": true,
+      "employee_id": "E-1011",
+      "employment_status": "ACTIVE",
+      "hr_version": 1,
+      "grants_version": 1,
+      "domains": [
+        "FIN-REPORTING"
+      ],
+      "cases": [],
+      "mirror_to_token_groups": false,
+      "domains_generated": {
+        "prefix": "SYN-OVERLIMIT-",
+        "count": 999,
+        "note": "999 generated domains plus FIN-REPORTING: far above the constraint budget and the observed service limit"
+      }
+    }
+  ]
+}

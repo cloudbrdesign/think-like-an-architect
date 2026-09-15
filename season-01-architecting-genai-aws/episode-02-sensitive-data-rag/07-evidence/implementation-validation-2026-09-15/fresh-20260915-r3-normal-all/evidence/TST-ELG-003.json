@@ -1,0 +1,1482 @@
+{
+  "category": "eligibility",
+  "controls": [
+    "CTL-001",
+    "CTL-011",
+    "CTL-017"
+  ],
+  "evidence": "evidence/TST-ELG-003.json",
+  "expected": "No BID-ORION canary for P-01, P-03\u2026P-07 in any channel, including immediately after P-02's identical question",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 245,
+          "retrieval": 339,
+          "total": 593,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-01",
+        "question": "orion_pricing",
+        "relevance": {
+          "kept": [
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9"
+          ]
+        },
+        "request_id": "754902d1-9dbe-498b-914b-5d45667fff77",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.530167,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.499936,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 210,
+          "retrieval": 371,
+          "total": 591,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-01",
+        "question": "orion_discount",
+        "relevance": {
+          "kept": [
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff",
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5"
+          ]
+        },
+        "request_id": "662d61b0-bd8b-4d56-b24f-b278c17e7afc",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.539872,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.526568,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 185,
+            "sha256": "12460fafad8be9deafdae0e34f454f0b43e9755fc963004fd813d6bb949fb2a1",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "FIN-REPORTING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 13,
+          "generation": 234,
+          "retrieval": 363,
+          "total": 616,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-03",
+        "question": "orion_pricing",
+        "relevance": {
+          "kept": [
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422",
+            "7201cab3-6811-4104-8d96-110ab244a5f9"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff"
+          ]
+        },
+        "request_id": "cf63402a-e49b-482d-a291-f960d0fbac06",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-08",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "FIN-REPORTING",
+            "score": 0.617291,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.530167,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-03": 1,
+            "D-08": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 185,
+            "sha256": "12460fafad8be9deafdae0e34f454f0b43e9755fc963004fd813d6bb949fb2a1",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "FIN-REPORTING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 259,
+          "retrieval": 414,
+          "total": 681,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-03",
+        "question": "orion_discount",
+        "relevance": {
+          "kept": [
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "7201cab3-6811-4104-8d96-110ab244a5f9",
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff"
+          ]
+        },
+        "request_id": "d1d99eef-3a75-4dc3-bb47-970b96bdaf47",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-08",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "FIN-REPORTING",
+            "score": 0.550846,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.539872,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-03": 1,
+            "D-08": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 186,
+            "sha256": "2dbe720b1327111515d5dc32f2be78871a2fef8d0e5df8c4e3d8273672d12077",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "SEC-SIGNALLING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 5,
+          "generation": 220,
+          "retrieval": 352,
+          "total": 583,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-04",
+        "question": "orion_pricing",
+        "relevance": {
+          "kept": [
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9"
+          ]
+        },
+        "request_id": "dafb4cd5-225d-49bd-b19a-f8ecc6279c3d",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.530167,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.499936,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 186,
+            "sha256": "2dbe720b1327111515d5dc32f2be78871a2fef8d0e5df8c4e3d8273672d12077",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "SEC-SIGNALLING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 241,
+          "retrieval": 338,
+          "total": 589,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-04",
+        "question": "orion_discount",
+        "relevance": {
+          "kept": [
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff",
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5"
+          ]
+        },
+        "request_id": "a03319d2-c0c2-44ae-bbc3-5f7d31d41530",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.539872,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.526568,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          },
+          {
+            "bytes": 113,
+            "sha256": "ab43fe1f84c8609a2741ca6bceb2d6d6e23bffe2fb6aa437a77b647fc8a15f8a",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "SI-0417"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 5,
+          "generation": 250,
+          "retrieval": 864,
+          "total": 1126,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-05",
+        "question": "orion_pricing",
+        "relevance": {
+          "kept": [
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff",
+            "2ccc5d23-a940-42d3-8f0b-e6c020f66682",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9"
+          ]
+        },
+        "request_id": "67787f91-4208-4d8b-ac9a-128a3bd2d9da",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.530167,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.50089,
+            "section_id": "S2",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.499936,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-04": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          },
+          {
+            "bytes": 113,
+            "sha256": "ab43fe1f84c8609a2741ca6bceb2d6d6e23bffe2fb6aa437a77b647fc8a15f8a",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "SI-0417"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "generation": 235,
+          "retrieval": 705,
+          "total": 949,
+          "verification": 3
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-05",
+        "question": "orion_discount",
+        "relevance": {
+          "kept": [
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff",
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5",
+            "2ccc5d23-a940-42d3-8f0b-e6c020f66682"
+          ]
+        },
+        "request_id": "dd6e5a1f-d1e3-4ec4-9361-d4a22d23b05b",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.539872,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.526568,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.519981,
+            "section_id": "S2",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          },
+          {
+            "bytes": 113,
+            "sha256": "2aea5ddfc94ccbf254c17f5b75b238e802127a0681227565675f2660992bdb13",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "HR-2031"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "generation": 254,
+          "retrieval": 692,
+          "total": 967,
+          "verification": 16
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-06",
+        "question": "orion_pricing",
+        "relevance": {
+          "kept": [
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff",
+            "54161ac0-b52f-44b0-9eeb-658c227465dd",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9"
+          ]
+        },
+        "request_id": "606bd006-d166-4ccd-bbf8-22f56ab737f9",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.530167,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.505251,
+            "section_id": "S1",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.499936,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-05": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          },
+          {
+            "bytes": 113,
+            "sha256": "2aea5ddfc94ccbf254c17f5b75b238e802127a0681227565675f2660992bdb13",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "HR-2031"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 200,
+          "retrieval": 698,
+          "total": 908,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-06",
+        "question": "orion_discount",
+        "relevance": {
+          "kept": [
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff",
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5",
+            "54161ac0-b52f-44b0-9eeb-658c227465dd"
+          ]
+        },
+        "request_id": "d9024b8c-9246-4f25-80cf-eea6bc104f0a",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.539872,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.526568,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.495406,
+            "section_id": "S1",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 186,
+            "sha256": "d89494e936bbef9421b44d4c598790e1cdbc36352d1202b340e09962754478ea",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "OPS-LEADERSHIP"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 295,
+          "retrieval": 334,
+          "total": 638,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-07",
+        "question": "orion_pricing",
+        "relevance": {
+          "kept": [
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff",
+            "79f9e77c-efb6-4110-bdf8-dc5e90290da9"
+          ]
+        },
+        "request_id": "a98d9473-6bc7-4e44-81ba-bb05668f8a6a",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.530167,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.499936,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 186,
+            "sha256": "d89494e936bbef9421b44d4c598790e1cdbc36352d1202b340e09962754478ea",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "OPS-LEADERSHIP"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 222,
+          "retrieval": 277,
+          "total": 509,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-07",
+        "question": "orion_discount",
+        "relevance": {
+          "kept": [
+            "72d5495f-4e4e-495e-b5a1-6a4c4a328422",
+            "bb7677fb-750a-4639-997e-af4141fd6889",
+            "069bc8fc-0a78-4586-b34e-142b6fb08b4d"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "9cb294c5-7079-4717-902c-1e43cae7e1ff",
+            "17b8337d-cc5d-46c8-b5ec-b7a3bc605dd5"
+          ]
+        },
+        "request_id": "9b159c1d-5099-4f47-a909-b11e62864bb0",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.539872,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.526568,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      }
+    ],
+    "leaks": [],
+    "precondition": {
+      "answer": "The Project Orion bid price band is ZETA-17, with a commercial position of a walk-away position in band ZETA-12. These are synthetic placeholders. Marker CANARY-BID-ORION-PRICING-7Q3. I can't answer that question.",
+      "citations": [
+        {
+          "document_id": "D-03",
+          "document_title": "Project Orion delivery report",
+          "section_id": "S4",
+          "section_title": "Commercial position and bid pricing"
+        },
+        {
+          "document_id": "D-14",
+          "document_title": "Orion commercial summary",
+          "section_id": "S1",
+          "section_title": "Discount strategy"
+        },
+        {
+          "document_id": "D-03",
+          "document_title": "Project Orion delivery report",
+          "section_id": "S1",
+          "section_title": "Background"
+        },
+        {
+          "document_id": "D-03",
+          "document_title": "Project Orion delivery report",
+          "section_id": "S2",
+          "section_title": "Delivery"
+        },
+        {
+          "document_id": "D-03",
+          "document_title": "Project Orion delivery report",
+          "section_id": "S3",
+          "section_title": "Lessons learned"
+        }
+      ],
+      "constraints": [
+        {
+          "bytes": 181,
+          "sha256": "8ed7671b959cc64341f3e2245c7c66922e249b8c09e0382d4732beccca64734d",
+          "tier": "shared"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [
+          "BID-ORION"
+        ],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": null,
+      "generation_invoked": true,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 4,
+        "generation": 335,
+        "retrieval": 376,
+        "total": 739,
+        "verification": 22
+      },
+      "outcome": "ANSWERED",
+      "persona": "P-02",
+      "question": "orion_pricing",
+      "relevance": {
+        "kept": [
+          "1b7e0f8f-7f5e-4063-a6b4-62b99d1e4c86",
+          "bf8a0cef-8a24-48d8-a2a6-b63154f56e62",
+          "069bc8fc-0a78-4586-b34e-142b6fb08b4d",
+          "bb7677fb-750a-4639-997e-af4141fd6889",
+          "72d5495f-4e4e-495e-b5a1-6a4c4a328422"
+        ],
+        "min_score": 0.6,
+        "omitted": []
+      },
+      "request_id": "408d1369-8a86-4391-ad81-856ee601d95f",
+      "retrieved": [
+        {
+          "document_id": "D-03",
+          "label": "CONFIDENTIAL",
+          "record_version": "1",
+          "scope": "BID-ORION",
+          "score": 0.919845,
+          "section_id": "S4",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-14",
+          "label": "CONFIDENTIAL",
+          "record_version": "1",
+          "scope": "BID-ORION",
+          "score": 0.717496,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.705779,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.674968,
+          "section_id": "S2",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.641401,
+          "section_id": "S3",
+          "tier": "shared"
+        }
+      ],
+      "tiers_called": [
+        "shared"
+      ],
+      "verification": {
+        "mismatches": [],
+        "record_versions": {
+          "D-03": 1,
+          "D-14": 1
+        },
+        "status": "PASS"
+      }
+    }
+  },
+  "observed": "precondition: P-02 retrieved D-03 \u00a74 immediately before; no ineligible canary for 6 personas \u00d7 2 questions",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T09:43:40+00:00",
+  "status": "PASS",
+  "test_id": "TST-ELG-003",
+  "verifies": [
+    "SEC-001",
+    "SEC-004"
+  ]
+}

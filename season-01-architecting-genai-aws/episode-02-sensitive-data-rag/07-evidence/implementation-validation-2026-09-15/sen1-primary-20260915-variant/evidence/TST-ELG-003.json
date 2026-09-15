@@ -1,0 +1,1869 @@
+{
+  "category": "eligibility",
+  "controls": [
+    "CTL-001",
+    "CTL-011",
+    "CTL-017"
+  ],
+  "evidence": "evidence/TST-ELG-003.json",
+  "expected": "No BID-ORION canary for P-01, P-03\u2026P-07 in any channel, including immediately after P-02's identical question",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "retrieval": 897,
+          "total": 906,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-01",
+        "question": "orion_pricing",
+        "relevance": null,
+        "request_id": "4553b2ca-2a98-4db4-a24a-4e8716cb428e",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.919845,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.717496,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.505251,
+            "section_id": "S1",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.50089,
+            "section_id": "S2",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "3d0a93e3-a6e5-468b-9643-5c7f1efb12ff",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "0a109177-a95e-4cc2-8d39-45a1a2222333",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "retrieval": 828,
+          "total": 836,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-01",
+        "question": "orion_discount",
+        "relevance": null,
+        "request_id": "1fe51250-5e8a-41eb-8d27-56d26225c131",
+        "retrieved": [
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.916425,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.68808,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.519981,
+            "section_id": "S2",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.495406,
+            "section_id": "S1",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "0a109177-a95e-4cc2-8d39-45a1a2222333",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "3d0a93e3-a6e5-468b-9643-5c7f1efb12ff",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "FIN-REPORTING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 6,
+          "retrieval": 865,
+          "total": 876,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-03",
+        "question": "orion_pricing",
+        "relevance": null,
+        "request_id": "a77f4137-b810-4afb-9608-66052d81fa88",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.919845,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.717496,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.505251,
+            "section_id": "S1",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.50089,
+            "section_id": "S2",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "3d0a93e3-a6e5-468b-9643-5c7f1efb12ff",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "0a109177-a95e-4cc2-8d39-45a1a2222333",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "FIN-REPORTING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "retrieval": 862,
+          "total": 872,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-03",
+        "question": "orion_discount",
+        "relevance": null,
+        "request_id": "50279966-accc-408b-8380-e378c64a4344",
+        "retrieved": [
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.916425,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.68808,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.519981,
+            "section_id": "S2",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.495406,
+            "section_id": "S1",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "0a109177-a95e-4cc2-8d39-45a1a2222333",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "3d0a93e3-a6e5-468b-9643-5c7f1efb12ff",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "SEC-SIGNALLING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "retrieval": 854,
+          "total": 863,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-04",
+        "question": "orion_pricing",
+        "relevance": null,
+        "request_id": "eae052b1-2dbd-48f6-a2c3-f25ea3c78ac1",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.919845,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.717496,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.505251,
+            "section_id": "S1",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.50089,
+            "section_id": "S2",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "3d0a93e3-a6e5-468b-9643-5c7f1efb12ff",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "0a109177-a95e-4cc2-8d39-45a1a2222333",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "SEC-SIGNALLING"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "retrieval": 742,
+          "total": 750,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-04",
+        "question": "orion_discount",
+        "relevance": null,
+        "request_id": "1d71fc00-2ae8-492b-88ce-4d4afaa0b5e6",
+        "retrieved": [
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.916425,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.68808,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.519981,
+            "section_id": "S2",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.495406,
+            "section_id": "S1",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "0a109177-a95e-4cc2-8d39-45a1a2222333",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "3d0a93e3-a6e5-468b-9643-5c7f1efb12ff",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "SI-0417"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 9,
+          "retrieval": 790,
+          "total": 804,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-05",
+        "question": "orion_pricing",
+        "relevance": null,
+        "request_id": "d774815a-f13e-4b7e-a374-9c6e2ea2d605",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.919845,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.717496,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.505251,
+            "section_id": "S1",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.50089,
+            "section_id": "S2",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "3d0a93e3-a6e5-468b-9643-5c7f1efb12ff",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "SI-0417"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "retrieval": 784,
+          "total": 793,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-05",
+        "question": "orion_discount",
+        "relevance": null,
+        "request_id": "aa341002-e3ff-4a68-a157-2d4ca6fc0442",
+        "retrieved": [
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.916425,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.68808,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.519981,
+            "section_id": "S2",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.495406,
+            "section_id": "S1",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "3d0a93e3-a6e5-468b-9643-5c7f1efb12ff",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "HR-2031"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "retrieval": 782,
+          "total": 791,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-06",
+        "question": "orion_pricing",
+        "relevance": null,
+        "request_id": "ee7c26c2-fde6-452b-900c-5e40188d976e",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.919845,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.717496,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.505251,
+            "section_id": "S1",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.50089,
+            "section_id": "S2",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "0a109177-a95e-4cc2-8d39-45a1a2222333",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "HR-2031"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "retrieval": 744,
+          "total": 753,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-06",
+        "question": "orion_discount",
+        "relevance": null,
+        "request_id": "fe79aba8-8004-4e39-9a08-cae2f0f23e0b",
+        "retrieved": [
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.916425,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.68808,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.519981,
+            "section_id": "S2",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.495406,
+            "section_id": "S1",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "0a109177-a95e-4cc2-8d39-45a1a2222333",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "OPS-LEADERSHIP"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "retrieval": 770,
+          "total": 779,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-07",
+        "question": "orion_pricing",
+        "relevance": null,
+        "request_id": "30626c66-52ed-48be-b540-9e911abf20ef",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.919845,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.717496,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.705779,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.674968,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.641401,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.505251,
+            "section_id": "S1",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.50089,
+            "section_id": "S2",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "3d0a93e3-a6e5-468b-9643-5c7f1efb12ff",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "0a109177-a95e-4cc2-8d39-45a1a2222333",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 117,
+            "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+            "tier": "shared"
+          },
+          {
+            "bytes": 51,
+            "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "OPS-LEADERSHIP"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": "CTL-014",
+        "generation_invoked": false,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 3,
+          "retrieval": 704,
+          "total": 713,
+          "verification": 4
+        },
+        "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+        "persona": "P-07",
+        "question": "orion_discount",
+        "relevance": null,
+        "request_id": "0e1d2407-c658-4096-8943-df48a68180ac",
+        "retrieved": [
+          {
+            "document_id": "D-14",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.916425,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.68808,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651106,
+            "section_id": "S3",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.63919,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.629412,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.519981,
+            "section_id": "S2",
+            "tier": "restricted"
+          },
+          {
+            "document_id": "D-05",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "HR-2031",
+            "score": 0.495406,
+            "section_id": "S1",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [
+            {
+              "chunk_id": "12154b62-6e8a-4aba-a144-9ee5aecc91c7",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "83deb05e-1416-476f-b86c-ce2addb76fcc",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "0a109177-a95e-4cc2-8d39-45a1a2222333",
+              "reason": "NOT_ELIGIBLE"
+            },
+            {
+              "chunk_id": "3d0a93e3-a6e5-468b-9643-5c7f1efb12ff",
+              "reason": "NOT_ELIGIBLE"
+            }
+          ],
+          "record_versions": {
+            "D-03": 1,
+            "D-04": 1,
+            "D-05": 1,
+            "D-14": 1
+          },
+          "status": "MISMATCH"
+        }
+      }
+    ],
+    "leaks": [
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-HR2031-CASE-P8",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-01",
+        "question": "orion_pricing"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-HR2031-CASE-P8",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-01",
+        "question": "orion_discount"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-HR2031-CASE-P8",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-03",
+        "question": "orion_pricing"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-HR2031-CASE-P8",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-03",
+        "question": "orion_discount"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-HR2031-CASE-P8",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-04",
+        "question": "orion_pricing"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-HR2031-CASE-P8",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-04",
+        "question": "orion_discount"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-HR2031-CASE-P8"
+        ],
+        "persona": "P-05",
+        "question": "orion_pricing"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-HR2031-CASE-P8"
+        ],
+        "persona": "P-05",
+        "question": "orion_discount"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-06",
+        "question": "orion_pricing"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-06",
+        "question": "orion_discount"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-HR2031-CASE-P8",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-07",
+        "question": "orion_pricing"
+      },
+      {
+        "leaked": [
+          "CANARY-BID-ORION-PRICING-7Q3",
+          "CANARY-CLAIMS-INTERNAL",
+          "CANARY-HR2031-CASE-P8",
+          "CANARY-SI0417-WITNESS-K2"
+        ],
+        "persona": "P-07",
+        "question": "orion_discount"
+      }
+    ],
+    "precondition": {
+      "answer": "I can't answer that question.",
+      "citations": [],
+      "constraints": [
+        {
+          "bytes": 117,
+          "sha256": "1ceb7e3abbd7145ab131955d57ef4ad3ebb4b0fb4d8ade9b031d7399b9b6ab35",
+          "tier": "shared"
+        },
+        {
+          "bytes": 51,
+          "sha256": "fe45f<account>d4bd35cfccac7ac1b4ea596f39227a0efe76f645c729879",
+          "tier": "restricted"
+        }
+      ],
+      "decision": {
+        "cases": [],
+        "domains": [
+          "BID-ORION"
+        ],
+        "grants_version": 1,
+        "hr_version": 1,
+        "status": "ALLOW"
+      },
+      "failing_control": "CTL-014",
+      "generation_invoked": false,
+      "http_status": 200,
+      "latency_ms": {
+        "decision": 79,
+        "retrieval": 983,
+        "total": 1076,
+        "verification": 12
+      },
+      "outcome": "WITHHELD_VERIFICATION_MISMATCH",
+      "persona": "P-02",
+      "question": "orion_pricing",
+      "relevance": null,
+      "request_id": "24e71d73-e3bf-41b3-afb8-e53aaff1430c",
+      "retrieved": [
+        {
+          "document_id": "D-03",
+          "label": "CONFIDENTIAL",
+          "record_version": "1",
+          "scope": "BID-ORION",
+          "score": 0.919845,
+          "section_id": "S4",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-14",
+          "label": "CONFIDENTIAL",
+          "record_version": "1",
+          "scope": "BID-ORION",
+          "score": 0.717496,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.705779,
+          "section_id": "S1",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.674968,
+          "section_id": "S2",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-03",
+          "label": "INTERNAL",
+          "record_version": "1",
+          "scope": "NONE",
+          "score": 0.641401,
+          "section_id": "S3",
+          "tier": "shared"
+        },
+        {
+          "document_id": "D-05",
+          "label": "RESTRICTED",
+          "record_version": "1",
+          "scope": "HR-2031",
+          "score": 0.505251,
+          "section_id": "S1",
+          "tier": "restricted"
+        },
+        {
+          "document_id": "D-04",
+          "label": "RESTRICTED",
+          "record_version": "1",
+          "scope": "SI-0417",
+          "score": 0.50089,
+          "section_id": "S2",
+          "tier": "restricted"
+        }
+      ],
+      "tiers_called": [
+        "shared",
+        "restricted"
+      ],
+      "verification": {
+        "mismatches": [
+          {
+            "chunk_id": "3d0a93e3-a6e5-468b-9643-5c7f1efb12ff",
+            "reason": "NOT_ELIGIBLE"
+          },
+          {
+            "chunk_id": "0a109177-a95e-4cc2-8d39-45a1a2222333",
+            "reason": "NOT_ELIGIBLE"
+          }
+        ],
+        "record_versions": {
+          "D-03": 1,
+          "D-04": 1,
+          "D-05": 1,
+          "D-14": 1
+        },
+        "status": "MISMATCH"
+      }
+    }
+  },
+  "observed": "precondition: P-02 retrieved D-03 \u00a74 immediately before; LEAKS [{'persona': 'P-01', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-01', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-03', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-03', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-04', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-04', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-05', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8']}, {'persona': 'P-05', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8']}, {'persona': 'P-06', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-06', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-07', 'question': 'orion_pricing', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}, {'persona': 'P-07', 'question': 'orion_discount', 'leaked': ['CANARY-BID-ORION-PRICING-7Q3', 'CANARY-CLAIMS-INTERNAL', 'CANARY-HR2031-CASE-P8', 'CANARY-SI0417-WITNESS-K2']}]",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:02:49+00:00",
+  "status": "FAIL",
+  "test_id": "TST-ELG-003",
+  "verifies": [
+    "SEC-001",
+    "SEC-004"
+  ]
+}

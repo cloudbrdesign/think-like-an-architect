@@ -1,0 +1,31 @@
+{
+  "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "PASS": 1
+  },
+  "deployment": null,
+  "finished_at": "2026-09-15T10:16:28+00:00",
+  "region": null,
+  "run_id": "fresh-20260915-r3-TST-OPS-001",
+  "scope": "fresh-copy run",
+  "started_at": "2026-09-15T10:16:28+00:00",
+  "tests": [
+    {
+      "category": "repeatability",
+      "controls": [],
+      "evidence": "evidence/TST-OPS-001.json",
+      "expected": "Unattended from a fresh copy: preflight \u2192 deploy \u2192 fixtures \u2192 full suite \u2192 experiments \u2192 cleanup verified; results match",
+      "level": "L5",
+      "observed": "every step exited 0; results match the reference run; cleanup verified",
+      "privileged_observation": false,
+      "recorded_at": "2026-09-15T10:16:28+00:00",
+      "status": "PASS",
+      "test_id": "TST-OPS-001",
+      "verifies": [
+        "OPS-003"
+      ]
+    }
+  ],
+  "variant": null
+}

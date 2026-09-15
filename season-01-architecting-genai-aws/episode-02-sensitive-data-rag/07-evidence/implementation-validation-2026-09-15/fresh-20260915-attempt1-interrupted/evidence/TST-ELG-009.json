@@ -1,0 +1,389 @@
+{
+  "category": "eligibility",
+  "controls": [
+    "CTL-011",
+    "CTL-012"
+  ],
+  "evidence": "evidence/TST-ELG-009.json",
+  "expected": "Correct tier \u2260 authorization: zero HR-2031, FIN-REPORTING or SEC-SIGNALLING canaries although the tier was searched",
+  "level": "L3",
+  "observations": {
+    "asks": [
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 49,
+            "sha256": "804c0d5dd902c230e6b5b86ac1a025ac5d84063e94aa386a05d668ad3cae2876",
+            "tier": "shared"
+          },
+          {
+            "bytes": 113,
+            "sha256": "ab43fe1f84c8609a2741ca6bceb2d6d6e23bffe2fb6aa437a77b647fc8a15f8a",
+            "tier": "restricted"
+          }
+        ],
+        "decision": {
+          "cases": [
+            "SI-0417"
+          ],
+          "domains": [],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 10,
+          "generation": 189,
+          "retrieval": 715,
+          "total": 920,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-05",
+        "question": "hr2031",
+        "relevance": {
+          "kept": [
+            "07571b79-76a2-4790-be25-c22746691f5d"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "fe7f5f86-d00f-4525-add2-fd113961d025",
+            "5140ac23-0a96-4836-9fdc-98f35953a183",
+            "26385d1b-eeeb-415d-961d-255b628a2331",
+            "3f6ce34b-4817-41c6-8c41-0c9b50f913e8",
+            "af65a752-777f-40a6-87df-c58b10db9a86"
+          ]
+        },
+        "request_id": "8824a4f6-82be-431c-9b19-668f59e84ef8",
+        "retrieved": [
+          {
+            "document_id": "D-06",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.675552,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.558477,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.552073,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.541961,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.536744,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "RESTRICTED",
+            "record_version": "1",
+            "scope": "SI-0417",
+            "score": 0.52998,
+            "section_id": "S2",
+            "tier": "restricted"
+          }
+        ],
+        "tiers_called": [
+          "shared",
+          "restricted"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-04": 1,
+            "D-06": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question.",
+        "citations": [],
+        "constraints": [
+          {
+            "bytes": 181,
+            "sha256": "8ed7671b959cc64341f3e2245c7c66922e249b8c09e0382d4732beccca64734d",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "BID-ORION"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 4,
+          "generation": 268,
+          "retrieval": 298,
+          "total": 576,
+          "verification": 4
+        },
+        "outcome": "NO_RELEVANT_CONTENT",
+        "persona": "P-02",
+        "question": "finance",
+        "relevance": {
+          "kept": [
+            "bc433406-0a28-495a-8237-00ebf87859e8",
+            "05686f31-9cb7-493e-8234-f75b06855729",
+            "00b8124f-a4ac-43be-a93e-7ab8f6004609",
+            "26385d1b-eeeb-415d-961d-255b628a2331"
+          ],
+          "min_score": 0.6,
+          "omitted": [
+            "fe7f5f86-d00f-4525-add2-fd113961d025"
+          ]
+        },
+        "request_id": "cdfd721b-29e8-4658-80c7-f71b573d3286",
+        "retrieved": [
+          {
+            "document_id": "D-03",
+            "label": "CONFIDENTIAL",
+            "record_version": "1",
+            "scope": "BID-ORION",
+            "score": 0.634504,
+            "section_id": "S4",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.623709,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.616985,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.602108,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.594804,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      },
+      {
+        "answer": "I can't answer that question. The provided sources do not mention any weaknesses in the signalling controller maintenance interface.",
+        "citations": [
+          {
+            "document_id": "D-12",
+            "document_title": "Signalling fault-finding guide",
+            "section_id": "S1",
+            "section_title": "Finding a controller fault"
+          },
+          {
+            "document_id": "D-01",
+            "document_title": "Signalling maintenance procedure SMP-12",
+            "section_id": "S1",
+            "section_title": "Fault isolation"
+          },
+          {
+            "document_id": "D-01",
+            "document_title": "Signalling maintenance procedure SMP-12",
+            "section_id": "S2",
+            "section_title": "Post-maintenance tests"
+          },
+          {
+            "document_id": "D-04",
+            "document_title": "Safety investigation SI-0417 report",
+            "section_id": "S1",
+            "section_title": "Sanitised findings"
+          },
+          {
+            "document_id": "D-03",
+            "document_title": "Project Orion delivery report",
+            "section_id": "S1",
+            "section_title": "Background"
+          }
+        ],
+        "constraints": [
+          {
+            "bytes": 181,
+            "sha256": "8ed7671b959cc64341f3e2245c7c66922e249b8c09e0382d4732beccca64734d",
+            "tier": "shared"
+          }
+        ],
+        "decision": {
+          "cases": [],
+          "domains": [
+            "BID-ORION"
+          ],
+          "grants_version": 1,
+          "hr_version": 1,
+          "status": "ALLOW"
+        },
+        "failing_control": null,
+        "generation_invoked": true,
+        "http_status": 200,
+        "latency_ms": {
+          "decision": 5,
+          "generation": 211,
+          "retrieval": 323,
+          "total": 545,
+          "verification": 4
+        },
+        "outcome": "ANSWERED",
+        "persona": "P-02",
+        "question": "sec_vuln",
+        "relevance": {
+          "kept": [
+            "fe7f5f86-d00f-4525-add2-fd113961d025",
+            "05686f31-9cb7-493e-8234-f75b06855729",
+            "26385d1b-eeeb-415d-961d-255b628a2331",
+            "3f6ce34b-4817-41c6-8c41-0c9b50f913e8",
+            "00b8124f-a4ac-43be-a93e-7ab8f6004609"
+          ],
+          "min_score": 0.6,
+          "omitted": []
+        },
+        "request_id": "68130de6-6c00-4d09-82be-e448649f77de",
+        "retrieved": [
+          {
+            "document_id": "D-12",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.747785,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.740715,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-01",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.71012,
+            "section_id": "S2",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-04",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.651529,
+            "section_id": "S1",
+            "tier": "shared"
+          },
+          {
+            "document_id": "D-03",
+            "label": "INTERNAL",
+            "record_version": "1",
+            "scope": "NONE",
+            "score": 0.614376,
+            "section_id": "S1",
+            "tier": "shared"
+          }
+        ],
+        "tiers_called": [
+          "shared"
+        ],
+        "verification": {
+          "mismatches": [],
+          "record_versions": {
+            "D-01": 1,
+            "D-03": 1,
+            "D-04": 1,
+            "D-12": 1
+          },
+          "status": "PASS"
+        }
+      }
+    ],
+    "explanation": "The tier holds several scopes; the constraint derived from the decision selects only eligible ones",
+    "leaks": []
+  },
+  "observed": "P-05 restricted tier searched: True; P-02 shared tier searched: True; leaks []",
+  "privileged_observation": false,
+  "recorded_at": "2026-09-15T07:33:56+00:00",
+  "status": "PASS",
+  "test_id": "TST-ELG-009",
+  "verifies": [
+    "SEC-001",
+    "SEC-006"
+  ]
+}
