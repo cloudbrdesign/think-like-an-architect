@@ -1,0 +1,949 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Think Like an Architect S01E03 - Kestrelmoor Knowledge Assistant: keeping the knowledge base current (educational
+  implementation). Episode 02's authorisation architecture is unchanged; Episode 03 adds the change path, the
+  convergence state and the reconciliation that proves completeness. Read the IAM roles to answer "who may write
+  derived state?", "who may advance a watermark?" and "who may search each tier?".
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Variant and NamePrefix only name and tag resources. A failure experiment differs from the normal deployment ONLY in
+# the module packaged for it (scripts/tla_ops.py build <variant>); this template never switches behaviour.
+#   normal              the approved architecture
+#   status-ignored      FX-1: authoritative lifecycle status is not an answering input
+#   order-ignored       FX-2: change application is last-write-wins
+#   no-reconciliation   FX-3: reconciliation is disabled (notifications are dropped operationally)
+#   no-delivery         configuration-only: the NORMAL packages and the NORMAL reconciler, with
+#                       ChangeNotificationsEnabled=false from creation. It replaces no module, so it is the one
+#                       variant that differs from normal by a parameter rather than by packaging.
+#   lab-delivery-off    learner lab Part A: the normal code, ChangeNotificationsEnabled=false from creation
+#   lab-delivery-on     learner lab Part B: the normal code with live delivery, under its own stack name so the
+#                       learner lab never touches the normal deployment
+# ---------------------------------------------------------------------------------------------------------------------
+Parameters:
+  NamePrefix:
+    Type: String
+    Default: tla-s01e03-normal
+    AllowedPattern: "^tla-s01e03-(normal|fx-status|fx-order|fx-reconciliation|fx-nodelivery|lab-off|lab-on)$"
+  Variant:
+    Type: String
+    Default: normal
+    AllowedValues: [normal, status-ignored, order-ignored, no-reconciliation, no-delivery, lab-delivery-off, lab-delivery-on]
+  ArtifactBucket:
+    Type: String
+    Description: Bucket holding the function packages (created by scripts/tla_ops.py deploy)
+  QueryCodeKey:
+    Type: String
+  ChangeCodeKey:
+    Type: String
+  GenerationModelId:
+    Type: String
+    Default: amazon.nova-micro-v1:0
+    AllowedPattern: "^amazon\\.[a-z0-9-]+-v[0-9]+:[0-9]+$"
+    Description: In-Region foundation-model ID (never a cross-region inference profile)
+  RelevanceMinScore:
+    Type: String
+    Default: "0.60"
+    AllowedPattern: "^0(\\.[0-9]{1,3})?$|^1(\\.0{1,3})?$"
+    Description: Answer-quality threshold. Relevance is not authorization and never decides currency.
+  RolePath:
+    Type: String
+    Default: /tla/s01e03/
+  PermissionsBoundaryArn:
+    Type: String
+    Default: ""
+  ChangeNotificationsEnabled:
+    Type: String
+    Default: "true"
+    AllowedValues: ["true", "false"]
+    Description: >-
+      Whether the records stream delivers change notifications. Defaults to true; the normal deployment is never
+      created with it off. FX-3 needs a deployment where the low-latency path never accounted for a change, and
+      toggling this mapping at runtime proved unreliable (delivery fired during three of six proven-disabled
+      windows, root cause undetermined). Setting it false AT CREATION makes non-delivery a property of the deployment
+      rather than a switch flipped mid-experiment, so the precondition cannot race the experiment that depends on it.
+  MetricNamespace:
+    Type: String
+    Default: TLA/S01E03
+    AllowedPattern: "^[A-Za-z0-9/_.-]{1,255}$"
+    Description: CloudWatch namespace for freshness escalation metrics. Counts and class names only, never content.
+
+Conditions:
+  HasPermissionsBoundary: !Not [!Equals [!Ref PermissionsBoundaryArn, ""]]
+  DeliverChangeNotifications: !Equals [!Ref ChangeNotificationsEnabled, "true"]
+
+Resources:
+  # ===================================================================================================================
+  # AUTHORITATIVE STATE (ADR-001). The records table is the authority for content version, status, effective-from,
+  # supersession and classification. Its STREAM is the low-latency change signal (ADR-003): every write to a record
+  # produces one, including a write made by hand, so "the writer forgot to publish" cannot be confused with "delivery
+  # lost it". A notification never proves completeness.
+  # ===================================================================================================================
+  AuthorizationTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${NamePrefix}-authorization"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - {AttributeName: requester_sub, AttributeType: S}
+        - {AttributeName: record, AttributeType: S}
+      KeySchema:
+        - {AttributeName: requester_sub, KeyType: HASH}
+        - {AttributeName: record, KeyType: RANGE}
+
+  RecordsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${NamePrefix}-records"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - {AttributeName: document_id, AttributeType: S}
+      KeySchema:
+        - {AttributeName: document_id, KeyType: HASH}
+      StreamSpecification:
+        StreamViewType: NEW_AND_OLD_IMAGES
+
+  # DERIVED OPERATIONAL STATE (ADR-002, ADR-003, ADR-005, ADR-006). Pending entries, reflected versions, generations,
+  # watermarks, reconciliation passes and the deletion ledger. Derived state, never authority: if it disagrees with the
+  # records table, the records table wins.
+  ConvergenceTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${NamePrefix}-convergence"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - {AttributeName: pk, AttributeType: S}
+      KeySchema:
+        - {AttributeName: pk, KeyType: HASH}
+
+  AuditTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${NamePrefix}-audit"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - {AttributeName: request_id, AttributeType: S}
+      KeySchema:
+        - {AttributeName: request_id, KeyType: HASH}
+
+  # ===================================================================================================================
+  # Simulated records system: synthetic source documents. Only the change-path role may read them.
+  # ===================================================================================================================
+  RecordsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${NamePrefix}-records-${AWS::AccountId}"
+      PublicAccessBlockConfiguration: {BlockPublicAcls: true, BlockPublicPolicy: true, IgnorePublicAcls: true, RestrictPublicBuckets: true}
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+
+  RecordsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref RecordsBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:*"
+            Resource: [!GetAtt RecordsBucket.Arn, !Sub "${RecordsBucket.Arn}/*"]
+            Condition: {Bool: {aws:SecureTransport: "false"}}
+          - Sid: DenyRecordReadsExceptChangePath
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "${RecordsBucket.Arn}/*"
+            Condition: {ArnNotEquals: {aws:PrincipalArn: !GetAtt ChangeRole.Arn}}
+
+  # ===================================================================================================================
+  # TIER 1 of D3 — blast-radius reduction (Episode 02, unchanged). Only the change path writes a tier; only that tier's
+  # service role reads it. THE TIER IS NOT THE AUTHORIZATION BOUNDARY.
+  # ===================================================================================================================
+  SharedSectionBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${NamePrefix}-shared-sections-${AWS::AccountId}"
+      PublicAccessBlockConfiguration: {BlockPublicAcls: true, BlockPublicPolicy: true, IgnorePublicAcls: true, RestrictPublicBuckets: true}
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+
+  SharedSectionBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref SharedSectionBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:*"
+            Resource: [!GetAtt SharedSectionBucket.Arn, !Sub "${SharedSectionBucket.Arn}/*"]
+            Condition: {Bool: {aws:SecureTransport: "false"}}
+          - Sid: DenySectionWritesExceptChangePath
+            Effect: Deny
+            Principal: "*"
+            Action: [s3:PutObject, s3:DeleteObject]
+            Resource: !Sub "${SharedSectionBucket.Arn}/*"
+            Condition: {ArnNotEquals: {aws:PrincipalArn: !GetAtt ChangeRole.Arn}}
+          - Sid: DenySectionReadsExceptThisTiersKnowledgeBase
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "${SharedSectionBucket.Arn}/*"
+            Condition: {ArnNotEquals: {aws:PrincipalArn: !GetAtt SharedKnowledgeBaseRole.Arn}}
+
+  RestrictedSectionBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${NamePrefix}-restricted-sections-${AWS::AccountId}"
+      PublicAccessBlockConfiguration: {BlockPublicAcls: true, BlockPublicPolicy: true, IgnorePublicAcls: true, RestrictPublicBuckets: true}
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+
+  RestrictedSectionBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref RestrictedSectionBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:*"
+            Resource: [!GetAtt RestrictedSectionBucket.Arn, !Sub "${RestrictedSectionBucket.Arn}/*"]
+            Condition: {Bool: {aws:SecureTransport: "false"}}
+          - Sid: DenySectionWritesExceptChangePath
+            Effect: Deny
+            Principal: "*"
+            Action: [s3:PutObject, s3:DeleteObject]
+            Resource: !Sub "${RestrictedSectionBucket.Arn}/*"
+            Condition: {ArnNotEquals: {aws:PrincipalArn: !GetAtt ChangeRole.Arn}}
+          - Sid: DenySectionReadsExceptThisTiersKnowledgeBase
+            Effect: Deny
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "${RestrictedSectionBucket.Arn}/*"
+            Condition: {ArnNotEquals: {aws:PrincipalArn: !GetAtt RestrictedKnowledgeBaseRole.Arn}}
+
+  SharedVectorBucket:
+    Type: AWS::S3Vectors::VectorBucket
+    Properties:
+      VectorBucketName: !Sub "${NamePrefix}-shared-vectors"
+
+  SharedVectorIndex:
+    Type: AWS::S3Vectors::Index
+    DependsOn: SharedVectorBucket
+    Properties:
+      VectorBucketName: !Sub "${NamePrefix}-shared-vectors"
+      IndexName: !Sub "${NamePrefix}-shared-index"
+      DataType: float32
+      Dimension: 1024
+      DistanceMetric: cosine
+      MetadataConfiguration:
+        NonFilterableMetadataKeys: [AMAZON_BEDROCK_TEXT, AMAZON_BEDROCK_METADATA]
+
+  RestrictedVectorBucket:
+    Type: AWS::S3Vectors::VectorBucket
+    Properties:
+      VectorBucketName: !Sub "${NamePrefix}-restricted-vectors"
+
+  RestrictedVectorIndex:
+    Type: AWS::S3Vectors::Index
+    DependsOn: RestrictedVectorBucket
+    Properties:
+      VectorBucketName: !Sub "${NamePrefix}-restricted-vectors"
+      IndexName: !Sub "${NamePrefix}-restricted-index"
+      DataType: float32
+      Dimension: 1024
+      DistanceMetric: cosine
+      MetadataConfiguration:
+        NonFilterableMetadataKeys: [AMAZON_BEDROCK_TEXT, AMAZON_BEDROCK_METADATA]
+
+  SharedKnowledgeBaseRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-shared-kb"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: {Service: bedrock.amazonaws.com}
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals: {aws:SourceAccount: !Ref "AWS::AccountId"}
+              ArnLike: {aws:SourceArn: !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:knowledge-base/*"}
+      Policies:
+        - PolicyName: shared-tier-indexing
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: EmbedWithInRegionModelOnly
+                Effect: Allow
+                Action: bedrock:InvokeModel
+                Resource: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0"
+              - Sid: SharedVectorIndexOnly
+                Effect: Allow
+                Action: [s3vectors:PutVectors, s3vectors:GetVectors, s3vectors:DeleteVectors, s3vectors:QueryVectors, s3vectors:GetIndex]
+                Resource: !Ref SharedVectorIndex
+              - Sid: ReadSharedSectionsOnly
+                Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub "arn:aws:s3:::${NamePrefix}-shared-sections-${AWS::AccountId}/sections/*"
+
+  RestrictedKnowledgeBaseRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-restricted-kb"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: {Service: bedrock.amazonaws.com}
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals: {aws:SourceAccount: !Ref "AWS::AccountId"}
+              ArnLike: {aws:SourceArn: !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:knowledge-base/*"}
+      Policies:
+        - PolicyName: restricted-tier-indexing
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: EmbedWithInRegionModelOnly
+                Effect: Allow
+                Action: bedrock:InvokeModel
+                Resource: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0"
+              - Sid: RestrictedVectorIndexOnly
+                Effect: Allow
+                Action: [s3vectors:PutVectors, s3vectors:GetVectors, s3vectors:DeleteVectors, s3vectors:QueryVectors, s3vectors:GetIndex]
+                Resource: !Ref RestrictedVectorIndex
+              - Sid: ReadRestrictedSectionsOnly
+                Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub "arn:aws:s3:::${NamePrefix}-restricted-sections-${AWS::AccountId}/sections/*"
+
+  SharedKnowledgeBase:
+    Type: AWS::Bedrock::KnowledgeBase
+    Properties:
+      Name: !Sub "${NamePrefix}-shared-kb"
+      RoleArn: !GetAtt SharedKnowledgeBaseRole.Arn
+      KnowledgeBaseConfiguration:
+        Type: VECTOR
+        VectorKnowledgeBaseConfiguration:
+          EmbeddingModelArn: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0"
+          EmbeddingModelConfiguration:
+            BedrockEmbeddingModelConfiguration: {Dimensions: 1024, EmbeddingDataType: FLOAT32}
+      StorageConfiguration:
+        Type: S3_VECTORS
+        S3VectorsConfiguration:
+          IndexArn: !Ref SharedVectorIndex
+
+  SharedDataSource:
+    Type: AWS::Bedrock::DataSource
+    Properties:
+      Name: !Sub "${NamePrefix}-shared-sections"
+      KnowledgeBaseId: !Ref SharedKnowledgeBase
+      DataDeletionPolicy: DELETE
+      DataSourceConfiguration:
+        Type: CUSTOM
+
+  RestrictedKnowledgeBase:
+    Type: AWS::Bedrock::KnowledgeBase
+    Properties:
+      Name: !Sub "${NamePrefix}-restricted-kb"
+      RoleArn: !GetAtt RestrictedKnowledgeBaseRole.Arn
+      KnowledgeBaseConfiguration:
+        Type: VECTOR
+        VectorKnowledgeBaseConfiguration:
+          EmbeddingModelArn: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0"
+          EmbeddingModelConfiguration:
+            BedrockEmbeddingModelConfiguration: {Dimensions: 1024, EmbeddingDataType: FLOAT32}
+      StorageConfiguration:
+        Type: S3_VECTORS
+        S3VectorsConfiguration:
+          IndexArn: !Ref RestrictedVectorIndex
+
+  RestrictedDataSource:
+    Type: AWS::Bedrock::DataSource
+    Properties:
+      Name: !Sub "${NamePrefix}-restricted-sections"
+      KnowledgeBaseId: !Ref RestrictedKnowledgeBase
+      DataDeletionPolicy: DELETE
+      DataSourceConfiguration:
+        Type: CUSTOM
+
+  # ===================================================================================================================
+  # Identity provider stand-in (Episode 02, unchanged).
+  # ===================================================================================================================
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: !Sub "${NamePrefix}-users"
+      AdminCreateUserConfig: {AllowAdminCreateUserOnly: true}
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - {Name: admin_only, Priority: 1}
+      Policies:
+        PasswordPolicy: {MinimumLength: 16, RequireLowercase: true, RequireUppercase: true, RequireNumbers: true, RequireSymbols: true}
+
+  AppClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref UserPool
+      ClientName: !Sub "${NamePrefix}-app"
+      GenerateSecret: false
+      ExplicitAuthFlows: [ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_REFRESH_TOKEN_AUTH]
+      PreventUserExistenceErrors: ENABLED
+      AccessTokenValidity: 5
+      IdTokenValidity: 5
+      RefreshTokenValidity: 60
+      TokenValidityUnits: {AccessToken: minutes, IdToken: minutes, RefreshToken: minutes}
+
+  OtherAppClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref UserPool
+      ClientName: !Sub "${NamePrefix}-other-app"
+      GenerateSecret: false
+      ExplicitAuthFlows: [ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_REFRESH_TOKEN_AUTH]
+      PreventUserExistenceErrors: ENABLED
+
+  # ===================================================================================================================
+  # Application roles. ONLY QueryRole searches the tiers and reads grants, records and convergence state (read-only).
+  # ONLY ChangeRole writes derived retrieval state. ONLY ReconcilerRole may advance a watermark.
+  # ===================================================================================================================
+  QueryRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-query"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - {Effect: Allow, Principal: {Service: lambda.amazonaws.com}, Action: sts:AssumeRole}
+      Policies:
+        - PolicyName: query-function
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: ReadAuthoritativeGrantsPerRequest
+                Effect: Allow
+                Action: [dynamodb:BatchGetItem, dynamodb:GetItem]
+                Resource: !GetAtt AuthorizationTable.Arn
+              - Sid: ReadAuthoritativeRecordsPerRequest
+                Effect: Allow
+                Action: [dynamodb:BatchGetItem, dynamodb:GetItem]
+                Resource: !GetAtt RecordsTable.Arn
+              - Sid: ReadConvergenceStateOnly
+                Effect: Allow
+                Action: [dynamodb:BatchGetItem, dynamodb:GetItem]
+                Resource: !GetAtt ConvergenceTable.Arn
+              - Sid: SearchSharedTierOnlyFromTheGateway
+                Effect: Allow
+                Action: bedrock:Retrieve
+                Resource: !GetAtt SharedKnowledgeBase.KnowledgeBaseArn
+              - Sid: SearchRestrictedTierOnlyFromTheGateway
+                Effect: Allow
+                Action: bedrock:Retrieve
+                Resource: !GetAtt RestrictedKnowledgeBase.KnowledgeBaseArn
+              - Sid: GenerateWithInRegionModelOnly
+                Effect: Allow
+                Action: bedrock:InvokeModel
+                Resource: !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/${GenerationModelId}"
+              - Sid: WriteAuditRecordsOnly
+                Effect: Allow
+                Action: dynamodb:PutItem
+                Resource: !GetAtt AuditTable.Arn
+              - Sid: OwnLogGroup
+                Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !GetAtt QueryLogGroup.Arn
+
+  ChangeRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-change"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - {Effect: Allow, Principal: {Service: lambda.amazonaws.com}, Action: sts:AssumeRole}
+      Policies:
+        - PolicyName: change-path
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: ReadAuthoritativeRecords
+                Effect: Allow
+                Action: [dynamodb:BatchGetItem, dynamodb:GetItem, dynamodb:Scan]
+                Resource: !GetAtt RecordsTable.Arn
+              - Sid: ReadDerivedConvergenceState
+                Effect: Allow
+                Action: [dynamodb:GetItem, dynamodb:BatchGetItem, dynamodb:Scan]
+                Resource: !GetAtt ConvergenceTable.Arn
+              # The applier keeps pending, reflected, generation and deletion state. It may NOT write a watermark:
+              # only a completed reconciliation pass may (ADR-003). As a permission rather than a code rule, this stays
+              # true of anything that ever runs as the change path. (LeadingKeys cannot constrain Scan, so reads are a
+              # separate, unconditioned statement above.)
+              - Sid: WriteDerivedStateButNeverAWatermark
+                Effect: Allow
+                # UpdateItem is here for retry accounting only: the applier counts an attempt with a conditional ADD
+                # on a PENDING# entry it already owns. A read-then-put would resurrect an entry another applier had
+                # just cleared, and that resurrected entry would later be escalated as a stuck change which had in
+                # fact converged. The LeadingKeys condition below is unchanged: this still cannot write a watermark.
+                Action: [dynamodb:PutItem, dynamodb:DeleteItem, dynamodb:UpdateItem]
+                Resource: !GetAtt ConvergenceTable.Arn
+                Condition:
+                  ForAllValues:StringLike:
+                    dynamodb:LeadingKeys: ["PENDING#*", "REFLECTED#*", "GENERATION#*", "DELETION#*"]
+              - Sid: ReadSourceRecords
+                Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub "arn:aws:s3:::${NamePrefix}-records-${AWS::AccountId}/records/*"
+              - Sid: WriteAndRemoveSharedTierSections
+                Effect: Allow
+                Action: [s3:PutObject, s3:DeleteObject, s3:ListBucket]
+                Resource:
+                  - !Sub "arn:aws:s3:::${NamePrefix}-shared-sections-${AWS::AccountId}"
+                  - !Sub "arn:aws:s3:::${NamePrefix}-shared-sections-${AWS::AccountId}/sections/*"
+              - Sid: WriteAndRemoveRestrictedTierSections
+                Effect: Allow
+                Action: [s3:PutObject, s3:DeleteObject, s3:ListBucket]
+                Resource:
+                  - !Sub "arn:aws:s3:::${NamePrefix}-restricted-sections-${AWS::AccountId}"
+                  - !Sub "arn:aws:s3:::${NamePrefix}-restricted-sections-${AWS::AccountId}/sections/*"
+              # Observed platform behaviour, not an architectural choice: ingesting into a CUSTOM data source also
+              # requires StartIngestionJob and AssociateThirdPartyKnowledgeBase, whose names describe neither the call
+              # nor its effect. Without them every ingest is denied. Episode 02 carries the same pair.
+              - Sid: IngestAndRemoveDocumentsInEachTier
+                Effect: Allow
+                Action:
+                  - bedrock:IngestKnowledgeBaseDocuments
+                  - bedrock:GetKnowledgeBaseDocuments
+                  - bedrock:DeleteKnowledgeBaseDocuments
+                  - bedrock:ListKnowledgeBaseDocuments
+                  - bedrock:StartIngestionJob
+                  - bedrock:AssociateThirdPartyKnowledgeBase
+                Resource:
+                  - !GetAtt SharedKnowledgeBase.KnowledgeBaseArn
+                  - !GetAtt RestrictedKnowledgeBase.KnowledgeBaseArn
+              - Sid: WriteChangeReports
+                Effect: Allow
+                Action: dynamodb:PutItem
+                Resource: !GetAtt AuditTable.Arn
+              - Sid: OwnLogGroups
+                Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource:
+                  - !GetAtt ApplierLogGroup.Arn
+                  - !GetAtt RebuildLogGroup.Arn
+
+  NotifierRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-notifier"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - {Effect: Allow, Principal: {Service: lambda.amazonaws.com}, Action: sts:AssumeRole}
+      Policies:
+        - PolicyName: change-notifier
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: ReadTheRecordsStream
+                Effect: Allow
+                Action: [dynamodb:GetRecords, dynamodb:GetShardIterator, dynamodb:DescribeStream, dynamodb:ListStreams]
+                Resource: !GetAtt RecordsTable.StreamArn
+              # The notifier may write PENDING entries. It may NOT write watermarks: only a completed reconciliation
+              # pass may advance one (ADR-003). The condition makes that boundary readable in the template.
+              - Sid: WritePendingEntriesOnly
+                Effect: Allow
+                Action: [dynamodb:PutItem, dynamodb:DeleteItem, dynamodb:GetItem]
+                Resource: !GetAtt ConvergenceTable.Arn
+                Condition:
+                  ForAllValues:StringLike: {dynamodb:LeadingKeys: ["PENDING#*"]}
+              - Sid: AskTheApplierToConverge
+                Effect: Allow
+                Action: lambda:InvokeFunction
+                Resource: !GetAtt ApplierFunction.Arn
+              - Sid: OwnLogGroup
+                Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !GetAtt NotifierLogGroup.Arn
+
+  ReconcilerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${NamePrefix}-reconciler"
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - {Effect: Allow, Principal: {Service: lambda.amazonaws.com}, Action: sts:AssumeRole}
+      Policies:
+        - PolicyName: reconciler
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: ReadTheAuthoritativeExport
+                Effect: Allow
+                Action: [dynamodb:Scan, dynamodb:GetItem, dynamodb:BatchGetItem]
+                Resource: !GetAtt RecordsTable.Arn
+              - Sid: ReadDerivedStateToCompareIt
+                Effect: Allow
+                Action: [dynamodb:Scan, dynamodb:GetItem, dynamodb:BatchGetItem]
+                Resource: !GetAtt ConvergenceTable.Arn
+              # The only principal permitted to write a watermark, and only alongside the pass record that justifies it.
+              - Sid: AdvanceTheWatermarkAndRecordThePass
+                Effect: Allow
+                Action: [dynamodb:PutItem, dynamodb:DeleteItem]
+                Resource: !GetAtt ConvergenceTable.Arn
+                Condition:
+                  ForAllValues:StringLike:
+                    dynamodb:LeadingKeys: ["WATERMARK#*", "RECONCILIATION#*", "PENDING#*"]
+              - Sid: RequestRepairs
+                Effect: Allow
+                Action: lambda:InvokeFunction
+                Resource: !GetAtt ApplierFunction.Arn
+              - Sid: OwnLogGroup
+                Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !GetAtt ReconcilerLogGroup.Arn
+
+  # ===================================================================================================================
+  # Functions and log groups (1-day retention; structured, content-free log lines).
+  # ===================================================================================================================
+  QueryLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${NamePrefix}-query"
+      RetentionInDays: 1
+
+  NotifierLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${NamePrefix}-notifier"
+      RetentionInDays: 1
+
+  ApplierLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${NamePrefix}-applier"
+      RetentionInDays: 1
+
+  ReconcilerLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${NamePrefix}-reconciler"
+      RetentionInDays: 1
+
+  RebuildLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${NamePrefix}-rebuild"
+      RetentionInDays: 1
+
+  ApiAccessLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/tla/${NamePrefix}/api-access"
+      RetentionInDays: 1
+
+  QueryFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${NamePrefix}-query"
+      Runtime: python3.13
+      Handler: query.handler.handler
+      MemorySize: 512
+      Timeout: 60
+      Role: !GetAtt QueryRole.Arn
+      Code: {S3Bucket: !Ref ArtifactBucket, S3Key: !Ref QueryCodeKey}
+      LoggingConfig: {LogGroup: !Ref QueryLogGroup}
+      Environment:
+        Variables:
+          DEPLOYMENT_NAME: !Ref NamePrefix
+          AUTHORIZATION_TABLE: !Ref AuthorizationTable
+          RECORDS_TABLE: !Ref RecordsTable
+          CONVERGENCE_TABLE: !Ref ConvergenceTable
+          AUDIT_TABLE: !Ref AuditTable
+          SHARED_KNOWLEDGE_BASE_ID: !Ref SharedKnowledgeBase
+          RESTRICTED_KNOWLEDGE_BASE_ID: !Ref RestrictedKnowledgeBase
+          GENERATION_MODEL_ID: !Ref GenerationModelId
+          RELEVANCE_MIN_SCORE: !Ref RelevanceMinScore
+
+  ApplierFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${NamePrefix}-applier"
+      Runtime: python3.13
+      Handler: change.applier.handler
+      MemorySize: 512
+      Timeout: 600
+      Role: !GetAtt ChangeRole.Arn
+      Code: {S3Bucket: !Ref ArtifactBucket, S3Key: !Ref ChangeCodeKey}
+      LoggingConfig: {LogGroup: !Ref ApplierLogGroup}
+      Environment:
+        Variables:
+          DEPLOYMENT_NAME: !Ref NamePrefix
+          RECORDS_TABLE: !Ref RecordsTable
+          CONVERGENCE_TABLE: !Ref ConvergenceTable
+          AUDIT_TABLE: !Ref AuditTable
+          RECORDS_BUCKET: !Ref RecordsBucket
+          SHARED_SECTION_BUCKET: !Ref SharedSectionBucket
+          RESTRICTED_SECTION_BUCKET: !Ref RestrictedSectionBucket
+          SHARED_KNOWLEDGE_BASE_ID: !Ref SharedKnowledgeBase
+          SHARED_DATA_SOURCE_ID: !GetAtt SharedDataSource.DataSourceId
+          RESTRICTED_KNOWLEDGE_BASE_ID: !Ref RestrictedKnowledgeBase
+          RESTRICTED_DATA_SOURCE_ID: !GetAtt RestrictedDataSource.DataSourceId
+
+  RebuildFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${NamePrefix}-rebuild"
+      Runtime: python3.13
+      Handler: change.rebuild.handler
+      MemorySize: 512
+      Timeout: 900
+      Role: !GetAtt ChangeRole.Arn
+      Code: {S3Bucket: !Ref ArtifactBucket, S3Key: !Ref ChangeCodeKey}
+      LoggingConfig: {LogGroup: !Ref RebuildLogGroup}
+      Environment:
+        Variables:
+          DEPLOYMENT_NAME: !Ref NamePrefix
+          RECORDS_TABLE: !Ref RecordsTable
+          CONVERGENCE_TABLE: !Ref ConvergenceTable
+          AUDIT_TABLE: !Ref AuditTable
+          RECORDS_BUCKET: !Ref RecordsBucket
+          SHARED_SECTION_BUCKET: !Ref SharedSectionBucket
+          RESTRICTED_SECTION_BUCKET: !Ref RestrictedSectionBucket
+          SHARED_KNOWLEDGE_BASE_ID: !Ref SharedKnowledgeBase
+          SHARED_DATA_SOURCE_ID: !GetAtt SharedDataSource.DataSourceId
+          RESTRICTED_KNOWLEDGE_BASE_ID: !Ref RestrictedKnowledgeBase
+          RESTRICTED_DATA_SOURCE_ID: !GetAtt RestrictedDataSource.DataSourceId
+
+  NotifierFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${NamePrefix}-notifier"
+      Runtime: python3.13
+      Handler: change.notifier.handler
+      MemorySize: 256
+      Timeout: 60
+      Role: !GetAtt NotifierRole.Arn
+      Code: {S3Bucket: !Ref ArtifactBucket, S3Key: !Ref ChangeCodeKey}
+      LoggingConfig: {LogGroup: !Ref NotifierLogGroup}
+      Environment:
+        Variables:
+          DEPLOYMENT_NAME: !Ref NamePrefix
+          CONVERGENCE_TABLE: !Ref ConvergenceTable
+          APPLIER_FUNCTION_NAME: !Ref ApplierFunction
+
+  ReconcilerFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${NamePrefix}-reconciler"
+      Runtime: python3.13
+      Handler: change.reconciler.handler
+      MemorySize: 512
+      Timeout: 600
+      Role: !GetAtt ReconcilerRole.Arn
+      Code: {S3Bucket: !Ref ArtifactBucket, S3Key: !Ref ChangeCodeKey}
+      LoggingConfig: {LogGroup: !Ref ReconcilerLogGroup}
+      Environment:
+        Variables:
+          DEPLOYMENT_NAME: !Ref NamePrefix
+          RECORDS_TABLE: !Ref RecordsTable
+          CONVERGENCE_TABLE: !Ref ConvergenceTable
+          APPLIER_FUNCTION_NAME: !Ref ApplierFunction
+
+  # The change signal. FX-3 needs a deployment in which this mapping NEVER delivered, so the state is established when
+  # the stack is created rather than by disabling the mapping mid-experiment: a runtime toggle reported Disabled and
+  # then delivered anyway in three of six observed windows (root cause undetermined), which silently invalidates
+  # any experiment resting on it. The pipeline then looks healthy while authoritative state diverges — visible only
+  # because reconciliation and the watermark exist. Defaults to delivering; the normal deployment never turns it off.
+  RecordsStreamToNotifier:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      EventSourceArn: !GetAtt RecordsTable.StreamArn
+      FunctionName: !GetAtt NotifierFunction.Arn
+      StartingPosition: LATEST
+      BatchSize: 10
+      MaximumBatchingWindowInSeconds: 1
+      Enabled: !If [DeliverChangeNotifications, true, false]
+
+  # ===================================================================================================================
+  # API edge (Episode 02, unchanged): JWT authorizer on the only route; the query function may be invoked by this API
+  # only. The change path has no route: it is started by the stream, by reconciliation or by the operator.
+  # ===================================================================================================================
+  HttpApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Sub "${NamePrefix}-api"
+      ProtocolType: HTTP
+
+  JwtAuthorizer:
+    Type: AWS::ApiGatewayV2::Authorizer
+    Properties:
+      ApiId: !Ref HttpApi
+      Name: !Sub "${NamePrefix}-jwt"
+      AuthorizerType: JWT
+      IdentitySource: ["$request.header.Authorization"]
+      JwtConfiguration:
+        Issuer: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}"
+        Audience: [!Ref AppClient]
+
+  QueryIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApi
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt QueryFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  AskRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: POST /ask
+      AuthorizationType: JWT
+      AuthorizerId: !Ref JwtAuthorizer
+      AuthorizationScopes: [aws.cognito.signin.user.admin]
+      Target: !Sub "integrations/${QueryIntegration}"
+
+  DefaultStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref HttpApi
+      StageName: $default
+      AutoDeploy: true
+      DefaultRouteSettings: {ThrottlingBurstLimit: 20, ThrottlingRateLimit: 10}
+      AccessLogSettings:
+        DestinationArn: !GetAtt ApiAccessLogGroup.Arn
+        Format: '{"requestId":"$context.requestId","routeKey":"$context.routeKey","status":"$context.status","authorizerError":"$context.authorizer.error","integrationError":"$context.integrationErrorMessage","requestTime":"$context.requestTime"}'
+
+  QueryInvokeOnlyThroughApi:
+    Type: AWS::Lambda::ResourcePolicy
+    Properties:
+      ResourceArn: !GetAtt QueryFunction.Arn
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: AllowThisApiOnly
+            Effect: Allow
+            Principal: {Service: apigateway.amazonaws.com}
+            Action: lambda:InvokeFunction
+            Resource: !GetAtt QueryFunction.Arn
+            Condition: {ArnLike: {aws:SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*"}}
+          - Sid: DenyEveryOtherCaller
+            Effect: Deny
+            Principal: "*"
+            Action: lambda:InvokeFunction
+            Resource: !GetAtt QueryFunction.Arn
+            Condition: {ArnNotLike: {aws:SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*"}}
+  # ===================================================================================================================
+  # The escalation alert (FRS-004, OPS-001, ADR-007 §3).
+  # ===================================================================================================================
+  # The metric is derived from the reconciler's own log line rather than written by the function. That keeps the
+  # ruled transport (CloudWatch metric + alarm) while leaving the reconciler role exactly as narrow as it was:
+  # PutMetricData has no resource-level permission, so emitting directly would have meant Resource "*".
+  WindowBreachMetricFilter:
+    Type: AWS::Logs::MetricFilter
+    Properties:
+      LogGroupName: !Ref ReconcilerLogGroup
+      FilterPattern: '{ $.stage = "escalation" }'
+      MetricTransformations:
+        - MetricNamespace: !Ref MetricNamespace
+          MetricName: !Sub "${NamePrefix}-WindowBreachedChanges"
+          MetricValue: $.breached_total
+          DefaultValue: 0
+          Unit: Count
+
+  WindowBreachAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub "${NamePrefix}-window-breach"
+      AlarmDescription: >-
+        A change has outlived its change class's freshness window and is still not reflected. The reconciler emits
+        this metric on every completed pass, including 0, so the alarm clears itself once the breach is repaired
+        rather than latching. The affected document identifiers are named in the reconciler's log line: as a metric
+        dimension they would create one metric per document and bound nothing; the metric NAME carries the
+        deployment, so the normal stack and a variant cannot collide on one metric. KNOWN LIMITATION: missing data is
+        treated as not breaching, so this alarm reports breaches FOUND BY reconciliation, never the case where
+        reconciliation itself has stopped running — that is what the request path's overdue check answers instead.
+      Namespace: !Ref MetricNamespace
+      MetricName: !Sub "${NamePrefix}-WindowBreachedChanges"
+      Statistic: Maximum
+      Period: 3600
+      EvaluationPeriods: 1
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+
+Outputs:
+  Variant: {Value: !Ref Variant}
+  NamePrefix: {Value: !Ref NamePrefix}
+  ApiEndpoint: {Value: !GetAtt HttpApi.ApiEndpoint}
+  UserPoolId: {Value: !Ref UserPool}
+  AppClientId: {Value: !Ref AppClient}
+  OtherAppClientId: {Value: !Ref OtherAppClient}
+  AuthorizationTable: {Value: !Ref AuthorizationTable}
+  RecordsTable: {Value: !Ref RecordsTable}
+  ClassificationTable: {Value: !Ref RecordsTable}
+  RecordsStreamArn: {Value: !GetAtt RecordsTable.StreamArn}
+  ConvergenceTable: {Value: !Ref ConvergenceTable}
+  AuditTable: {Value: !Ref AuditTable}
+  RecordsBucket: {Value: !Ref RecordsBucket}
+  SharedSectionBucket: {Value: !Ref SharedSectionBucket}
+  RestrictedSectionBucket: {Value: !Ref RestrictedSectionBucket}
+  SharedVectorBucket: {Value: !Sub "${NamePrefix}-shared-vectors"}
+  RestrictedVectorBucket: {Value: !Sub "${NamePrefix}-restricted-vectors"}
+  SharedVectorIndex: {Value: !Sub "${NamePrefix}-shared-index"}
+  RestrictedVectorIndex: {Value: !Sub "${NamePrefix}-restricted-index"}
+  SharedVectorIndexArn: {Value: !Ref SharedVectorIndex}
+  RestrictedVectorIndexArn: {Value: !Ref RestrictedVectorIndex}
+  SharedKnowledgeBaseId: {Value: !Ref SharedKnowledgeBase}
+  SharedKnowledgeBaseArn: {Value: !GetAtt SharedKnowledgeBase.KnowledgeBaseArn}
+  SharedDataSourceId: {Value: !GetAtt SharedDataSource.DataSourceId}
+  RestrictedKnowledgeBaseId: {Value: !Ref RestrictedKnowledgeBase}
+  RestrictedKnowledgeBaseArn: {Value: !GetAtt RestrictedKnowledgeBase.KnowledgeBaseArn}
+  RestrictedDataSourceId: {Value: !GetAtt RestrictedDataSource.DataSourceId}
+  QueryFunctionName: {Value: !Ref QueryFunction}
+  NotifierFunctionName: {Value: !Ref NotifierFunction}
+  ApplierFunctionName: {Value: !Ref ApplierFunction}
+  ReconcilerFunctionName: {Value: !Ref ReconcilerFunction}
+  RebuildFunctionName: {Value: !Ref RebuildFunction}
+  RecordsStreamMappingId: {Value: !Ref RecordsStreamToNotifier}
+  QueryRoleArn: {Value: !GetAtt QueryRole.Arn}
+  QueryRoleName: {Value: !Ref QueryRole}
+  ChangeRoleArn: {Value: !GetAtt ChangeRole.Arn}
+  NotifierRoleArn: {Value: !GetAtt NotifierRole.Arn}
+  ReconcilerRoleArn: {Value: !GetAtt ReconcilerRole.Arn}
+  WindowBreachAlarmName: {Value: !Ref WindowBreachAlarm}
+  MetricNamespace: {Value: !Ref MetricNamespace}
+  SharedKnowledgeBaseRoleArn: {Value: !GetAtt SharedKnowledgeBaseRole.Arn}
+  RestrictedKnowledgeBaseRoleArn: {Value: !GetAtt RestrictedKnowledgeBaseRole.Arn}

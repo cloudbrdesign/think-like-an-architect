@@ -1,0 +1,163 @@
+{
+  "schema": "tla-e03-lifecycle-scenarios/1",
+  "note": "Synthetic authoritative changes used by the Episode 03 validation themes. Each scenario names the document, the question that reaches it, the persona who is eligible for it, and the authoritative patch the operator applies. Expectations are what the tests assert; no result is recorded here.",
+  "scenarios": [
+    {
+      "id": "SC-SUPERSEDE",
+      "theme": "VT-1",
+      "change_class": "supersede_withdraw",
+      "document_id": "D-01",
+      "question": "smp12",
+      "asked_by": "P-01",
+      "patch": {"status": "SUPERSEDED", "superseded_by": "D-06"},
+      "bump_version": true,
+      "expect": "Withheld from the next request, although the label, scope and version still verify exactly as Episode 02 checked them."
+    },
+    {
+      "id": "SC-SUPERSEDE-IN-PLACE",
+      "theme": "VT-1",
+      "change_class": "supersede_withdraw",
+      "document_id": "D-02",
+      "question": "induction_ppe",
+      "asked_by": "P-01",
+      "patch": {"status": "SUPERSEDED", "superseded_by": "D-06"},
+      "bump_version": false,
+      "expect": "Superseding a document does not edit it, so the version does not change. Withheld from the next request, and derived state still converges."
+    },
+    {
+      "id": "SC-WITHDRAW",
+      "theme": "VT-1",
+      "change_class": "supersede_withdraw",
+      "document_id": "D-02",
+      "question": "induction_ppe",
+      "asked_by": "P-01",
+      "patch": {"status": "WITHDRAWN"},
+      "bump_version": true,
+      "expect": "Withdrawn content is never answered as current; there is no successor to point at."
+    },
+    {
+      "id": "SC-FUTURE-DATED",
+      "theme": "VT-1",
+      "change_class": "supersede_withdraw",
+      "document_id": "D-08",
+      "question": "finance",
+      "asked_by": "P-03",
+      "patch": {"status": "WITHDRAWN"},
+      "effective_in_seconds": 7200,
+      "bump_version": true,
+      "expect": "A status change dated in the future has not happened yet: the document stays current until its effective time."
+    },
+    {
+      "id": "SC-NEW-VERSION",
+      "theme": "VT-2",
+      "change_class": "new_version",
+      "document_id": "D-06",
+      "question": "oncall",
+      "asked_by": "P-01",
+      "patch": {},
+      "bump_version": true,
+      "expect": "While the newer effective version is not retrievable the answer is withheld (known stale is not current); once applied, answers resume and cite the new version only."
+    },
+    {
+      "id": "SC-REPLAY-OLDER",
+      "theme": "VT-3",
+      "change_class": "new_version",
+      "document_id": "D-06",
+      "question": "oncall",
+      "asked_by": "P-01",
+      "replay": "previous",
+      "expect": "A replayed older version is refused as OLDER; derived state keeps the newest authoritative version."
+    },
+    {
+      "id": "SC-DUPLICATE",
+      "theme": "VT-3",
+      "change_class": "new_version",
+      "document_id": "D-06",
+      "question": "oncall",
+      "asked_by": "P-01",
+      "replay": "current",
+      "expect": "Applying the same change twice leaves derived state identical (FRS-006)."
+    },
+    {
+      "id": "SC-RECLASSIFY-UP",
+      "theme": "VT-7",
+      "change_class": "reclassify_up",
+      "document_id": "D-13",
+      "question": "resilience",
+      "asked_by": "P-01",
+      "also_ask": "P-07",
+      "patch": {"document_label": "CONFIDENTIAL", "document_scope": "OPS-LEADERSHIP"},
+      "bump_version": true,
+      "expect": "Enforced from the next request for the persona who loses access (Episode 02 behaviour, inherited); the persona holding OPS-LEADERSHIP can read it once derived state has converged."
+    },
+    {
+      "id": "SC-RECLASSIFY-DOWN",
+      "theme": "VT-7",
+      "change_class": "reclassify_down",
+      "document_id": "D-07",
+      "question": "sec_vuln",
+      "asked_by": "P-01",
+      "also_ask": "P-04",
+      "patch": {"document_label": "INTERNAL", "document_scope": null},
+      "bump_version": true,
+      "expect": "Content becomes more widely available only once the change is effective in the record and derived state has converged — never before."
+    },
+    {
+      "id": "SC-LOST-CHANGE",
+      "theme": "VT-4",
+      "change_class": "supersede_withdraw",
+      "document_id": "D-14",
+      "question": "orion_discount",
+      "asked_by": "P-02",
+      "patch": {"status": "SUPERSEDED", "superseded_by": "D-03"},
+      "bump_version": true,
+      "drop_notifications": true,
+      "expect": "Nothing in the delivery path ever hears about this change. Reconciliation finds it by comparing with authority, repairs it, and only then may the watermark advance."
+    },
+    {
+      "id": "SC-PARTIAL-FAILURE",
+      "theme": "VT-5",
+      "change_class": "new_version",
+      "document_id": "D-12",
+      "question": "faults",
+      "asked_by": "P-01",
+      "patch": {},
+      "bump_version": true,
+      "remove_source_object": true,
+      "expect": "The change cannot be applied: the document stays pending and the failure is visible and retryable. No eligibility widens, and the previous generation keeps serving nothing it should not."
+    },
+    {
+      "id": "SC-DELETE",
+      "theme": "VT-6",
+      "change_class": "deletion",
+      "document_id": "D-12",
+      "question": "faults",
+      "asked_by": "P-01",
+      "delete_record": true,
+      "expect": "Absent from every copy in the derived-copy graph — section objects, knowledge-base documents, vector entries, generation records and the pending entry — with a content-free ledger entry naming what was proven removed."
+    },
+    {
+      "id": "SC-FRESHNESS-CANARY",
+      "theme": "VT-8",
+      "change_class": "new_version",
+      "document_id": "D-15",
+      "question": "parking",
+      "asked_by": "P-01",
+      "patch": {},
+      "bump_version": true,
+      "drop_notifications": true,
+      "hold_seconds": 30,
+      "expect": "The reported age of the oldest pending change tracks the delay actually injected. A measurement that cannot detect an injected delay is not evidence."
+    },
+    {
+      "id": "SC-REBUILD",
+      "theme": "VT-9",
+      "change_class": "new_version",
+      "document_id": null,
+      "question": "smp12",
+      "asked_by": "P-01",
+      "rebuild": true,
+      "expect": "Build a new generation from authority, verify it, promote it, retire the old one — with answering continuing throughout and the Episode 02 suite still passing. Rebuild is the exception, not the freshness mechanism."
+    }
+  ]
+}
