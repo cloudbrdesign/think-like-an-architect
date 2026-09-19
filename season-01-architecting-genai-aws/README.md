@@ -9,7 +9,7 @@ is.**
 |---|---|---|
 | 01 | [How to Build Multi-Tenant RAG Without Leaking Customer Data](episode-01-multi-tenant-rag/README.md) | Available — engagement, implementation, validation and evidence |
 | 02 | [How to Design RAG When Your Documents Contain Sensitive Data](episode-02-sensitive-data-rag/README.md) | Available — engagement, implementation, validation, failure experiments and evidence |
-| 03 | How to Keep a Production Knowledge Base Up to Date | Planned |
+| 03 | [How to Keep a Production Knowledge Base Up to Date](episode-03-keeping-knowledge-current/README.md) | Available — learner lab, engagement, implementation and evidence summary |
 | 04 | How to Design a GenAI API That Survives Production Traffic | Planned |
 | 05 | How to Reduce GenAI Cost Without Destroying User Experience | Planned |
 | 06 | How to Design AI Systems You Can Actually Audit | Planned |

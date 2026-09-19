@@ -43,7 +43,10 @@ The engagement templates are available in [templates/](templates/README.md). Epi
 engagement, the educational implementation, its validation suite and an example evidence set. Start at
 [the Episode 01 README](season-01-architecting-genai-aws/episode-01-multi-tenant-rag/README.md). Episode 02 is available too:
 the engagement, implementation, validation suite, three failure experiments and an example evidence set — start at
-[the Episode 02 README](season-01-architecting-genai-aws/episode-02-sensitive-data-rag/README.md). The season overview is
+[the Episode 02 README](season-01-architecting-genai-aws/episode-02-sensitive-data-rag/README.md). Episode 03 is available:
+a two-part learner lab — a stale copy that is retrieved and refused, then a failed change that is retried, escalated
+and recovered — with the engagement, implementation and an evidence summary; start at
+[the Episode 03 README](season-01-architecting-genai-aws/episode-03-keeping-knowledge-current/README.md). The season overview is
 [season-01-architecting-genai-aws/README.md](season-01-architecting-genai-aws/README.md).
 
 ## Licence
