@@ -1,0 +1,306 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  Think Like an Architect S01E04 - Kestrelmoor: answering under production traffic. The capacity contract made real:
+  partitioned capacity as reserved concurrency, an age-bounded burst buffer as a queue whose messages carry deadlines,
+  and saturation signals with four alarms that never merge. Read the reserved concurrency to answer "how much may this
+  workload ever consume?" and the alarms to answer "what would an operator see before a caller complains?"
+
+Parameters:
+  Prefix:
+    Type: String
+    Description: Resource name prefix; every resource carries it so absence can be proved by an independent scan.
+  RolePath:
+    Type: String
+    Default: /cloudbrewery/tla/
+  PermissionsBoundaryArn:
+    Type: String
+    Default: ''
+    Description: >-
+      Optional. A permissions boundary to attach to the two roles this stack creates. Leave blank unless your
+      organisation requires one - many accounts do not. It is offered because attaching a boundary to roles a
+      deployment creates is good practice where it is available.
+  AnsweringPermits:
+    Type: Number
+    Default: 4
+    Description: Reserved concurrency for the answering partition. Reserved concurrency sets a maximum AND a minimum.
+  ChangeFloor:
+    Type: Number
+    Default: 1
+    Description: Reserved concurrency for change processing - the floor that stops answering starving it.
+  BufferMaxAgeSeconds:
+    Type: Number
+    Default: 10
+  DemonstrationParameters:
+    Type: String
+    Description: The one configuration blob (CTL-412), echoed into both functions and every run summary.
+  UseReservedConcurrency:
+    Type: String
+    Default: 'false'
+    AllowedValues: ['true', 'false']
+    Description: >-
+      Whether AWS reserved concurrency enforces the partitions. It can only be 'true' where the account's concurrency
+      limit leaves 10 unreserved after the reservations. This account's TOTAL limit is 10, so AWS refuses any
+      reservation at all - the partitions are then enforced by the in-process permit counter, which CTL-401 names as
+      the other half of the same control. The architecture is unchanged; only its enforcement layer is.
+
+Conditions:
+  ReserveConcurrency: !Equals [!Ref UseReservedConcurrency, 'true']
+  HasPermissionsBoundary: !Not [!Equals [!Ref PermissionsBoundaryArn, '']]
+
+Resources:
+
+  # ── The age-bounded burst buffer (P2, ADR-002) ──────────────────────────────────────────────────────────────────
+  # Retention is the queue's own floor of 60 s; the ARCHITECTURE's bound is the per-message deadline the consumer
+  # checks before execution. The two are not the same thing, and relying on retention alone would leave work to be
+  # executed long after anyone wanted the answer.
+  BufferQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub '${Prefix}-buffer'
+      MessageRetentionPeriod: 60
+      VisibilityTimeout: 30
+      Tags:
+        - {Key: Project, Value: ThinkLikeAnArchitect}
+        - {Key: Episode, Value: '04'}
+        - {Key: Purpose, Value: education}
+
+  # ── Roles: least privilege per function, both under the runtime boundary ────────────────────────────────────────
+  AnsweringRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${Prefix}-answering'
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref 'AWS::NoValue']
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - {Effect: Allow, Principal: {Service: lambda.amazonaws.com}, Action: 'sts:AssumeRole'}
+      Policies:
+        - PolicyName: answering
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              # Reads and deletes from the buffer. It may NOT change its own reserved concurrency: a workload that can
+              # raise its own ceiling does not have one.
+              - Effect: Allow
+                Action: ['sqs:ReceiveMessage', 'sqs:DeleteMessage', 'sqs:GetQueueAttributes',
+                         'sqs:ChangeMessageVisibility', 'sqs:SendMessage']
+                Resource: !GetAtt BufferQueue.Arn
+              - Effect: Allow
+                Action: 'cloudwatch:PutMetricData'
+                Resource: '*'
+                Condition: {StringEquals: {'cloudwatch:namespace': 'TLA/S01E04'}}
+              - Effect: Allow
+                Action: ['logs:CreateLogStream', 'logs:PutLogEvents']
+                Resource: !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${Prefix}-*:*'
+
+  ChangeRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${Prefix}-change'
+      Path: !Ref RolePath
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref 'AWS::NoValue']
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - {Effect: Allow, Principal: {Service: lambda.amazonaws.com}, Action: 'sts:AssumeRole'}
+      Policies:
+        - PolicyName: change
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              # Deliberately NO access to the buffer queue and NO model invocation: this workload's separation from
+              # answering is what the floor is protecting.
+              - Effect: Allow
+                Action: 'cloudwatch:PutMetricData'
+                Resource: '*'
+                Condition: {StringEquals: {'cloudwatch:namespace': 'TLA/S01E04'}}
+              - Effect: Allow
+                Action: ['logs:CreateLogStream', 'logs:PutLogEvents']
+                Resource: !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${Prefix}-*:*'
+
+  AnsweringLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${Prefix}-answering'
+      RetentionInDays: 1
+
+  ChangeLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${Prefix}-change'
+      RetentionInDays: 1
+
+  # ── Partitioned capacity (P3, P5, ADR-003) ──────────────────────────────────────────────────────────────────────
+  # Reserved concurrency is the mechanism: it sets the maximum this partition may consume AND guarantees it that
+  # much. One workload therefore cannot take the capacity the other needs, which is the whole of CTL-401.
+  AnsweringFunction:
+    Type: AWS::Lambda::Function
+    DependsOn: AnsweringLogGroup
+    Properties:
+      FunctionName: !Sub '${Prefix}-answering'
+      Runtime: python3.12
+      Handler: index.handler
+      Role: !GetAtt AnsweringRole.Arn
+      Timeout: 30
+      MemorySize: 256
+      ReservedConcurrentExecutions: !If [ReserveConcurrency, !Ref AnsweringPermits, !Ref 'AWS::NoValue']
+      Environment:
+        Variables:
+          TLA_PARAMETERS_JSON: !Ref DemonstrationParameters
+          TLA_BUFFER_QUEUE: !Ref BufferQueue
+          TLA_METRIC_NAMESPACE: 'TLA/S01E04'
+          TLA_BUFFER_MAX_AGE_SECONDS: !Ref BufferMaxAgeSeconds
+      Code:
+        ZipFile: |
+          """Answering worker. The deployed proof of the capacity contract.
+
+          Its job in the lab is to show that the AWS mapping carries the architecture: reserved concurrency really is
+          the partition, the message deadline really is checked BEFORE execution, and the four outcomes really do
+          stay separate in the metrics.
+          """
+          import json, os, time
+          import boto3
+
+          CW = boto3.client("cloudwatch")
+          NAMESPACE = os.environ["TLA_METRIC_NAMESPACE"]
+          MAX_AGE = float(os.environ["TLA_BUFFER_MAX_AGE_SECONDS"])
+          OUTCOMES = ("ANSWERED", "DEGRADED_BUT_ANSWERED", "CAPACITY_REFUSED", "TRUST_WITHHELD")
+
+          def emit(outcome, extra=None):
+              # One metric per outcome. Never a single 'errors' metric: merging CAPACITY_REFUSED with TRUST_WITHHELD
+              # is precisely the ambiguity this episode exists to remove.
+              data = [{"MetricName": outcome, "Value": 1, "Unit": "Count"}]
+              for name, value in (extra or {}).items():
+                  data.append({"MetricName": name, "Value": value, "Unit": "None"})
+              CW.put_metric_data(Namespace=NAMESPACE, MetricData=data)
+
+          def handler(event, context):
+              records = event.get("Records") or [{"body": json.dumps(event)}]
+              results = []
+              for record in records:
+                  body = json.loads(record["body"]) if isinstance(record.get("body"), str) else record
+                  enqueued_at = float(body.get("enqueued_at", time.time()))
+                  age = time.time() - enqueued_at
+                  # The age bound, checked BEFORE execution. Expired work leaves as an explicit outcome.
+                  if age > MAX_AGE:
+                      emit("CAPACITY_REFUSED", {"buffer_age_seconds": age, "expired_before_execution": 1})
+                      results.append({"outcome": "CAPACITY_REFUSED", "reason": "buffer_age_exceeded"})
+                      continue
+                  if body.get("currency_unknown"):
+                      # Trust is not degradable. Under any load this is withheld, never answered.
+                      emit("TRUST_WITHHELD", {"buffer_age_seconds": age})
+                      results.append({"outcome": "TRUST_WITHHELD", "reason": "currency_unconfirmed"})
+                      continue
+                  emit("ANSWERED", {"buffer_age_seconds": age})
+                  results.append({"outcome": "ANSWERED", "citations": ["synthetic-doc-1"]})
+              return {"statusCode": 200, "body": json.dumps({"results": results})}
+
+  ChangeFunction:
+    Type: AWS::Lambda::Function
+    DependsOn: ChangeLogGroup
+    Properties:
+      FunctionName: !Sub '${Prefix}-change'
+      Runtime: python3.12
+      Handler: index.handler
+      Role: !GetAtt ChangeRole.Arn
+      Timeout: 30
+      MemorySize: 128
+      ReservedConcurrentExecutions: !If [ReserveConcurrency, !Ref ChangeFloor, !Ref 'AWS::NoValue']
+      Environment:
+        Variables:
+          TLA_METRIC_NAMESPACE: 'TLA/S01E04'
+      Code:
+        ZipFile: |
+          """Change processing. Episode 03's workload, here only to prove it keeps its floor and reports its lag."""
+          import os, time
+          import boto3
+
+          CW = boto3.client("cloudwatch")
+          NAMESPACE = os.environ["TLA_METRIC_NAMESPACE"]
+
+          def handler(event, context):
+              lag = float(event.get("freshness_lag_seconds", 0))
+              CW.put_metric_data(Namespace=NAMESPACE, MetricData=[
+                  {"MetricName": "freshness_lag_seconds", "Value": lag, "Unit": "Seconds"},
+                  {"MetricName": "change_applied", "Value": 1, "Unit": "Count"}])
+              return {"applied": True, "watermark": time.time()}
+
+  BufferToAnswering:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      EventSourceArn: !GetAtt BufferQueue.Arn
+      FunctionName: !GetAtt AnsweringFunction.Arn
+      BatchSize: 1
+      Enabled: true
+
+  # ── Saturation signals: four alarms, never merged (P6, CTL-410, ADR-007) ────────────────────────────────────────
+  # Queue AGE leads, because depth alone cannot distinguish a queue that is draining from one that is stuck.
+  BufferAgeAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${Prefix}-buffer-age'
+      AlarmDescription: Work is waiting close to its deadline - callers are about to be refused.
+      Namespace: AWS/SQS
+      MetricName: ApproximateAgeOfOldestMessage
+      Dimensions: [{Name: QueueName, Value: !GetAtt BufferQueue.QueueName}]
+      Statistic: Maximum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: !Ref BufferMaxAgeSeconds
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+
+  CapacityRefusedAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${Prefix}-capacity-refused'
+      AlarmDescription: We are refusing work for capacity reasons. A statement about us.
+      Namespace: 'TLA/S01E04'
+      MetricName: CAPACITY_REFUSED
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+
+  TrustWithheldAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${Prefix}-trust-withheld'
+      AlarmDescription: We are declining to answer for trust reasons. A statement about the request - never merged
+        with capacity refusal, because the two demand opposite responses from an operator.
+      Namespace: 'TLA/S01E04'
+      MetricName: TRUST_WITHHELD
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+
+  FreshnessLagAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${Prefix}-freshness-lag'
+      AlarmDescription: The derived copy is falling behind the authority - Episode 03's claim is lapsing, visibly.
+      Namespace: 'TLA/S01E04'
+      MetricName: freshness_lag_seconds
+      Statistic: Maximum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 30
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+
+Outputs:
+  BufferQueueUrl:
+    Value: !Ref BufferQueue
+  AnsweringFunctionName:
+    Value: !Ref AnsweringFunction
+  ChangeFunctionName:
+    Value: !Ref ChangeFunction
+  AlarmNames:
+    Description: The four alarms, by name - they are addressed by name because the deploy role is scoped to alarm:tla-*
+    Value: !Sub '${Prefix}-buffer-age,${Prefix}-capacity-refused,${Prefix}-trust-withheld,${Prefix}-freshness-lag'
