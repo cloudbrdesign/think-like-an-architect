@@ -46,7 +46,11 @@ the engagement, implementation, validation suite, three failure experiments and 
 [the Episode 02 README](season-01-architecting-genai-aws/episode-02-sensitive-data-rag/README.md). Episode 03 is available:
 a two-part learner lab — a stale copy that is retrieved and refused, then a failed change that is retried, escalated
 and recovered — with the engagement, implementation and an evidence summary; start at
-[the Episode 03 README](season-01-architecting-genai-aws/episode-03-keeping-knowledge-current/README.md). The season overview is
+[the Episode 03 README](season-01-architecting-genai-aws/episode-03-keeping-knowledge-current/README.md). Episode 04 is
+available: what an API should promise when more people ask than it can answer safely — admission control, an
+age-bounded buffer, explicit refusal, the retry contract, graceful degradation that never weakens the trust checks,
+and a designed recovery; start at
+[the Episode 04 README](season-01-architecting-genai-aws/episode-04-answering-under-production-traffic/README.md). The season overview is
 [season-01-architecting-genai-aws/README.md](season-01-architecting-genai-aws/README.md).
 
 ## Licence
