@@ -11,7 +11,7 @@ is.**
 | 02 | [How to Design RAG When Your Documents Contain Sensitive Data](episode-02-sensitive-data-rag/README.md) | Available — engagement, implementation, validation, failure experiments and evidence |
 | 03 | [How to Keep a Production Knowledge Base Up to Date](episode-03-keeping-knowledge-current/README.md) | Available — learner lab, engagement, implementation and evidence summary |
 | 04 | [How to Design a GenAI API That Survives Production Traffic](episode-04-answering-under-production-traffic/README.md) | Available — the capacity contract: admission, bounded buffering, load shedding, retry amplification, degradation and recovery, with the engagement, implementation and failure experiments |
-| 05 | How to Reduce GenAI Cost Without Destroying User Experience | Planned |
+| 05 | [How to Reduce GenAI Cost Without Destroying User Experience](episode-05-cost-without-breaking-answers/README.md) | Available — learner lab: one safe reuse mode, entitlement revocation, document withdrawal and one-of-n section withdrawal, with the preservation work made visible |
 | 06 | How to Design AI Systems You Can Actually Audit | Planned |
 | 07 | How to Design for Failure When Your AI Model Is Unavailable | Planned |
 | 08 | Design the Enterprise GenAI Platform — Final Architecture Challenge | Planned |
