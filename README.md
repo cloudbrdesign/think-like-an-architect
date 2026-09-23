@@ -50,7 +50,12 @@ and recovered — with the engagement, implementation and an evidence summary; s
 available: what an API should promise when more people ask than it can answer safely — admission control, an
 age-bounded buffer, explicit refusal, the retry contract, graceful degradation that never weakens the trust checks,
 and a designed recovery; start at
-[the Episode 04 README](season-01-architecting-genai-aws/episode-04-answering-under-production-traffic/README.md). The season overview is
+[the Episode 04 README](season-01-architecting-genai-aws/episode-04-answering-under-production-traffic/README.md). Episode 05 is
+available as a learner lab: reuse that is only valid while the assumptions behind it still hold — revoke an
+entitlement, withdraw a procedure, withdraw one carried section of three, and watch what the reuse path refuses to
+serve, with the preservation work it costs shown alongside what it removed; it runs locally in about a minute with no
+cloud account, and start at
+[the Episode 05 README](season-01-architecting-genai-aws/episode-05-cost-without-breaking-answers/README.md). The season overview is
 [season-01-architecting-genai-aws/README.md](season-01-architecting-genai-aws/README.md).
 
 ## Licence
