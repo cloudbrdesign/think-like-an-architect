@@ -54,7 +54,7 @@ cp config/learner.env.example config/learner.env    # set AWS_PROFILE, AWS_REGIO
 ```
 
 If you deploy with a restricted deployment role instead of an administrator, set `TLA_ROLE_PATH` and
-`TLA_PERMISSIONS_BOUNDARY_ARN` to what that role requires. (CloudBrewery's own validation role also needs one narrowly
+`TLA_PERMISSIONS_BOUNDARY_ARN` to what that role requires. (Cloud Brewery Academy's own validation role also needs one narrowly
 scoped `apigateway:TagResource` compatibility permission for tagged API stage creation; administrators already have it.)
 
 ## Run it — steps 0 to 6

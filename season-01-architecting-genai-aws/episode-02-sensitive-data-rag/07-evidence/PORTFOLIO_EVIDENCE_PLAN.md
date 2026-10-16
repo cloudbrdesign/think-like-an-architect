@@ -41,7 +41,7 @@ Use the [portfolio evidence template](../../../templates/PORTFOLIO_EVIDENCE.md) 
 
 ## What an example looks like
 
-CloudBrewery's own runs are kept, redacted, in
+Cloud Brewery Academy's own runs are kept, redacted, in
 [implementation-validation-2026-09-15](implementation-validation-2026-09-15/README.md). Use them to see the shape of the
 evidence. **Do not present them as your own.**
 

@@ -43,7 +43,7 @@ Use the [portfolio evidence template](../../../templates/PORTFOLIO_EVIDENCE.md) 
 
 ## What an example looks like
 
-CloudBrewery's own run is kept, redacted, in [implementation-validation-2026-09-14](implementation-validation-2026-09-14/README.md). Use it to see
+Cloud Brewery Academy's own run is kept, redacted, in [implementation-validation-2026-09-14](implementation-validation-2026-09-14/README.md). Use it to see
 the shape of the evidence. **Do not present it as your own** — your portfolio is evidence of the work *you* performed.
 
 ## Describe it accurately
