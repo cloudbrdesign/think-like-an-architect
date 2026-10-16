@@ -89,7 +89,7 @@ The architecture's candidate mapping, refined by verification. "Status" shows th
 ## 4. The deployable learner architecture
 
 One stack per deployment (`tla-s01e01-normal`, or `tla-s01e01-sensitivity` for the test-only variant) plus an artifact
-bucket created by the deploy script. As built, every resource carries the CloudBrewery lab tag standard:
+bucket created by the deploy script. As built, every resource carries the Cloud Brewery Academy lab tag standard:
 `Project=CloudBreweryLabs`, `Course=ThinkLikeAnArchitect`, `Season=01`, `Episode=01`, `Environment=Sandbox`,
 `ManagedBy=CloudBreweryLabs`, `Variant=normal|sensitivity`, `Purpose=education`, `DeployedWith=CloudFormation`. This replaces
 the `tla:*` keys drafted during design, so there is one tag vocabulary.
@@ -312,7 +312,7 @@ remain. Added at implementation design:
 ## 15. Portfolio evidence produced by the implementation
 
 This maps outputs to [PORTFOLIO_EVIDENCE_PLAN.md](../07-evidence/PORTFOLIO_EVIDENCE_PLAN.md). A complete example set,
-from CloudBrewery's own fresh-copy run, is in [07-evidence/implementation-validation-2026-09-14](../07-evidence/implementation-validation-2026-09-14/README.md).
+from Cloud Brewery Academy's own fresh-copy run, is in [07-evidence/implementation-validation-2026-09-14](../07-evidence/implementation-validation-2026-09-14/README.md).
 
 | Evidence category | Produced by | Artifact (learner keeps, redacted) |
 |---|---|---|
@@ -338,7 +338,7 @@ from CloudBrewery's own fresh-copy run, is in [07-evidence/implementation-valida
 | Learner mechanism selected | **Met** — section 2 |
 | Implementation design complete | **Met** — this document, IMPLEMENTATION_CONTROLS, TEST_HARNESS_DESIGN |
 | Test strategy executable | **Met in design** — harness, fixtures, guards, sensitivity variant specified |
-| Sandbox prerequisites understood | **Met** — PLATFORM_VERIFICATION section 1; CloudBrewery's validation sandbox, region (us-east-1) and budget guardrail are in place |
+| Sandbox prerequisites understood | **Met** — PLATFORM_VERIFICATION section 1; Cloud Brewery Academy's validation sandbox, region (us-east-1) and budget guardrail are in place |
 | Cost target plausible | **Met** — dated estimate far below USD 10 |
 | Cleanup designed | **Met** — COST_AND_CLEANUP |
 | No unresolved architecture blocker | **Met** — all platform findings are mapping- or implementation-level (CH-01…CH-13); SPK-B, the one spike whose failure would reopen ADR-005, passed |

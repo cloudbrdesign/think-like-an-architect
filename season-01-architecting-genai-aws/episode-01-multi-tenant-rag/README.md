@@ -22,7 +22,7 @@ are all here. Everything in this folder is free; no purchase is needed to comple
 | **What you need to read along** | Nothing but this repository |
 | **What you need to build it** | A dedicated sandbox AWS account with administrator access, Python 3.10+ and `boto3`. Prerequisites and the preflight check are in the [learner guide](05-implementation/README.md#prerequisites) |
 | **What it costs** | Reading costs nothing. **Deploying creates billable resources in your own account.** Read [Cost and cleanup](05-implementation/COST_AND_CLEANUP.md) first, and set a budget alert |
-| **How long the lab takes** | CloudBrewery's own run from a fresh clone took about 18 minutes, from preflight to verified cleanup ([evidence](07-evidence/implementation-validation-2026-09-14/FRESH_COPY_RUN.md)). Reading and reasoning time is yours |
+| **How long the lab takes** | Cloud Brewery Academy's own run from a fresh clone took about 18 minutes, from preflight to verified cleanup ([evidence](07-evidence/implementation-validation-2026-09-14/FRESH_COPY_RUN.md)). Reading and reasoning time is yours |
 | **What you keep** | [Portfolio evidence of the work you performed](07-evidence/PORTFOLIO_EVIDENCE_PLAN.md) — not a certification |
 
 ## The engagement in ten stages
@@ -55,7 +55,7 @@ python3 tools/traceability_check.py season-01-architecting-genai-aws/episode-01-
 
 ## What the example evidence shows — and its limits
 
-CloudBrewery's run of this implementation, from a fresh clone, is in
+Cloud Brewery Academy's run of this implementation, from a fresh clone, is in
 [07-evidence/implementation-validation-2026-09-14](07-evidence/implementation-validation-2026-09-14/README.md):
 - all 22 validation tests passed;
 - the sensitivity experiment made the isolation tests fail once the primary control was removed;

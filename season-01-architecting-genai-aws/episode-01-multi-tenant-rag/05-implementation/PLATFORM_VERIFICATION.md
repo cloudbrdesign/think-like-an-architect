@@ -17,7 +17,7 @@ Verification classes used:
 
 ## 1. Learner sandbox requirements
 
-These are the prerequisites a learner — or CloudBrewery's own validation run — needs before anything is deployed.
+These are the prerequisites a learner — or Cloud Brewery Academy's own validation run — needs before anything is deployed.
 
 | Requirement | Recommendation | Why |
 |---|---|---|
@@ -84,7 +84,7 @@ synthetic data only, and is destroyed after each run. A failed spike is useful e
 
 **Shared rules:**
 - The sandbox, region and budget come from section 1.
-- Every resource is tagged. As run, the spikes used the CloudBrewery lab tag standard (`Course`, `Season`, `Episode`,
+- Every resource is tagged. As run, the spikes used the Cloud Brewery Academy lab tag standard (`Course`, `Season`, `Episode`,
   `Variant=spike`, `Purpose=verification`, …) rather than the `tla:*` keys drafted here; the implementation
   design aligns its tags to that standard.
 - Each spike ends with cleanup and a tag search.

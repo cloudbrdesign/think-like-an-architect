@@ -24,4 +24,4 @@ A learner must be able to complete every engagement from this repository alone. 
 
 ## Commit identity
 
-Commits use the CloudBrewery publisher identity, and commit messages describe the change to the repository.
+Commits use the Cloud Brewery Academy publisher identity, and commit messages describe the change to the repository.
